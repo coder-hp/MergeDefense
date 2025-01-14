@@ -1,23 +1,28 @@
-﻿using UnityEngine;
+using UnityEngine;
 using System.Collections;
 using UnityEngine.UI;
 using System.Collections.Generic;
 using System;
 using DG.Tweening;
 
-public class ToastScript : MonoBehaviour {
+public class ToastScript : MonoBehaviour
+{
+    static GameObject prefab = null;
     public static void show (string text)
     {
         try
         {
-            //GameObject prefab = Resources.Load("Toast/Toast") as GameObject;
-            //GameObject obj = Instantiate(prefab, LaunchScript.s_instance.canvas_top);
-            //obj.transform.Find("Text").GetComponent<Text>().text = text;
+            if (prefab == null)
+            {
+                prefab = Resources.Load("Toast/Toast") as GameObject;
+            }
+            GameObject obj = Instantiate(prefab, LaunchScript.s_instance.canvas_top);
+            obj.transform.Find("Text").GetComponent<Text>().text = text;
 
-            //obj.transform.DOLocalMove(new Vector3(0, 200, 0), 1).OnComplete(() =>
-            //{
-            //    Destroy(obj);
-            //});
+            obj.transform.DOLocalMove(new Vector3(0, 200, 0), 1).OnComplete(() =>
+            {
+                Destroy(obj);
+            });
         }
         catch(Exception exp)
         {

@@ -1,0 +1,105 @@
+using System.Collections;
+using System.Collections.Generic;
+using System.IO;
+using UnityEngine;
+using UnityEngine.UI;
+
+public class GMLayer : MonoBehaviour
+{
+    public static GMLayer s_instance = null;
+
+    public bool isDebug = false;
+    public GameObject bg;
+    public Text text_fps;
+
+    bool isShowFPS = false;
+
+    private void Awake()
+    {
+        s_instance = this;
+
+        if(isDebug)
+        {
+            text_fps.gameObject.SetActive(true);
+        }
+    }
+
+    int fpsIndex = 0;
+    Vector2 touchBegin;
+    void Update()
+    {
+        if (isDebug)
+        {
+            transform.SetAsLastSibling();
+
+            if (Input.GetMouseButtonDown(0))
+            {
+                touchBegin = CommonUtil.getCurMousePosToUI();
+            }
+            else if (Input.GetMouseButtonUp(0))
+            {
+                Vector2 touchEnd = CommonUtil.getCurMousePosToUI();
+
+                if ((touchBegin.y >= (1440 / 2 - 200)) && (touchEnd.y >= (1440 / 2 - 200)))
+                {
+                    if ((touchEnd.x - touchBegin.x) > 100)
+                    {
+                        bg.SetActive(true);
+                    }
+                }
+            }
+
+            if (isShowFPS && ++fpsIndex == 15)
+            {
+                fpsIndex = 0;
+                text_fps.text = "FPS:" + (int)(1f / Time.deltaTime);
+            }
+        }
+    }
+
+    public void onClickClearData()
+    {
+        PlayerPrefs.DeleteAll();
+
+        // 删除缓存文件
+        //{
+        //    DirectoryInfo TheFolder = new DirectoryInfo(DownScript.s_instance.savePath);
+        //    foreach (FileInfo file in TheFolder.GetFiles())
+        //    {
+        //        File.Delete(file.FullName);
+        //    }
+        //}
+
+        ToastScript.show("数据清除完毕，重启pp");
+        onClickClose();
+    }
+
+    public void onClickAddGold()
+    {
+        GameData.changeMyGold(1000, "GM");
+        ToastScript.show("+1000");
+    }
+
+    public void onClickUnlockAll()
+    {
+        
+        ToastScript.show("解锁成功");
+        onClickClose();
+    }
+
+    public void onClickFPS()
+    {
+        isShowFPS = true;
+        onClickClose();
+    }
+
+    public void onClickDeleteRes()
+    {
+        Resources.UnloadUnusedAssets();
+    }
+
+    public void onClickClose()
+    {
+        bg.SetActive(false);
+    }
+}
