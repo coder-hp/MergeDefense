@@ -4,14 +4,25 @@ using UnityEngine;
 
 public class GameLayer : MonoBehaviour
 {
+    public static GameLayer s_instance = null;
+
     public List<Transform> enemyMoveFourPoint = new List<Transform>();
     public Transform enemyPoint;
 
-    Vector3 enemyBornPos;
+    [HideInInspector]
+    public List<Vector3> list_enemyMoveFourPos = new List<Vector3>();
+
+    private void Awake()
+    {
+        s_instance = this;
+    }
 
     void Start()
     {
-        enemyBornPos = enemyMoveFourPoint[0].position;
+        for(int i = 0; i < enemyMoveFourPoint.Count; i++)
+        {
+            list_enemyMoveFourPos.Add(enemyMoveFourPoint[i].position);
+        }
 
         LayerManager.ShowLayer(Consts.Layer.GameUILayer);
 
@@ -20,7 +31,6 @@ public class GameLayer : MonoBehaviour
 
     void onInvokeAddEnemy()
     {
-        Transform enemyTrans = Instantiate(ObjectPool.getPrefab("Prefabs/Enemys/enemy1"), enemyPoint).transform;
-        enemyTrans.position = enemyBornPos;
+        Instantiate(ObjectPool.getPrefab("Prefabs/Enemys/enemy1"), enemyPoint);
     }
 }

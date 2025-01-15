@@ -356,6 +356,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4729789445500738202}
   - component: {fileID: 7212460890321329611}
+  - component: {fileID: -7090605276762049441}
   m_Layer: 0
   m_Name: GameLayer
   m_TagString: Untagged
@@ -401,6 +402,19 @@ MonoBehaviour:
   - {fileID: 6162854313086487263}
   - {fileID: 6823065894570184334}
   enemyPoint: {fileID: 5070735870438125811}
+  list_enemyMoveFourPos: []
+--- !u!114 &-7090605276762049441
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3154725897590284526}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5d71120e0b379314c833341cc052dacc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &3376967586139326472
 GameObject:
   m_ObjectHideFlags: 0
