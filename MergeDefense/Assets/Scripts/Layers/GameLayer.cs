@@ -11,6 +11,8 @@ public class GameLayer : MonoBehaviour
 
     [HideInInspector]
     public List<Vector3> list_enemyMoveFourPos = new List<Vector3>();
+    [HideInInspector]
+    public int maxEnemyCount = 100;
 
     private void Awake()
     {
@@ -31,6 +33,9 @@ public class GameLayer : MonoBehaviour
 
     void onInvokeAddEnemy()
     {
-        Instantiate(ObjectPool.getPrefab("Prefabs/Enemys/enemy1"), enemyPoint);
+        if (EnemyManager.s_instance.getEnemyCount() < maxEnemyCount)
+        {
+            Instantiate(ObjectPool.getPrefab("Prefabs/Enemys/enemy1"), enemyPoint);
+        }
     }
 }

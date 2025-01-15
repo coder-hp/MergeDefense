@@ -1,12 +1,24 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class GameUILayer : MonoBehaviour
 {
-    void Start()
+    public static GameUILayer s_instance = null;
+
+    public Text text_enemyCount;
+    public Image img_enemyCountProgress;
+
+    private void Awake()
     {
-        
+        s_instance = this;
+    }
+
+    public void refreshEnemyCount()
+    {
+        text_enemyCount.text = EnemyManager.s_instance.getEnemyCount() + "/" + GameLayer.s_instance.maxEnemyCount;
+        img_enemyCountProgress.transform.localScale = new Vector3(EnemyManager.s_instance.getEnemyCount() / 100f, 1,1);
     }
 
     public void onClickPause()

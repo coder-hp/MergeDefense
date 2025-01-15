@@ -21,13 +21,20 @@ public class EnemyManager : MonoBehaviour
         }
     }
 
+    public int getEnemyCount()
+    {
+        return list_enemy.Count;
+    }
+
     public void addEnemy(EnemyLogic enemyLogic)
     {
         list_enemy.Add(enemyLogic);
+        GameUILayer.s_instance.refreshEnemyCount();
     }
 
     public void removeEnemy(EnemyLogic enemyLogic)
     {
         list_enemy.Add(enemyLogic);
+        GameUILayer.s_instance.refreshEnemyCount();
     }
 }
