@@ -8,6 +8,7 @@ public class GameLayer : MonoBehaviour
 
     public List<Transform> enemyMoveFourPoint = new List<Transform>();
     public Transform enemyPoint;
+    public Transform heroPoint;
 
     [HideInInspector]
     public List<Vector3> list_enemyMoveFourPos = new List<Vector3>();
@@ -36,6 +37,18 @@ public class GameLayer : MonoBehaviour
         if (EnemyManager.s_instance.getEnemyCount() < maxEnemyCount)
         {
             Instantiate(ObjectPool.getPrefab("Prefabs/Enemys/enemy1"), enemyPoint);
+        }
+    }
+
+    public void addHero()
+    {
+        for(int i = 0; i < heroPoint.childCount; i++)
+        {
+            if(heroPoint.GetChild(i).childCount == 0)
+            {
+                Transform heroTrans = Instantiate(ObjectPool.getPrefab("Prefabs/Heros/hero1"), heroPoint.GetChild(i)).transform;
+                return;
+            }
         }
     }
 }

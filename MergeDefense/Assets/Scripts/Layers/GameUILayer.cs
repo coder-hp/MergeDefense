@@ -43,7 +43,7 @@ public class GameUILayer : MonoBehaviour
 
     public void onClickHero()
     {
-
+        GameLayer.s_instance.addHero();
     }
 
     public void onClickWeapon()
