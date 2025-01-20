@@ -7,10 +7,7 @@ public class AtlasUtil
 {
     static SpriteAtlas atlas_main = null;
     static SpriteAtlas atlas_game = null;
-    static SpriteAtlas atlas_set = null;
-    static SpriteAtlas atlas_loading = null;
-    static SpriteAtlas atlas_shopIcon = null;
-    static SpriteAtlas atlas_island = null;
+    static SpriteAtlas atlas_icon = null;
 
     public static SpriteAtlas getAtlas_main()
     {
@@ -30,39 +27,12 @@ public class AtlasUtil
         return atlas_game;
     }
 
-    public static SpriteAtlas getAtlas_shopIcon()
+    public static SpriteAtlas getAtlas_icon()
     {
-        if (atlas_shopIcon == null)
+        if (atlas_icon == null)
         {
-            atlas_shopIcon = Resources.Load("Atlas/shopIcon", typeof(SpriteAtlas)) as SpriteAtlas;
+            atlas_icon = Resources.Load("Atlas/icon", typeof(SpriteAtlas)) as SpriteAtlas;
         }
-        return atlas_shopIcon;
-    }
-
-    public static SpriteAtlas getAtlas_loading()
-    {
-        if (atlas_loading == null)
-        {
-            atlas_loading = Resources.Load("Atlas/loading", typeof(SpriteAtlas)) as SpriteAtlas;
-        }
-        return atlas_loading;
-    }
-
-    public static SpriteAtlas getAtlas_set()
-    {
-        if (atlas_set == null)
-        {
-            atlas_set = Resources.Load("Atlas/set", typeof(SpriteAtlas)) as SpriteAtlas;
-        }
-        return atlas_set;
-    }
-
-    public static SpriteAtlas getAtlas_island()
-    {
-        if (atlas_island == null)
-        {
-            atlas_island = Resources.Load("Atlas/island", typeof(SpriteAtlas)) as SpriteAtlas;
-        }
-        return atlas_island;
+        return atlas_icon;
     }
 }
