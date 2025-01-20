@@ -43,11 +43,14 @@ public class EnemyLogic : MonoBehaviour
 
     public void damage(int atk)
     {
-        curHP -= atk;
-        if(curHP <= 0)
+        if (curHP > 0)
         {
-            curHP = 0;
-            die();
+            curHP -= atk;
+            if (curHP <= 0)
+            {
+                curHP = 0;
+                die();
+            }
         }
     }
 
