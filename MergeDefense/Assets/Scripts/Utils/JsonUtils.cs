@@ -1,4 +1,4 @@
-﻿using Newtonsoft.Json;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -11,7 +11,7 @@ public class JsonUtils
 {
     static public List<T> loadJsonToList<T>(string jsonName)
     {
-        string path = "datas/" + jsonName;
+        string path = "Datas/" + jsonName;
         TextAsset jsonData = Resources.Load<TextAsset>(path);
         return JsonConvert.DeserializeObject<List<T>>(jsonData.ToString());
 	}

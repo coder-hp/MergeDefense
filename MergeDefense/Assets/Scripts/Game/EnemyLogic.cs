@@ -8,10 +8,16 @@ public class EnemyLogic : MonoBehaviour
     int curTargetPosIndex = 1;
     float moveSpeed = 2;
 
+    float curHP;
+    float fullHP;
+
     private void Awake()
     {
         EnemyManager.s_instance.addEnemy(this);
         transform.position = GameLayer.s_instance.list_enemyMoveFourPos[0];
+
+        curHP = 100;
+        fullHP = 100;
     }
 
     public void move()
@@ -33,5 +39,21 @@ public class EnemyLogic : MonoBehaviour
                 transform.localScale = new Vector3(1, 1, 1);
             }
         }
+    }
+
+    public void damage(int atk)
+    {
+        curHP -= atk;
+        if(curHP <= 0)
+        {
+            curHP = 0;
+            die();
+        }
+    }
+
+    void die()
+    {
+        EnemyManager.s_instance.removeEnemy(this);
+        Destroy(gameObject);
     }
 }

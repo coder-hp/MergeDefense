@@ -34,7 +34,24 @@ public class EnemyManager : MonoBehaviour
 
     public void removeEnemy(EnemyLogic enemyLogic)
     {
-        list_enemy.Add(enemyLogic);
+        list_enemy.Remove(enemyLogic);
         GameUILayer.s_instance.refreshEnemyCount();
+    }
+
+    public EnemyLogic getMinDisTarget(Transform hero)
+    {
+        float tempDis;
+        float minDis = 999;
+        EnemyLogic enemyLogic = null;
+        for (int i = 0; i < list_enemy.Count; i++)
+        {
+            tempDis = Vector3.Distance(hero.position, list_enemy[i].transform.position);
+            if (tempDis < minDis)
+            {
+                minDis = tempDis;
+                enemyLogic = list_enemy[i];
+            }
+        }
+        return enemyLogic;
     }
 }
