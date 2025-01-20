@@ -62,7 +62,7 @@ public class GameUILayer : MonoBehaviour
                 if (weaponGridTrans.GetChild(i).childCount == 0)
                 {
                     UIItemWeapon uIItemWeapon = Instantiate(item_weapon, weaponGridTrans.GetChild(i)).GetComponent<UIItemWeapon>();
-                    uIItemWeapon.init(RandomUtil.getRandom(1, 6), RandomUtil.getRandom(1, 10));
+                    uIItemWeapon.init(RandomUtil.getRandom(1, 6), 1);
                     break;
                 }
             }

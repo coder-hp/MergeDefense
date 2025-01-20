@@ -57,7 +57,11 @@ public class EnemyLogic : MonoBehaviour
                     transform.localScale = new Vector3(1, 1, 1);
                 }
             }
-            bloodBarTrans.localPosition = CommonUtil.WorldPosToUI(GameLayer.s_instance.camera3D, bloodPoint.position);
+
+            if (bloodBarTrans)
+            {
+                bloodBarTrans.localPosition = CommonUtil.WorldPosToUI(GameLayer.s_instance.camera3D, bloodPoint.position);
+            }
         }
     }
 
