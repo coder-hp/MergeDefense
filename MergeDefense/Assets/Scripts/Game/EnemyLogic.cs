@@ -23,6 +23,15 @@ public class EnemyLogic : MonoBehaviour
             {
                 curTargetPosIndex = 0;
             }
+
+            if(curTargetPosIndex == 3)
+            {
+                transform.localScale = new Vector3(-1,1,1);
+            }
+            else if (curTargetPosIndex == 1)
+            {
+                transform.localScale = new Vector3(1, 1, 1);
+            }
         }
     }
 }
