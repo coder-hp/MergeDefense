@@ -11,33 +11,53 @@ public class EnemyLogic : MonoBehaviour
     float curHP;
     float fullHP;
 
+    Transform bloodPoint;
+    Transform bloodBarTrans;
+    Transform bloodProgressTrans;
+
     private void Awake()
     {
         EnemyManager.s_instance.addEnemy(this);
         transform.position = GameLayer.s_instance.list_enemyMoveFourPos[0];
 
-        curHP = 100;
-        fullHP = 100;
+        curHP = 150;
+        fullHP = 150;
+    }
+
+    private void Start()
+    {
+        bloodPoint = transform.Find("bloodPoint");
+
+        // 创建血条
+        {
+            bloodBarTrans = Instantiate(GameUILayer.s_instance.prefab_bloodBar,GameUILayer.s_instance.bloodPointTrans).transform;
+            bloodBarTrans.localPosition = CommonUtil.WorldPosToUI(GameLayer.s_instance.camera3D, bloodPoint.position);
+            bloodProgressTrans = bloodBarTrans.GetChild(0);
+        }
     }
 
     public void move()
     {
-        transform.position = Vector3.MoveTowards(transform.position, GameLayer.s_instance.list_enemyMoveFourPos[curTargetPosIndex], moveSpeed * Time.deltaTime);
-        if(Vector3.Distance(transform.position, GameLayer.s_instance.list_enemyMoveFourPos[curTargetPosIndex]) <= 0.1f)
+        if (curHP > 0)
         {
-            if(++curTargetPosIndex > 3)
+            transform.position = Vector3.MoveTowards(transform.position, GameLayer.s_instance.list_enemyMoveFourPos[curTargetPosIndex], moveSpeed * Time.deltaTime);
+            if (Vector3.Distance(transform.position, GameLayer.s_instance.list_enemyMoveFourPos[curTargetPosIndex]) <= 0.1f)
             {
-                curTargetPosIndex = 0;
-            }
+                if (++curTargetPosIndex > 3)
+                {
+                    curTargetPosIndex = 0;
+                }
 
-            if(curTargetPosIndex == 3)
-            {
-                transform.localScale = new Vector3(-1,1,1);
+                if (curTargetPosIndex == 3)
+                {
+                    transform.localScale = new Vector3(-1, 1, 1);
+                }
+                else if (curTargetPosIndex == 1)
+                {
+                    transform.localScale = new Vector3(1, 1, 1);
+                }
             }
-            else if (curTargetPosIndex == 1)
-            {
-                transform.localScale = new Vector3(1, 1, 1);
-            }
+            bloodBarTrans.localPosition = CommonUtil.WorldPosToUI(GameLayer.s_instance.camera3D, bloodPoint.position);
         }
     }
 
@@ -51,12 +71,16 @@ public class EnemyLogic : MonoBehaviour
                 curHP = 0;
                 die();
             }
+
+            bloodProgressTrans.localScale = new Vector3(curHP / fullHP, 1,1);
         }
     }
 
     void die()
     {
         EnemyManager.s_instance.removeEnemy(this);
+
+        Destroy(bloodBarTrans.gameObject);
         Destroy(gameObject);
     }
 }

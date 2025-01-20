@@ -7,8 +7,10 @@ public class GameUILayer : MonoBehaviour
 {
     public static GameUILayer s_instance = null;
 
+    public GameObject prefab_bloodBar;
     public Text text_enemyCount;
     public Image img_enemyCountProgress;
+    public Transform bloodPointTrans;
 
     private void Awake()
     {

@@ -7,6 +7,7 @@ public class GameLayer : MonoBehaviour
     public static GameLayer s_instance = null;
 
     public List<Transform> enemyMoveFourPoint = new List<Transform>();
+    public Camera camera3D;
     public Transform enemyPoint;
     public Transform heroPoint;
 
