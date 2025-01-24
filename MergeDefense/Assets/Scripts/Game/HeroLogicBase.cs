@@ -13,6 +13,8 @@ public class HeroLogicBase : MonoBehaviour
     [HideInInspector]
     public SkeletonAnimation spineAni;
 
+    List<WeaponData> list_weapon = new List<WeaponData>();
+
     float atkRange = 1;
     bool isAttacking = false;
 
@@ -65,6 +67,13 @@ public class HeroLogicBase : MonoBehaviour
     int getAtk()
     {
         return heroData.atk;
+    }
+
+    public void addWeapon(WeaponData weaponData)
+    {
+        ToastScript.show("增加武器:" + weaponData.name + " level" + weaponData.level);
+        Debug.Log(transform.name + "增加武器:" + weaponData.name + " level" + weaponData.level);
+        list_weapon.Add(weaponData);
     }
 
     public void playAni(string aniName,bool isLoop)

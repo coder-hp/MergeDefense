@@ -15,6 +15,8 @@ public class UIItemWeapon : MonoBehaviour
     Transform parentTrans;
     Transform mergeTarget = null;
 
+    RaycastHit raycastHit;
+
     public void init(int type,int level)
     {
         parentTrans = transform.parent;
@@ -92,23 +94,32 @@ public class UIItemWeapon : MonoBehaviour
         transform.localPosition = CommonUtil.getCurMousePosToUI();
 
         Transform trans = getMinDisItemWeapon();
-        if(Vector2.Distance(trans.position,transform.position) <= 0.5f)
+        if (trans)
         {
-            if(mergeTarget && mergeTarget != trans)
+            if (Vector2.Distance(trans.position, transform.position) <= 0.5f)
+            {
+                if (mergeTarget && mergeTarget != trans)
+                {
+                    mergeTarget.GetComponent<Image>().color = Color.white;
+                    mergeTarget.DOScale(1f, 0.2f);
+                }
+                mergeTarget = trans;
+                mergeTarget.GetComponent<Image>().color = Color.green;
+                mergeTarget.DOScale(1.2f, 0.2f);
+            }
+            else if (mergeTarget)
             {
                 mergeTarget.GetComponent<Image>().color = Color.white;
                 mergeTarget.DOScale(1f, 0.2f);
+                mergeTarget = null;
             }
-            mergeTarget = trans;
-            mergeTarget.GetComponent<Image>().color = Color.green;
-            mergeTarget.DOScale(1.2f, 0.2f);
         }
-        else if(mergeTarget)
-        {
-            mergeTarget.GetComponent<Image>().color = Color.white;
-            mergeTarget.DOScale(1f, 0.2f);
-            mergeTarget = null;
-        }
+
+        //raycastHit = RayUtil.getEndPoint(CommonUtil.mousePosToWorld(GameLayer.s_instance.camera3D));
+        //if (raycastHit.collider)
+        //{
+        //    Debug.Log(raycastHit.collider.name);
+        //}
     }
 
     private void OnMouseUp()
@@ -126,14 +137,29 @@ public class UIItemWeapon : MonoBehaviour
             }
         }
 
-        transform.SetParent(parentTrans);
-        transform.DOLocalMove(Vector3.zero, 0.2f);
-
         if (mergeTarget)
         {
             mergeTarget.GetComponent<Image>().color = Color.white;
             mergeTarget.DOScale(1f, 0.2f);
         }
+
+        // 检测是否拖到角色上
+        {
+            raycastHit = RayUtil.getEndPoint(CommonUtil.mousePosToWorld(GameLayer.s_instance.camera3D));
+            if (raycastHit.collider && raycastHit.collider.CompareTag("Hero"))
+            {
+                raycastHit.collider.GetComponent<HeroLogicBase>().addWeapon(weaponData);
+                Destroy(gameObject);
+                return;
+            }
+            else
+            {
+                // 未拖到角色上
+            }
+        }
+
+        transform.SetParent(parentTrans);
+        transform.DOLocalMove(Vector3.zero, 0.2f);
     }
 
     Transform getMinDisItemWeapon()
@@ -155,5 +181,18 @@ public class UIItemWeapon : MonoBehaviour
         }
 
         return trans;
+    }
+
+    void checkBlockBase()
+    {
+        raycastHit = RayUtil.getEndPoint(CommonUtil.mousePosToWorld(GameLayer.s_instance.camera3D));
+        if (raycastHit.collider && raycastHit.collider.CompareTag("Hero"))
+        {
+            raycastHit.collider.GetComponent<HeroLogicBase>();
+        }
+        else
+        {
+            // 未拖到角色上
+        }
     }
 }
