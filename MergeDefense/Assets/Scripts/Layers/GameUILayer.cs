@@ -54,7 +54,7 @@ public class GameUILayer : MonoBehaviour
     // 锻造
     public void onClickForge()
     {
-        int forgeCount = RandomUtil.getRandom(1,5);
+        int forgeCount = RandomUtil.getRandom(1,3);
         for(int c = 0; c < forgeCount; c++)
         {
             for (int i = 0; i < weaponGridTrans.childCount; i++)
