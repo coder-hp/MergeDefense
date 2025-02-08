@@ -49,10 +49,10 @@ public class UIItemWeapon : MonoBehaviour
                     break;
                 }
 
-            // 手里剑
+            // 拳套
             case 4:
                 {
-                    img_level_bg.color = CommonUtil.stringToColor("#5CE4FF");
+                    img_level_bg.color = CommonUtil.stringToColor("#FF8A8C");
                     break;
                 }
 
@@ -63,12 +63,8 @@ public class UIItemWeapon : MonoBehaviour
                     break;
                 }
 
-            // 拳套
-            case 6:
-                {
-                    img_level_bg.color = CommonUtil.stringToColor("#FF8A8C");
-                    break;
-                }
+            // 
+
         }
     }
 
