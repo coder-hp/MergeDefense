@@ -22,7 +22,7 @@ public class GameUILayer : MonoBehaviour
     public void refreshEnemyCount()
     {
         text_enemyCount.text = EnemyManager.s_instance.getEnemyCount() + "/" + GameLayer.s_instance.maxEnemyCount;
-        img_enemyCountProgress.transform.localScale = new Vector3(EnemyManager.s_instance.getEnemyCount() / 100f, 1,1);
+        img_enemyCountProgress.fillAmount = EnemyManager.s_instance.getEnemyCount() / 100f;
     }
 
     public void onClickPause()

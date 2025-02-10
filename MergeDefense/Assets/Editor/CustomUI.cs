@@ -37,8 +37,7 @@ public class CustomUI : MonoBehaviour
             if (instance != null)
             {
                 instance.transform.SetParent(Selection.gameObjects[0].transform);
-
-                // 设置实例的位置
+                instance.transform.localScale = Vector3.one;
                 instance.transform.localPosition = Vector3.zero;
 
                 // 选中实例（可选）
