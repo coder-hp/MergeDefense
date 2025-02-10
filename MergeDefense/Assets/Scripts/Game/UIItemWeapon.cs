@@ -6,6 +6,7 @@ using UnityEngine.UI;
 
 public class UIItemWeapon : MonoBehaviour
 {
+    public Image img_icon;
     public Image img_level_bg;
     public Text text_level;
 
@@ -24,7 +25,12 @@ public class UIItemWeapon : MonoBehaviour
         weaponData = WeaponEntity.getInstance().getData(type, level);
 
         text_level.text = level.ToString();
-        transform.GetComponent<Image>().sprite = AtlasUtil.getAtlas_icon().GetSprite("weapon_" + type);
+
+        // 品质框
+        transform.GetComponent<Image>().sprite = AtlasUtil.getAtlas_game().GetSprite("dikuang_1");
+
+        // 武器icon
+        img_icon.sprite = AtlasUtil.getAtlas_icon().GetSprite("weapon_" + type);
 
         switch (weaponData.type)
         {
