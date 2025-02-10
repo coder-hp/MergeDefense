@@ -27,22 +27,29 @@ public class GameUILayer : MonoBehaviour
 
     public void onClickPause()
     {
-
+        if(Time.timeScale == 0)
+        {
+            Time.timeScale = 1;
+        }
+        else
+        {
+            Time.timeScale = 0;
+        }
     }
 
     public void onClickSort()
     {
-
+        ToastScript.show("暂未开放");
     }
 
     public void onClickAutoMake()
     {
-
+        ToastScript.show("暂未开放");
     }
 
     public void onClickMyth()
     {
-
+        ToastScript.show("暂未开放");
     }
 
     // 召唤
@@ -71,6 +78,6 @@ public class GameUILayer : MonoBehaviour
 
     public void onClickShop()
     {
-
+        ToastScript.show("暂未开放");
     }
 }
