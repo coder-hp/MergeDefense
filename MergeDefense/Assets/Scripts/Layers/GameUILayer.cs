@@ -40,7 +40,7 @@ public class GameUILayer : MonoBehaviour
         text_time.text = "00:" + curBoCiRestTime;
 
         waitAddEnemy.Clear();
-        for(int i = 0; i < 10; i++)
+        for(int i = 0; i < 15; i++)
         {
             waitAddEnemy.Add(1);
         }
