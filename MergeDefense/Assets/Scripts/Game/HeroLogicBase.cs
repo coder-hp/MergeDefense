@@ -15,7 +15,7 @@ public class HeroLogicBase : MonoBehaviour
 
     List<WeaponData> list_weapon = new List<WeaponData>();
 
-    float atkRange = 1;
+    float atkRange = 0f;
     bool isAttacking = false;
 
     public void Awake()
@@ -25,7 +25,7 @@ public class HeroLogicBase : MonoBehaviour
         // 近战
         if (heroData.isJinZhan == 1)
         {
-            atkRange = 1.5f;
+            atkRange = 1.9f;
         }
         // 远程
         else
