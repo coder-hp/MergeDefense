@@ -133,10 +133,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   prefab_bloodBar: {fileID: 2430950351226351057}
   item_weapon: {fileID: 8597224232747892432}
-  text_enemyCount: {fileID: 8279762320973953388}
   img_enemyCountProgress: {fileID: 2884777209870039736}
   bloodPointTrans: {fileID: 6469946548303348863}
   weaponGridTrans: {fileID: 1078602792453762366}
+  text_enemyCount: {fileID: 8279762320973953388}
+  text_time: {fileID: 6593359631840922468}
+  text_boci: {fileID: 1186522037032281197}
 --- !u!1 &292383454900794365
 GameObject:
   m_ObjectHideFlags: 0
@@ -4151,6 +4153,17 @@ PrefabInstance:
       insertIndex: -1
       addedObject: {fileID: 851652304298350013}
   m_SourcePrefab: {fileID: 100100000, guid: 99807ca801ef46e448ce608ef576201d, type: 3}
+--- !u!114 &1186522037032281197 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 2756007894942796871, guid: 99807ca801ef46e448ce608ef576201d, type: 3}
+  m_PrefabInstance: {fileID: 3911395060667099178}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2313739746537745586}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5f7201a12d95ffc409449d95f23cf332, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!224 &1280147747795860245 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 2849633481152320319, guid: 99807ca801ef46e448ce608ef576201d, type: 3}
@@ -5756,6 +5769,17 @@ RectTransform:
   m_CorrespondingSourceObject: {fileID: 2849633481152320319, guid: 99807ca801ef46e448ce608ef576201d, type: 3}
   m_PrefabInstance: {fileID: 9060995279003289379}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &6593359631840922468 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 2756007894942796871, guid: 99807ca801ef46e448ce608ef576201d, type: 3}
+  m_PrefabInstance: {fileID: 9060995279003289379}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7776309375197086651}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5f7201a12d95ffc409449d95f23cf332, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &7776309375197086651 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 1608945188646028440, guid: 99807ca801ef46e448ce608ef576201d, type: 3}

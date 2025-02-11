@@ -9,14 +9,78 @@ public class GameUILayer : MonoBehaviour
 
     public GameObject prefab_bloodBar;
     public GameObject item_weapon;
-    public Text text_enemyCount;
     public Image img_enemyCountProgress;
     public Transform bloodPointTrans;
     public Transform weaponGridTrans;
+    public Text text_enemyCount;
+    public Text text_time;
+    public Text text_boci;
+
+    int curBoCi = 0;
+    int curBoCiRestTime = 20;
+
+    List<int> waitAddEnemy = new List<int>();
 
     private void Awake()
     {
         s_instance = this;
+
+        Invoke("startBoCi",0.5f);
+    }
+
+    void startBoCi()
+    {
+        ++curBoCi;
+
+        ToastScript.show("当前波次：" + curBoCi);
+
+        curBoCiRestTime = 20;
+
+        text_boci.text = "波次：" + curBoCi + "/80";
+        text_time.text = "00:" + curBoCiRestTime;
+
+        waitAddEnemy.Clear();
+        for(int i = 0; i < 10; i++)
+        {
+            waitAddEnemy.Add(1);
+        }
+
+        InvokeRepeating("onInvokeBoCiSecond",1,1);
+        InvokeRepeating("onInvokeAddEnemy", 0.5f, 0.5f);
+    }
+
+    void onInvokeBoCiSecond()
+    {
+        --curBoCiRestTime;
+
+        if(curBoCiRestTime >= 10)
+        {
+            text_time.text = "00:" + curBoCiRestTime;
+        }
+        else
+        {
+            text_time.text = "00:0" + curBoCiRestTime;
+        }
+
+        if (curBoCiRestTime <= 0)
+        {
+            CancelInvoke("onInvokeBoCiSecond");
+            Invoke("startBoCi", 2);
+        }
+    }
+
+    void onInvokeAddEnemy()
+    {
+        if(waitAddEnemy.Count > 0)
+        {
+            GameLayer.s_instance.addEnemy(waitAddEnemy[0]);
+            waitAddEnemy.RemoveAt(0);
+
+            if (waitAddEnemy.Count == 0)
+            {
+                CancelInvoke("onInvokeAddEnemy");
+            }
+        }
     }
 
     public void refreshEnemyCount()

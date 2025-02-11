@@ -29,15 +29,13 @@ public class GameLayer : MonoBehaviour
         }
 
         LayerManager.ShowLayer(Consts.Layer.GameUILayer);
-
-        InvokeRepeating("onInvokeAddEnemy",1,1);
     }
 
-    void onInvokeAddEnemy()
+    public void addEnemy(int id)
     {
         if (EnemyManager.s_instance.getEnemyCount() < maxEnemyCount)
         {
-            Instantiate(ObjectPool.getPrefab("Prefabs/Enemys/enemy1"), enemyPoint);
+            Instantiate(ObjectPool.getPrefab("Prefabs/Enemys/enemy" + id), enemyPoint);
         }
     }
 
