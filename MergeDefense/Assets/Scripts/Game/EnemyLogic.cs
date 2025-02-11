@@ -5,6 +5,9 @@ using UnityEngine;
 
 public class EnemyLogic : MonoBehaviour
 {
+    [HideInInspector]
+    public Transform centerPoint;
+
     int curTargetPosIndex = 1;
     float moveSpeed = 2;
 
@@ -17,20 +20,19 @@ public class EnemyLogic : MonoBehaviour
 
     private void Awake()
     {
+        centerPoint = transform.Find("centerPoint");
+
         EnemyManager.s_instance.addEnemy(this);
         transform.position = GameLayer.s_instance.list_enemyMoveFourPos[0];
 
         curHP = 150;
         fullHP = 150;
-    }
 
-    private void Start()
-    {
         bloodPoint = transform.Find("bloodPoint");
 
         // 创建血条
         {
-            bloodBarTrans = Instantiate(GameUILayer.s_instance.prefab_bloodBar,GameUILayer.s_instance.bloodPointTrans).transform;
+            bloodBarTrans = Instantiate(GameUILayer.s_instance.prefab_bloodBar, GameUILayer.s_instance.bloodPointTrans).transform;
             bloodBarTrans.localPosition = CommonUtil.WorldPosToUI(GameLayer.s_instance.camera3D, bloodPoint.position);
             bloodProgressTrans = bloodBarTrans.GetChild(0);
         }

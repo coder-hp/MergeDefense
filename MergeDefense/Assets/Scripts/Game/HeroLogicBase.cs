@@ -12,6 +12,8 @@ public class HeroLogicBase : MonoBehaviour
     public HeroData heroData;
     [HideInInspector]
     public Animator animator;
+    [HideInInspector]
+    public Transform centerPoint;
 
     List<WeaponData> list_weapon = new List<WeaponData>();
 
@@ -21,6 +23,9 @@ public class HeroLogicBase : MonoBehaviour
 
     public void Awake()
     {
+        animator = transform.Find("model").GetComponent<Animator>();
+        centerPoint = transform.Find("centerPoint");
+
         heroData = HeroEntity.getInstance().getData(id);
 
         // 近战
@@ -35,18 +40,19 @@ public class HeroLogicBase : MonoBehaviour
         }
     }
 
-    private void Start()
+    private void Update()
     {
-        animator = transform.Find("model").GetComponent<Animator>();
+        checkAttack();
     }
 
-    private void Update()
+    public bool checkAttack()
     {
         if (!isAttacking)
         {
             EnemyLogic enemyLogic = EnemyManager.s_instance.getMinDisTarget(transform);
             if (enemyLogic && Vector3.Distance(transform.position, enemyLogic.transform.position) <= atkRange)
             {
+                lookEnemy(enemyLogic);
                 isAttacking = true;
                 playAni("attack");
 
@@ -60,8 +66,25 @@ public class HeroLogicBase : MonoBehaviour
                 {
 
                 }
+
+                return true;
             }
         }
+
+        return false;
+    }
+
+    void lookEnemy(EnemyLogic enemyLogic)
+    {
+        Vector2 point1 = centerPoint.position;
+        Vector2 point2 = enemyLogic.centerPoint.position;
+
+        // 计算两个点之间的向量
+        Vector2 vector = point2 - point1;
+
+        float angle = -Vector2.SignedAngle(Vector2.up, vector);
+
+        transform.localRotation = Quaternion.Euler(0, angle, 0);
     }
 
     int getAtk()
