@@ -11,12 +11,13 @@ public class HeroLogicBase : MonoBehaviour
     [HideInInspector]
     public HeroData heroData;
     [HideInInspector]
-    public SkeletonAnimation spineAni;
+    public Animator animator;
 
     List<WeaponData> list_weapon = new List<WeaponData>();
 
     float atkRange = 0f;
-    bool isAttacking = false;
+    [HideInInspector]
+    public bool isAttacking = false;
 
     public void Awake()
     {
@@ -36,8 +37,7 @@ public class HeroLogicBase : MonoBehaviour
 
     private void Start()
     {
-        spineAni = transform.Find("body").GetComponent<SkeletonAnimation>();
-        spineAni.state.Complete += OnSpineAniComplete;
+        animator = transform.Find("model").GetComponent<Animator>();
     }
 
     private void Update()
@@ -48,7 +48,7 @@ public class HeroLogicBase : MonoBehaviour
             if (enemyLogic && Vector3.Distance(transform.position, enemyLogic.transform.position) <= atkRange)
             {
                 isAttacking = true;
-                playAni("attack",false);
+                playAni("attack");
 
                 // 单体攻击
                 if (heroData.isAtkSingle == 1)
@@ -76,21 +76,8 @@ public class HeroLogicBase : MonoBehaviour
         list_weapon.Add(weaponData);
     }
 
-    public void playAni(string aniName,bool isLoop)
+    public void playAni(string aniName)
     {
-        spineAni.state.SetAnimation(0, aniName, isLoop);
-    }
-
-    void OnSpineAniComplete(TrackEntry entry)
-    {
-        switch (entry.Animation.Name)
-        {
-            case "attack":
-                {
-                    isAttacking = false;
-                    playAni("idle", true);
-                    break;
-                }
-        }
+        animator.Play(aniName,0,0);
     }
 }

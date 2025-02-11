@@ -8,7 +8,7 @@ class LayerManager
 {
     public static GameObject ShowLayer(Consts.Layer layer,bool isHighLayer = false)
     {
-        Debug.Log("----LayerManager.showLayer------" + layer);
+        //Debug.Log("----LayerManager.showLayer------" + layer);
 
         if (layer == Consts.Layer.GameLayer)
         {
