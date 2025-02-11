@@ -1,3 +1,4 @@
+using DG.Tweening;
 using Spine.Unity;
 using System.Collections;
 using System.Collections.Generic;
@@ -36,6 +37,9 @@ public class EnemyLogic : MonoBehaviour
             bloodBarTrans.localPosition = CommonUtil.WorldPosToUI(GameLayer.s_instance.camera3D, bloodPoint.position);
             bloodProgressTrans = bloodBarTrans.GetChild(0);
         }
+
+        transform.localScale = Vector3.zero;
+        transform.DOScale(1,0.5f);
     }
 
     public void move()

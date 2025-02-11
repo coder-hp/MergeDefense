@@ -10,6 +10,7 @@ public class GameLayer : MonoBehaviour
     public Camera camera3D;
     public Transform enemyPoint;
     public Transform heroPoint;
+    public GameObject heroGrid;
 
     [HideInInspector]
     public List<Vector3> list_enemyMoveFourPos = new List<Vector3>();
