@@ -482,6 +482,18 @@ public class CommonUtil
         return (pos1 - pos2).magnitude;
     }
 
+    static public float twoPointAngle(Vector2 point1, Vector2 point2)
+    {
+        // 计算两个点之间的向量
+        Vector2 vector = point2 - point1;
+
+        // Vector2.SignedAngle(from , to)
+        // 注意：from和to并不是坐标，而是向量
+        float angle = Vector2.SignedAngle(Vector2.up, vector);
+
+        return angle;
+    }
+
     static public float angleToRadian(float angle)
     {
         return angle * Mathf.Deg2Rad;

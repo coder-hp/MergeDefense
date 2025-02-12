@@ -76,14 +76,7 @@ public class HeroLogicBase : MonoBehaviour
 
     void lookEnemy(EnemyLogic enemyLogic)
     {
-        Vector2 point1 = centerPoint.position;
-        Vector2 point2 = enemyLogic.centerPoint.position;
-
-        // 计算两个点之间的向量
-        Vector2 vector = point2 - point1;
-
-        float angle = -Vector2.SignedAngle(Vector2.up, vector);
-
+        float angle = -CommonUtil.twoPointAngle(centerPoint.position, enemyLogic.centerPoint.position);
         transform.localRotation = Quaternion.Euler(0, angle, 0);
     }
 
@@ -99,8 +92,15 @@ public class HeroLogicBase : MonoBehaviour
         list_weapon.Add(weaponData);
     }
 
-    public void playAni(string aniName)
+    public void playAni(string aniName,float crossFadeTime = 0)
     {
-        animator.Play(aniName,0,0);
+        if(crossFadeTime > 0)
+        {
+            animator.CrossFade(aniName, crossFadeTime);
+        }
+        else
+        {
+            animator.Play(aniName,0,0);
+        }
     }
 }
