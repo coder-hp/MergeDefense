@@ -27,7 +27,7 @@ public class UIItemWeapon : MonoBehaviour
         text_level.text = level.ToString();
 
         // 品质框
-        transform.GetComponent<Image>().sprite = AtlasUtil.getAtlas_game().GetSprite("dikuang_1");
+        transform.GetComponent<Image>().sprite = AtlasUtil.getAtlas_game().GetSprite("dikuang_B");
 
         // 武器icon
         img_icon.sprite = AtlasUtil.getAtlas_icon().GetSprite("weapon_" + type);
