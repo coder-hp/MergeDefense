@@ -100,11 +100,13 @@ public class UIItemWeapon : MonoBehaviour
         {
             if (Vector2.Distance(trans.position, transform.position) <= 0.5f)
             {
+                // 先重置之前选中的格子
                 if (mergeTarget && mergeTarget != trans)
                 {
                     mergeTarget.GetComponent<Image>().color = Color.white;
                     mergeTarget.DOScale(1f, 0.2f);
                 }
+
                 mergeTarget = trans;
                 mergeTarget.GetComponent<Image>().color = Color.green;
                 mergeTarget.DOScale(1.2f, 0.2f);
@@ -116,25 +118,32 @@ public class UIItemWeapon : MonoBehaviour
                 mergeTarget = null;
             }
         }
-
-        //raycastHit = RayUtil.getEndPoint(CommonUtil.mousePosToWorld(GameLayer.s_instance.camera3D));
-        //if (raycastHit.collider)
-        //{
-        //    Debug.Log(raycastHit.collider.name);
-        //}
     }
 
     private void OnMouseUp()
     {
         if (mergeTarget)
         {
-            UIItemWeapon uIItemWeapon = mergeTarget.GetChild(0).GetComponent<UIItemWeapon>();
-            if(uIItemWeapon.weaponData.type == weaponData.type && uIItemWeapon.weaponData.level == weaponData.level && uIItemWeapon.weaponData.level <= 9)
+            if (mergeTarget.childCount > 0)
             {
+                UIItemWeapon uIItemWeapon = mergeTarget.GetChild(0).GetComponent<UIItemWeapon>();
+                if (uIItemWeapon.weaponData.type == weaponData.type && uIItemWeapon.weaponData.level == weaponData.level && uIItemWeapon.weaponData.level <= 9)
+                {
+                    mergeTarget.GetComponent<Image>().color = Color.white;
+                    mergeTarget.DOScale(1f, 0.2f);
+                    uIItemWeapon.addLevel();
+                    Destroy(gameObject);
+                    return;
+                }
+            }
+            else
+            {
+                transform.SetParent(mergeTarget);
+                transform.localScale = Vector3.one;
+                transform.localPosition = Vector3.zero;
+
                 mergeTarget.GetComponent<Image>().color = Color.white;
                 mergeTarget.DOScale(1f, 0.2f);
-                uIItemWeapon.addLevel();
-                Destroy(gameObject);
                 return;
             }
         }
@@ -171,7 +180,8 @@ public class UIItemWeapon : MonoBehaviour
         Transform trans = null;
         for (int i = 0; i < GameUILayer.s_instance.weaponGridTrans.childCount; i++)
         {
-            if (GameUILayer.s_instance.weaponGridTrans.GetChild(i).childCount == 1)
+            // 不限制是否为空格子
+            // if (GameUILayer.s_instance.weaponGridTrans.GetChild(i).childCount == 1)
             {
                 tempDis = Vector2.Distance(GameUILayer.s_instance.weaponGridTrans.GetChild(i).position, transform.position);
                 if (tempDis < minDis)
