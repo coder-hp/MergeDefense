@@ -125,12 +125,20 @@ public class HeroLogicBase : MonoBehaviour
 
         if (isTriggerMouseDown)
         {
-            if(GameUILayer.s_instance.heroInfoPanel.gameObject.activeInHierarchy)
+            if(GameUILayer.s_instance.heroInfoPanel.gameObject.activeInHierarchy && GameUILayer.s_instance.heroInfoPanel.heroLogicBase == this)
             {
-                GameUILayer.s_instance.heroInfoPanel.isCanClose = false;
+                // 如果当前角色信息面板显示的是当前点击的角色，则关闭信息面板
+                // 触发的是UI那边的HeroInfoPanel.onClickClose
             }
+            else
+            {
+                if (GameUILayer.s_instance.heroInfoPanel.gameObject.activeInHierarchy)
+                {
+                    GameUILayer.s_instance.heroInfoPanel.isCanClose = false;
+                }
 
-            GameUILayer.s_instance.heroInfoPanel.show(this);
+                GameUILayer.s_instance.heroInfoPanel.show(this);
+            }
         }
 
         isTriggerMouseDown = false;

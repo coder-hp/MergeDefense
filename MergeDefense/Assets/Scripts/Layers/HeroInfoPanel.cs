@@ -16,8 +16,8 @@ public class HeroInfoPanel : MonoBehaviour
 
     [HideInInspector]
     public bool isCanClose = true;      // 为了连续点击角色时，角色信息面板不用关闭再显示
-
-    HeroLogicBase heroLogicBase;
+    [HideInInspector]
+    public HeroLogicBase heroLogicBase;
 
     public void show(HeroLogicBase _heroLogicBase)
     {
@@ -84,6 +84,7 @@ public class HeroInfoPanel : MonoBehaviour
             return;
         }
 
+        heroLogicBase = null;
         gameObject.SetActive(false);
     }
 }
