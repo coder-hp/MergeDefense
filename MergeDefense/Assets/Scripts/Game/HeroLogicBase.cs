@@ -15,8 +15,8 @@ public class HeroLogicBase : MonoBehaviour
     public Animator animator;
     [HideInInspector]
     public Transform centerPoint;
-
-    List<WeaponData> list_weapon = new List<WeaponData>();
+    [HideInInspector]
+    public List<WeaponData> list_weapon = new List<WeaponData>();
 
     float atkRange = 0f;
     [HideInInspector]
@@ -108,7 +108,7 @@ public class HeroLogicBase : MonoBehaviour
     bool isTriggerMouseDown = false;
     private void OnMouseDown()
     {
-        if (isTouchInUI())
+        if (!GameUILayer.s_instance.heroInfoPanel.gameObject.activeInHierarchy && isTouchInUI())
         {
             return;
         }
@@ -118,13 +118,18 @@ public class HeroLogicBase : MonoBehaviour
 
     private void OnMouseUp()
     {
-        if(isTouchInUI())
+        if (!GameUILayer.s_instance.heroInfoPanel.gameObject.activeInHierarchy && isTouchInUI())
         {
             return;
         }
 
         if (isTriggerMouseDown)
         {
+            if(GameUILayer.s_instance.heroInfoPanel.gameObject.activeInHierarchy)
+            {
+                GameUILayer.s_instance.heroInfoPanel.isCanClose = false;
+            }
+
             GameUILayer.s_instance.heroInfoPanel.show(this);
         }
 
