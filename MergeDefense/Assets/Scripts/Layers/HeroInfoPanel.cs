@@ -15,7 +15,7 @@ public class HeroInfoPanel : MonoBehaviour
     public Text text_weaponName;
 
     [HideInInspector]
-    public bool isCanClose = true;
+    public bool isCanClose = true;      // 为了连续点击角色时，角色信息面板不用关闭再显示
 
     HeroLogicBase heroLogicBase;
 
