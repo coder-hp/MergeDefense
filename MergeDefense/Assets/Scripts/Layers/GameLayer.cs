@@ -46,7 +46,7 @@ public class GameLayer : MonoBehaviour
         {
             if(heroPoint.GetChild(i).childCount == 0)
             {
-                Transform heroTrans = Instantiate(ObjectPool.getPrefab("Prefabs/Heros/hero1"), heroPoint.GetChild(i)).transform;
+                Transform heroTrans = Instantiate(ObjectPool.getPrefab("Prefabs/Heros/hero101"), heroPoint.GetChild(i)).transform;
                 return;
             }
         }

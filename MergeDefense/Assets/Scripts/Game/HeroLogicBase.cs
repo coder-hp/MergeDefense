@@ -3,6 +3,7 @@ using Spine.Unity;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.EventSystems;
 
 public class HeroLogicBase : MonoBehaviour
 {
@@ -102,5 +103,24 @@ public class HeroLogicBase : MonoBehaviour
         {
             animator.Play(aniName,0,0);
         }
+    }
+
+    private void OnMouseDown()
+    {
+        // 检测触摸是否在UI上（Button、Image等）
+        {
+            // 电脑端用法
+            if (EventSystem.current.IsPointerOverGameObject())
+            {
+                return;
+            }
+
+            // 手机端用法
+            if (Input.touchCount > 0 && EventSystem.current.IsPointerOverGameObject(Input.GetTouch(0).fingerId))
+            {
+                return;
+            }
+        }
+        GameUILayer.s_instance.heroInfoPanel.show(this);
     }
 }
