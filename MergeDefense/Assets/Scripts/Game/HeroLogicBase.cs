@@ -105,22 +105,53 @@ public class HeroLogicBase : MonoBehaviour
         }
     }
 
+    bool isTriggerMouseDown = false;
     private void OnMouseDown()
+    {
+        if (isTouchInUI())
+        {
+            return;
+        }
+
+        isTriggerMouseDown = true;
+    }
+
+    private void OnMouseUp()
+    {
+        if(isTouchInUI())
+        {
+            return;
+        }
+
+        if (isTriggerMouseDown)
+        {
+            GameUILayer.s_instance.heroInfoPanel.show(this);
+        }
+
+        isTriggerMouseDown = false;
+    }
+
+    private void OnMouseExit()
+    {
+        isTriggerMouseDown = false;
+    }
+
+    bool isTouchInUI()
     {
         // 检测触摸是否在UI上（Button、Image等）
         {
             // 电脑端用法
             if (EventSystem.current.IsPointerOverGameObject())
             {
-                return;
+                return true;
             }
 
             // 手机端用法
             if (Input.touchCount > 0 && EventSystem.current.IsPointerOverGameObject(Input.GetTouch(0).fingerId))
             {
-                return;
+                return true;
             }
         }
-        GameUILayer.s_instance.heroInfoPanel.show(this);
+        return false;
     }
 }
