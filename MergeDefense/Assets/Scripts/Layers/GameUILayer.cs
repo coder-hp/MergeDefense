@@ -32,11 +32,11 @@ public class GameUILayer : MonoBehaviour
     {
         ++curBoCi;
 
-        ToastScript.show("当前波次：" + curBoCi);
+        ToastScript.show("WAVE：" + curBoCi);
 
         curBoCiRestTime = 20;
 
-        text_boci.text = "波次：" + curBoCi + "/80";
+        text_boci.text = "WAVE：" + curBoCi + "/80";
         text_time.text = "00:" + curBoCiRestTime;
 
         waitAddEnemy.Clear();
