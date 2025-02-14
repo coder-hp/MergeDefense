@@ -37,35 +37,35 @@ public class UIItemWeapon : MonoBehaviour
             // 剑
             case 1:
                 {
-                    img_level_bg.color = CommonUtil.stringToColor("#FFF04C");
+                    img_level_bg.color = CommonUtil.stringToColor("#FFD618");
                     break;
                 }
 
             // 弓
             case 2:
                 {
-                    img_level_bg.color = CommonUtil.stringToColor("#CBF736");
+                    img_level_bg.color = CommonUtil.stringToColor("#64D967");
                     break;
                 }
 
             // 斧
             case 3:
                 {
-                    img_level_bg.color = CommonUtil.stringToColor("#FFB14C");
+                    img_level_bg.color = CommonUtil.stringToColor("#3BD3FF");
                     break;
                 }
 
             // 拳套
             case 4:
                 {
-                    img_level_bg.color = CommonUtil.stringToColor("#FF8A8C");
+                    img_level_bg.color = CommonUtil.stringToColor("#FF6F6F");
                     break;
                 }
 
             // 魔杖
             case 5:
                 {
-                    img_level_bg.color = CommonUtil.stringToColor("#E3A9FF");
+                    img_level_bg.color = CommonUtil.stringToColor("#E28BFF");
                     break;
                 }
 
