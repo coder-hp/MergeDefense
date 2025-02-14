@@ -169,8 +169,10 @@ public class UIItemWeapon : MonoBehaviour
             }
         }
 
-        transform.SetParent(parentTrans);
-        transform.DOLocalMove(Vector3.zero, 0.2f);
+        transform.DOMove(parentTrans.position, 0.2f).OnComplete(()=>
+        {
+            transform.SetParent(parentTrans);
+        });
     }
 
     Transform getMinDisItemWeapon()
