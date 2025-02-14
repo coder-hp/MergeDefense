@@ -82,8 +82,22 @@ public class HeroLogicBase : MonoBehaviour
 
                 if (minDis <= 1.2f)
                 {
-                    transform.SetParent(GameLayer.s_instance.heroPoint.Find(minDisGrid.name));
-                    transform.DOLocalMove(Vector3.zero,1);
+                    // 目标格子没有角色
+                    if (GameLayer.s_instance.heroPoint.Find(minDisGrid.name).childCount == 0)
+                    {
+                        transform.SetParent(GameLayer.s_instance.heroPoint.Find(minDisGrid.name));
+                        transform.DOLocalMove(Vector3.zero, 1);
+                    }
+                    // 已有角色，交换位置
+                    else
+                    {
+                        Transform otherHero = GameLayer.s_instance.heroPoint.Find(minDisGrid.name).GetChild(0);
+                        otherHero.SetParent(transform.parent);
+                        otherHero.DOLocalMove(Vector3.zero, 1);
+
+                        transform.SetParent(GameLayer.s_instance.heroPoint.Find(minDisGrid.name));
+                        transform.DOLocalMove(Vector3.zero, 1);
+                    }
                 }
             }
         }
