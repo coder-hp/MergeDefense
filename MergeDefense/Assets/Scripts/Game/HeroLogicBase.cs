@@ -22,6 +22,8 @@ public class HeroLogicBase : MonoBehaviour
     [HideInInspector]
     public bool isAttacking = false;
 
+    bool isDraging = false;
+
     public void Awake()
     {
         animator = transform.Find("model").GetComponent<Animator>();
@@ -43,6 +45,14 @@ public class HeroLogicBase : MonoBehaviour
 
     private void Update()
     {
+        if(isDraging)
+        {
+            if(Input.GetMouseButton(0))
+            {
+
+            }
+        }
+
         checkAttack();
     }
 
@@ -146,7 +156,11 @@ public class HeroLogicBase : MonoBehaviour
 
     private void OnMouseExit()
     {
-        isTriggerMouseDown = false;
+        if (isTriggerMouseDown)
+        {
+            isTriggerMouseDown = false;
+            isDraging = true;
+        }
     }
 
     bool isTouchInUI()
