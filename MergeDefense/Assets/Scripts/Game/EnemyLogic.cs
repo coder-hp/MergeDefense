@@ -3,6 +3,7 @@ using Spine.Unity;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class EnemyLogic : MonoBehaviour
 {
@@ -17,7 +18,7 @@ public class EnemyLogic : MonoBehaviour
 
     Transform bloodPoint;
     Transform bloodBarTrans;
-    Transform bloodProgressTrans;
+    Image bloodProgressImg;
 
     private void Awake()
     {
@@ -35,7 +36,7 @@ public class EnemyLogic : MonoBehaviour
         {
             bloodBarTrans = Instantiate(GameUILayer.s_instance.prefab_bloodBar, GameUILayer.s_instance.bloodPointTrans).transform;
             bloodBarTrans.localPosition = CommonUtil.WorldPosToUI(GameLayer.s_instance.camera3D, bloodPoint.position);
-            bloodProgressTrans = bloodBarTrans.GetChild(0);
+            bloodProgressImg = bloodBarTrans.GetChild(0).GetComponent<Image>();
         }
 
         transform.localScale = Vector3.zero;
@@ -82,7 +83,7 @@ public class EnemyLogic : MonoBehaviour
                 die();
             }
 
-            bloodProgressTrans.localScale = new Vector3(curHP / fullHP, 1,1);
+            bloodProgressImg.DOFillAmount(curHP / fullHP,0.2f);
         }
     }
 
