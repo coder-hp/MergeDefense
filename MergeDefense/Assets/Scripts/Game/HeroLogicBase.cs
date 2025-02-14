@@ -1,3 +1,4 @@
+using DG.Tweening;
 using Spine;
 using Spine.Unity;
 using System.Collections;
@@ -47,9 +48,43 @@ public class HeroLogicBase : MonoBehaviour
     {
         if(isDraging)
         {
+            Vector3 mousePos = CommonUtil.mousePosToWorld(GameLayer.s_instance.camera3D);
+            float minDis = 100;
+            Transform minDisGrid = null;
+            for(int i = 0; i < GameLayer.s_instance.heroGrid.transform.childCount; i++)
+            {
+                float tempDis = Vector3.Distance(mousePos, GameLayer.s_instance.heroGrid.transform.GetChild(i).position);
+                if (tempDis < minDis)
+                {
+                    minDis = tempDis;
+                    minDisGrid = GameLayer.s_instance.heroGrid.transform.GetChild(i);
+                }
+            }
+
             if(Input.GetMouseButton(0))
             {
+                if(minDis <= 1.2f)
+                {
+                    GameLayer.s_instance.heroGridChoiced.localScale = Vector3.one;
+                    GameLayer.s_instance.heroGridChoiced.transform.position = minDisGrid.position;
+                }
+                else
+                {
+                    GameLayer.s_instance.heroGridChoiced.localScale = Vector3.zero;
+                }
+            }
+            else if (Input.GetMouseButtonUp(0))
+            {
+                isDraging = false;
 
+                GameLayer.s_instance.heroGrid.SetActive(false);
+                GameLayer.s_instance.heroGridChoiced.localScale = Vector3.zero;
+
+                if (minDis <= 1.2f)
+                {
+                    transform.SetParent(GameLayer.s_instance.heroPoint.Find(minDisGrid.name));
+                    transform.DOLocalMove(Vector3.zero,1);
+                }
             }
         }
 
@@ -160,6 +195,8 @@ public class HeroLogicBase : MonoBehaviour
         {
             isTriggerMouseDown = false;
             isDraging = true;
+
+            GameLayer.s_instance.heroGrid.SetActive(true);
         }
     }
 
