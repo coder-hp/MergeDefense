@@ -7,6 +7,7 @@ using UnityEngine.UI;
 public class UIItemWeapon : MonoBehaviour
 {
     public Image img_icon;
+    public Image img_frame;
     public Image img_level_bg;
     public Text text_level;
 
@@ -27,7 +28,7 @@ public class UIItemWeapon : MonoBehaviour
         text_level.text = level.ToString();
 
         // 品质框
-        transform.GetComponent<Image>().sprite = AtlasUtil.getAtlas_game().GetSprite("dikuang_B");
+        transform.GetComponent<Image>().sprite = AtlasUtil.getAtlas_game().GetSprite("dikuang_A");
 
         // 武器icon
         img_icon.sprite = AtlasUtil.getAtlas_icon().GetSprite("weapon_" + type);
@@ -38,6 +39,7 @@ public class UIItemWeapon : MonoBehaviour
             case 1:
                 {
                     img_level_bg.color = CommonUtil.stringToColor("#FFD618");
+                    img_frame.color = CommonUtil.stringToColor("#FFD618");
                     break;
                 }
 
@@ -45,6 +47,7 @@ public class UIItemWeapon : MonoBehaviour
             case 2:
                 {
                     img_level_bg.color = CommonUtil.stringToColor("#64D967");
+                    img_frame.color = CommonUtil.stringToColor("#64D967");
                     break;
                 }
 
@@ -52,6 +55,7 @@ public class UIItemWeapon : MonoBehaviour
             case 3:
                 {
                     img_level_bg.color = CommonUtil.stringToColor("#3BD3FF");
+                    img_frame.color = CommonUtil.stringToColor("#3BD3FF");
                     break;
                 }
 
@@ -59,6 +63,7 @@ public class UIItemWeapon : MonoBehaviour
             case 4:
                 {
                     img_level_bg.color = CommonUtil.stringToColor("#FF6F6F");
+                    img_frame.color = CommonUtil.stringToColor("#FF6F6F");
                     break;
                 }
 
@@ -66,6 +71,7 @@ public class UIItemWeapon : MonoBehaviour
             case 5:
                 {
                     img_level_bg.color = CommonUtil.stringToColor("#E28BFF");
+                    img_frame.color = CommonUtil.stringToColor("#E28BFF");
                     break;
                 }
 
