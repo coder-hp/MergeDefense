@@ -194,17 +194,4 @@ public class UIItemWeapon : MonoBehaviour
 
         return trans;
     }
-
-    void checkBlockBase()
-    {
-        raycastHit = RayUtil.getEndPoint(CommonUtil.mousePosToWorld(GameLayer.s_instance.camera3D));
-        if (raycastHit.collider && raycastHit.collider.CompareTag("Hero"))
-        {
-            raycastHit.collider.GetComponent<HeroLogicBase>();
-        }
-        else
-        {
-            // 未拖到角色上
-        }
-    }
 }
