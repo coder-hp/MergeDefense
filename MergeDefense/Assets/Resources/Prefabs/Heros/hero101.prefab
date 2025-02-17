@@ -80,9 +80,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   id: 101
+  curStar: 1
   animator: {fileID: 0}
   centerPoint: {fileID: 0}
   isAttacking: 0
+  isMerge: 0
+  starTrans: {fileID: 0}
+  heroQualityTrans: {fileID: 0}
 --- !u!114 &8055308523608671907
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -127,6 +131,10 @@ PrefabInstance:
     - target: {fileID: 1711602797156373880, guid: e9300b9661c64a24ab39e1533f234614, type: 3}
       propertyPath: m_Name
       value: model
+      objectReference: {fileID: 0}
+    - target: {fileID: 1711602797156373880, guid: e9300b9661c64a24ab39e1533f234614, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2056743154188701634, guid: e9300b9661c64a24ab39e1533f234614, type: 3}
       propertyPath: m_LocalPosition.x
