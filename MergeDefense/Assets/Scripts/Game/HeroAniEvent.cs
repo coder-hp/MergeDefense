@@ -21,6 +21,7 @@ public class HeroAniEvent : MonoBehaviour
             if (transform.localEulerAngles.y != 180)
             {
                 heroLogicBase.transform.localRotation = Quaternion.Euler(0, 180, 0);
+                heroLogicBase.heroQualityTrans.rotation = Quaternion.Euler(0, 0, 0);
             }
         }
     }

@@ -29,6 +29,9 @@ public class HeroLogicBase : MonoBehaviour
     bool isDraging = false;
     bool isCanUpdate = false;
 
+    [HideInInspector]
+    public Transform heroQualityTrans;
+    Material material_qualityBg;
 
     public void Awake()
     {
@@ -44,6 +47,13 @@ public class HeroLogicBase : MonoBehaviour
         centerPoint = transform.Find("centerPoint");
 
         heroData = HeroEntity.getInstance().getData(id);
+
+        // 品质背景板
+        {
+            heroQualityTrans = Instantiate(ObjectPool.getPrefab("Prefabs/Games/heroQuality"), transform).transform;
+            heroQualityTrans.rotation = Quaternion.Euler(0,0,0);
+            material_qualityBg = heroQualityTrans.GetComponent<MeshRenderer>().material;
+        }
 
         // 星星预设
         {
@@ -176,12 +186,29 @@ public class HeroLogicBase : MonoBehaviour
                 starTrans.Find(i.ToString()).gameObject.SetActive(false);
             }
         }
+
+        // 橙色
+        if (curStar > 9)
+        {
+            material_qualityBg.SetColor("_Color",new Color(1, 0.6f,0.24f));
+        }
+        // 紫色
+        else if (curStar > 6)
+        {
+            material_qualityBg.SetColor("_Color", new Color(1, 0.34f, 0.88f));
+        }
+        // 蓝色
+        else if (curStar > 3)
+        {
+            material_qualityBg.SetColor("_Color", new Color(0.46f, 0.57f,1));
+        }
     }
 
     void lookEnemy(EnemyLogic enemyLogic)
     {
         float angle = -CommonUtil.twoPointAngle(centerPoint.position, enemyLogic.centerPoint.position);
         transform.localRotation = Quaternion.Euler(0, angle, 0);
+        heroQualityTrans.rotation = Quaternion.Euler(0, 0, 0);
     }
 
     int getAtk()
