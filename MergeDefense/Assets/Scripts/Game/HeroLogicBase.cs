@@ -19,8 +19,6 @@ public class HeroLogicBase : MonoBehaviour
     [HideInInspector]
     public List<WeaponData> list_weapon = new List<WeaponData>();
     [HideInInspector]
-    public float atkRange = 0f;
-    [HideInInspector]
     public bool isAttacking = false;
 
     bool isDraging = false;
@@ -31,17 +29,6 @@ public class HeroLogicBase : MonoBehaviour
         centerPoint = transform.Find("centerPoint");
 
         heroData = HeroEntity.getInstance().getData(id);
-
-        // 近战
-        if (heroData.isJinZhan == 1)
-        {
-            atkRange = 1.9f;
-        }
-        // 远程
-        else
-        {
-            atkRange = 10;
-        }
     }
 
     private void Update()
@@ -69,7 +56,7 @@ public class HeroLogicBase : MonoBehaviour
                     GameLayer.s_instance.heroGridChoiced.transform.position = minDisGrid.position;
 
                     GameLayer.s_instance.attackRangeTrans.position = minDisGrid.position;
-                    GameLayer.s_instance.attackRangeTrans.localScale = new Vector3(atkRange,atkRange, atkRange);
+                    GameLayer.s_instance.attackRangeTrans.localScale = new Vector3(heroData.atkRange, heroData.atkRange, heroData.atkRange);
                 }
                 else
                 {
@@ -115,7 +102,7 @@ public class HeroLogicBase : MonoBehaviour
         if (!isAttacking)
         {
             EnemyLogic enemyLogic = EnemyManager.s_instance.getMinDisTarget(transform);
-            if (enemyLogic && Vector3.Distance(transform.position, enemyLogic.transform.position) <= atkRange)
+            if (enemyLogic && Vector3.Distance(transform.position, enemyLogic.transform.position) <= heroData.atkRange)
             {
                 lookEnemy(enemyLogic);
                 isAttacking = true;

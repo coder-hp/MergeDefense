@@ -10,7 +10,7 @@ public class HeroData
     public string name;
     public int atk;
     public float atkSpeed;
-    public int isJinZhan;
+    public float atkRange;
     public int isAtkSingle;
     public int critRate;
     public int critDamage;
