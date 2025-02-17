@@ -55,6 +55,7 @@ public class GameLayer : MonoBehaviour
                             heroLogicBase2.isMerge = true;
                             heroLogicBase2.GetComponent<BoxCollider>().enabled = false;
                             heroLogicBase2.transform.SetParent(transform);
+                            Destroy(heroLogicBase2.starTrans.gameObject);
                             heroLogicBase2.transform.DOMove(heroLogicBase1.transform.position, 0.5f).OnComplete(() =>
                             {
                                 Destroy(heroLogicBase2.gameObject);

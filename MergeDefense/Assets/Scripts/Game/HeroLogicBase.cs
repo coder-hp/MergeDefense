@@ -23,8 +23,11 @@ public class HeroLogicBase : MonoBehaviour
     public bool isAttacking = false;
     [HideInInspector]
     public bool isMerge = false;
+    [HideInInspector]
+    public Transform starTrans;
 
     bool isDraging = false;
+
 
     public void Awake()
     {
@@ -32,6 +35,13 @@ public class HeroLogicBase : MonoBehaviour
         centerPoint = transform.Find("centerPoint");
 
         heroData = HeroEntity.getInstance().getData(id);
+
+        // 星星预设
+        {
+            starTrans = Instantiate(GameUILayer.s_instance.prefab_heroStar, GameUILayer.s_instance.heroStarPointTrans).transform;
+            starTrans.localPosition = CommonUtil.WorldPosToUI(GameLayer.s_instance.camera3D, transform.position);
+            setStarUI();
+        }
 
         GameLayer.s_instance.checkHeroMerge();
     }
@@ -136,6 +146,26 @@ public class HeroLogicBase : MonoBehaviour
         return false;
     }
 
+    void setStarUI()
+    {
+        int showCount = curStar % 3;
+        if (showCount == 0)
+        {
+            showCount = 3;
+        }
+        for (int i = 1; i <= 3; i++)
+        {
+            if (i <= showCount)
+            {
+                starTrans.Find(i.ToString()).gameObject.SetActive(true);
+            }
+            else
+            {
+                starTrans.Find(i.ToString()).gameObject.SetActive(false);
+            }
+        }
+    }
+
     void lookEnemy(EnemyLogic enemyLogic)
     {
         float angle = -CommonUtil.twoPointAngle(centerPoint.position, enemyLogic.centerPoint.position);
@@ -157,6 +187,7 @@ public class HeroLogicBase : MonoBehaviour
     public void addStar()
     {
         ++curStar;
+        setStarUI();
     }
 
     public void playAni(string aniName,float crossFadeTime = 0)
@@ -239,5 +270,13 @@ public class HeroLogicBase : MonoBehaviour
             }
         }
         return false;
+    }
+
+    private void OnDestroy()
+    {
+        if(starTrans)
+        {
+            Destroy(starTrans.gameObject);
+        }
     }
 }

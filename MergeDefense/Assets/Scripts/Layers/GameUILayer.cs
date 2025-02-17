@@ -9,9 +9,11 @@ public class GameUILayer : MonoBehaviour
 
     public HeroInfoPanel heroInfoPanel;
     public GameObject prefab_bloodBar;
+    public GameObject prefab_heroStar;
     public GameObject item_weapon;
     public Image img_enemyCountProgress;
     public Transform bloodPointTrans;
+    public Transform heroStarPointTrans;
     public Transform weaponGridTrans;
     public Text text_enemyCount;
     public Text text_time;
