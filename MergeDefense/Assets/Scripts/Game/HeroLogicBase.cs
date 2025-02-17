@@ -18,8 +18,8 @@ public class HeroLogicBase : MonoBehaviour
     public Transform centerPoint;
     [HideInInspector]
     public List<WeaponData> list_weapon = new List<WeaponData>();
-
-    float atkRange = 0f;
+    [HideInInspector]
+    public float atkRange = 0f;
     [HideInInspector]
     public bool isAttacking = false;
 
@@ -67,10 +67,14 @@ public class HeroLogicBase : MonoBehaviour
                 {
                     GameLayer.s_instance.heroGridChoiced.localScale = Vector3.one;
                     GameLayer.s_instance.heroGridChoiced.transform.position = minDisGrid.position;
+
+                    GameLayer.s_instance.attackRangeTrans.position = minDisGrid.position;
+                    GameLayer.s_instance.attackRangeTrans.localScale = new Vector3(atkRange,atkRange, atkRange);
                 }
                 else
                 {
                     GameLayer.s_instance.heroGridChoiced.localScale = Vector3.zero;
+                    GameLayer.s_instance.attackRangeTrans.localScale = Vector3.zero;
                 }
             }
             else if (Input.GetMouseButtonUp(0))
@@ -79,6 +83,7 @@ public class HeroLogicBase : MonoBehaviour
 
                 GameLayer.s_instance.heroGrid.SetActive(false);
                 GameLayer.s_instance.heroGridChoiced.localScale = Vector3.zero;
+                GameLayer.s_instance.attackRangeTrans.localScale = Vector3.zero;
 
                 if (minDis <= 1.2f)
                 {
@@ -196,6 +201,7 @@ public class HeroLogicBase : MonoBehaviour
                     GameUILayer.s_instance.heroInfoPanel.isCanClose = false;
                 }
 
+                GameLayer.s_instance.attackRangeTrans.position = transform.parent.position;
                 GameUILayer.s_instance.heroInfoPanel.show(this);
             }
         }

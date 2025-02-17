@@ -21,6 +21,8 @@ public class HeroInfoPanel : MonoBehaviour
 
     public void show(HeroLogicBase _heroLogicBase)
     {
+        GameLayer.s_instance.attackRangeTrans.localScale = new Vector3(_heroLogicBase.atkRange, _heroLogicBase.atkRange, _heroLogicBase.atkRange);
+
         gameObject.SetActive(true);
 
         heroLogicBase = _heroLogicBase;
@@ -86,5 +88,6 @@ public class HeroInfoPanel : MonoBehaviour
 
         heroLogicBase = null;
         gameObject.SetActive(false);
+        GameLayer.s_instance.attackRangeTrans.localScale = Vector3.zero;
     }
 }
