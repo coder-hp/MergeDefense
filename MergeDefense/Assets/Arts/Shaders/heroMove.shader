@@ -2,6 +2,7 @@ Shader "Kein/Hero/heroMove"
 {
     Properties
     {
+        _Color("Color",color)=(1,1,1,1)
         _MainTex ("Texture", 2D) = "white" {}
         _Tiling("Tiling",float) = 1
     }
@@ -30,7 +31,7 @@ Shader "Kein/Hero/heroMove"
                 float2 uv : TEXCOORD0;
                 float4 vertex : SV_POSITION;
             };
-
+            fixed4 _Color;
             sampler2D _MainTex;
             float4 _MainTex_ST;
             float _Tiling;
@@ -46,6 +47,7 @@ Shader "Kein/Hero/heroMove"
             {
                 i.uv.y *= _Tiling;
                 fixed4 col = tex2D(_MainTex, i.uv);
+                col.rgb *= _Color.rgb;
                 return col;
             }
             ENDCG
