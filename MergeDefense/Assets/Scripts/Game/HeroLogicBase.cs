@@ -27,10 +27,19 @@ public class HeroLogicBase : MonoBehaviour
     public Transform starTrans;
 
     bool isDraging = false;
+    bool isCanUpdate = false;
 
 
     public void Awake()
     {
+        transform.localScale = new Vector3(1.3f, 1.3f, 1.3f);
+        transform.DOScale(0.7f, 0.2f).OnComplete(()=>
+        {
+            transform.DOScale(1f, 0.1f).OnComplete(()=>
+            {
+                isCanUpdate = true;
+            });
+        });
         animator = transform.Find("model").GetComponent<Animator>();
         centerPoint = transform.Find("centerPoint");
 
@@ -42,12 +51,15 @@ public class HeroLogicBase : MonoBehaviour
             starTrans.localPosition = CommonUtil.WorldPosToUI(GameLayer.s_instance.camera3D, transform.position);
             setStarUI();
         }
-
-        GameLayer.s_instance.checkHeroMerge();
     }
 
     private void Update()
     {
+        if(!isCanUpdate)
+        {
+            return;
+        }
+
         if(isMerge)
         {
             return;
