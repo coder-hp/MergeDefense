@@ -9,6 +9,7 @@ using UnityEngine.EventSystems;
 public class HeroLogicBase : MonoBehaviour
 {
     public int id;
+    public int curStar = 1;
 
     [HideInInspector]
     public HeroData heroData;
@@ -20,6 +21,8 @@ public class HeroLogicBase : MonoBehaviour
     public List<WeaponData> list_weapon = new List<WeaponData>();
     [HideInInspector]
     public bool isAttacking = false;
+    [HideInInspector]
+    public bool isMerge = false;
 
     bool isDraging = false;
 
@@ -29,10 +32,17 @@ public class HeroLogicBase : MonoBehaviour
         centerPoint = transform.Find("centerPoint");
 
         heroData = HeroEntity.getInstance().getData(id);
+
+        GameLayer.s_instance.checkHeroMerge();
     }
 
     private void Update()
     {
+        if(isMerge)
+        {
+            return;
+        }
+
         if(isDraging)
         {
             Vector3 mousePos = CommonUtil.mousePosToWorld(GameLayer.s_instance.camera3D);
@@ -142,6 +152,11 @@ public class HeroLogicBase : MonoBehaviour
         ToastScript.show("增加武器:" + weaponData.name + " level" + weaponData.level);
         Debug.Log(transform.name + "增加武器:" + weaponData.name + " level" + weaponData.level);
         list_weapon.Add(weaponData);
+    }
+
+    public void addStar()
+    {
+        ++curStar;
     }
 
     public void playAni(string aniName,float crossFadeTime = 0)

@@ -1,3 +1,4 @@
+using DG.Tweening;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -34,6 +35,39 @@ public class GameLayer : MonoBehaviour
         LayerManager.ShowLayer(Consts.Layer.GameUILayer);
     }
 
+    public void checkHeroMerge()
+    {
+        // 检测是否可以合并
+        for (int i = 0; i < heroPoint.childCount; i++)
+        {
+            for (int j = 0; j < heroPoint.childCount; j++)
+            {
+                if(i != j)
+                {
+                    if (heroPoint.GetChild(i).childCount == 1 && heroPoint.GetChild(j).childCount == 1)
+                    {
+                        HeroLogicBase heroLogicBase1 = heroPoint.GetChild(i).GetChild(0).GetComponent<HeroLogicBase>();
+                        HeroLogicBase heroLogicBase2 = heroPoint.GetChild(j).GetChild(0).GetComponent<HeroLogicBase>();
+                        if ((heroLogicBase1.curStar < heroLogicBase1.heroData.maxStar) && (heroLogicBase1.heroData.id == heroLogicBase2.heroData.id) && (heroLogicBase1.curStar == heroLogicBase2.curStar))
+                        {
+                            heroLogicBase1.addStar();
+
+                            heroLogicBase2.isMerge = true;
+                            heroLogicBase2.GetComponent<BoxCollider>().enabled = false;
+                            heroLogicBase2.transform.SetParent(transform);
+                            heroLogicBase2.transform.DOMove(heroLogicBase1.transform.position, 0.5f).OnComplete(() =>
+                            {
+                                Destroy(heroLogicBase2.gameObject);
+                                checkHeroMerge();
+                            });
+                            return;
+                        }
+                    }
+                }
+            }
+        }
+    }
+
     public void addEnemy(int id)
     {
         if (EnemyManager.s_instance.getEnemyCount() < maxEnemyCount)
@@ -48,7 +82,7 @@ public class GameLayer : MonoBehaviour
         {
             if(heroPoint.GetChild(i).childCount == 0)
             {
-                Transform heroTrans = Instantiate(ObjectPool.getPrefab("Prefabs/Heros/hero102"), heroPoint.GetChild(i)).transform;
+                Transform heroTrans = Instantiate(ObjectPool.getPrefab("Prefabs/Heros/hero101"), heroPoint.GetChild(i)).transform;
                 return;
             }
         }
