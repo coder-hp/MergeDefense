@@ -1,6 +1,7 @@
 using DG.Tweening;
 using Spine;
 using Spine.Unity;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -34,9 +35,15 @@ public class HeroLogicBase : MonoBehaviour
     Vector3 heroQualityOffset = new Vector3(0, 0.44f, 0.8f);
     Material material_qualityBg;
 
+    [HideInInspector]
+    public Action Attack;
+
+    HeroAniEvent heroAniEvent;
+
 
     public void Awake()
     {
+        heroAniEvent = transform.Find("model").GetComponent<HeroAniEvent>();
         transform.localScale = new Vector3(1.3f, 1.3f, 1.3f);
         transform.DOScale(0.7f, 0.2f).OnComplete(()=>
         {
@@ -169,20 +176,10 @@ public class HeroLogicBase : MonoBehaviour
             EnemyLogic enemyLogic = EnemyManager.s_instance.getMinDisTarget(transform);
             if (enemyLogic && Vector3.Distance(transform.position, enemyLogic.transform.position) <= heroData.atkRange)
             {
+                heroAniEvent.enemyLogic = enemyLogic;
                 lookEnemy(enemyLogic);
                 isAttacking = true;
                 playAni("attack");
-
-                // 单体攻击
-                if (heroData.isAtkSingle == 1)
-                {
-                    enemyLogic.damage(getAtk());
-                }
-                // 群体攻击
-                else
-                {
-
-                }
 
                 return true;
             }
@@ -233,7 +230,7 @@ public class HeroLogicBase : MonoBehaviour
         transform.localRotation = Quaternion.Euler(0, angle, 0);
     }
 
-    int getAtk()
+    public int getAtk()
     {
         return heroData.atk;
     }

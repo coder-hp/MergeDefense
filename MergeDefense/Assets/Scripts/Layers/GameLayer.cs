@@ -15,6 +15,7 @@ public class GameLayer : MonoBehaviour
     public Transform heroGridChoiced;
     public Transform attackRangeTrans;
     public Transform heroQualityPoint;
+    public Transform flyPoint;
 
     [HideInInspector]
     public List<Vector3> list_enemyMoveFourPos = new List<Vector3>();
@@ -85,7 +86,7 @@ public class GameLayer : MonoBehaviour
         {
             if(heroPoint.GetChild(i).childCount == 0)
             {
-                Transform heroTrans = Instantiate(ObjectPool.getPrefab("Prefabs/Heros/hero" + RandomUtil.getRandom(101,102)), heroPoint.GetChild(i)).transform;
+                Transform heroTrans = Instantiate(ObjectPool.getPrefab("Prefabs/Heros/hero" + RandomUtil.getRandom(102,102)), heroPoint.GetChild(i)).transform;
                 Invoke("checkHeroMerge",0.3f);
                 return;
             }

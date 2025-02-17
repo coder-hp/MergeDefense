@@ -720,6 +720,7 @@ Transform:
   - {fileID: 1737212649471613696}
   - {fileID: 5637032323043564754}
   - {fileID: 5070735870438125811}
+  - {fileID: 4149523117588117092}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &7212460890321329611
@@ -746,6 +747,7 @@ MonoBehaviour:
   heroGridChoiced: {fileID: 2135443028451985268}
   attackRangeTrans: {fileID: 1889172472041156528}
   heroQualityPoint: {fileID: 7220120283883626461}
+  flyPoint: {fileID: 4149523117588117092}
   list_enemyMoveFourPos: []
   maxEnemyCount: 100
 --- !u!114 &-7090605276762049441
@@ -1424,6 +1426,37 @@ Transform:
   - {fileID: 7737516421354825228}
   - {fileID: 6162854313086487263}
   - {fileID: 6823065894570184334}
+  m_Father: {fileID: 4729789445500738202}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &7156926895083689909
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 4149523117588117092}
+  m_Layer: 0
+  m_Name: flyPoint
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &4149523117588117092
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7156926895083689909}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
   m_Father: {fileID: 4729789445500738202}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &7463697905699283151
