@@ -14,6 +14,7 @@ public class GameLayer : MonoBehaviour
     public GameObject heroGrid;
     public Transform heroGridChoiced;
     public Transform attackRangeTrans;
+    public Transform heroQualityPoint;
 
     [HideInInspector]
     public List<Vector3> list_enemyMoveFourPos = new List<Vector3>();
@@ -56,6 +57,7 @@ public class GameLayer : MonoBehaviour
                             heroLogicBase2.GetComponent<BoxCollider>().enabled = false;
                             heroLogicBase2.transform.SetParent(transform);
                             Destroy(heroLogicBase2.starTrans.gameObject);
+                            Destroy(heroLogicBase2.heroQualityTrans.gameObject);
                             heroLogicBase2.transform.DOMove(heroLogicBase1.transform.position, 0.5f).OnComplete(() =>
                             {
                                 Destroy(heroLogicBase2.gameObject);

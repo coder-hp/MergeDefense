@@ -31,7 +31,9 @@ public class HeroLogicBase : MonoBehaviour
 
     [HideInInspector]
     public Transform heroQualityTrans;
+    Vector3 heroQualityOffset = new Vector3(0, 0.44f, 0.8f);
     Material material_qualityBg;
+
 
     public void Awake()
     {
@@ -50,8 +52,8 @@ public class HeroLogicBase : MonoBehaviour
 
         // 品质背景板
         {
-            heroQualityTrans = Instantiate(ObjectPool.getPrefab("Prefabs/Games/heroQuality"), transform).transform;
-            heroQualityTrans.rotation = Quaternion.Euler(0,0,0);
+            heroQualityTrans = Instantiate(ObjectPool.getPrefab("Prefabs/Games/heroQuality"), GameLayer.s_instance.heroQualityPoint).transform;
+            heroQualityTrans.position = transform.position + heroQualityOffset;
             material_qualityBg = heroQualityTrans.GetComponent<MeshRenderer>().material;
         }
 
@@ -116,21 +118,42 @@ public class HeroLogicBase : MonoBehaviour
 
                 if (minDis <= 1.2f)
                 {
+                    Transform minDisGridTrans = GameLayer.s_instance.heroPoint.Find(minDisGrid.name);
+
                     // 目标格子没有角色
-                    if (GameLayer.s_instance.heroPoint.Find(minDisGrid.name).childCount == 0)
+                    if (minDisGridTrans.childCount == 0)
                     {
-                        transform.SetParent(GameLayer.s_instance.heroPoint.Find(minDisGrid.name));
-                        transform.DOLocalMove(Vector3.zero, 1);
+                        starTrans.localScale = Vector3.zero;
+                        transform.SetParent(minDisGridTrans);
+                        transform.DOLocalMove(Vector3.zero, 1).OnComplete(()=>
+                        {
+                            starTrans.localScale = Vector3.one;
+                            starTrans.localPosition = CommonUtil.WorldPosToUI(GameLayer.s_instance.camera3D, transform.position);
+                        });
+                        heroQualityTrans.DOMove(minDisGridTrans.position + heroQualityOffset, 1);
                     }
                     // 已有角色，交换位置
                     else
                     {
-                        Transform otherHero = GameLayer.s_instance.heroPoint.Find(minDisGrid.name).GetChild(0);
+                        Transform otherHero = minDisGridTrans.GetChild(0);
+                        HeroLogicBase heroLogicBase_other = otherHero.GetComponent<HeroLogicBase>();
+                        heroLogicBase_other.starTrans.localScale = Vector3.zero;
                         otherHero.SetParent(transform.parent);
-                        otherHero.DOLocalMove(Vector3.zero, 1);
+                        otherHero.DOLocalMove(Vector3.zero, 1).OnComplete(() =>
+                        {
+                            heroLogicBase_other.starTrans.localScale = Vector3.one;
+                            heroLogicBase_other.starTrans.localPosition = CommonUtil.WorldPosToUI(GameLayer.s_instance.camera3D, otherHero.position);
+                        });
+                        heroLogicBase_other.heroQualityTrans.DOMove(transform.parent.position + heroQualityOffset, 1);
 
-                        transform.SetParent(GameLayer.s_instance.heroPoint.Find(minDisGrid.name));
-                        transform.DOLocalMove(Vector3.zero, 1);
+                        starTrans.localScale = Vector3.zero;
+                        transform.SetParent(minDisGridTrans);
+                        transform.DOLocalMove(Vector3.zero, 1).OnComplete(() =>
+                        {
+                            starTrans.localScale = Vector3.one;
+                            starTrans.localPosition = CommonUtil.WorldPosToUI(GameLayer.s_instance.camera3D, transform.position);
+                        });
+                        heroQualityTrans.DOMove(minDisGridTrans.position + heroQualityOffset, 1);
                     }
                 }
             }
@@ -208,7 +231,6 @@ public class HeroLogicBase : MonoBehaviour
     {
         float angle = -CommonUtil.twoPointAngle(centerPoint.position, enemyLogic.centerPoint.position);
         transform.localRotation = Quaternion.Euler(0, angle, 0);
-        heroQualityTrans.rotation = Quaternion.Euler(0, 0, 0);
     }
 
     int getAtk()
