@@ -7,8 +7,14 @@ public class HeroInfoPanel : MonoBehaviour
 {
     public GameObject bgTrans;
     public Image img_head;
-    public Image img_weapon1;
-    public Image img_weapon2;
+    public Image img_head_bg;
+    public Image img_head_kuang;
+    public Image img_weaponIcon1;
+    public Image img_weaponIcon2;
+    public Image img_weaponFrame1;
+    public Image img_weaponFrame2;
+    public GameObject obj_weapon1;
+    public GameObject obj_weapon2;
     public GameObject obj_choicedWeapon1;
     public GameObject obj_choicedWeapon2;
     public Text text_heroName;
@@ -29,24 +35,33 @@ public class HeroInfoPanel : MonoBehaviour
 
         text_heroName.text = heroLogicBase.heroData.name;
         img_head.sprite = AtlasUtil.getAtlas_icon().GetSprite("head_" + heroLogicBase.id);
+        img_head_kuang.sprite = AtlasUtil.getAtlas_game().GetSprite("kuang_hero_" + heroLogicBase.heroData.quality + "_1");
+        img_head_bg.sprite = AtlasUtil.getAtlas_game().GetSprite("kuang_hero_" + heroLogicBase.heroData.quality + "_2");
 
         text_weaponName.text = "No Weapons";
-        img_weapon1.gameObject.SetActive(false);
-        img_weapon2.gameObject.SetActive(false);
+        obj_weapon1.gameObject.SetActive(false);
+        obj_weapon2.gameObject.SetActive(false);
         obj_choicedWeapon1.SetActive(false);
         obj_choicedWeapon2.SetActive(false);
 
         if (heroLogicBase.list_weapon.Count >= 1)
         {
-            img_weapon1.gameObject.SetActive(true);
-            img_weapon1.sprite = AtlasUtil.getAtlas_icon().GetSprite("weapon_" + heroLogicBase.list_weapon[0].type);
+            obj_weapon1.gameObject.SetActive(true);
+            img_weaponIcon1.sprite = AtlasUtil.getAtlas_icon().GetSprite("weapon_" + heroLogicBase.list_weapon[0].type);
+            img_weaponFrame1.color = Consts.list_weaponColor[heroLogicBase.list_weapon[0].type - 1];
+            obj_weapon1.transform.Find("level_bg").GetComponent<Image>().color = Consts.list_weaponColor[heroLogicBase.list_weapon[0].type - 1];
+            obj_weapon1.transform.Find("level_bg/level").GetComponent<Text>().text = heroLogicBase.list_weapon[0].level.ToString();
+
             onClickWeaponIcon(0);
         }
 
         if (heroLogicBase.list_weapon.Count >= 2)
         {
-            img_weapon2.gameObject.SetActive(true);
-            img_weapon2.sprite = AtlasUtil.getAtlas_icon().GetSprite("weapon_" + heroLogicBase.list_weapon[1].type);
+            obj_weapon2.gameObject.SetActive(true);
+            img_weaponIcon2.sprite = AtlasUtil.getAtlas_icon().GetSprite("weapon_" + heroLogicBase.list_weapon[1].type);
+            img_weaponFrame2.color = Consts.list_weaponColor[heroLogicBase.list_weapon[1].type - 1];
+            obj_weapon2.transform.Find("level_bg").GetComponent<Image>().color = Consts.list_weaponColor[heroLogicBase.list_weapon[1].type - 1];
+            obj_weapon2.transform.Find("level_bg/level").GetComponent<Text>().text = heroLogicBase.list_weapon[1].level.ToString();
         }
     }
 
