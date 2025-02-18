@@ -16,11 +16,14 @@ public class GameLayer : MonoBehaviour
     public Transform attackRangeTrans;
     public Transform heroQualityPoint;
     public Transform flyPoint;
+    public Transform effectPoint;
 
     [HideInInspector]
     public List<Vector3> list_enemyMoveFourPos = new List<Vector3>();
     [HideInInspector]
     public int maxEnemyCount = 100;
+
+    bool isMerging = false;
 
     private void Awake()
     {
@@ -52,8 +55,6 @@ public class GameLayer : MonoBehaviour
                         HeroLogicBase heroLogicBase2 = heroPoint.GetChild(j).GetChild(0).GetComponent<HeroLogicBase>();
                         if ((heroLogicBase1.curStar < heroLogicBase1.heroData.maxStar) && (heroLogicBase1.heroData.id == heroLogicBase2.heroData.id) && (heroLogicBase1.curStar == heroLogicBase2.curStar))
                         {
-                            heroLogicBase1.addStar();
-
                             heroLogicBase2.isMerge = true;
                             heroLogicBase2.GetComponent<BoxCollider>().enabled = false;
                             heroLogicBase2.transform.SetParent(transform);
@@ -61,8 +62,10 @@ public class GameLayer : MonoBehaviour
                             Destroy(heroLogicBase2.heroQualityTrans.gameObject);
                             heroLogicBase2.transform.DOMove(heroLogicBase1.transform.position, 0.5f).OnComplete(() =>
                             {
+                                heroLogicBase1.addStar();
+                                EffectManager.heroMerge(heroLogicBase1.transform.position);
                                 Destroy(heroLogicBase2.gameObject);
-                                checkHeroMerge();
+                                Invoke("checkHeroMerge", 0.5f);
                             });
                             return;
                         }
@@ -70,6 +73,8 @@ public class GameLayer : MonoBehaviour
                 }
             }
         }
+
+        isMerging = false;
     }
 
     public void addEnemy(int id)
@@ -87,7 +92,12 @@ public class GameLayer : MonoBehaviour
             if(heroPoint.GetChild(i).childCount == 0)
             {
                 Transform heroTrans = Instantiate(ObjectPool.getPrefab("Prefabs/Heros/hero" + RandomUtil.getRandom(101,102)), heroPoint.GetChild(i)).transform;
-                Invoke("checkHeroMerge",0.3f);
+
+                if (!isMerging)
+                {
+                    isMerging = true;
+                    Invoke("checkHeroMerge", 0.3f);
+                }
                 return;
             }
         }
