@@ -101,7 +101,7 @@ public class HeroLogicBase : MonoBehaviour
 
             if(Input.GetMouseButton(0))
             {
-                if(minDis <= 1.2f)
+                if(minDis <= 1.4f)
                 {
                     GameLayer.s_instance.heroGridChoiced.localScale = Vector3.one;
                     GameLayer.s_instance.heroGridChoiced.transform.position = minDisGrid.position;
@@ -127,7 +127,7 @@ public class HeroLogicBase : MonoBehaviour
                 GameLayer.s_instance.attackRangeTrans.localScale = Vector3.zero;
                 HeroMoveLine.s_instance.hide();
 
-                if (minDis <= 1.2f)
+                if (minDis <= 1.4f)
                 {
                     Transform minDisGridTrans = GameLayer.s_instance.heroPoint.Find(minDisGrid.name);
 
