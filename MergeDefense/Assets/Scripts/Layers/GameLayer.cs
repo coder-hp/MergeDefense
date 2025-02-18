@@ -60,12 +60,12 @@ public class GameLayer : MonoBehaviour
                             heroLogicBase2.transform.SetParent(transform);
                             Destroy(heroLogicBase2.starTrans.gameObject);
                             Destroy(heroLogicBase2.heroQualityTrans.gameObject);
-                            heroLogicBase2.transform.DOMove(heroLogicBase1.transform.position, 0.5f).OnComplete(() =>
+                            heroLogicBase2.transform.DOMove(heroLogicBase1.transform.position, 0.3f).OnComplete(() =>
                             {
                                 heroLogicBase1.addStar();
                                 EffectManager.heroMerge(heroLogicBase1.transform.position);
                                 Destroy(heroLogicBase2.gameObject);
-                                Invoke("checkHeroMerge", 0.5f);
+                                Invoke("checkHeroMerge", 0.3f);
                             });
                             return;
                         }
