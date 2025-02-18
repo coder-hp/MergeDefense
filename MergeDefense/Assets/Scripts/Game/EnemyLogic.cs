@@ -72,7 +72,8 @@ public class EnemyLogic : MonoBehaviour
         }
     }
 
-    public void damage(int atk)
+    // 返回值：本次攻击是否造成死亡
+    public bool damage(int atk)
     {
         if (curHP > 0)
         {
@@ -81,10 +82,13 @@ public class EnemyLogic : MonoBehaviour
             {
                 curHP = 0;
                 die();
+                return true;
             }
 
             bloodProgressImg.DOFillAmount(curHP / fullHP,0.2f);
         }
+
+        return false;
     }
 
     void die()

@@ -6,7 +6,8 @@ public class EnemyManager : MonoBehaviour
 {
     public static EnemyManager s_instance = null;
 
-    List<EnemyLogic> list_enemy = new List<EnemyLogic>();
+    [HideInInspector]
+    public List<EnemyLogic> list_enemy = new List<EnemyLogic>();
 
     private void Awake()
     {

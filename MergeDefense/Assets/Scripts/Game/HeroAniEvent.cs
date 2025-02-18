@@ -39,9 +39,9 @@ public class HeroAniEvent : MonoBehaviour
                 // 法师
                 case 103:
                     {
-                        Transform arrow = Instantiate(ObjectPool.getPrefab("Prefabs/Games/arrow"), GameLayer.s_instance.flyPoint).transform;
+                        Transform arrow = Instantiate(ObjectPool.getPrefab("Prefabs/Games/magicBall"), GameLayer.s_instance.flyPoint).transform;
                         arrow.position = heroLogicBase.centerPoint.position;
-                        arrow.GetComponent<ArrowLogic>().init(heroLogicBase.getAtk(), enemyLogic);
+                        arrow.GetComponent<MagicBallLogic>().init(heroLogicBase.getAtk(), enemyLogic);
                         break;
                     }
             }
