@@ -35,6 +35,15 @@ public class HeroAniEvent : MonoBehaviour
                         arrow.GetComponent<ArrowLogic>().init(heroLogicBase.getAtk(),enemyLogic);
                         break;
                     }
+
+                // 法师
+                case 103:
+                    {
+                        Transform arrow = Instantiate(ObjectPool.getPrefab("Prefabs/Games/arrow"), GameLayer.s_instance.flyPoint).transform;
+                        arrow.position = heroLogicBase.centerPoint.position;
+                        arrow.GetComponent<ArrowLogic>().init(heroLogicBase.getAtk(), enemyLogic);
+                        break;
+                    }
             }
         }
 
