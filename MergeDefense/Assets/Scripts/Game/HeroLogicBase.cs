@@ -108,11 +108,14 @@ public class HeroLogicBase : MonoBehaviour
 
                     GameLayer.s_instance.attackRangeTrans.position = minDisGrid.position;
                     GameLayer.s_instance.attackRangeTrans.localScale = new Vector3(heroData.atkRange, heroData.atkRange, heroData.atkRange);
+
+                    HeroMoveLine.s_instance.setPos(GameLayer.s_instance.heroGrid.transform.Find(transform.parent.name).position, minDisGrid.position);
                 }
                 else
                 {
                     GameLayer.s_instance.heroGridChoiced.localScale = Vector3.zero;
                     GameLayer.s_instance.attackRangeTrans.localScale = Vector3.zero;
+                    HeroMoveLine.s_instance.hide();
                 }
             }
             else if (Input.GetMouseButtonUp(0))
@@ -122,6 +125,7 @@ public class HeroLogicBase : MonoBehaviour
                 GameLayer.s_instance.heroGrid.SetActive(false);
                 GameLayer.s_instance.heroGridChoiced.localScale = Vector3.zero;
                 GameLayer.s_instance.attackRangeTrans.localScale = Vector3.zero;
+                HeroMoveLine.s_instance.hide();
 
                 if (minDis <= 1.2f)
                 {
