@@ -13,12 +13,13 @@ public class HeroInfoPanel : MonoBehaviour
     public Image img_weaponIcon2;
     public Image img_weaponFrame1;
     public Image img_weaponFrame2;
+    public Image img_choicedWeapon1;
+    public Image img_choicedWeapon2;
     public GameObject obj_weapon1;
     public GameObject obj_weapon2;
-    public GameObject obj_choicedWeapon1;
-    public GameObject obj_choicedWeapon2;
     public Text text_heroName;
     public Text text_weaponName;
+    public Text text_career;
 
     [HideInInspector]
     public bool isCanClose = true;      // 为了连续点击角色时，角色信息面板不用关闭再显示
@@ -34,6 +35,7 @@ public class HeroInfoPanel : MonoBehaviour
         heroLogicBase = _heroLogicBase;
 
         text_heroName.text = heroLogicBase.heroData.name;
+        text_career.text = heroLogicBase.heroData.career;
         img_head.sprite = AtlasUtil.getAtlas_icon().GetSprite("head_" + heroLogicBase.id);
         img_head_kuang.sprite = AtlasUtil.getAtlas_game().GetSprite("kuang_hero_" + heroLogicBase.heroData.quality + "_1");
         img_head_bg.sprite = AtlasUtil.getAtlas_game().GetSprite("kuang_hero_" + heroLogicBase.heroData.quality + "_2");
@@ -41,8 +43,8 @@ public class HeroInfoPanel : MonoBehaviour
         text_weaponName.text = "No Weapons";
         obj_weapon1.gameObject.SetActive(false);
         obj_weapon2.gameObject.SetActive(false);
-        obj_choicedWeapon1.SetActive(false);
-        obj_choicedWeapon2.SetActive(false);
+        img_choicedWeapon1.gameObject.SetActive(false);
+        img_choicedWeapon2.gameObject.SetActive(false);
 
         if (heroLogicBase.list_weapon.Count >= 1)
         {
@@ -71,8 +73,9 @@ public class HeroInfoPanel : MonoBehaviour
         {
             if (heroLogicBase.list_weapon.Count >= 1)
             {
-                obj_choicedWeapon1.SetActive(true);
-                obj_choicedWeapon2.SetActive(false);
+                img_choicedWeapon1.gameObject.SetActive(true);
+                img_choicedWeapon2.gameObject.SetActive(false);
+                img_choicedWeapon1.color = Consts.list_weaponColor[heroLogicBase.list_weapon[0].type - 1];
 
                 text_weaponName.text = heroLogicBase.list_weapon[0].name;
             }
@@ -85,8 +88,9 @@ public class HeroInfoPanel : MonoBehaviour
         {
             if (heroLogicBase.list_weapon.Count >= 2)
             {
-                obj_choicedWeapon1.SetActive(false);
-                obj_choicedWeapon2.SetActive(true);
+                img_choicedWeapon1.gameObject.SetActive(false);
+                img_choicedWeapon2.gameObject.SetActive(true);
+                img_choicedWeapon2.color = Consts.list_weaponColor[heroLogicBase.list_weapon[1].type - 1];
 
                 text_weaponName.text = heroLogicBase.list_weapon[1].name;
             }
