@@ -1,3 +1,7 @@
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+
 public class Consts
 {
     public static long closeLightShdow = 4200000000;                 // 关闭灯光阴影
@@ -20,4 +24,13 @@ public class Consts
         GameLayer,
         ShowRewardLayer,
     }
+
+    public static List<Color> list_weaponColor = new List<Color>()
+    {
+        CommonUtil.stringToColor("#FFD618"),    // 剑
+        CommonUtil.stringToColor("#64D967"),    // 弓
+        CommonUtil.stringToColor("#3BD3FF"),    // 斧
+        CommonUtil.stringToColor("#FF6F6F"),    // 拳套
+        CommonUtil.stringToColor("#E28BFF"),    // 魔杖
+    };
 }
