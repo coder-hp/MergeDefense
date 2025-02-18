@@ -8,7 +8,7 @@ public class HeroData
 {
     public int id;
     public string name;
-    public string quality;
+    public int quality;
     public int maxStar;
     public int atk;
     public float atkSpeed;
