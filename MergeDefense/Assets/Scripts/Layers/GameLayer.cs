@@ -102,4 +102,22 @@ public class GameLayer : MonoBehaviour
             }
         }
     }
+
+    public void addHeroById(int id)
+    {
+        for (int i = 0; i < heroPoint.childCount; i++)
+        {
+            if (heroPoint.GetChild(i).childCount == 0)
+            {
+                Transform heroTrans = Instantiate(ObjectPool.getPrefab("Prefabs/Heros/hero" + id), heroPoint.GetChild(i)).transform;
+
+                if (!isMerging)
+                {
+                    isMerging = true;
+                    Invoke("checkHeroMerge", 0.3f);
+                }
+                return;
+            }
+        }
+    }
 }
