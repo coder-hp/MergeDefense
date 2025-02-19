@@ -23,7 +23,7 @@ public class HeroInfoPanel : MonoBehaviour
     public Text text_skillDesc;
     public Text text_atk;
     public Text text_atk_speed;
-    public Text text_crit_dmg;
+    public Text text_crit_rate;
     public Transform skillTrans;
     public Transform tab_weaponTrans;
     public Transform tab_skillTrans;
@@ -47,7 +47,7 @@ public class HeroInfoPanel : MonoBehaviour
         text_career.text = heroLogicBase.heroData.career;
         text_atk.text = heroLogicBase.heroData.atk.ToString();
         text_atk_speed.text = heroLogicBase.heroData.atkSpeed.ToString();
-        text_crit_dmg.text = ((int)(heroLogicBase.heroData.atk * heroLogicBase.heroData.critDamage)).ToString();
+        text_crit_rate.text = heroLogicBase.heroData.critRate + "%";
         img_head.sprite = AtlasUtil.getAtlas_icon().GetSprite("head_" + heroLogicBase.id);
         img_head_kuang.sprite = AtlasUtil.getAtlas_game().GetSprite("kuang_hero_" + heroLogicBase.heroData.quality + "_1");
         img_head_bg.sprite = AtlasUtil.getAtlas_game().GetSprite("kuang_hero_" + heroLogicBase.heroData.quality + "_2");
