@@ -11,6 +11,7 @@ public class DamageNumManager : MonoBehaviour
     public GameObject prefab_damageNum;
 
     List<Transform> list_damageNum = new List<Transform>();
+    List<Text> list_damageNumText = new List<Text>();
 
     void Awake()
     {
@@ -26,16 +27,19 @@ public class DamageNumManager : MonoBehaviour
             {
                 damageNumTrans = list_damageNum[i];
                 damageNumTrans.localScale = Vector3.one;
+                list_damageNumText[i].text = num.ToString();
                 break;
             }
         }
 
-        if(!damageNumTrans)
+        if(damageNumTrans == null)
         {
             damageNumTrans = Instantiate(prefab_damageNum, transform).transform;
             list_damageNum.Add(damageNumTrans);
+            list_damageNumText.Add(damageNumTrans.GetChild(0).GetComponent<Text>());
+            list_damageNumText[list_damageNumText.Count - 1].text = num.ToString();
         }
-        damageNumTrans.GetChild(0).GetComponent<Text>().text = num.ToString();
+
         damageNumTrans.localPosition = CommonUtil.WorldPosToUI(GameLayer.s_instance.camera3D, worldPos);
         damageNumTrans.DOLocalMoveY(damageNumTrans.localPosition.y + 80, 0.4f).OnComplete(()=>
         {
