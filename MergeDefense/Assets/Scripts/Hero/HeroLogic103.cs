@@ -11,6 +11,6 @@ public class HeroLogic103 : HeroBase
     {
         Transform arrow = Instantiate(ObjectPool.getPrefab("Prefabs/Games/magicBall"), GameLayer.s_instance.flyPoint).transform;
         arrow.position = heroLogicBase.centerPoint.position;
-        arrow.GetComponent<MagicBallLogic>().init(heroLogicBase.getAtk(), enemyLogic);
+        arrow.GetComponent<MagicBallLogic>().init(heroLogicBase, enemyLogic);
     }
 }

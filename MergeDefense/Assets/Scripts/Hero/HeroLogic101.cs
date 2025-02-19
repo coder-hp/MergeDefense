@@ -9,6 +9,14 @@ public class HeroLogic101 : HeroBase
 {
     public override void AttackLogic(EnemyLogic enemyLogic)
     {
-        enemyLogic.damage((int)(heroLogicBase.getAtk() * ((RandomUtil.getRandom(1,100) <= 15) ? 1.5f : 1)));
+        bool isCrit = RandomUtil.getRandom(1, 100) <= heroLogicBase.getCritRate() ? true : false;
+        int atk = (int)(heroLogicBase.getAtk() * (isCrit ? heroLogicBase.getCritDamageXiShu() : 1));
+        if (!enemyLogic.damage(atk, isCrit))
+        {
+            if(RandomUtil.getRandom(1, 100) <= 15)
+            {
+                enemyLogic.damage((int)(heroLogicBase.getAtk() * 1.5f),false);
+            }
+        }
     }
 }

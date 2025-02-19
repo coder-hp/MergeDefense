@@ -11,13 +11,13 @@ public class HeroLogic102 : HeroBase
     {
         Transform arrow = Instantiate(ObjectPool.getPrefab("Prefabs/Games/arrow"), GameLayer.s_instance.flyPoint).transform;
         arrow.position = heroLogicBase.centerPoint.position;
-        arrow.GetComponent<ArrowLogic>().init(heroLogicBase.getAtk(), enemyLogic);
+        arrow.GetComponent<ArrowLogic>().init(heroLogicBase, enemyLogic);
 
         if(RandomUtil.getRandom(1,100) <= 25)
         {
             Transform arrow2 = Instantiate(ObjectPool.getPrefab("Prefabs/Games/arrow"), GameLayer.s_instance.flyPoint).transform;
             arrow2.position = heroLogicBase.centerPoint.position;
-            arrow2.GetComponent<ArrowLogic>().init(heroLogicBase.getAtk(), enemyLogic);
+            arrow2.GetComponent<ArrowLogic>().init(heroLogicBase, enemyLogic);
 
             // 把第一支箭往前挪一挪
             arrow.position = Vector3.MoveTowards(arrow.position, enemyLogic.transform.position, 1);

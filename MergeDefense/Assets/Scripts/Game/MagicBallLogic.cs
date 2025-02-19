@@ -4,15 +4,15 @@ using UnityEngine;
 
 public class MagicBallLogic : MonoBehaviour
 {
-    int atk;
+    HeroLogicBase heroLogicBase;
     EnemyLogic enemyLogic;
     Transform targetTrans;
     float moveSpeed = 10;
     float damageRange = 1.9f;
 
-    public void init(int _atk, EnemyLogic _enemyLogic)
+    public void init(HeroLogicBase _heroLogicBase, EnemyLogic _enemyLogic)
     {
-        atk = _atk;
+        heroLogicBase = _heroLogicBase;
         enemyLogic = _enemyLogic;
         targetTrans = enemyLogic.transform;
     }
@@ -34,14 +34,16 @@ public class MagicBallLogic : MonoBehaviour
                 {
                     if (Vector3.Distance(transform.position, EnemyManager.s_instance.list_enemy[i].transform.position) <= damageRange)
                     {
-                        if(EnemyManager.s_instance.list_enemy[i].damage(atk))
+                        bool isCrit = RandomUtil.getRandom(1, 100) <= heroLogicBase.getCritRate() ? true : false;
+                        int atk = (int)(heroLogicBase.getAtk() * (isCrit ? heroLogicBase.getCritDamageXiShu() : 1));
+                        if (EnemyManager.s_instance.list_enemy[i].damage(atk, isCrit))
                         {
                             --i;
                         }
                         // 没死的话，判定技能伤害
                         else if(isTriggerSkill)
                         {
-                            if (EnemyManager.s_instance.list_enemy[i].damage((int)(atk * 2.5f)))
+                            if (EnemyManager.s_instance.list_enemy[i].damage((int)(atk * 2.5f),false))
                             {
                                 --i;
                             }

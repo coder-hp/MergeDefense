@@ -16,7 +16,7 @@ public class HeroData
     public float atkSpeed;
     public float atkRange;
     public int critRate;
-    public int critDamage;
+    public float critDamage;
     public string goodWeapon;
     public string badWeapon;
 }

@@ -239,6 +239,16 @@ public class HeroLogicBase : MonoBehaviour
         return heroData.atk;
     }
 
+    public int getCritRate()
+    {
+        return heroData.critRate;
+    }
+
+    public float getCritDamageXiShu()
+    {
+        return heroData.critDamage;
+    }
+
     public void addWeapon(WeaponData weaponData)
     {
         ToastScript.show("增加武器:" + weaponData.name + " level" + weaponData.level);

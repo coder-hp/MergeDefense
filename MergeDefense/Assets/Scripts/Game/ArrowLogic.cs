@@ -4,14 +4,14 @@ using UnityEngine;
 
 public class ArrowLogic : MonoBehaviour
 {
-    int atk;
+    HeroLogicBase heroLogicBase;
     EnemyLogic enemyLogic;
     Transform targetTrans;
     float moveSpeed = 10;
 
-    public void init(int _atk,EnemyLogic _enemyLogic)
+    public void init(HeroLogicBase _heroLogicBase, EnemyLogic _enemyLogic)
     {
-        atk = _atk;
+        heroLogicBase = _heroLogicBase;
         enemyLogic = _enemyLogic;
         targetTrans = enemyLogic.transform;
     }
@@ -27,7 +27,9 @@ public class ArrowLogic : MonoBehaviour
 
             if (Vector3.Distance(transform.position, targetTrans.position) <= 0.1f)
             {
-                enemyLogic.damage(atk);
+                bool isCrit = RandomUtil.getRandom(1, 100) <= heroLogicBase.getCritRate() ? true : false;
+                int atk = (int)(heroLogicBase.getAtk() * (isCrit ? heroLogicBase.getCritDamageXiShu() : 1));
+                enemyLogic.damage(atk, isCrit);
                 Destroy(gameObject);
             }
         }

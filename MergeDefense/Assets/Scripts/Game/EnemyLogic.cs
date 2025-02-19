@@ -68,7 +68,7 @@ public class EnemyLogic : MonoBehaviour
     }
 
     // 返回值：本次攻击是否造成死亡
-    public bool damage(int atk)
+    public bool damage(int atk,bool isCrit)
     {
         if (curHP > 0)
         {
