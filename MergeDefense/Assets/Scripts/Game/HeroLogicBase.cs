@@ -10,8 +10,9 @@ using UnityEngine.EventSystems;
 public class HeroLogicBase : MonoBehaviour
 {
     public int id;
-    public int curStar = 1;
 
+    [HideInInspector]
+    public int curStar = 1;
     [HideInInspector]
     public HeroData heroData;
     [HideInInspector]
@@ -186,8 +187,8 @@ public class HeroLogicBase : MonoBehaviour
     {
         if (!isAttacking)
         {
-            EnemyLogic enemyLogic = EnemyManager.s_instance.getMinDisTarget(transform);
-            if (enemyLogic && Vector3.Distance(transform.position, enemyLogic.transform.position) <= heroData.atkRange)
+            EnemyLogic enemyLogic = EnemyManager.s_instance.getMinDisTarget(centerPoint);
+            if (enemyLogic && Vector3.Distance(centerPoint.position, enemyLogic.transform.position) <= heroData.atkRange)
             {
                 heroAniEvent.enemyLogic = enemyLogic;
                 lookEnemy(enemyLogic);
@@ -315,7 +316,7 @@ public class HeroLogicBase : MonoBehaviour
                     GameUILayer.s_instance.heroInfoPanel.isCanClose = false;
                 }
 
-                GameLayer.s_instance.attackRangeTrans.position = transform.parent.position;
+                GameLayer.s_instance.attackRangeTrans.position = centerPoint.position;
                 GameUILayer.s_instance.heroInfoPanel.show(this);
             }
         }
