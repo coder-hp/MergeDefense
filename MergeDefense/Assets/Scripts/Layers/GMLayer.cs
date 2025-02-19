@@ -11,6 +11,8 @@ public class GMLayer : MonoBehaviour
     public bool isDebug = false;
     public GameObject bg;
     public Text text_fps;
+    public Transform addHeroPanel;
+    public GameObject prefab_addHero;
 
     bool isShowFPS = false;
 
@@ -21,6 +23,17 @@ public class GMLayer : MonoBehaviour
         if(isDebug)
         {
             text_fps.gameObject.SetActive(true);
+        }
+
+        for(int i = 0; i < HeroEntity.getInstance().list.Count; i++)
+        {
+            int id = HeroEntity.getInstance().list[i].id;
+            Transform trans = Instantiate(prefab_addHero, addHeroPanel).transform;
+            trans.GetChild(0).GetComponent<Text>().text = HeroEntity.getInstance().list[i].name;
+            trans.GetComponent<Button>().onClick.AddListener(()=>
+            {
+                GameLayer.s_instance.addHeroById(id);
+            });
         }
     }
 
