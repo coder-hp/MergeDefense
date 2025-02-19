@@ -511,6 +511,7 @@ public class CommonUtil
     }
 
     // 注：UI使用localPosition
+    static RectTransform canvasRectTransform = null;
     public static Vector2 WorldPosToUI(Camera camera3D, Vector3 worldPosition)
     {
         //Vector2 pos;
@@ -522,7 +523,10 @@ public class CommonUtil
         Canvas canvas = LaunchScript.s_instance.canvas;
 
         // 获取RectTransform组件
-        RectTransform canvasRectTransform = canvas.GetComponent<RectTransform>();
+        if (canvasRectTransform == null)
+        {
+            canvasRectTransform = canvas.GetComponent<RectTransform>();
+        }
 
         // 获取世界坐标在屏幕中的位置
         Vector2 screenPosition = camera3D.WorldToScreenPoint(worldPosition);

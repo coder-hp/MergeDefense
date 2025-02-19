@@ -77,6 +77,8 @@ public class EnemyLogic : MonoBehaviour
     {
         if (curHP > 0)
         {
+            DamageNumManager.s_instance.showDamageNum(atk,bloodPoint.position);
+
             curHP -= atk;
             if (curHP <= 0)
             {
