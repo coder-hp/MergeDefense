@@ -10,7 +10,7 @@ public class HeroLogic103 : HeroBase
     public override void AttackLogic(EnemyLogic enemyLogic)
     {
         Transform arrow = Instantiate(ObjectPool.getPrefab("Prefabs/Games/magicBall"), GameLayer.s_instance.flyPoint).transform;
-        arrow.position = heroLogicBase.centerPoint.position;
+        arrow.position = heroLogicBase.curStandGrid.position;
         arrow.GetComponent<MagicBallLogic>().init(heroLogicBase, enemyLogic);
     }
 }

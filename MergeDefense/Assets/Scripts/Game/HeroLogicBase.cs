@@ -29,23 +29,27 @@ public class HeroLogicBase : MonoBehaviour
     public Transform starTrans;
     [HideInInspector]
     public Transform emojiTrans;
+    [HideInInspector]
+    public Transform curStandGrid;
+    [HideInInspector]
+    public bool isCanUpdate = false;
 
     bool isDraging = false;
-    bool isCanUpdate = false;
 
     [HideInInspector]
     public Transform heroQualityTrans;
-    Vector3 heroQualityOffset = new Vector3(0, 0.44f, 0.8f);
+    Vector3 heroQualityOffset = new Vector3(0, 0f, -0.01f);
     Material material_qualityBg;
 
     [HideInInspector]
     public Action Attack;
 
     HeroAniEvent heroAniEvent;
-
+    Vector3 emojiOffset = new Vector3(-0.2f, 0.5f, 0);
 
     public void Awake()
     {
+        curStandGrid = GameLayer.s_instance.heroGrid.transform.Find(transform.parent.name);
         heroAniEvent = transform.Find("model").GetComponent<HeroAniEvent>();
         transform.localScale = new Vector3(1.3f, 1.3f, 1.3f);
         transform.DOScale(0.7f, 0.2f).OnComplete(()=>
@@ -63,7 +67,7 @@ public class HeroLogicBase : MonoBehaviour
         // 品质背景板
         {
             heroQualityTrans = Instantiate(ObjectPool.getPrefab("Prefabs/Games/heroQuality"), GameLayer.s_instance.heroQualityPoint).transform;
-            heroQualityTrans.position = transform.position + heroQualityOffset;
+            heroQualityTrans.position = curStandGrid.position + heroQualityOffset;
             material_qualityBg = heroQualityTrans.GetComponent<MeshRenderer>().material;
         }
 
@@ -77,7 +81,7 @@ public class HeroLogicBase : MonoBehaviour
         // emoji
         {
             emojiTrans = Instantiate(GameUILayer.s_instance.prefab_heroEmoji, GameUILayer.s_instance.heroStarPointTrans).transform;
-            emojiTrans.localPosition = CommonUtil.WorldPosToUI(GameLayer.s_instance.camera3D, centerPoint.position + new Vector3(-0.2f,0.5f,0));
+            emojiTrans.localPosition = CommonUtil.WorldPosToUI(GameLayer.s_instance.camera3D, curStandGrid.position + new Vector3(-0.2f,0.5f,0));
             emojiTrans.localScale = Vector3.zero;
         }
     }
@@ -119,7 +123,7 @@ public class HeroLogicBase : MonoBehaviour
                     GameLayer.s_instance.attackRangeTrans.position = minDisGrid.position;
                     GameLayer.s_instance.attackRangeTrans.localScale = new Vector3(heroData.atkRange, heroData.atkRange, heroData.atkRange);
 
-                    HeroMoveLine.s_instance.setPos(GameLayer.s_instance.heroGrid.transform.Find(transform.parent.name).position, minDisGrid.position);
+                    HeroMoveLine.s_instance.setPos(curStandGrid.position, minDisGrid.position);
                 }
                 else
                 {
@@ -139,42 +143,57 @@ public class HeroLogicBase : MonoBehaviour
 
                 if (minDis <= 1.4f)
                 {
-                    Transform minDisGridTrans = GameLayer.s_instance.heroPoint.Find(minDisGrid.name);
+                    Transform minDisGridHeroPoint = GameLayer.s_instance.heroPoint.Find(minDisGrid.name);
 
                     // 目标格子没有角色
-                    if (minDisGridTrans.childCount == 0)
+                    if (minDisGridHeroPoint.childCount == 0)
                     {
+                        isCanUpdate = false;
+                        playAni("run");
+
+                        float angle = -CommonUtil.twoPointAngle(curStandGrid.position, minDisGrid.position);
+                        transform.localRotation = Quaternion.Euler(0, angle, 0);
                         starTrans.localScale = Vector3.zero;
-                        transform.SetParent(minDisGridTrans);
+                        curStandGrid = minDisGrid;
+                        transform.SetParent(minDisGridHeroPoint);
                         transform.DOLocalMove(Vector3.zero, 1).OnComplete(()=>
                         {
+                            playAni("idle");
+                            isCanUpdate = true;
+                            isAttacking = false;
                             starTrans.localScale = Vector3.one;
                             starTrans.localPosition = CommonUtil.WorldPosToUI(GameLayer.s_instance.camera3D, transform.position);
                         });
-                        heroQualityTrans.DOMove(minDisGridTrans.position + heroQualityOffset, 1);
+
+                        heroQualityTrans.DOMove(minDisGrid.position + heroQualityOffset, 1);
+                        emojiTrans.localPosition = CommonUtil.WorldPosToUI(GameLayer.s_instance.camera3D, curStandGrid.position + emojiOffset);
                     }
                     // 已有角色，交换位置
                     else
                     {
-                        Transform otherHero = minDisGridTrans.GetChild(0);
+                        Transform otherHero = minDisGridHeroPoint.GetChild(0);
                         HeroLogicBase heroLogicBase_other = otherHero.GetComponent<HeroLogicBase>();
                         heroLogicBase_other.starTrans.localScale = Vector3.zero;
+                        heroLogicBase_other.curStandGrid = curStandGrid;
                         otherHero.SetParent(transform.parent);
                         otherHero.DOLocalMove(Vector3.zero, 1).OnComplete(() =>
                         {
                             heroLogicBase_other.starTrans.localScale = Vector3.one;
                             heroLogicBase_other.starTrans.localPosition = CommonUtil.WorldPosToUI(GameLayer.s_instance.camera3D, otherHero.position);
                         });
-                        heroLogicBase_other.heroQualityTrans.DOMove(transform.parent.position + heroQualityOffset, 1);
+                        heroLogicBase_other.heroQualityTrans.DOMove(heroLogicBase_other.curStandGrid.position + heroQualityOffset, 1);
+                        heroLogicBase_other.emojiTrans.localPosition = CommonUtil.WorldPosToUI(GameLayer.s_instance.camera3D, heroLogicBase_other.curStandGrid.position + emojiOffset);
 
                         starTrans.localScale = Vector3.zero;
-                        transform.SetParent(minDisGridTrans);
+                        curStandGrid = minDisGrid;
+                        transform.SetParent(minDisGridHeroPoint);
                         transform.DOLocalMove(Vector3.zero, 1).OnComplete(() =>
                         {
                             starTrans.localScale = Vector3.one;
                             starTrans.localPosition = CommonUtil.WorldPosToUI(GameLayer.s_instance.camera3D, transform.position);
                         });
-                        heroQualityTrans.DOMove(minDisGridTrans.position + heroQualityOffset, 1);
+                        heroQualityTrans.DOMove(curStandGrid.position + heroQualityOffset, 1);
+                        emojiTrans.localPosition = CommonUtil.WorldPosToUI(GameLayer.s_instance.camera3D, curStandGrid.position + emojiOffset);
                     }
                 }
             }
@@ -187,8 +206,8 @@ public class HeroLogicBase : MonoBehaviour
     {
         if (!isAttacking)
         {
-            EnemyLogic enemyLogic = EnemyManager.s_instance.getMinDisTarget(centerPoint);
-            if (enemyLogic && Vector3.Distance(centerPoint.position, enemyLogic.transform.position) <= heroData.atkRange)
+            EnemyLogic enemyLogic = EnemyManager.s_instance.getMinDisTarget(curStandGrid);
+            if (enemyLogic && Vector3.Distance(curStandGrid.position, enemyLogic.transform.position) <= heroData.atkRange)
             {
                 heroAniEvent.enemyLogic = enemyLogic;
                 lookEnemy(enemyLogic);
@@ -240,7 +259,7 @@ public class HeroLogicBase : MonoBehaviour
 
     void lookEnemy(EnemyLogic enemyLogic)
     {
-        float angle = -CommonUtil.twoPointAngle(centerPoint.position, enemyLogic.transform.position);
+        float angle = -CommonUtil.twoPointAngle(curStandGrid.position, enemyLogic.transform.position);
         transform.localRotation = Quaternion.Euler(0, angle, 0);
     }
 
@@ -316,7 +335,7 @@ public class HeroLogicBase : MonoBehaviour
                     GameUILayer.s_instance.heroInfoPanel.isCanClose = false;
                 }
 
-                GameLayer.s_instance.attackRangeTrans.position = centerPoint.position;
+                GameLayer.s_instance.attackRangeTrans.position = curStandGrid.position;
                 GameUILayer.s_instance.heroInfoPanel.show(this);
             }
         }

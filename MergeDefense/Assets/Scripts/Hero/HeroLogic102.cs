@@ -10,13 +10,13 @@ public class HeroLogic102 : HeroBase
     public override void AttackLogic(EnemyLogic enemyLogic)
     {
         Transform arrow = Instantiate(ObjectPool.getPrefab("Prefabs/Games/arrow"), GameLayer.s_instance.flyPoint).transform;
-        arrow.position = heroLogicBase.centerPoint.position;
+        arrow.position = heroLogicBase.curStandGrid.position;
         arrow.GetComponent<ArrowLogic>().init(heroLogicBase, enemyLogic);
 
         if(RandomUtil.getRandom(1,100) <= 25)
         {
             Transform arrow2 = Instantiate(ObjectPool.getPrefab("Prefabs/Games/arrow"), GameLayer.s_instance.flyPoint).transform;
-            arrow2.position = heroLogicBase.centerPoint.position;
+            arrow2.position = heroLogicBase.curStandGrid.position;
             arrow2.GetComponent<ArrowLogic>().init(heroLogicBase, enemyLogic);
 
             // 把第一支箭往前挪一挪
