@@ -46,17 +46,6 @@ public class HeroAniEvent : MonoBehaviour
                     }
             }
         }
-
-        //// 单体攻击
-        //if (heroLogicBase.heroData.isAtkSingle == 1)
-        //{
-        //    enemyLogic.damage(heroLogicBase.getAtk());
-        //}
-        //// 群体攻击
-        //else
-        //{
-
-        //}
     }
 
     public void onAttackEnd()
