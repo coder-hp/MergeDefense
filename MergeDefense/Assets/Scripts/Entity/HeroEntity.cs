@@ -17,8 +17,8 @@ public class HeroData
     public float atkRange;
     public int critRate;
     public float critDamage;
-    public string goodWeapon;
-    public string badWeapon;
+    public int goodWeapon;      // 0:没有擅长武器  -1:擅长所有武器
+    public int badWeapon;       // 0:没有擅长武器  -1:擅长所有武器
 }
 
 public class HeroEntity

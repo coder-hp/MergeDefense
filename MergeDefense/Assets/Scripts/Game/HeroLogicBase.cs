@@ -26,6 +26,8 @@ public class HeroLogicBase : MonoBehaviour
     public bool isMerge = false;
     [HideInInspector]
     public Transform starTrans;
+    [HideInInspector]
+    public Transform emojiTrans;
 
     bool isDraging = false;
     bool isCanUpdate = false;
@@ -69,6 +71,13 @@ public class HeroLogicBase : MonoBehaviour
             starTrans = Instantiate(GameUILayer.s_instance.prefab_heroStar, GameUILayer.s_instance.heroStarPointTrans).transform;
             starTrans.localPosition = CommonUtil.WorldPosToUI(GameLayer.s_instance.camera3D, transform.position);
             setStarUI();
+        }
+
+        // emoji
+        {
+            emojiTrans = Instantiate(GameUILayer.s_instance.prefab_heroEmoji, GameUILayer.s_instance.heroStarPointTrans).transform;
+            emojiTrans.localPosition = CommonUtil.WorldPosToUI(GameLayer.s_instance.camera3D, centerPoint.position + new Vector3(-0.2f,0.5f,0));
+            emojiTrans.localScale = Vector3.zero;
         }
     }
 
@@ -344,11 +353,39 @@ public class HeroLogicBase : MonoBehaviour
         return false;
     }
 
+    public void showWeaponEmoji(int type)
+    {
+        // 优势武器
+        if(heroData.goodWeapon == -1 || type == heroData.goodWeapon)
+        {
+            emojiTrans.localScale = Vector3.one;
+            emojiTrans.GetChild(0).localScale = Vector3.one;
+            emojiTrans.GetChild(1).localScale = Vector3.zero;
+        }
+        // 劣势武器
+        else if (type == heroData.badWeapon)
+        {
+            emojiTrans.localScale = Vector3.one;
+            emojiTrans.GetChild(0).localScale = Vector3.zero;
+            emojiTrans.GetChild(1).localScale = Vector3.one;
+        }
+        else
+        {
+            emojiTrans.localScale = Vector3.zero;
+        }
+    }
+
+    public void hideWeaponEmoji()
+    {
+        emojiTrans.localScale = Vector3.zero;
+    }
+
     private void OnDestroy()
     {
         if(starTrans)
         {
             Destroy(starTrans.gameObject);
+            Destroy(emojiTrans.gameObject);
         }
     }
 }
