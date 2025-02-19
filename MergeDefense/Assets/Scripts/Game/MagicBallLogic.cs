@@ -28,6 +28,8 @@ public class MagicBallLogic : MonoBehaviour
 
             if (Vector3.Distance(transform.position, targetTrans.position) <= 0.1f)
             {
+                // 技能：攻击时，20%概率对范围内的敌人造成攻击力250%的伤害
+                bool isTriggerSkill = RandomUtil.getRandom(1,100) <= 20 ? true : false;
                 for (int i = 0; i < EnemyManager.s_instance.list_enemy.Count; i++)
                 {
                     if (Vector3.Distance(transform.position, EnemyManager.s_instance.list_enemy[i].transform.position) <= damageRange)
@@ -35,6 +37,14 @@ public class MagicBallLogic : MonoBehaviour
                         if(EnemyManager.s_instance.list_enemy[i].damage(atk))
                         {
                             --i;
+                        }
+                        // 没死的话，判定技能伤害
+                        else if(isTriggerSkill)
+                        {
+                            if (EnemyManager.s_instance.list_enemy[i].damage((int)(atk * 2.5f)))
+                            {
+                                --i;
+                            }
                         }
                     }
                 }

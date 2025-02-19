@@ -5,6 +5,7 @@ using UnityEngine;
 public class HeroAniEvent : MonoBehaviour
 {
     HeroLogicBase heroLogicBase = null;
+    HeroBase heroBase = null;
 
     [HideInInspector]
     public EnemyLogic enemyLogic = null;
@@ -12,38 +13,16 @@ public class HeroAniEvent : MonoBehaviour
     private void Awake()
     {
         heroLogicBase = transform.parent.GetComponent<HeroLogicBase>();
+        heroBase = transform.parent.GetComponent<HeroBase>();
     }
 
     public void onAttack()
     {
         if (enemyLogic)
         {
-            switch (heroLogicBase.id)
+            if(heroBase)
             {
-                // 剑士
-                case 101:
-                    {
-                        enemyLogic.damage(heroLogicBase.getAtk());
-                        break;
-                    }
-
-                // 射手
-                case 102:
-                    {
-                        Transform arrow = Instantiate(ObjectPool.getPrefab("Prefabs/Games/arrow"), GameLayer.s_instance.flyPoint).transform;
-                        arrow.position = heroLogicBase.centerPoint.position;
-                        arrow.GetComponent<ArrowLogic>().init(heroLogicBase.getAtk(),enemyLogic);
-                        break;
-                    }
-
-                // 法师
-                case 103:
-                    {
-                        Transform arrow = Instantiate(ObjectPool.getPrefab("Prefabs/Games/magicBall"), GameLayer.s_instance.flyPoint).transform;
-                        arrow.position = heroLogicBase.centerPoint.position;
-                        arrow.GetComponent<MagicBallLogic>().init(heroLogicBase.getAtk(), enemyLogic);
-                        break;
-                    }
+                heroBase.AttackLogic(enemyLogic);
             }
         }
     }

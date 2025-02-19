@@ -41,6 +41,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1424779052366672914}
   - component: {fileID: 7384110952235753725}
+  - component: {fileID: -5432538171949052384}
   - component: {fileID: 5333269904741635981}
   m_Layer: 0
   m_Name: hero102
@@ -86,6 +87,19 @@ MonoBehaviour:
   isMerge: 0
   starTrans: {fileID: 0}
   heroQualityTrans: {fileID: 0}
+--- !u!114 &-5432538171949052384
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4301457524428072430}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 228e71721401ca8448789d4bdcf39c37, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  heroLogicBase: {fileID: 0}
 --- !u!65 &5333269904741635981
 BoxCollider:
   m_ObjectHideFlags: 0
