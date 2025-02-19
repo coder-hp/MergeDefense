@@ -10,6 +10,7 @@ public class HeroData
     public string name;
     public int quality;
     public string career;
+    public string skills;
     public int maxStar;
     public int atk;
     public float atkSpeed;
