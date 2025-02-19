@@ -97,6 +97,22 @@ public class HeroInfoPanel : MonoBehaviour
         }
     }
 
+    public void onClickSkillIcon(int index)
+    {
+        if (index == 0)
+        {
+            
+        }
+        else if (index == 1)
+        {
+            
+        }
+        else if (index == 2)
+        {
+
+        }
+    }
+
     public void onClickClose()
     {
         if (!isCanClose)
