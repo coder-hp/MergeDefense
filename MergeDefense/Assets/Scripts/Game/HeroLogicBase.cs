@@ -230,7 +230,7 @@ public class HeroLogicBase : MonoBehaviour
 
     void lookEnemy(EnemyLogic enemyLogic)
     {
-        float angle = -CommonUtil.twoPointAngle(centerPoint.position, enemyLogic.centerPoint.position);
+        float angle = -CommonUtil.twoPointAngle(centerPoint.position, enemyLogic.transform.position);
         transform.localRotation = Quaternion.Euler(0, angle, 0);
     }
 

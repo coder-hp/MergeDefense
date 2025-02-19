@@ -13,7 +13,7 @@ public class ArrowLogic : MonoBehaviour
     {
         atk = _atk;
         enemyLogic = _enemyLogic;
-        targetTrans = enemyLogic.centerPoint;
+        targetTrans = enemyLogic.transform;
     }
 
     void Update()

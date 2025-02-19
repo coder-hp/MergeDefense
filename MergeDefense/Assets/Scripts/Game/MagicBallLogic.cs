@@ -14,7 +14,7 @@ public class MagicBallLogic : MonoBehaviour
     {
         atk = _atk;
         enemyLogic = _enemyLogic;
-        targetTrans = enemyLogic.centerPoint;
+        targetTrans = enemyLogic.transform;
     }
 
     void Update()
@@ -30,7 +30,7 @@ public class MagicBallLogic : MonoBehaviour
             {
                 for (int i = 0; i < EnemyManager.s_instance.list_enemy.Count; i++)
                 {
-                    if (Vector3.Distance(transform.position, EnemyManager.s_instance.list_enemy[i].centerPoint.position) <= damageRange)
+                    if (Vector3.Distance(transform.position, EnemyManager.s_instance.list_enemy[i].transform.position) <= damageRange)
                     {
                         if(EnemyManager.s_instance.list_enemy[i].damage(atk))
                         {

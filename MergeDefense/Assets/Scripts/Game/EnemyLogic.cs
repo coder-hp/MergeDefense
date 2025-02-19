@@ -7,9 +7,6 @@ using UnityEngine.UI;
 
 public class EnemyLogic : MonoBehaviour
 {
-    [HideInInspector]
-    public Transform centerPoint;
-
     int curTargetPosIndex = 1;
     float moveSpeed = 2;
 
@@ -22,8 +19,6 @@ public class EnemyLogic : MonoBehaviour
 
     private void Awake()
     {
-        centerPoint = transform.Find("centerPoint");
-
         EnemyManager.s_instance.addEnemy(this);
         transform.position = GameLayer.s_instance.list_enemyMoveFourPos[0];
 
