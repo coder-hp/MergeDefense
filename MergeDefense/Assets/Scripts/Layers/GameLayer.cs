@@ -81,20 +81,14 @@ public class GameLayer : MonoBehaviour
                                 Transform trans = heroLogicBase1.transform.Find("model");
                                 trans.DOLocalMoveY(0.5f, moveTime).SetEase(Ease.OutCubic).OnComplete(() =>
                                 {
-                                    trans.DOLocalMoveY(0f, 0.1f).SetEase(Ease.InCubic).OnComplete(() =>
-                                    {
-
-                                    });
+                                    trans.DOLocalMoveY(0f, 0.1f).SetEase(Ease.InCubic);
                                 });
 
                                 trans.DOScaleY(1.3f, moveTime).SetEase(Ease.OutCubic).OnComplete(() =>
                                 {
                                     trans.DOScaleY(0.5f, 0.1f).SetEase(Ease.InCubic).OnComplete(() =>
                                     {
-                                        trans.DOScaleY(1f, 0.1f).SetEase(Ease.OutCubic).OnComplete(() =>
-                                        {
-
-                                        });
+                                        trans.DOScaleY(1f, 0.1f).SetEase(Ease.OutCubic);
                                     });
                                 });
                             }

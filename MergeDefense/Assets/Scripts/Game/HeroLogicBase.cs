@@ -378,11 +378,15 @@ public class HeroLogicBase : MonoBehaviour
         return false;
     }
 
+    DG.Tweening.Sequence tween_emoji = null;
     public void showWeaponEmoji(int type)
     {
+        bool isShowTween = false;
+
         // 优势武器
         if(heroData.goodWeapon == -1 || type == heroData.goodWeapon)
         {
+            isShowTween = true;
             emojiTrans.localScale = Vector3.one;
             emojiTrans.GetChild(0).localScale = Vector3.one;
             emojiTrans.GetChild(1).localScale = Vector3.zero;
@@ -390,6 +394,7 @@ public class HeroLogicBase : MonoBehaviour
         // 劣势武器
         else if (type == heroData.badWeapon)
         {
+            isShowTween = true;
             emojiTrans.localScale = Vector3.one;
             emojiTrans.GetChild(0).localScale = Vector3.zero;
             emojiTrans.GetChild(1).localScale = Vector3.one;
@@ -398,11 +403,29 @@ public class HeroLogicBase : MonoBehaviour
         {
             emojiTrans.localScale = Vector3.zero;
         }
+
+        if(isShowTween)
+        {
+            if(tween_emoji == null)
+            {
+                tween_emoji = DOTween.Sequence();
+                tween_emoji.Append(emojiTrans.DOLocalRotateQuaternion(Quaternion.Euler(0,0,5),0.5f))
+                           .Append(emojiTrans.DOLocalRotateQuaternion(Quaternion.Euler(0, 0, -5), 0.5f)).SetLoops(-1);
+                tween_emoji.SetAutoKill(false);
+            }
+
+            tween_emoji.Restart();
+        }
     }
 
     public void hideWeaponEmoji()
     {
         emojiTrans.localScale = Vector3.zero;
+
+        if(tween_emoji != null)
+        {
+            tween_emoji.Pause();
+        }
     }
 
     private void OnDestroy()
@@ -410,6 +433,10 @@ public class HeroLogicBase : MonoBehaviour
         if(starTrans)
         {
             Destroy(starTrans.gameObject);
+        }
+
+        if(emojiTrans)
+        {
             Destroy(emojiTrans.gameObject);
         }
     }
