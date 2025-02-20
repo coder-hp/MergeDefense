@@ -47,7 +47,7 @@ public class GameUILayer : MonoBehaviour
         waitAddEnemy.Clear();
         for(int i = 0; i < 15; i++)
         {
-            waitAddEnemy.Add(1);
+            waitAddEnemy.Add(curBoCi);
         }
 
         InvokeRepeating("onInvokeBoCiSecond",1,1);
