@@ -67,7 +67,17 @@ public class GameLayer : MonoBehaviour
                                 moveTime = 0.4f;
                             }
 
-                            heroLogicBase2.transform.DOMove(heroLogicBase1.transform.position + new Vector3(0,0.35f,0), moveTime).SetEase(Ease.Linear).OnComplete(() =>
+                            float jumpHight = Vector3.Distance(heroLogicBase1.transform.position, heroLogicBase2.transform.position) / 5f;
+                            if (jumpHight < 0.5f)
+                            {
+                                jumpHight = 0.5f;
+                            }
+                            else if (jumpHight > 1)
+                            {
+                                jumpHight = 1f;
+                            }
+
+                            heroLogicBase2.transform.DOMove(heroLogicBase1.transform.position + new Vector3(0, jumpHight * 0.7f, 0), moveTime).SetEase(Ease.Linear).OnComplete(() =>
                             {
                                 heroLogicBase1.addStar();
                                 EffectManager.heroMerge(heroLogicBase1.transform.position);
@@ -79,7 +89,7 @@ public class GameLayer : MonoBehaviour
                             // 升星角色的合并动画
                             {
                                 Transform trans = heroLogicBase1.transform.Find("model");
-                                trans.DOLocalMoveY(0.5f, moveTime).SetEase(Ease.OutCubic).OnComplete(() =>
+                                trans.DOLocalMoveY(jumpHight, moveTime).SetEase(Ease.OutCubic).OnComplete(() =>
                                 {
                                     trans.DOLocalMoveY(0f, 0.1f).SetEase(Ease.InCubic);
                                 });
