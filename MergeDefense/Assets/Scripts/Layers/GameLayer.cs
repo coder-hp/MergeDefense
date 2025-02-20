@@ -60,7 +60,14 @@ public class GameLayer : MonoBehaviour
                             heroLogicBase2.transform.SetParent(transform);
                             Destroy(heroLogicBase2.starTrans.gameObject);
                             Destroy(heroLogicBase2.heroQualityTrans.gameObject);
-                            heroLogicBase2.transform.DOMove(heroLogicBase1.transform.position + new Vector3(0,0.3f,0), 0.2f).SetEase(Ease.Linear).OnComplete(() =>
+
+                            float moveTime = Vector3.Distance(heroLogicBase1.transform.position, heroLogicBase2.transform.position) / 10f;
+                            if(moveTime > 0.4f)
+                            {
+                                moveTime = 0.4f;
+                            }
+
+                            heroLogicBase2.transform.DOMove(heroLogicBase1.transform.position + new Vector3(0,0.35f,0), moveTime).SetEase(Ease.Linear).OnComplete(() =>
                             {
                                 heroLogicBase1.addStar();
                                 EffectManager.heroMerge(heroLogicBase1.transform.position);
@@ -72,7 +79,7 @@ public class GameLayer : MonoBehaviour
                             // 升星角色的合并动画
                             {
                                 Transform trans = heroLogicBase1.transform.Find("model");
-                                trans.DOLocalMoveY(0.5f, 0.2f).SetEase(Ease.OutCubic).OnComplete(() =>
+                                trans.DOLocalMoveY(0.5f, moveTime).SetEase(Ease.OutCubic).OnComplete(() =>
                                 {
                                     trans.DOLocalMoveY(0f, 0.1f).SetEase(Ease.InCubic).OnComplete(() =>
                                     {
@@ -80,7 +87,7 @@ public class GameLayer : MonoBehaviour
                                     });
                                 });
 
-                                trans.DOScaleY(1.3f, 0.2f).SetEase(Ease.OutCubic).OnComplete(() =>
+                                trans.DOScaleY(1.3f, moveTime).SetEase(Ease.OutCubic).OnComplete(() =>
                                 {
                                     trans.DOScaleY(0.5f, 0.1f).SetEase(Ease.InCubic).OnComplete(() =>
                                     {
