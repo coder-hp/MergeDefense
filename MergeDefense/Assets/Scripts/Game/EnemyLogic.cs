@@ -8,8 +8,8 @@ using UnityEngine.UI;
 public class EnemyLogic : MonoBehaviour
 {
     int curTargetPosIndex = 1;
-    float moveSpeed = 2;
 
+    float moveSpeed = 2;
     float curHP;
     float fullHP;
 
@@ -17,13 +17,12 @@ public class EnemyLogic : MonoBehaviour
     Transform bloodBarTrans;
     Image bloodProgressImg;
 
+    EnemyWaveData enemyWaveData;
+
     private void Awake()
     {
         EnemyManager.s_instance.addEnemy(this);
         transform.position = GameLayer.s_instance.list_enemyMoveFourPos[0];
-
-        curHP = 150;
-        fullHP = 150;
 
         bloodPoint = transform.Find("bloodPoint");
 
@@ -36,6 +35,15 @@ public class EnemyLogic : MonoBehaviour
 
         transform.localScale = Vector3.zero;
         transform.DOScale(1,0.5f);
+    }
+
+    public void init(EnemyWaveData _enemyWaveData)
+    {
+        enemyWaveData = _enemyWaveData;
+
+        curHP = enemyWaveData.hp;
+        fullHP = curHP;
+        moveSpeed *= enemyWaveData.speed;
     }
 
     public void move()

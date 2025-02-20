@@ -24,7 +24,7 @@ public class GameUILayer : MonoBehaviour
     int curBoCi = 0;
     int curBoCiRestTime = 20;
 
-    List<int> waitAddEnemy = new List<int>();
+    List<EnemyWaveData> waitAddEnemy = new List<EnemyWaveData>();
 
     private void Awake()
     {
@@ -37,17 +37,41 @@ public class GameUILayer : MonoBehaviour
     {
         ++curBoCi;
 
-        ToastScript.show("WAVE：" + curBoCi);
+        // ToastScript.show("WAVE：" + curBoCi);
 
-        curBoCiRestTime = 20;
+        EnemyWaveData enemyWaveData = EnemyWaveEntity.getInstance().getData(curBoCi);
+
+        // 小怪
+        if(enemyWaveData.enemyType == 1)
+        {
+            curBoCiRestTime = 20;
+        }
+        // 精英
+        else if (enemyWaveData.enemyType == 2)
+        {
+            curBoCiRestTime = 40;
+        }
+        // Boss
+        else if (enemyWaveData.enemyType == 3)
+        {
+            curBoCiRestTime = 60;
+        }
 
         text_boci.text = "WAVE：" + curBoCi + "/80";
-        text_time.text = "00:" + curBoCiRestTime;
+
+        if(curBoCiRestTime == 60)
+        {
+            text_time.text = "01:00";
+        }
+        else
+        {
+            text_time.text = "00:" + curBoCiRestTime;
+        }
 
         waitAddEnemy.Clear();
-        for(int i = 0; i < 15; i++)
+        for(int i = 0; i < enemyWaveData.count; i++)
         {
-            waitAddEnemy.Add(curBoCi);
+            waitAddEnemy.Add(enemyWaveData);
         }
 
         InvokeRepeating("onInvokeBoCiSecond",1,1);

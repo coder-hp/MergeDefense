@@ -101,11 +101,11 @@ public class GameLayer : MonoBehaviour
         isMerging = false;
     }
 
-    public void addEnemy(int id)
+    public void addEnemy(EnemyWaveData enemyWaveData)
     {
         if (EnemyManager.s_instance.getEnemyCount() < maxEnemyCount)
         {
-            Instantiate(ObjectPool.getPrefab("Prefabs/Enemys/enemy" + id), enemyPoint);
+            Instantiate(ObjectPool.getPrefab("Prefabs/Enemys/" + enemyWaveData.prefab), enemyPoint).GetComponent<EnemyLogic>().init(enemyWaveData);
         }
     }
 
