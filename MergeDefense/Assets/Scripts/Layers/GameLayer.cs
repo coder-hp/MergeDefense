@@ -60,37 +60,38 @@ public class GameLayer : MonoBehaviour
                             heroLogicBase2.transform.SetParent(transform);
                             Destroy(heroLogicBase2.starTrans.gameObject);
                             Destroy(heroLogicBase2.heroQualityTrans.gameObject);
-                            heroLogicBase2.transform.DOMove(heroLogicBase1.transform.position, 0.3f).SetEase(Ease.Linear).OnComplete(() =>
+                            heroLogicBase2.transform.DOMove(heroLogicBase1.transform.position + new Vector3(0,0.7f,0), 0.2f).SetEase(Ease.Linear).OnComplete(() =>
                             {
                                 heroLogicBase1.addStar();
                                 EffectManager.heroMerge(heroLogicBase1.transform.position);
 
-                                // 升星角色的合并动画
-                                {
-                                    Transform trans = heroLogicBase1.transform.Find("model");
-                                    trans.DOLocalMoveY(0.5f, 0.1f).SetEase(Ease.OutCubic).OnComplete(() =>
-                                    {
-                                        trans.DOLocalMoveY(0f, 0.1f).SetEase(Ease.InCubic).OnComplete(() =>
-                                        {
-                                            
-                                        });
-                                    });
-
-                                    trans.DOScaleY(1.3f, 0.1f).SetEase(Ease.OutCubic).OnComplete(() =>
-                                    {
-                                        trans.DOScaleY(0.5f, 0.1f).SetEase(Ease.InCubic).OnComplete(() =>
-                                        {
-                                            trans.DOScaleY(1f, 0.1f).SetEase(Ease.OutCubic).OnComplete(() =>
-                                            {
-
-                                            });
-                                        });
-                                    });
-                                }
-
                                 Destroy(heroLogicBase2.gameObject);
                                 Invoke("checkHeroMerge", 0.3f);
                             });
+
+                            // 升星角色的合并动画
+                            {
+                                Transform trans = heroLogicBase1.transform.Find("model");
+                                trans.DOLocalMoveY(0.5f, 0.2f).SetEase(Ease.OutCubic).OnComplete(() =>
+                                {
+                                    trans.DOLocalMoveY(0f, 0.1f).SetEase(Ease.InCubic).OnComplete(() =>
+                                    {
+
+                                    });
+                                });
+
+                                trans.DOScaleY(1.3f, 0.2f).SetEase(Ease.OutCubic).OnComplete(() =>
+                                {
+                                    trans.DOScaleY(0.5f, 0.1f).SetEase(Ease.InCubic).OnComplete(() =>
+                                    {
+                                        trans.DOScaleY(1f, 0.1f).SetEase(Ease.OutCubic).OnComplete(() =>
+                                        {
+
+                                        });
+                                    });
+                                });
+                            }
+
                             return;
                         }
                     }
