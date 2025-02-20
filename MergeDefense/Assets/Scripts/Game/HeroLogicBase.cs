@@ -258,7 +258,7 @@ public class HeroLogicBase : MonoBehaviour
         // 白色
         else if (curStar > 0)
         {
-            material_qualityBg.SetColor("_Color", new Color(0.85f,0.8f,0.8f));
+            material_qualityBg.SetColor("_Color", new Color(0.8f,0.75f,0.75f));
         }
     }
 
