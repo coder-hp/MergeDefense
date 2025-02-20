@@ -56,6 +56,7 @@ public class GameUILayer : MonoBehaviour
         waitAddEnemy.Clear();
         for(int i = 0; i < enemyWaveData.count; i++)
         {
+            //enemyWaveData.prefab = "enemy29";
             waitAddEnemy.Add(enemyWaveData);
         }
 
