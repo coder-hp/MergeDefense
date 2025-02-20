@@ -41,22 +41,7 @@ public class GameUILayer : MonoBehaviour
 
         EnemyWaveData enemyWaveData = EnemyWaveEntity.getInstance().getData(curBoCi);
 
-        // 小怪
-        if(enemyWaveData.enemyType == 1)
-        {
-            curBoCiRestTime = 20;
-        }
-        // 精英
-        else if (enemyWaveData.enemyType == 2)
-        {
-            curBoCiRestTime = 40;
-        }
-        // Boss
-        else if (enemyWaveData.enemyType == 3)
-        {
-            curBoCiRestTime = 60;
-        }
-
+        curBoCiRestTime = enemyWaveData.time;
         text_boci.text = "WAVE：" + curBoCi + "/80";
 
         if(curBoCiRestTime == 60)

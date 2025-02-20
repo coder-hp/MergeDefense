@@ -12,6 +12,7 @@ public class EnemyWaveData
     public int count;
     public int hp;
     public float speed;
+    public int time;
 }
 
 public class EnemyWaveEntity
