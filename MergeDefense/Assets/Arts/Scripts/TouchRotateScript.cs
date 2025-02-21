@@ -21,7 +21,7 @@ public class TouchRotateScript : MonoBehaviour
         // 处理触摸/鼠标输入
         HandleInput();
 
-        // 应用旋转
+        // 旋转
         ApplyRotation();
     }
 
@@ -51,7 +51,7 @@ public class TouchRotateScript : MonoBehaviour
                     break;
             }
         }
-        // PC端鼠标输入（便于测试）
+        // PC端鼠标输入
         else if (Input.GetMouseButtonDown(0))
         {
             lastTouchPos = Input.mousePosition;
