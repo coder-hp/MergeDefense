@@ -30,6 +30,31 @@ public class Consts
         ShowRewardLayer,
     }
 
+    public enum BuffType
+    {
+        Atk,
+        AtkSpeed,
+        CritRate,
+        CritDamage,
+        MoveSpeed,
+    }
+
+    public class BuffData
+    {
+        public BuffType buffType;
+        public float value;
+        public float time;
+        public string from;
+
+        public BuffData(BuffType _buffType, float _value, float _time,string _from =  "")
+        {
+            buffType = _buffType;
+            value = _value;
+            time = _time;
+            from = _from;
+        }
+    }
+
     public static List<Color> list_weaponColor = new List<Color>()
     {
         CommonUtil.stringToColor("#FFD618"),    // 剑

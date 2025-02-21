@@ -19,6 +19,9 @@ public class EnemyLogic : MonoBehaviour
 
     EnemyWaveData enemyWaveData;
 
+    [HideInInspector]
+    public List<Consts.BuffData> list_buffDatas = new List<Consts.BuffData>();
+
     private void Awake()
     {
         EnemyManager.s_instance.addEnemy(this);
@@ -48,9 +51,35 @@ public class EnemyLogic : MonoBehaviour
 
     public void move()
     {
+        for(int i = 0; i < list_buffDatas.Count; i++)
+        {
+            if(list_buffDatas[i].time > 0)
+            {
+                list_buffDatas[i].time -= Time.deltaTime;
+                if(list_buffDatas[i].time <= 0)
+                {
+                    list_buffDatas.RemoveAt(i);
+                    --i;
+                }
+            }
+        }
+
         if (curHP > 0)
         {
-            transform.position = Vector3.MoveTowards(transform.position, GameLayer.s_instance.list_enemyMoveFourPos[curTargetPosIndex], moveSpeed * Time.deltaTime);
+            float moveSpeedXiShu = 1;
+            for (int i = 0; i < list_buffDatas.Count; i++)
+            {
+                if (list_buffDatas[i].buffType == Consts.BuffType.MoveSpeed)
+                {
+                    moveSpeedXiShu += list_buffDatas[i].value;
+                }
+            }
+            if(moveSpeedXiShu < 0)
+            {
+                moveSpeedXiShu = 0;
+            }
+
+            transform.position = Vector3.MoveTowards(transform.position, GameLayer.s_instance.list_enemyMoveFourPos[curTargetPosIndex], moveSpeed * moveSpeedXiShu * Time.deltaTime);
             if (Vector3.Distance(transform.position, GameLayer.s_instance.list_enemyMoveFourPos[curTargetPosIndex]) <= 0.1f)
             {
                 if (++curTargetPosIndex > 3)
