@@ -300,7 +300,11 @@ public class HeroLogicBase : MonoBehaviour
     {
         if(aniName == Consts.HeroAniNameAttack)
         {
-
+            animator.speed = heroData.atkSpeed;
+        }
+        else
+        {
+            animator.speed = 1;
         }
 
         if(crossFadeTime > 0)
