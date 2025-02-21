@@ -41,7 +41,7 @@ public class DamageNumManager : MonoBehaviour
         }
 
         damageNumTrans.localPosition = CommonUtil.WorldPosToUI(GameLayer.s_instance.camera3D, worldPos);
-        damageNumTrans.DOLocalMoveY(damageNumTrans.localPosition.y + RandomUtil.getRandom(50, 70), 0.4f).OnComplete(()=>
+        damageNumTrans.DOLocalMoveY(damageNumTrans.localPosition.y + RandomUtil.getRandom(60, 100), 0.4f).OnComplete(()=>
         {
             damageNumTrans.localScale = Vector3.zero;
         });

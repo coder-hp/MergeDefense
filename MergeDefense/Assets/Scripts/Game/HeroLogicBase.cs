@@ -413,8 +413,10 @@ public class HeroLogicBase : MonoBehaviour
                            .Append(emojiTrans.DOLocalRotateQuaternion(Quaternion.Euler(0, 0, -5), 0.5f)).SetLoops(-1);
                 tween_emoji.SetAutoKill(false);
             }
-
-            tween_emoji.Restart();
+            else
+            {
+                tween_emoji.Restart();
+            }
         }
     }
 
