@@ -30,7 +30,7 @@ public class RoleDemonstrationScript : MonoBehaviour
 
     private void Update()
     {
-        heroTrans.Rotate(new Vector3(0,-20f,0) * Time.deltaTime);
+        //heroTrans.Rotate(new Vector3(0,-20f,0) * Time.deltaTime);
     }
     void HideAllHero()
     {
