@@ -2,9 +2,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-// 射手
-// 单体攻击
-// 技能：攻击时，25%概率射出2支箭
+// 雪人
+// 远程单体攻击
+// 技能：攻击附带20%减速效果，持续5s
 public class HeroLogic105 : HeroBase
 {
     public override void AttackLogic(EnemyLogic enemyLogic)
