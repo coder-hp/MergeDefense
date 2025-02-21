@@ -25,9 +25,6 @@ public class GameLayer : MonoBehaviour
 
     bool isMerging = false;
 
-    [HideInInspector]
-    public int curGold = 0;
-
     private void Awake()
     {
         s_instance = this;
@@ -41,12 +38,6 @@ public class GameLayer : MonoBehaviour
         }
 
         LayerManager.ShowLayer(Consts.Layer.GameUILayer);
-    }
-
-    public void changeGold(int value)
-    {
-        curGold += value;
-        GameUILayer.s_instance.text_gold.text = curGold.ToString();
     }
 
     public void checkHeroMerge()
@@ -130,22 +121,24 @@ public class GameLayer : MonoBehaviour
         }
     }
 
-    public void addHero()
+    public bool addHero()
     {
-        for(int i = 0; i < heroPoint.childCount; i++)
+        for (int i = 0; i < heroPoint.childCount; i++)
         {
-            if(heroPoint.GetChild(i).childCount == 0)
+            if (heroPoint.GetChild(i).childCount == 0)
             {
-                Transform heroTrans = Instantiate(ObjectPool.getPrefab("Prefabs/Heros/hero" + RandomUtil.getRandom(101,104)), heroPoint.GetChild(i)).transform;
+                Transform heroTrans = Instantiate(ObjectPool.getPrefab("Prefabs/Heros/hero" + RandomUtil.getRandom(101, 104)), heroPoint.GetChild(i)).transform;
 
                 if (!isMerging)
                 {
                     isMerging = true;
                     Invoke("checkHeroMerge", 0.3f);
                 }
-                return;
+                return true;
             }
         }
+
+        return false;
     }
 
     public void addHeroById(int id)

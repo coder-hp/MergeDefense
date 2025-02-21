@@ -10,40 +10,48 @@ public class KillGoldManager : MonoBehaviour
 
     public GameObject prefab_killGold;
 
-    List<Transform> list_killGold = new List<Transform>();
-    List<Text> list_killGoldText = new List<Text>();
+    List<Text> list_killGold = new List<Text>();
 
     void Awake()
     {
         s_instance = this;
     }
 
-    public void showKillGold(int num, Vector3 worldPos)
+    public void showKillGold(int num)
     {
-        Transform killGoldTrans = null;
+        Text killGoldText = null;
         for (int i = 0; i < list_killGold.Count; i++)
         {
-            if(list_killGold[i].localScale.x == 0)
+            if(list_killGold[i].transform.localScale.x == 0)
             {
-                killGoldTrans = list_killGold[i];
-                killGoldTrans.localScale = Vector3.one;
-                list_killGoldText[i].text = num.ToString();
+                killGoldText = list_killGold[i];
+                killGoldText.transform.localScale = Vector3.one;
+                if (num >= 0)
+                {
+                    killGoldText.text = "+"+num.ToString();
+                    killGoldText.color = Color.white;
+                }
+                else
+                {
+                    killGoldText.text = num.ToString();
+                    killGoldText.color = Color.red;
+                }
                 break;
             }
         }
 
-        if(killGoldTrans == null)
+        if(killGoldText == null)
         {
-            killGoldTrans = Instantiate(prefab_killGold, transform).transform;
-            list_killGold.Add(killGoldTrans);
-            list_killGoldText.Add(killGoldTrans.GetChild(1).GetComponent<Text>());
-            list_killGoldText[list_killGoldText.Count - 1].text = num.ToString();
+            killGoldText = Instantiate(prefab_killGold, transform).GetComponent<Text>();
+            list_killGold.Add(killGoldText);
+            killGoldText.text = num.ToString();
         }
 
-        killGoldTrans.localPosition = CommonUtil.WorldPosToUI(GameLayer.s_instance.camera3D, worldPos);
-        killGoldTrans.DOLocalMoveY(killGoldTrans.localPosition.y + RandomUtil.getRandom(80, 100), 0.4f).OnComplete(()=>
+        killGoldText.transform.position = GameUILayer.s_instance.text_gold.transform.position;
+        killGoldText.transform.DOLocalMoveY(killGoldText.transform.localPosition.y + 70, 0.8f).SetEase(Ease.OutCubic).OnComplete(()=>
         {
-            killGoldTrans.localScale = Vector3.zero;
+            killGoldText.transform.localScale = Vector3.zero;
         });
+        killGoldText.DOFade(0, 0.8f).SetEase(Ease.OutCubic);
     }
 }

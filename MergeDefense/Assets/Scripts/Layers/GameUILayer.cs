@@ -17,20 +17,32 @@ public class GameUILayer : MonoBehaviour
     public Transform bloodPointTrans;
     public Transform heroStarPointTrans;
     public Transform weaponGridTrans;
+    public Transform curGoldIconTrans;
     public Text text_enemyCount;
     public Text text_time;
     public Text text_boci;
     public Text text_gold;
     public Text text_diamond;
+    public Text btn_summon_gold;
+    public Text btn_forge_gold;
 
     int curBoCi = 0;
     int curBoCiRestTime = 20;
+
+    [HideInInspector]
+    public int curGold = Consts.startHaveGold;
+    int curSummonGold = Consts.startSummonGold;
+    int curForgeGold = Consts.startForgeGold;
 
     List<EnemyWaveData> waitAddEnemy = new List<EnemyWaveData>();
 
     private void Awake()
     {
         s_instance = this;
+
+        text_gold.text = curGold.ToString();
+        btn_summon_gold.text = curSummonGold.ToString();
+        btn_forge_gold.text = curForgeGold.ToString();
 
         Invoke("startBoCi",0.5f);
     }
@@ -106,6 +118,27 @@ public class GameUILayer : MonoBehaviour
         img_enemyCountProgress.fillAmount = EnemyManager.s_instance.getEnemyCount() / 100f;
     }
 
+    DG.Tweening.Sequence tween_changeGold = null;
+    public void changeGold(int value)
+    {
+        curGold += value;
+        text_gold.text = curGold.ToString();
+
+        KillGoldManager.s_instance.showKillGold(value);
+
+        if (tween_changeGold == null)
+        {
+            tween_changeGold = DOTween.Sequence();
+            tween_changeGold.Append(curGoldIconTrans.DOScale(1.3f, 0.2f))
+                       .Append(curGoldIconTrans.DOScale(1, 0.2f));
+            tween_changeGold.SetAutoKill(false);
+        }
+        else
+        {
+            tween_changeGold.Restart();
+        }
+    }
+
     public void onClickPause()
     {
         if(Time.timeScale == 0)
@@ -136,24 +169,55 @@ public class GameUILayer : MonoBehaviour
     // 召唤
     public void onClickHero()
     {
-        GameLayer.s_instance.addHero();
+        if (curGold < curSummonGold)
+        {
+            ToastScript.show("Coins Not Enough!");
+            return;
+        }
+
+        if (GameLayer.s_instance.addHero())
+        {
+            changeGold(-curSummonGold);
+
+            // 增加下次召唤金额
+            curSummonGold += Consts.summonAddGold;
+            btn_summon_gold.text = curSummonGold.ToString();
+        }
     }
 
     // 锻造
     public void onClickForge()
     {
-        int forgeCount = RandomUtil.getRandom(1,3);
-        for(int c = 0; c < forgeCount; c++)
+        if (curGold < curForgeGold)
+        {
+            ToastScript.show("Coins Not Enough!");
+            return;
+        }
+
+        bool isForgeSuccess = false;
+        int forgeCount = RandomUtil.getRandom(1, 3);
+        for (int c = 0; c < forgeCount; c++)
         {
             for (int i = 0; i < weaponGridTrans.childCount; i++)
             {
                 if (weaponGridTrans.GetChild(i).childCount == 0)
                 {
+                    isForgeSuccess = true;
+
                     UIItemWeapon uIItemWeapon = Instantiate(item_weapon, weaponGridTrans.GetChild(i)).GetComponent<UIItemWeapon>();
                     uIItemWeapon.init(RandomUtil.getRandom(1, 5), 1);
                     break;
                 }
             }
+        }
+
+        if (isForgeSuccess)
+        {
+            changeGold(-curForgeGold);
+
+            // 增加下次锻造金额
+            curForgeGold += Consts.forgeAddGold;
+            btn_forge_gold.text = curForgeGold.ToString();
         }
     }
 
