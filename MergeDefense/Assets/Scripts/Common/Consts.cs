@@ -38,4 +38,8 @@ public class Consts
         CommonUtil.stringToColor("#FF6F6F"),    // 拳套
         CommonUtil.stringToColor("#E28BFF"),    // 魔杖
     };
+
+    public static string HeroAniNameIdle = "idle";
+    public static string HeroAniNameAttack = "attack";
+    public static string HeroAniNameRun = "run";
 }

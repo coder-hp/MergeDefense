@@ -149,7 +149,7 @@ public class HeroLogicBase : MonoBehaviour
                     if (minDisGridHeroPoint.childCount == 0)
                     {
                         isCanUpdate = false;
-                        playAni("run");
+                        playAni(Consts.HeroAniNameRun);
 
                         float angle = -CommonUtil.twoPointAngle(curStandGrid.position, minDisGrid.position);
                         transform.localRotation = Quaternion.Euler(0, angle, 0);
@@ -158,7 +158,7 @@ public class HeroLogicBase : MonoBehaviour
                         transform.SetParent(minDisGridHeroPoint);
                         transform.DOLocalMove(Vector3.zero, 1).OnComplete(()=>
                         {
-                            playAni("idle");
+                            playAni(Consts.HeroAniNameIdle);
                             isCanUpdate = true;
                             isAttacking = false;
                             starTrans.localScale = Vector3.one;
@@ -212,7 +212,7 @@ public class HeroLogicBase : MonoBehaviour
                 heroAniEvent.enemyLogic = enemyLogic;
                 lookEnemy(enemyLogic);
                 isAttacking = true;
-                playAni("attack");
+                playAni(Consts.HeroAniNameAttack);
 
                 return true;
             }
@@ -298,6 +298,11 @@ public class HeroLogicBase : MonoBehaviour
 
     public void playAni(string aniName,float crossFadeTime = 0)
     {
+        if(aniName == Consts.HeroAniNameAttack)
+        {
+
+        }
+
         if(crossFadeTime > 0)
         {
             animator.CrossFade(aniName, crossFadeTime);

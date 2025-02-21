@@ -17,9 +17,9 @@ public class RoleDemonstrationScript : MonoBehaviour
     private void Awake()
     {
         btn_SwitchHero.onClick.AddListener(SwitchHero);
-        btn_Play_Idle.onClick.AddListener(() => PlayAnimation("idle"));
-        btn_Play_Attack.onClick.AddListener(() => PlayAnimation("attack"));
-        btn_Play_Run.onClick.AddListener(() => PlayAnimation("run"));
+        btn_Play_Idle.onClick.AddListener(() => PlayAnimation(Consts.HeroAniNameIdle));
+        btn_Play_Attack.onClick.AddListener(() => PlayAnimation(Consts.HeroAniNameAttack));
+        btn_Play_Run.onClick.AddListener(() => PlayAnimation(Consts.HeroAniNameRun));
     }
     void Start()
     {
