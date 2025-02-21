@@ -5,24 +5,27 @@ using UnityEngine.UI;
 
 public class RoleDemonstrationScript : MonoBehaviour
 {
+    public Text text_heroName;
     public Transform heroTrans;
     public Button btn_SwitchHero;
     public Button btn_Play_Idle;
     public Button btn_Play_Attack;
     public Button btn_Play_Run;
     int herpId = 0;
+    
 
     private void Awake()
     {
         btn_SwitchHero.onClick.AddListener(SwitchHero);
-        btn_Play_Idle.onClick.AddListener(PlayIdle);
-        btn_Play_Attack.onClick.AddListener(PlayAttack);
-        btn_Play_Run.onClick.AddListener(PlayRun);
+        btn_Play_Idle.onClick.AddListener(() => PlayAnimation("idle"));
+        btn_Play_Attack.onClick.AddListener(() => PlayAnimation("attack"));
+        btn_Play_Run.onClick.AddListener(() => PlayAnimation("run"));
     }
     void Start()
     {
         HideAllHero();
         heroTrans.GetChild(herpId).gameObject.SetActive(true);
+        RefreshHeroName();
     }
 
     private void Update()
@@ -46,17 +49,35 @@ public class RoleDemonstrationScript : MonoBehaviour
             herpId = 0;
         }
         heroTrans.GetChild(herpId).gameObject.SetActive(true);
+        RefreshHeroName();
     }
-    void PlayIdle()
+    void PlayAnimation(string aniStr)
     {
-        heroTrans.GetChild(herpId).GetComponent<Animator>().Play("idle",0,0);
+        heroTrans.GetChild(herpId).GetComponent<Animator>().Play(aniStr, 0,0);
     }
-    void PlayAttack()
+    string GetHeroName(int _heroId)
     {
-        heroTrans.GetChild(herpId).GetComponent<Animator>().Play("attack", 0, 0);
+        string _heroName = "";
+        switch (_heroId)
+        {
+            case 0:
+                _heroName = "剑士";
+                break;
+            case 1:
+                _heroName = "弓箭";
+                break;
+            case 2:
+                _heroName = "法师";
+                break;
+            case 3:
+                _heroName = "斧手";
+                break;
+        }
+        return _heroName;
     }
-    void PlayRun()
+    void RefreshHeroName()
     {
-        heroTrans.GetChild(herpId).GetComponent<Animator>().Play("run", 0, 0);
+        text_heroName.text = GetHeroName(herpId);
     }
+
 }
