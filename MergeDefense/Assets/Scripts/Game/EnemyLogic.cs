@@ -98,6 +98,8 @@ public class EnemyLogic : MonoBehaviour
 
     void die()
     {
+        KillGoldManager.s_instance.showKillGold(enemyWaveData.killGold, bloodPoint.position);
+        GameLayer.s_instance.changeGold(enemyWaveData.killGold);
         EnemyManager.s_instance.removeEnemy(this);
 
         Destroy(bloodBarTrans.gameObject);

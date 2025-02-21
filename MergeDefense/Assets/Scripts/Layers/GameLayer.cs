@@ -25,6 +25,9 @@ public class GameLayer : MonoBehaviour
 
     bool isMerging = false;
 
+    [HideInInspector]
+    public int curGold = 0;
+
     private void Awake()
     {
         s_instance = this;
@@ -38,6 +41,12 @@ public class GameLayer : MonoBehaviour
         }
 
         LayerManager.ShowLayer(Consts.Layer.GameUILayer);
+    }
+
+    public void changeGold(int value)
+    {
+        curGold += value;
+        GameUILayer.s_instance.text_gold.text = curGold.ToString();
     }
 
     public void checkHeroMerge()

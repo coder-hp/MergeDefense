@@ -20,6 +20,8 @@ public class GameUILayer : MonoBehaviour
     public Text text_enemyCount;
     public Text text_time;
     public Text text_boci;
+    public Text text_gold;
+    public Text text_diamond;
 
     int curBoCi = 0;
     int curBoCiRestTime = 20;
