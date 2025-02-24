@@ -19,6 +19,9 @@ public class EnemyLogic : MonoBehaviour
 
     EnemyWaveData enemyWaveData;
 
+    MeshRenderer meshRenderer;
+    MaterialPropertyBlock propRedColor;
+
     [HideInInspector]
     public List<Consts.BuffData> list_buffDatas = new List<Consts.BuffData>();
 
@@ -38,6 +41,9 @@ public class EnemyLogic : MonoBehaviour
 
         transform.localScale = Vector3.zero;
         transform.DOScale(1,0.5f);
+
+        propRedColor = new MaterialPropertyBlock();
+        meshRenderer = transform.GetChild(0).GetComponent<MeshRenderer>();
     }
 
     public void init(EnemyWaveData _enemyWaveData)
@@ -49,9 +55,10 @@ public class EnemyLogic : MonoBehaviour
         moveSpeed *= enemyWaveData.speed;
     }
 
+    // 此方法每帧都会调用，所以不用再写一个Update方法
     public void move()
     {
-        for(int i = 0; i < list_buffDatas.Count; i++)
+        for (int i = 0; i < list_buffDatas.Count; i++)
         {
             if(list_buffDatas[i].time > 0)
             {
@@ -105,6 +112,7 @@ public class EnemyLogic : MonoBehaviour
     }
 
     // 返回值：本次攻击是否造成死亡
+    Tween tween_hitRedColor = null;
     public bool damage(int atk,bool isCrit)
     {
         if (curHP > 0)
@@ -120,9 +128,27 @@ public class EnemyLogic : MonoBehaviour
             }
 
             bloodProgressImg.DOFillAmount(curHP / fullHP,0.2f);
+
+            setHitColorProgress(1);
+
+            // 从红色渐变为0
+            if(tween_hitRedColor == null)
+            {
+                tween_hitRedColor = DOTween.To(() => 1f, setHitColorProgress, 0f, 0.3f).SetEase(Ease.Linear).SetAutoKill(false);
+            }
+            else
+            {
+                tween_hitRedColor.Restart();
+            }
         }
 
         return false;
+    }
+
+    private void setHitColorProgress(float f)
+    {
+        propRedColor.SetFloat("_Hit", f);
+        meshRenderer.SetPropertyBlock(propRedColor);
     }
 
     void die()
@@ -132,5 +158,10 @@ public class EnemyLogic : MonoBehaviour
 
         Destroy(bloodBarTrans.gameObject);
         Destroy(gameObject);
+
+        if(tween_hitRedColor != null)
+        {
+            tween_hitRedColor.Kill();
+        }
     }
 }
