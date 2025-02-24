@@ -77,7 +77,7 @@ Shader "Kein/Spine/Skeleton" {
 				texColor.rgb *= texColor.a;
 				#endif
                 if(texColor.a > 0.2)
-                texColor.rgb = lerp(texColor.rgb,texColor.rgb + fixed3(0.99,0.0,0.0), _Hit);
+                texColor.rgb = lerp(texColor.rgb,texColor.rgb + fixed3(0.5,0.0,0.0), _Hit);
                 texColor *= i.vertexColor;
 				return texColor;
 			}
