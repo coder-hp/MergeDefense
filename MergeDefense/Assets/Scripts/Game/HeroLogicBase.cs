@@ -47,6 +47,8 @@ public class HeroLogicBase : MonoBehaviour
     HeroAniEvent heroAniEvent;
     Vector3 emojiOffset = new Vector3(-0.2f, 0.5f, 0);
 
+    HeroStarData heroStarData;
+
     public void Awake()
     {
         curStandGrid = GameLayer.s_instance.heroGrid.transform.Find(transform.parent.name);
@@ -63,6 +65,7 @@ public class HeroLogicBase : MonoBehaviour
         centerPoint = transform.Find("centerPoint");
 
         heroData = HeroEntity.getInstance().getData(id);
+        heroStarData = HeroStarEntity.getInstance().getData(curStar);
 
         // 品质背景板
         {
@@ -270,7 +273,12 @@ public class HeroLogicBase : MonoBehaviour
 
     public int getAtk()
     {
-        return heroData.atk;
+        return (int)(heroData.atk * heroStarData.baseAtkXiShu);
+    }
+
+    public float getAtkSpeed()
+    {
+        return heroData.atkSpeed;
     }
 
     public int getCritRate()
@@ -293,6 +301,7 @@ public class HeroLogicBase : MonoBehaviour
     public void addStar()
     {
         ++curStar;
+        heroStarData = HeroStarEntity.getInstance().getData(curStar);
         setStarUI();
     }
 

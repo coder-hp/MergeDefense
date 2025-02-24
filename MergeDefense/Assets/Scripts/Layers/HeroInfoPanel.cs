@@ -45,9 +45,9 @@ public class HeroInfoPanel : MonoBehaviour
 
         text_heroName.text = heroLogicBase.heroData.name;
         text_career.text = heroLogicBase.heroData.career;
-        text_atk.text = heroLogicBase.heroData.atk.ToString();
-        text_atk_speed.text = heroLogicBase.heroData.atkSpeed.ToString();
-        text_crit_rate.text = heroLogicBase.heroData.critRate + "%";
+        text_atk.text = heroLogicBase.getAtk().ToString();
+        text_atk_speed.text = heroLogicBase.getAtkSpeed().ToString();
+        text_crit_rate.text = heroLogicBase.getCritRate() + "%";
         img_head.sprite = AtlasUtil.getAtlas_icon().GetSprite("head_" + heroLogicBase.id);
         img_head_kuang.sprite = AtlasUtil.getAtlas_game().GetSprite("kuang_hero_" + heroLogicBase.heroData.quality + "_1");
         img_head_bg.sprite = AtlasUtil.getAtlas_game().GetSprite("kuang_hero_" + heroLogicBase.heroData.quality + "_2");
