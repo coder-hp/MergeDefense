@@ -26,8 +26,10 @@ public class GameUILayer : MonoBehaviour
     public Text btn_summon_gold;
     public Text btn_forge_gold;
 
-    int curBoCi = 0;
-    int curBoCiRestTime = 20;
+    [HideInInspector]
+    public int curBoCi = 0;
+    [HideInInspector]
+    public int curBoCiRestTime = 20;
 
     [HideInInspector]
     public int curGold = Consts.startHaveGold;
@@ -75,7 +77,7 @@ public class GameUILayer : MonoBehaviour
         }
 
         InvokeRepeating("onInvokeBoCiSecond",1,1);
-        InvokeRepeating("onInvokeAddEnemy", 0.5f, 0.5f);
+        InvokeRepeating("onInvokeAddEnemy", 0.7f, 0.7f);
     }
 
     void onInvokeBoCiSecond()

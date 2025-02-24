@@ -32,6 +32,9 @@ public class EnemyLogic : MonoBehaviour
 
         bloodPoint = transform.Find("bloodPoint");
 
+        transform.localScale = Vector3.zero;
+        transform.DOScale(1,0.5f);
+
         // 创建血条
         {
             bloodBarTrans = Instantiate(GameUILayer.s_instance.prefab_bloodBar, GameUILayer.s_instance.bloodPointTrans).transform;
@@ -39,11 +42,9 @@ public class EnemyLogic : MonoBehaviour
             bloodProgressImg = bloodBarTrans.GetChild(0).GetComponent<Image>();
         }
 
-        transform.localScale = Vector3.zero;
-        transform.DOScale(1,0.5f);
-
         propRedColor = new MaterialPropertyBlock();
         meshRenderer = transform.GetChild(0).GetComponent<MeshRenderer>();
+        transform.GetChild(0).localPosition -= new Vector3(0,0,GameUILayer.s_instance.curBoCi / 1000f);
     }
 
     public void init(EnemyWaveData _enemyWaveData)
