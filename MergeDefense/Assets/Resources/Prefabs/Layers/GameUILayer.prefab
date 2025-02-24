@@ -227,6 +227,8 @@ MonoBehaviour:
   text_diamond: {fileID: 3502357396282039785}
   btn_summon_gold: {fileID: 4481693099585822707}
   btn_forge_gold: {fileID: 7063937017468583406}
+  curBoCi: 0
+  curBoCiRestTime: 20
   curGold: 100
 --- !u!1 &292383454900794365
 GameObject:
@@ -5517,7 +5519,7 @@ MonoBehaviour:
   m_Padding:
     m_Left: 0
     m_Right: 0
-    m_Top: 90
+    m_Top: 40
     m_Bottom: 0
   m_ChildAlignment: 4
   m_Spacing: 0
