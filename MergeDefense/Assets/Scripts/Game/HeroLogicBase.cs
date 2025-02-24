@@ -81,7 +81,7 @@ public class HeroLogicBase : MonoBehaviour
         // emoji
         {
             emojiTrans = Instantiate(GameUILayer.s_instance.prefab_heroEmoji, GameUILayer.s_instance.heroStarPointTrans).transform;
-            emojiTrans.localPosition = CommonUtil.WorldPosToUI(GameLayer.s_instance.camera3D, curStandGrid.position + new Vector3(-0.2f,0.5f,0));
+            emojiTrans.localPosition = CommonUtil.WorldPosToUI(GameLayer.s_instance.camera3D, curStandGrid.position + new Vector3(-0.2f,0.7f,0));
             emojiTrans.localScale = Vector3.zero;
         }
     }
