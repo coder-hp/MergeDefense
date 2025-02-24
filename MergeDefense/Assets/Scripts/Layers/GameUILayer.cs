@@ -26,10 +26,8 @@ public class GameUILayer : MonoBehaviour
     public Text btn_summon_gold;
     public Text btn_forge_gold;
 
-    [HideInInspector]
-    public int curBoCi = 0;
-    [HideInInspector]
-    public int curBoCiRestTime = 20;
+    int curBoCi = 0;
+    int curBoCiRestTime = 20;
 
     [HideInInspector]
     public int curGold = Consts.startHaveGold;

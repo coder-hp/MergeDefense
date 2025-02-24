@@ -44,7 +44,7 @@ public class EnemyLogic : MonoBehaviour
 
         propRedColor = new MaterialPropertyBlock();
         meshRenderer = transform.GetChild(0).GetComponent<MeshRenderer>();
-        transform.GetChild(0).localPosition -= new Vector3(0,0,GameUILayer.s_instance.curBoCi / 1000f);
+        transform.GetChild(0).localPosition -= new Vector3(0,0,GameLayer.s_instance.addedEnemyCount * 0.000001f);
     }
 
     public void init(EnemyWaveData _enemyWaveData)
