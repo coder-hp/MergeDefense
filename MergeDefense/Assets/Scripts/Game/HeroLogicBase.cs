@@ -273,7 +273,7 @@ public class HeroLogicBase : MonoBehaviour
 
     public int getAtk()
     {
-        return (int)(heroData.atk * heroStarData.baseAtkXiShu);
+        return (int)Mathf.Round(heroData.atk * heroStarData.baseAtkXiShu);
     }
 
     public float getAtkSpeed()
