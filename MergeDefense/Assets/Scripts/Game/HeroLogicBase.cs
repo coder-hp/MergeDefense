@@ -450,5 +450,10 @@ public class HeroLogicBase : MonoBehaviour
         {
             Destroy(emojiTrans.gameObject);
         }
+
+        if(tween_emoji != null)
+        {
+            tween_emoji.Kill();
+        }
     }
 }
