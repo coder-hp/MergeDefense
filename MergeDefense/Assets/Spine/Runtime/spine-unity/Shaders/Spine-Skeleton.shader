@@ -2,7 +2,7 @@ Shader "Kein/Spine/Skeleton" {
 	Properties {
 		//_Cutoff ("Shadow alpha cutoff", Range(0,1)) = 0.1
 		[NoScaleOffset] _MainTex ("Main Texture", 2D) = "black" {}
-        _HitColor("HitColor",color) = (1,1,1,1)
+        //_HitColor("HitColor",color) = (1,1,1,1)
         _Hit("_Hit",Range(0,1))=0
 		//[Toggle(_STRAIGHT_ALPHA_INPUT)] _StraightAlphaInput("Straight Alpha Texture", Int) = 0
 		//[HideInInspector] _StencilRef("Stencil Reference", Float) = 1.0
@@ -67,7 +67,7 @@ Shader "Kein/Spine/Skeleton" {
 			}
 
             float _Hit;
-            fixed4 _HitColor;
+            //fixed4 _HitColor;
 
 			float4 frag (VertexOutput i) : SV_Target {
 				float4 texColor = tex2D(_MainTex, i.uv);
@@ -75,8 +75,10 @@ Shader "Kein/Spine/Skeleton" {
 				#if defined(_STRAIGHT_ALPHA_INPUT)
 				texColor.rgb *= texColor.a;
 				#endif
+                if(texColor.a > 0.2)
+                texColor.rgb = lerp(texColor.rgb,fixed3(0.99,0.23,0.23), _Hit);
                 texColor *= i.vertexColor;
-                texColor.rgb = lerp(texColor.rgb,_HitColor.rgb, _Hit);
+                
 
 				return texColor;
 			}
