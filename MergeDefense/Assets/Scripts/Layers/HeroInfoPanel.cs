@@ -24,6 +24,7 @@ public class HeroInfoPanel : MonoBehaviour
     public Text text_atk;
     public Text text_atk_speed;
     public Text text_crit_rate;
+    public Transform weaponBuffsTrans;
     public Transform skillTrans;
     public Transform tab_weaponTrans;
     public Transform tab_skillTrans;
@@ -109,8 +110,19 @@ public class HeroInfoPanel : MonoBehaviour
 
     public void onClickWeaponIcon(int index)
     {
+        if (index == 0 && heroLogicBase.list_weapon.Count == 0)
+        {
+            return;
+        }
+        else if (index == 1 && heroLogicBase.list_weapon.Count < 2)
+        {
+            return;
+        }
+
         tab_weaponTrans.localScale = Vector3.one;
         tab_skillTrans.localScale = Vector3.zero;
+
+        weaponBuffsTrans.localScale = Vector3.zero;
         text_skillDesc.transform.localScale = Vector3.zero;
 
         for (int i = 0; i < skillTrans.childCount; i++)
@@ -122,6 +134,8 @@ public class HeroInfoPanel : MonoBehaviour
         {
             if (heroLogicBase.list_weapon.Count >= 1)
             {
+                showWeaponBuffInfo(heroLogicBase.list_weapon[0]);
+
                 img_choicedWeapon1.transform.localScale = Vector3.one;
                 img_choicedWeapon2.transform.localScale = Vector3.zero;
                 img_choicedWeapon1.color = Consts.list_weaponColor[heroLogicBase.list_weapon[0].type - 1];
@@ -137,6 +151,8 @@ public class HeroInfoPanel : MonoBehaviour
         {
             if (heroLogicBase.list_weapon.Count >= 2)
             {
+                showWeaponBuffInfo(heroLogicBase.list_weapon[1]);
+
                 img_choicedWeapon1.transform.localScale = Vector3.zero;
                 img_choicedWeapon2.transform.localScale = Vector3.one;
                 img_choicedWeapon2.color = Consts.list_weaponColor[heroLogicBase.list_weapon[1].type - 1];
@@ -144,6 +160,11 @@ public class HeroInfoPanel : MonoBehaviour
                 text_weaponName.text = heroLogicBase.list_weapon[1].name;
             }
         }
+    }
+
+    void showWeaponBuffInfo(WeaponData weaponData)
+    {
+        weaponBuffsTrans.localScale = Vector3.one;
     }
 
     public void onClickSkillIcon(int index)
@@ -154,6 +175,7 @@ public class HeroInfoPanel : MonoBehaviour
         tab_weaponTrans.localScale = Vector3.zero;
         tab_skillTrans.localScale = Vector3.one;
 
+        weaponBuffsTrans.localScale = Vector3.zero;
         text_skillDesc.transform.localScale = Vector3.one;
 
         for (int i = 0; i < skillTrans.childCount; i++)
