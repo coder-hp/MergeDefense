@@ -2,7 +2,7 @@ Shader "Kein/Spine/Skeleton" {
 	Properties {
 		//_Cutoff ("Shadow alpha cutoff", Range(0,1)) = 0.1
 		[NoScaleOffset] _MainTex ("Main Texture", 2D) = "black" {}
-        //_HitColor("HitColor",color) = (1,1,1,1)
+        _HitColor("HitColor",color) = (1,1,1,1)
         _Hit("_Hit",Range(0,1))=0
 		//[Toggle(_STRAIGHT_ALPHA_INPUT)] _StraightAlphaInput("Straight Alpha Texture", Int) = 0
 		//[HideInInspector] _StencilRef("Stencil Reference", Float) = 1.0
@@ -21,22 +21,23 @@ Shader "Kein/Spine/Skeleton" {
 	}
 
 	SubShader {
-		Tags { "Queue"="Transparent" "IgnoreProjector"="True" "RenderType"="Transparent" "PreviewType"="Plane" }
-
-		Fog { Mode Off }
-		Cull Off
-		ZWrite Off
-		Blend One OneMinusSrcAlpha
-		Lighting Off
+		
 
 		// Stencil {
 		// 	Ref[_StencilRef]
 		// 	Comp[_StencilComp]
 		// 	Pass Keep
 		// }
-
+        
 		Pass {
-			Name "Normal"
+			//Name "Normal"
+            Tags { "Queue"="Transparent" "IgnoreProjector"="True" "RenderType"="Transparent" "PreviewType"="Plane" }
+
+            Fog { Mode Off }
+            Cull Off
+            ZWrite Off
+            Blend One OneMinusSrcAlpha
+            Lighting Off
 
 			CGPROGRAM
 			#pragma shader_feature _ _STRAIGHT_ALPHA_INPUT
@@ -76,10 +77,8 @@ Shader "Kein/Spine/Skeleton" {
 				texColor.rgb *= texColor.a;
 				#endif
                 if(texColor.a > 0.2)
-                texColor.rgb = lerp(texColor.rgb,fixed3(0.99,0.23,0.23), _Hit);
+                texColor.rgb = lerp(texColor.rgb,texColor.rgb + fixed3(0.99,0.0,0.0), _Hit);
                 texColor *= i.vertexColor;
-                
-
 				return texColor;
 			}
 			ENDCG
