@@ -28,6 +28,8 @@ public class HeroInfoPanel : MonoBehaviour
     public Transform skillTrans;
     public Transform tab_weaponTrans;
     public Transform tab_skillTrans;
+    public Transform btn_sellHeroTrans;
+    public Text text_sellHeroPrice;
 
     [HideInInspector]
     public bool isCanClose = true;      // 为了连续点击角色时，角色信息面板不用关闭再显示
@@ -105,6 +107,12 @@ public class HeroInfoPanel : MonoBehaviour
         else if (skillsArray.Length > 0)
         {
             onClickSkillIcon(0);
+        }
+
+        // 卖出按钮
+        {
+            btn_sellHeroTrans.position = heroLogicBase.starTrans.position += new Vector3(0,-1,0);
+            text_sellHeroPrice.text = heroLogicBase.heroStarData.sellPrice.ToString();
         }
     }
 
@@ -292,6 +300,14 @@ public class HeroInfoPanel : MonoBehaviour
                 skillTrans.Find(i + "/choiced").localScale = Vector3.zero;
             }
         }
+    }
+
+    public void onClickSellHero()
+    {
+        GameUILayer.s_instance.changeGold(heroLogicBase.heroStarData.sellPrice);
+
+        Destroy(heroLogicBase.gameObject);
+        onClickClose();
     }
 
     public void onClickClose()
