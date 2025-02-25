@@ -35,8 +35,10 @@ public class SnowBallLogic : MonoBehaviour
                 {
                     for (int i = 0; i < enemyLogic.list_buffDatas.Count; i++)
                     {
+                        // 如果已存在该buff,则重置时间
                         if (enemyLogic.list_buffDatas[i].buffType == Consts.BuffType.MoveSpeed && enemyLogic.list_buffDatas[i].from == "105")
                         {
+                            enemyLogic.list_buffDatas[i].time = 5;
                             return;
                         }
                     }
