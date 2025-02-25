@@ -8,6 +8,7 @@ public class HeroStarData
 {
     public int star;
     public float baseAtkXiShu;
+    public int sellPrice;
 }
 
 public class HeroStarEntity
