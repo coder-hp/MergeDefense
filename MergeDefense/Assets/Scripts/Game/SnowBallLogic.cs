@@ -27,7 +27,7 @@ public class SnowBallLogic : MonoBehaviour
             if (Vector3.Distance(transform.position, targetTrans.position) <= 0.1f)
             {
                 bool isCrit = RandomUtil.getRandom(1, 100) <= heroLogicBase.getCritRate() ? true : false;
-                int atk = (int)(heroLogicBase.getAtk() * (isCrit ? heroLogicBase.getCritDamageXiShu() : 1));
+                int atk = Mathf.RoundToInt(heroLogicBase.getAtk() * (isCrit ? heroLogicBase.getCritDamageXiShu() : 1));
                 Destroy(gameObject);
 
                 // 如果没死，则判定技能：攻击附带20%减速效果，持续5s

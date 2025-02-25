@@ -35,7 +35,7 @@ public class MagicBallLogic : MonoBehaviour
                     if (Vector3.Distance(transform.position, EnemyManager.s_instance.list_enemy[i].transform.position) <= damageRange)
                     {
                         bool isCrit = RandomUtil.getRandom(1, 100) <= heroLogicBase.getCritRate() ? true : false;
-                        int atk = (int)(heroLogicBase.getAtk() * (isCrit ? heroLogicBase.getCritDamageXiShu() : 1));
+                        int atk = Mathf.RoundToInt(heroLogicBase.getAtk() * (isCrit ? heroLogicBase.getCritDamageXiShu() : 1));
                         if (EnemyManager.s_instance.list_enemy[i].damage(atk, isCrit))
                         {
                             --i;

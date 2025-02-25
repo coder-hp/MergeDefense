@@ -282,13 +282,13 @@ public class HeroLogicBase : MonoBehaviour
             // 擅长
             if ((heroData.goodWeapon == -1) || (heroData.goodWeapon == list_weapon[i].type))
             {
-                atk += (int)(Mathf.Round(list_weapon[i].buff1 * 1.2f));
+                atk += Mathf.RoundToInt(list_weapon[i].buff1 * 1.2f);
                 atkXiShu += list_weapon[i].buff2 * 1.2f;
             }
             // 不擅长
             else if ((heroData.badWeapon == -1) || (heroData.badWeapon == list_weapon[i].type))
             {
-                atk += (int)(Mathf.Round(list_weapon[i].buff1 * 0.8f));
+                atk += Mathf.RoundToInt(list_weapon[i].buff1 * 0.8f);
                 atkXiShu += list_weapon[i].buff2 * 0.8f;
             }
             else
@@ -298,7 +298,7 @@ public class HeroLogicBase : MonoBehaviour
             }
         }
 
-        return (int)Mathf.Round(atk * atkXiShu);
+        return Mathf.RoundToInt(atk * atkXiShu);
     }
 
     public float getAtkSpeed()
@@ -308,8 +308,8 @@ public class HeroLogicBase : MonoBehaviour
         // 武器加成
         for (int i = 0; i < list_weapon.Count; i++)
         {
-            // 擅长
-            if ((heroData.goodWeapon == -1) || (heroData.goodWeapon == list_weapon[i].type))
+            // Buff3激活
+            if ((heroData.badWeapon != -1) && (heroData.badWeapon != list_weapon[i].type))
             {
                 if(list_weapon[i].buff3Type == Consts.BuffType.AtkSpeed)
                 {
@@ -323,12 +323,42 @@ public class HeroLogicBase : MonoBehaviour
 
     public int getCritRate()
     {
-        return heroData.critRate;
+        int critRate = heroData.critRate;
+
+        // 武器加成
+        for (int i = 0; i < list_weapon.Count; i++)
+        {
+            // Buff3激活
+            if ((heroData.badWeapon != -1) && (heroData.badWeapon != list_weapon[i].type))
+            {
+                if (list_weapon[i].buff3Type == Consts.BuffType.CritRate)
+                {
+                    critRate += Mathf.RoundToInt(float.Parse(list_weapon[i].buff3ValueStr));
+                }
+            }
+        }
+
+        return critRate;
     }
 
     public float getCritDamageXiShu()
     {
-        return heroData.critDamage;
+        float critDamage = heroData.critDamage;
+
+        // 武器加成
+        for (int i = 0; i < list_weapon.Count; i++)
+        {
+            // Buff3激活
+            if ((heroData.badWeapon != -1) && (heroData.badWeapon != list_weapon[i].type))
+            {
+                if (list_weapon[i].buff3Type == Consts.BuffType.CritDamage)
+                {
+                    critDamage += float.Parse(list_weapon[i].buff3ValueStr);
+                }
+            }
+        }
+
+        return critDamage;
     }
 
     public void addWeapon(WeaponData weaponData)

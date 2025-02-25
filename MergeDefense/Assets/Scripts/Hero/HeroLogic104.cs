@@ -26,7 +26,7 @@ public class HeroLogic104 : HeroBase
                     isCrit = RandomUtil.getRandom(1, 100) <= heroLogicBase.getCritRate() ? true : false;
                 }
 
-                int atk = (int)(heroLogicBase.getAtk() * (isCrit ? heroLogicBase.getCritDamageXiShu() : 1));
+                int atk = Mathf.RoundToInt((heroLogicBase.getAtk() * (isCrit ? heroLogicBase.getCritDamageXiShu() : 1)));
                 if (EnemyManager.s_instance.list_enemy[i].damage(atk, isCrit))
                 {
                     --i;

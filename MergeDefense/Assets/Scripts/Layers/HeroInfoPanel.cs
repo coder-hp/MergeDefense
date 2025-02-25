@@ -174,13 +174,13 @@ public class HeroInfoPanel : MonoBehaviour
             // 擅长
             if ((heroLogicBase.heroData.goodWeapon == -1) || (heroLogicBase.heroData.goodWeapon == weaponData.type))
             {
-                atk = (int)(Mathf.Round(atk * 1.2f));
+                atk = Mathf.RoundToInt(atk * 1.2f);
                 buffValue = "<color=\"#60D262\">(+" + (atk - weaponData.buff1) + ") </color>" + atk;
             }
             // 不擅长
             else if ((heroLogicBase.heroData.badWeapon == -1) || (heroLogicBase.heroData.badWeapon == weaponData.type))
             {
-                atk = (int)(Mathf.Round(atk * 0.8f));
+                atk = Mathf.RoundToInt(atk * 0.8f);
                 buffValue = "<color=\"#FB6061\">(" + (atk - weaponData.buff1) + ") </color>" + atk;
             }
             
@@ -189,19 +189,19 @@ public class HeroInfoPanel : MonoBehaviour
 
         // 攻击力百分比加成
         {
-            int atk = (int)Mathf.Round(weaponData.buff2 * 100f);
+            int atk = Mathf.RoundToInt(weaponData.buff2 * 100f);
             string buffValue = atk + "%";
 
             // 擅长
             if ((heroLogicBase.heroData.goodWeapon == -1) || (heroLogicBase.heroData.goodWeapon == weaponData.type))
             {
-                int newAtk = (int)Mathf.Round(weaponData.buff2 * 1.2f * 100f);
+                int newAtk = Mathf.RoundToInt(weaponData.buff2 * 1.2f * 100f);
                 buffValue = "<color=\"#60D262\">(+" + (newAtk - atk) + "%) </color>" + newAtk + "%";
             }
             // 不擅长
             else if ((heroLogicBase.heroData.badWeapon == -1) || (heroLogicBase.heroData.badWeapon == weaponData.type))
             {
-                int newAtk = (int)Mathf.Round(weaponData.buff2 * 0.8f * 100f);
+                int newAtk = Mathf.RoundToInt(weaponData.buff2 * 0.8f * 100f);
                 buffValue = "<color=\"#FB6061\">(" + (newAtk - atk) + "%) </color>" + newAtk + "%";
             }
 
@@ -218,7 +218,7 @@ public class HeroInfoPanel : MonoBehaviour
                     {
                         weaponBuffsTrans.Find("buff3/name").GetComponent<Text>().text = "Crit Rate";
 
-                        int value = (int)Mathf.Round(float.Parse(weaponData.buff3ValueStr));
+                        int value = Mathf.RoundToInt(float.Parse(weaponData.buff3ValueStr));
                         weaponBuffsTrans.Find("buff3/value").GetComponent<Text>().text = value + "%";
                         break;
                     }
@@ -227,7 +227,7 @@ public class HeroInfoPanel : MonoBehaviour
                     {
                         weaponBuffsTrans.Find("buff3/name").GetComponent<Text>().text = "Crit Damage";
 
-                        int value = (int)Mathf.Round(float.Parse(weaponData.buff3ValueStr) * 100);
+                        int value = Mathf.RoundToInt(float.Parse(weaponData.buff3ValueStr) * 100);
                         weaponBuffsTrans.Find("buff3/value").GetComponent<Text>().text = value + "%";
                         break;
                     }
@@ -243,7 +243,7 @@ public class HeroInfoPanel : MonoBehaviour
                     {
                         weaponBuffsTrans.Find("buff3/name").GetComponent<Text>().text = "Proc Chance";
 
-                        int value = (int)Mathf.Round(float.Parse(weaponData.buff3ValueStr));
+                        int value = Mathf.RoundToInt(float.Parse(weaponData.buff3ValueStr));
                         weaponBuffsTrans.Find("buff3/value").GetComponent<Text>().text = value + "%";
                         break;
                     }
