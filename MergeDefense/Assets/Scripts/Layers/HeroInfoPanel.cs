@@ -166,14 +166,16 @@ public class HeroInfoPanel : MonoBehaviour
     {
         weaponBuffsTrans.localScale = Vector3.one;
 
+        // 攻击力
         {
             string buffValue = weaponData.buff1.ToString();
             weaponBuffsTrans.Find("buff1/value").GetComponent<Text>().text = buffValue;
         }
 
+        // 攻击力百分比加成
         {
-            string buffValue = weaponData.buff2.ToString();
-            weaponBuffsTrans.Find("buff2/value").GetComponent<Text>().text = buffValue;
+            int value = (int)Mathf.Round(weaponData.buff2 * 100);
+            weaponBuffsTrans.Find("buff2/value").GetComponent<Text>().text = value + "%";
         }
 
         {
@@ -202,9 +204,7 @@ public class HeroInfoPanel : MonoBehaviour
                 case Consts.BuffType.AtkSpeed:
                     {
                         weaponBuffsTrans.Find("buff3/name").GetComponent<Text>().text = "Attack Speed";
-
-                        int value = (int)Mathf.Round(float.Parse(buffValue.Split(':')[1]) * 100);
-                        weaponBuffsTrans.Find("buff3/value").GetComponent<Text>().text = value + "%";
+                        weaponBuffsTrans.Find("buff3/value").GetComponent<Text>().text = float.Parse(buffValue.Split(':')[1]).ToString();
                         break;
                     }
 
