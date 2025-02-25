@@ -246,22 +246,22 @@ public class HeroLogicBase : MonoBehaviour
         // 橙色
         if (curStar > 9)
         {
-            material_qualityBg.SetColor("_Color",new Color(1,0.6f,0.15f));
+            material_qualityBg.SetFloat("_ColorID", 4.0f);
         }
         // 紫色
         else if (curStar > 6)
         {
-            material_qualityBg.SetColor("_Color", new Color(0.75f,0.25f,1));
+            material_qualityBg.SetFloat("_ColorID", 3.0f);
         }
         // 蓝色
         else if (curStar > 3)
         {
-            material_qualityBg.SetColor("_Color", new Color(0.25f,0.5f,1));
+            material_qualityBg.SetFloat("_ColorID", 2.0f);
         }
         // 白色
         else if (curStar > 0)
         {
-            material_qualityBg.SetColor("_Color", new Color(0.8f,0.75f,0.75f));
+            material_qualityBg.SetFloat("_ColorID", 1.0f);
         }
     }
 
