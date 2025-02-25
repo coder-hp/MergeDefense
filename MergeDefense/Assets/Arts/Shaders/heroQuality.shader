@@ -6,18 +6,18 @@ Shader "Kein/Hero/heroQuality"
         
         _MainTex ("Texture", 2D) = "white" {}
         _Mask ("Mask", 2D) = "white" {}
-        _Color1_1("Color1_1",color) = (1,1,1,1)
-        _Color1_2("Color1_2",color) = (1,1,1,1)
-        _Color1_3("Color1_3",color) = (1,1,1,1)
-        _Color2_1("Color1_1",color) = (1,1,1,1)
-        _Color2_2("Color1_2",color) = (1,1,1,1)
-        _Color2_3("Color1_3",color) = (1,1,1,1)
-        _Color3_1("Color1_1",color) = (1,1,1,1)
-        _Color3_2("Color1_2",color) = (1,1,1,1)
-        _Color3_3("Color1_3",color) = (1,1,1,1)
-        _Color4_1("Color1_1",color) = (1,1,1,1)
-        _Color4_2("Color1_2",color) = (1,1,1,1)
-        _Color4_3("Color1_3",color) = (1,1,1,1)
+        _Color1_1("白色_1",color) = (1,1,1,1)
+        _Color1_2("白色_2",color) = (1,1,1,1)
+        _Color1_3("白色_3",color) = (1,1,1,1)
+        _Color2_1("蓝色_1",color) = (1,1,1,1)
+        _Color2_2("蓝色_2",color) = (1,1,1,1)
+        _Color2_3("蓝色_3",color) = (1,1,1,1)
+        _Color3_1("紫色_1",color) = (1,1,1,1)
+        _Color3_2("紫色_2",color) = (1,1,1,1)
+        _Color3_3("紫色_3",color) = (1,1,1,1)
+        _Color4_1("橙色_1",color) = (1,1,1,1)
+        _Color4_2("橙色_2",color) = (1,1,1,1)
+        _Color4_3("橙色_3",color) = (1,1,1,1)
     }
     SubShader
     {
