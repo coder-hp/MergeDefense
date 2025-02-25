@@ -48,9 +48,11 @@ public class UIItemWeapon : MonoBehaviour
         text_level.text = weaponData.level.ToString();
     }
 
+    Transform curDragChoicedHero = null;
     private void OnMouseDown()
     {
         mergeTarget = null;
+        curDragChoicedHero = null;
         transform.SetParent(GameUILayer.s_instance.transform);
 
         // 显示所有角色的武器适配性emoji
@@ -95,12 +97,22 @@ public class UIItemWeapon : MonoBehaviour
                 raycastHit = RayUtil.getEndPoint(CommonUtil.mousePosToWorld(GameLayer.s_instance.camera3D));
                 if (raycastHit.collider && raycastHit.collider.CompareTag("Hero"))
                 {
-                    HeroLogicBase heroLogicBase = raycastHit.collider.GetComponent<HeroLogicBase>();
-                    GameLayer.s_instance.weaponChoiceKuang.position = heroLogicBase.heroQualityTrans.position;
-                    GameLayer.s_instance.weaponChoiceKuang.localScale = Vector3.one;
+                    if(curDragChoicedHero != raycastHit.collider.transform)
+                    {
+                        curDragChoicedHero = raycastHit.collider.transform;
+                        HeroLogicBase heroLogicBase = curDragChoicedHero.GetComponent<HeroLogicBase>();
+
+                        if (heroLogicBase.isCanAddWeapon(weaponData.type))
+                        {
+                            Debug.Log("aaa");
+                            GameLayer.s_instance.weaponChoiceKuang.position = heroLogicBase.heroQualityTrans.position;
+                            GameLayer.s_instance.weaponChoiceKuang.localScale = Vector3.one;
+                        }
+                    }
                 }
                 else
                 {
+                    curDragChoicedHero = null;
                     GameLayer.s_instance.weaponChoiceKuang.localScale = Vector3.zero;
                 }
             }
@@ -157,9 +169,13 @@ public class UIItemWeapon : MonoBehaviour
             raycastHit = RayUtil.getEndPoint(CommonUtil.mousePosToWorld(GameLayer.s_instance.camera3D));
             if (raycastHit.collider && raycastHit.collider.CompareTag("Hero"))
             {
-                raycastHit.collider.GetComponent<HeroLogicBase>().addWeapon(weaponData);
-                Destroy(gameObject);
-                return;
+                HeroLogicBase heroLogicBase = raycastHit.collider.GetComponent<HeroLogicBase>();
+                if (heroLogicBase.isCanAddWeapon(weaponData.type))
+                {
+                    heroLogicBase.addWeapon(weaponData);
+                    Destroy(gameObject);
+                    return;
+                }
             }
             else
             {

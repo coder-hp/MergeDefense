@@ -382,6 +382,24 @@ public class HeroLogicBase : MonoBehaviour
         return skillRate;
     }
 
+    public bool isCanAddWeapon(int type)
+    {
+        if(list_weapon.Count >= 2)
+        {
+            return false;
+        }
+
+        for (int i = 0; i < list_weapon.Count; i++)
+        {
+            if (list_weapon[i].type == type)
+            {
+                return false;
+            }
+        }
+
+        return true;
+    }
+
     public void addWeapon(WeaponData weaponData)
     {
         ToastScript.show("增加武器:" + weaponData.name + " level" + weaponData.level);
