@@ -14,6 +14,7 @@ public class GameLayer : MonoBehaviour
     public GameObject heroGrid;
     public Transform heroGridChoiced;
     public Transform attackRangeTrans;
+    public Transform weaponChoiceKuang;
     public Transform heroQualityPoint;
     public Transform flyPoint;
     public Transform effectPoint;

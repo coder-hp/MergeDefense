@@ -89,11 +89,28 @@ public class UIItemWeapon : MonoBehaviour
                 mergeTarget.DOScale(1f, 0.2f);
                 mergeTarget = null;
             }
+            // 检测是否拖到角色上
+            else
+            {
+                raycastHit = RayUtil.getEndPoint(CommonUtil.mousePosToWorld(GameLayer.s_instance.camera3D));
+                if (raycastHit.collider && raycastHit.collider.CompareTag("Hero"))
+                {
+                    HeroLogicBase heroLogicBase = raycastHit.collider.GetComponent<HeroLogicBase>();
+                    GameLayer.s_instance.weaponChoiceKuang.position = heroLogicBase.heroQualityTrans.position;
+                    GameLayer.s_instance.weaponChoiceKuang.localScale = Vector3.one;
+                }
+                else
+                {
+                    GameLayer.s_instance.weaponChoiceKuang.localScale = Vector3.zero;
+                }
+            }
         }
     }
 
     private void OnMouseUp()
     {
+        GameLayer.s_instance.weaponChoiceKuang.localScale = Vector3.zero;
+
         // 关闭所有角色的武器适配性emoji
         for (int i = 0; i < GameLayer.s_instance.heroPoint.childCount; i++)
         {

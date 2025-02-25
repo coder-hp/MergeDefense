@@ -618,6 +618,7 @@ Transform:
   - {fileID: 2135443028451985268}
   - {fileID: 3334699292323018052}
   - {fileID: 1889172472041156528}
+  - {fileID: 1788374246870576438}
   - {fileID: 7220120283883626461}
   - {fileID: 5383232983578252299}
   m_Father: {fileID: 4729789445500738202}
@@ -748,11 +749,13 @@ MonoBehaviour:
   heroGrid: {fileID: 8265745479018369982}
   heroGridChoiced: {fileID: 2135443028451985268}
   attackRangeTrans: {fileID: 1889172472041156528}
+  weaponChoiceKuang: {fileID: 1788374246870576438}
   heroQualityPoint: {fileID: 7220120283883626461}
   flyPoint: {fileID: 4149523117588117092}
   effectPoint: {fileID: 8027066404486135526}
   list_enemyMoveFourPos: []
   maxEnemyCount: 100
+  addedEnemyCount: 0
 --- !u!114 &-7090605276762049441
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1149,6 +1152,38 @@ Transform:
   m_Children: []
   m_Father: {fileID: 1716152931486237262}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &5351075935891287076
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1788374246870576438}
+  m_Layer: 0
+  m_Name: weaponChoiceKuang
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1788374246870576438
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5351075935891287076}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0.497, z: 0}
+  m_LocalScale: {x: 0, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 6276045987764663666}
+  m_Father: {fileID: 1737212649471613696}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &5357620817645439260
 GameObject:
   m_ObjectHideFlags: 0
@@ -1335,6 +1370,89 @@ Transform:
   m_Children: []
   m_Father: {fileID: 3334699292323018052}
   m_LocalEulerAnglesHint: {x: -30, y: 0, z: 0}
+--- !u!1 &6652711920326029256
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 6276045987764663666}
+  - component: {fileID: 6969079663204596439}
+  - component: {fileID: 5139682833327296029}
+  m_Layer: 0
+  m_Name: weaponChoiceKuang
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &6276045987764663666
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6652711920326029256}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0.000000021855694, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1.4, y: 1.4, z: 1.4}
+  m_ConstrainProportionsScale: 1
+  m_Children: []
+  m_Father: {fileID: 1788374246870576438}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!33 &6969079663204596439
+MeshFilter:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6652711920326029256}
+  m_Mesh: {fileID: 5060444177187149915, guid: 582ae6f5f0dfdf245a10e127a5c986ed, type: 3}
+--- !u!23 &5139682833327296029
+MeshRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6652711920326029256}
+  m_Enabled: 1
+  m_CastShadows: 1
+  m_ReceiveShadows: 1
+  m_DynamicOccludee: 1
+  m_StaticShadowCaster: 0
+  m_MotionVectors: 1
+  m_LightProbeUsage: 1
+  m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 2
+  m_RayTraceProcedural: 0
+  m_RenderingLayerMask: 1
+  m_RendererPriority: 0
+  m_Materials:
+  - {fileID: 2100000, guid: 91a30e3c757114e4186ac456c8bda9bd, type: 2}
+  m_StaticBatchInfo:
+    firstSubMesh: 0
+    subMeshCount: 0
+  m_StaticBatchRoot: {fileID: 0}
+  m_ProbeAnchor: {fileID: 0}
+  m_LightProbeVolumeOverride: {fileID: 0}
+  m_ScaleInLightmap: 1
+  m_ReceiveGI: 1
+  m_PreserveUVs: 0
+  m_IgnoreNormalsForChartDetection: 0
+  m_ImportantGI: 0
+  m_StitchLightmapSeams: 1
+  m_SelectedEditorRenderState: 3
+  m_MinimumChartSize: 4
+  m_AutoUVMaxDistance: 0.5
+  m_AutoUVMaxAngle: 89
+  m_LightmapParameters: {fileID: 0}
+  m_SortingLayerID: 0
+  m_SortingLayer: 0
+  m_SortingOrder: 0
+  m_AdditionalVertexStreams: {fileID: 0}
 --- !u!1 &6682919540416034154
 GameObject:
   m_ObjectHideFlags: 0
@@ -2019,15 +2137,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: f9cec65695679514fb3ccd68f76fe546, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -0
-      objectReference: {fileID: 0}
-    - target: {fileID: -8679921383154817045, guid: f9cec65695679514fb3ccd68f76fe546, type: 3}
-      propertyPath: m_LocalPosition.y
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: f9cec65695679514fb3ccd68f76fe546, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0.497
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: f9cec65695679514fb3ccd68f76fe546, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 0.002
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: f9cec65695679514fb3ccd68f76fe546, type: 3}
       propertyPath: m_LocalRotation.w
@@ -2068,6 +2186,10 @@ PrefabInstance:
     - target: {fileID: 919132149155446097, guid: f9cec65695679514fb3ccd68f76fe546, type: 3}
       propertyPath: m_Name
       value: attackRange
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: f9cec65695679514fb3ccd68f76fe546, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
