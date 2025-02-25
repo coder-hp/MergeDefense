@@ -168,19 +168,52 @@ public class HeroInfoPanel : MonoBehaviour
 
         // 攻击力
         {
-            string buffValue = weaponData.buff1.ToString();
+            int atk = weaponData.buff1;
+            string buffValue = atk.ToString();
+
+            // 擅长
+            if ((heroLogicBase.heroData.goodWeapon == -1) || (heroLogicBase.heroData.goodWeapon == weaponData.type))
+            {
+                atk = (int)(Mathf.Round(atk * 1.2f));
+                buffValue = "<color=\"#60D262\">(+" + (atk - weaponData.buff1) + ") </color>" + atk;
+            }
+            // 不擅长
+            else if ((heroLogicBase.heroData.badWeapon == -1) || (heroLogicBase.heroData.badWeapon == weaponData.type))
+            {
+                atk = (int)(Mathf.Round(atk * 0.8f));
+                buffValue = "<color=\"#FB6061\">(" + (atk - weaponData.buff1) + ") </color>" + atk;
+            }
+            
             weaponBuffsTrans.Find("buff1/value").GetComponent<Text>().text = buffValue;
         }
 
         // 攻击力百分比加成
         {
-            int value = (int)Mathf.Round(weaponData.buff2 * 100);
-            weaponBuffsTrans.Find("buff2/value").GetComponent<Text>().text = value + "%";
+            int atk = (int)Mathf.Round(weaponData.buff2 * 100f);
+            string buffValue = atk + "%";
+
+            // 擅长
+            if ((heroLogicBase.heroData.goodWeapon == -1) || (heroLogicBase.heroData.goodWeapon == weaponData.type))
+            {
+                int newAtk = (int)Mathf.Round(weaponData.buff2 * 1.2f * 100f);
+                buffValue = "<color=\"#60D262\">(+" + (newAtk - atk) + ")% </color>" + newAtk + "%";
+            }
+            // 不擅长
+            else if ((heroLogicBase.heroData.badWeapon == -1) || (heroLogicBase.heroData.badWeapon == weaponData.type))
+            {
+                int newAtk = (int)Mathf.Round(weaponData.buff2 * 0.8f * 100f);
+                buffValue = "<color=\"#FB6061\">(" + (newAtk - atk) + ")% </color>" + newAtk + "%";
+            }
+
+            weaponBuffsTrans.Find("buff2/value").GetComponent<Text>().text = buffValue;
         }
 
+
+        // 第三个任意属性Buff
         {
             string buffValue = weaponData.buff3.ToString();
             int buffType = int.Parse(buffValue.Split(':')[0]);
+            weaponBuffsTrans.Find("buff3/icon").GetComponent<Image>().sprite = AtlasUtil.getAtlas_icon().GetSprite("buff_" + buffType);
             switch ((Consts.BuffType)buffType)
             {
                 case Consts.BuffType.CritRate:
@@ -216,6 +249,23 @@ public class HeroInfoPanel : MonoBehaviour
                         weaponBuffsTrans.Find("buff3/value").GetComponent<Text>().text = value + "%";
                         break;
                     }
+            }
+
+            // 未激活
+            if((heroLogicBase.heroData.badWeapon == -1) || (heroLogicBase.heroData.badWeapon == weaponData.type))
+            {
+                Color color = new Color(0.28f,0.3f,0.42f);
+                weaponBuffsTrans.Find("buff3/icon").GetComponent<Image>().color = color;
+                weaponBuffsTrans.Find("buff3/name").GetComponent<Text>().color = color;
+                weaponBuffsTrans.Find("buff3/value").GetComponent<Text>().color = color;
+            }
+            // 激活
+            else
+            {
+                Color color = weaponBuffsTrans.Find("buff1/icon").GetComponent<Image>().color;
+                weaponBuffsTrans.Find("buff3/icon").GetComponent<Image>().color = color;
+                weaponBuffsTrans.Find("buff3/name").GetComponent<Text>().color = color;
+                weaponBuffsTrans.Find("buff3/value").GetComponent<Text>().color = color;
             }
         }
     }
