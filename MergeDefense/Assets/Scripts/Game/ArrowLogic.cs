@@ -27,9 +27,12 @@ public class ArrowLogic : MonoBehaviour
 
             if (Vector3.Distance(transform.position, targetTrans.position) <= 0.1f)
             {
-                bool isCrit = RandomUtil.getRandom(1, 100) <= heroLogicBase.getCritRate() ? true : false;
-                int atk = Mathf.RoundToInt(heroLogicBase.getAtk() * (isCrit ? heroLogicBase.getCritDamageXiShu() : 1));
-                enemyLogic.damage(atk, isCrit);
+                if (heroLogicBase)
+                {
+                    bool isCrit = RandomUtil.getRandom(1, 100) <= heroLogicBase.getCritRate() ? true : false;
+                    int atk = Mathf.RoundToInt(heroLogicBase.getAtk() * (isCrit ? heroLogicBase.getCritDamageXiShu() : 1));
+                    enemyLogic.damage(atk, isCrit);
+                }
                 Destroy(gameObject);
             }
         }

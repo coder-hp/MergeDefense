@@ -26,24 +26,28 @@ public class SnowBallLogic : MonoBehaviour
 
             if (Vector3.Distance(transform.position, targetTrans.position) <= 0.1f)
             {
-                bool isCrit = RandomUtil.getRandom(1, 100) <= heroLogicBase.getCritRate() ? true : false;
-                int atk = Mathf.RoundToInt(heroLogicBase.getAtk() * (isCrit ? heroLogicBase.getCritDamageXiShu() : 1));
-                Destroy(gameObject);
-
-                // 如果没死，则判定技能：攻击附带20%减速效果，持续3s
-                if (!enemyLogic.damage(atk, isCrit))
+                if (heroLogicBase)
                 {
-                    for (int i = 0; i < enemyLogic.list_buffDatas.Count; i++)
+                    bool isCrit = RandomUtil.getRandom(1, 100) <= heroLogicBase.getCritRate() ? true : false;
+                    int atk = Mathf.RoundToInt(heroLogicBase.getAtk() * (isCrit ? heroLogicBase.getCritDamageXiShu() : 1));
+
+                    // 如果没死，则判定技能：攻击附带20%减速效果，持续3s
+                    if (!enemyLogic.damage(atk, isCrit))
                     {
-                        // 如果已存在该buff,则重置时间
-                        if (enemyLogic.list_buffDatas[i].buffType == Consts.BuffType.MoveSpeed && enemyLogic.list_buffDatas[i].from == "105")
+                        for (int i = 0; i < enemyLogic.list_buffDatas.Count; i++)
                         {
-                            enemyLogic.list_buffDatas[i].time = 3;
-                            return;
+                            // 如果已存在该buff,则重置时间
+                            if (enemyLogic.list_buffDatas[i].buffType == Consts.BuffType.MoveSpeed && enemyLogic.list_buffDatas[i].from == "105")
+                            {
+                                enemyLogic.list_buffDatas[i].time = 3;
+                                return;
+                            }
                         }
+                        enemyLogic.list_buffDatas.Add(new Consts.BuffData(Consts.BuffType.MoveSpeed, -0.2f, 3, "105"));
                     }
-                    enemyLogic.list_buffDatas.Add(new Consts.BuffData(Consts.BuffType.MoveSpeed,-0.2f,3, "105"));
                 }
+                
+                Destroy(gameObject);
             }
         }
         else

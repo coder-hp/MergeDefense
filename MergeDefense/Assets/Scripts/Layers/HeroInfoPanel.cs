@@ -111,7 +111,7 @@ public class HeroInfoPanel : MonoBehaviour
 
         // 卖出按钮
         {
-            btn_sellHeroTrans.position = heroLogicBase.starTrans.position += new Vector3(0,-1,0);
+            btn_sellHeroTrans.position = heroLogicBase.starTrans.position + new Vector3(0,-0.9f,0);
             text_sellHeroPrice.text = heroLogicBase.heroStarData.sellPrice.ToString();
         }
     }
