@@ -273,7 +273,32 @@ public class HeroLogicBase : MonoBehaviour
 
     public int getAtk()
     {
-        return (int)Mathf.Round(heroData.atk * heroStarData.baseAtkXiShu);
+        int atk = heroData.atk;
+        float atkXiShu = heroStarData.baseAtkXiShu;
+
+        // 武器加成
+        for (int i = 0; i < list_weapon.Count; i++)
+        {
+            // 擅长
+            if ((heroData.goodWeapon == -1) || (heroData.goodWeapon == list_weapon[i].type))
+            {
+                atk += (int)(Mathf.Round(list_weapon[i].buff1 * 1.2f));
+                atkXiShu += list_weapon[i].buff2 * 1.2f;
+            }
+            // 不擅长
+            else if ((heroData.badWeapon == -1) || (heroData.badWeapon == list_weapon[i].type))
+            {
+                atk += (int)(Mathf.Round(list_weapon[i].buff1 * 0.8f));
+                atkXiShu += list_weapon[i].buff2 * 0.8f;
+            }
+            else
+            {
+                atk += list_weapon[i].buff1;
+                atkXiShu += list_weapon[i].buff2;
+            }
+        }
+
+        return (int)Mathf.Round(atk * atkXiShu);
     }
 
     public float getAtkSpeed()
