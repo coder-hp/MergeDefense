@@ -4,7 +4,7 @@ using UnityEngine;
 
 // 雪人
 // 远程单体攻击
-// 技能：攻击附带20%减速效果，持续5s
+// 技能：攻击附带20%减速效果，持续3s
 public class HeroLogic105 : HeroBase
 {
     public override void AttackLogic(EnemyLogic enemyLogic)

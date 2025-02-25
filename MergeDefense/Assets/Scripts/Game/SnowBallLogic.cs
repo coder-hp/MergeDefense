@@ -30,7 +30,7 @@ public class SnowBallLogic : MonoBehaviour
                 int atk = (int)(heroLogicBase.getAtk() * (isCrit ? heroLogicBase.getCritDamageXiShu() : 1));
                 Destroy(gameObject);
 
-                // 如果没死，则判定技能：攻击附带20%减速效果，持续5s
+                // 如果没死，则判定技能：攻击附带20%减速效果，持续3s
                 if (!enemyLogic.damage(atk, isCrit))
                 {
                     for (int i = 0; i < enemyLogic.list_buffDatas.Count; i++)
@@ -38,11 +38,11 @@ public class SnowBallLogic : MonoBehaviour
                         // 如果已存在该buff,则重置时间
                         if (enemyLogic.list_buffDatas[i].buffType == Consts.BuffType.MoveSpeed && enemyLogic.list_buffDatas[i].from == "105")
                         {
-                            enemyLogic.list_buffDatas[i].time = 5;
+                            enemyLogic.list_buffDatas[i].time = 3;
                             return;
                         }
                     }
-                    enemyLogic.list_buffDatas.Add(new Consts.BuffData(Consts.BuffType.MoveSpeed,-0.2f,5, "105"));
+                    enemyLogic.list_buffDatas.Add(new Consts.BuffData(Consts.BuffType.MoveSpeed,-0.2f,3, "105"));
                 }
             }
         }
