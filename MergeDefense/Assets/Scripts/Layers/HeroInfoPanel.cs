@@ -211,16 +211,14 @@ public class HeroInfoPanel : MonoBehaviour
 
         // 第三个任意属性Buff
         {
-            string buffValue = weaponData.buff3.ToString();
-            int buffType = int.Parse(buffValue.Split(':')[0]);
-            weaponBuffsTrans.Find("buff3/icon").GetComponent<Image>().sprite = AtlasUtil.getAtlas_icon().GetSprite("buff_" + buffType);
-            switch ((Consts.BuffType)buffType)
+            weaponBuffsTrans.Find("buff3/icon").GetComponent<Image>().sprite = AtlasUtil.getAtlas_icon().GetSprite("buff_" + (int)weaponData.buff3Type);
+            switch (weaponData.buff3Type)
             {
                 case Consts.BuffType.CritRate:
                     {
                         weaponBuffsTrans.Find("buff3/name").GetComponent<Text>().text = "Crit Rate";
 
-                        int value = (int)Mathf.Round(float.Parse(buffValue.Split(':')[1]));
+                        int value = (int)Mathf.Round(float.Parse(weaponData.buff3ValueStr));
                         weaponBuffsTrans.Find("buff3/value").GetComponent<Text>().text = value + "%";
                         break;
                     }
@@ -229,7 +227,7 @@ public class HeroInfoPanel : MonoBehaviour
                     {
                         weaponBuffsTrans.Find("buff3/name").GetComponent<Text>().text = "Crit Damage";
 
-                        int value = (int)Mathf.Round(float.Parse(buffValue.Split(':')[1]) * 100);
+                        int value = (int)Mathf.Round(float.Parse(weaponData.buff3ValueStr) * 100);
                         weaponBuffsTrans.Find("buff3/value").GetComponent<Text>().text = value + "%";
                         break;
                     }
@@ -237,7 +235,7 @@ public class HeroInfoPanel : MonoBehaviour
                 case Consts.BuffType.AtkSpeed:
                     {
                         weaponBuffsTrans.Find("buff3/name").GetComponent<Text>().text = "Attack Speed";
-                        weaponBuffsTrans.Find("buff3/value").GetComponent<Text>().text = float.Parse(buffValue.Split(':')[1]).ToString();
+                        weaponBuffsTrans.Find("buff3/value").GetComponent<Text>().text = float.Parse(weaponData.buff3ValueStr).ToString();
                         break;
                     }
 
@@ -245,7 +243,7 @@ public class HeroInfoPanel : MonoBehaviour
                     {
                         weaponBuffsTrans.Find("buff3/name").GetComponent<Text>().text = "Proc Chance";
 
-                        int value = (int)Mathf.Round(float.Parse(buffValue.Split(':')[1]));
+                        int value = (int)Mathf.Round(float.Parse(weaponData.buff3ValueStr));
                         weaponBuffsTrans.Find("buff3/value").GetComponent<Text>().text = value + "%";
                         break;
                     }

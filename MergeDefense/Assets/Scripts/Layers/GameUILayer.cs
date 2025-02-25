@@ -118,7 +118,7 @@ public class GameUILayer : MonoBehaviour
         img_enemyCountProgress.fillAmount = EnemyManager.s_instance.getEnemyCount() / 100f;
     }
 
-    DG.Tweening.Sequence tween_changeGold = null;
+    Sequence tween_changeGold = null;
     public void changeGold(int value)
     {
         curGold += value;

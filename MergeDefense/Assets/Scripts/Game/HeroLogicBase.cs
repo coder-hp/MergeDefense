@@ -303,7 +303,22 @@ public class HeroLogicBase : MonoBehaviour
 
     public float getAtkSpeed()
     {
-        return heroData.atkSpeed;
+        float atkSpeed = heroData.atkSpeed;
+
+        // 武器加成
+        for (int i = 0; i < list_weapon.Count; i++)
+        {
+            // 擅长
+            if ((heroData.goodWeapon == -1) || (heroData.goodWeapon == list_weapon[i].type))
+            {
+                if(list_weapon[i].buff3Type == Consts.BuffType.AtkSpeed)
+                {
+                    atkSpeed += float.Parse(list_weapon[i].buff3ValueStr);
+                }
+            }
+        }
+
+        return atkSpeed;
     }
 
     public int getCritRate()
@@ -334,7 +349,7 @@ public class HeroLogicBase : MonoBehaviour
     {
         if(aniName == Consts.HeroAniNameAttack)
         {
-            animator.speed = heroData.atkSpeed;
+            animator.speed = getAtkSpeed();
         }
         else
         {

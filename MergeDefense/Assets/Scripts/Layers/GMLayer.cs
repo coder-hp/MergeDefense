@@ -89,7 +89,10 @@ public class GMLayer : MonoBehaviour
 
     public void onClickAddGold()
     {
-        GameData.changeMyGold(1000, "GM");
+        if(GameUILayer.s_instance)
+        {
+            GameUILayer.s_instance.changeGold(1000);
+        }
         ToastScript.show("+1000");
     }
 

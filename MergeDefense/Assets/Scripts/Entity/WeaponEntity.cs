@@ -13,6 +13,9 @@ public class WeaponData
     public int buff1;      // 攻击力
     public float buff2;    // 攻速
     public string buff3;   // 不固定
+
+    public Consts.BuffType buff3Type;
+    public string buff3ValueStr;
 }
 
 public class WeaponEntity
@@ -34,6 +37,13 @@ public class WeaponEntity
     public void init()
     {
         list = JsonUtils.loadJsonToList<WeaponData>("weapon");
+
+        for (int i = 0; i < list.Count; i++)
+        {
+            string[] strArray = list[i].buff3.Split(':');
+            list[i].buff3Type = (Consts.BuffType)int.Parse(strArray[0]);
+            list[i].buff3ValueStr = strArray[1];
+        }
     }
 
     public WeaponData getData(int type,int level)
