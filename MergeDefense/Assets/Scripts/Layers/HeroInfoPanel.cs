@@ -196,13 +196,13 @@ public class HeroInfoPanel : MonoBehaviour
             if ((heroLogicBase.heroData.goodWeapon == -1) || (heroLogicBase.heroData.goodWeapon == weaponData.type))
             {
                 int newAtk = (int)Mathf.Round(weaponData.buff2 * 1.2f * 100f);
-                buffValue = "<color=\"#60D262\">(+" + (newAtk - atk) + ")% </color>" + newAtk + "%";
+                buffValue = "<color=\"#60D262\">(+" + (newAtk - atk) + "%) </color>" + newAtk + "%";
             }
             // 不擅长
             else if ((heroLogicBase.heroData.badWeapon == -1) || (heroLogicBase.heroData.badWeapon == weaponData.type))
             {
                 int newAtk = (int)Mathf.Round(weaponData.buff2 * 0.8f * 100f);
-                buffValue = "<color=\"#FB6061\">(" + (newAtk - atk) + ")% </color>" + newAtk + "%";
+                buffValue = "<color=\"#FB6061\">(" + (newAtk - atk) + "%) </color>" + newAtk + "%";
             }
 
             weaponBuffsTrans.Find("buff2/value").GetComponent<Text>().text = buffValue;
