@@ -40,7 +40,7 @@ public class WeaponEntity
 
         for (int i = 0; i < list.Count; i++)
         {
-            string[] strArray = list[i].buff3.Split(':');
+            string[] strArray = list[i].buff3.Split('_');
             list[i].buff3Type = (Consts.BuffType)int.Parse(strArray[0]);
             list[i].buff3ValueStr = strArray[1];
         }
