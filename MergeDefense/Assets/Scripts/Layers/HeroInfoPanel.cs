@@ -210,7 +210,7 @@ public class HeroInfoPanel : MonoBehaviour
 
                 case Consts.BuffType.SkillRate:
                     {
-                        weaponBuffsTrans.Find("buff3/name").GetComponent<Text>().text = "Skill Rate";
+                        weaponBuffsTrans.Find("buff3/name").GetComponent<Text>().text = "Proc Chance";
 
                         int value = (int)Mathf.Round(float.Parse(buffValue.Split(':')[1]));
                         weaponBuffsTrans.Find("buff3/value").GetComponent<Text>().text = value + "%";
