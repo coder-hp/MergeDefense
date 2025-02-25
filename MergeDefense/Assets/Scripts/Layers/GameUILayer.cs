@@ -75,7 +75,7 @@ public class GameUILayer : MonoBehaviour
         }
 
         InvokeRepeating("onInvokeBoCiSecond",1,1);
-        InvokeRepeating("onInvokeAddEnemy", 0.7f, 0.7f);
+        InvokeRepeating("onInvokeAddEnemy", 0.6f, 0.6f);
     }
 
     void onInvokeBoCiSecond()
