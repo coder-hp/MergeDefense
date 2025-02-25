@@ -154,6 +154,7 @@ public class EnemyLogic : MonoBehaviour
 
     void die()
     {
+        EffectManager.enemyDie(transform.position);
         GameUILayer.s_instance.changeGold(enemyWaveData.killGold);
         EnemyManager.s_instance.removeEnemy(this);
 

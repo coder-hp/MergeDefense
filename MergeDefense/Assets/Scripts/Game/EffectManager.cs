@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class EffectManager
 {
-    public static Dictionary<string, GameObject> dic_saveObj = new Dictionary<string, GameObject>();
+    static Dictionary<string, GameObject> dic_saveObj = new Dictionary<string, GameObject>();
 
     public static void clear()
     {
@@ -25,5 +25,23 @@ public class EffectManager
             obj.transform.position = pos;
             dic_saveObj["HeroMerge"] = obj;
         }
+    }
+
+    static List<GameObject> list_enemyDieEffect = new List<GameObject>();
+    public static void enemyDie(Vector3 pos)
+    {
+        for(int i = 0; i < list_enemyDieEffect.Count; i++)
+        {
+            if(!list_enemyDieEffect[i].activeInHierarchy)
+            {
+                list_enemyDieEffect[i].transform.position = pos;
+                list_enemyDieEffect[i].SetActive(true);
+                return;
+            }
+        }
+
+        GameObject obj = GameObject.Instantiate(ObjectPool.getPrefab("Prefabs/Effects/EnemyDead"), GameLayer.s_instance.effectPoint);
+        obj.transform.position = pos;
+        list_enemyDieEffect.Add(obj);
     }
 }
