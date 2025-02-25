@@ -32,11 +32,12 @@ public class Consts
 
     public enum BuffType
     {
-        Atk,
-        AtkSpeed,
-        CritRate,
-        CritDamage,
-        MoveSpeed,
+        Atk,                // 攻击力
+        AtkSpeed,           // 攻速
+        CritRate,           // 暴击率
+        CritDamage,         // 暴击伤害
+        MoveSpeed,          // 移速
+        SkillRate,          // 技能概率
     }
 
     public class BuffData

@@ -165,6 +165,59 @@ public class HeroInfoPanel : MonoBehaviour
     void showWeaponBuffInfo(WeaponData weaponData)
     {
         weaponBuffsTrans.localScale = Vector3.one;
+
+        {
+            string buffValue = weaponData.buff1.ToString();
+            weaponBuffsTrans.Find("buff1/value").GetComponent<Text>().text = buffValue;
+        }
+
+        {
+            string buffValue = weaponData.buff2.ToString();
+            weaponBuffsTrans.Find("buff2/value").GetComponent<Text>().text = buffValue;
+        }
+
+        {
+            string buffValue = weaponData.buff3.ToString();
+            int buffType = int.Parse(buffValue.Split(':')[0]);
+            switch ((Consts.BuffType)buffType)
+            {
+                case Consts.BuffType.CritRate:
+                    {
+                        weaponBuffsTrans.Find("buff3/name").GetComponent<Text>().text = "Crit Rate";
+
+                        int value = (int)Mathf.Round(float.Parse(buffValue.Split(':')[1]));
+                        weaponBuffsTrans.Find("buff3/value").GetComponent<Text>().text = value + "%";
+                        break;
+                    }
+
+                case Consts.BuffType.CritDamage:
+                    {
+                        weaponBuffsTrans.Find("buff3/name").GetComponent<Text>().text = "Crit Damage";
+
+                        int value = (int)Mathf.Round(float.Parse(buffValue.Split(':')[1]) * 100);
+                        weaponBuffsTrans.Find("buff3/value").GetComponent<Text>().text = value + "%";
+                        break;
+                    }
+
+                case Consts.BuffType.AtkSpeed:
+                    {
+                        weaponBuffsTrans.Find("buff3/name").GetComponent<Text>().text = "Attack Speed";
+
+                        int value = (int)Mathf.Round(float.Parse(buffValue.Split(':')[1]) * 100);
+                        weaponBuffsTrans.Find("buff3/value").GetComponent<Text>().text = value + "%";
+                        break;
+                    }
+
+                case Consts.BuffType.SkillRate:
+                    {
+                        weaponBuffsTrans.Find("buff3/name").GetComponent<Text>().text = "Skill Rate";
+
+                        int value = (int)Mathf.Round(float.Parse(buffValue.Split(':')[1]));
+                        weaponBuffsTrans.Find("buff3/value").GetComponent<Text>().text = value + "%";
+                        break;
+                    }
+            }
+        }
     }
 
     public void onClickSkillIcon(int index)

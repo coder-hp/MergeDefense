@@ -10,6 +10,9 @@ public class WeaponData
     public int type;
     public string name;
     public int level;
+    public int buff1;      // 攻击力
+    public float buff2;    // 攻速
+    public string buff3;   // 不固定
 }
 
 public class WeaponEntity
