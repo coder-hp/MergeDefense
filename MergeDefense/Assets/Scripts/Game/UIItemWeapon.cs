@@ -104,7 +104,6 @@ public class UIItemWeapon : MonoBehaviour
 
                         if (heroLogicBase.isCanAddWeapon(weaponData.type))
                         {
-                            Debug.Log("aaa");
                             GameLayer.s_instance.weaponChoiceKuang.position = heroLogicBase.heroQualityTrans.position;
                             GameLayer.s_instance.weaponChoiceKuang.localScale = Vector3.one;
                         }

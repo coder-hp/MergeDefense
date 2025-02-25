@@ -389,13 +389,13 @@ public class HeroLogicBase : MonoBehaviour
             return false;
         }
 
-        for (int i = 0; i < list_weapon.Count; i++)
-        {
-            if (list_weapon[i].type == type)
-            {
-                return false;
-            }
-        }
+        //for (int i = 0; i < list_weapon.Count; i++)
+        //{
+        //    if (list_weapon[i].type == type)
+        //    {
+        //        return false;
+        //    }
+        //}
 
         return true;
     }
