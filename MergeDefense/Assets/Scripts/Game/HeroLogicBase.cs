@@ -47,7 +47,8 @@ public class HeroLogicBase : MonoBehaviour
     HeroAniEvent heroAniEvent;
     Vector3 emojiOffset = new Vector3(-0.2f, 0.5f, 0);
 
-    HeroStarData heroStarData;
+    [HideInInspector]
+    public HeroStarData heroStarData;
 
     public void Awake()
     {
