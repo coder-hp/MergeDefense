@@ -361,6 +361,26 @@ public class HeroLogicBase : MonoBehaviour
         return critDamage;
     }
 
+    public int getAddSkillRate()
+    {
+        int skillRate = 0;
+
+        // 武器加成
+        for (int i = 0; i < list_weapon.Count; i++)
+        {
+            // Buff3激活
+            if ((heroData.badWeapon != -1) && (heroData.badWeapon != list_weapon[i].type))
+            {
+                if (list_weapon[i].buff3Type == Consts.BuffType.SkillRate)
+                {
+                    skillRate += Mathf.RoundToInt(float.Parse(list_weapon[i].buff3ValueStr));
+                }
+            }
+        }
+
+        return skillRate;
+    }
+
     public void addWeapon(WeaponData weaponData)
     {
         ToastScript.show("增加武器:" + weaponData.name + " level" + weaponData.level);

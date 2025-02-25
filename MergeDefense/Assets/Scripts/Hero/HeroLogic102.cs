@@ -13,7 +13,7 @@ public class HeroLogic102 : HeroBase
         arrow.position = heroLogicBase.curStandGrid.position;
         arrow.GetComponent<ArrowLogic>().init(heroLogicBase, enemyLogic);
 
-        if(RandomUtil.getRandom(1,100) <= 25)
+        if(RandomUtil.getRandom(1,100) <= (25 + heroLogicBase.getAddSkillRate()))
         {
             Transform arrow2 = Instantiate(ObjectPool.getPrefab("Prefabs/Games/arrow"), GameLayer.s_instance.flyPoint).transform;
             arrow2.position = heroLogicBase.curStandGrid.position;

@@ -13,7 +13,7 @@ public class HeroLogic101 : HeroBase
         int atk = Mathf.RoundToInt(heroLogicBase.getAtk() * (isCrit ? heroLogicBase.getCritDamageXiShu() : 1));
         if (!enemyLogic.damage(atk, isCrit))
         {
-            if(RandomUtil.getRandom(1, 100) <= 15)
+            if(RandomUtil.getRandom(1, 100) <= (15 + heroLogicBase.getAddSkillRate()))
             {
                 enemyLogic.damage(Mathf.RoundToInt(heroLogicBase.getAtk() * 1.5f),false);
             }
