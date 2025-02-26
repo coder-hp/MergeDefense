@@ -147,7 +147,7 @@ public class GameUILayer : MonoBehaviour
         }
         else
         {
-            btn_summon_gold.color = Color.red;
+            btn_summon_gold.color = new Color(0.97f, 0.26f, 0.26f, 1);
         }
 
         // 检查锻造金额是否足够
@@ -157,7 +157,7 @@ public class GameUILayer : MonoBehaviour
         }
         else
         {
-            btn_forge_gold.color = Color.red;
+            btn_forge_gold.color = new Color(0.97f, 0.26f, 0.26f, 1);
         }
     }
 
