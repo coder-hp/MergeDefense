@@ -9,6 +9,7 @@ public class HeroInfoPanel : MonoBehaviour
     public Image img_head;
     public Image img_head_bg;
     public Image img_head_kuang;
+    public Image img_footShadow;
     public Image img_weaponIcon1;
     public Image img_weaponIcon2;
     public Image img_weaponFrame1;
@@ -55,6 +56,19 @@ public class HeroInfoPanel : MonoBehaviour
         img_head.sprite = AtlasUtil.getAtlas_icon().GetSprite("head_" + heroLogicBase.id);
         img_head_kuang.sprite = AtlasUtil.getAtlas_game().GetSprite("kuang_hero_" + heroLogicBase.heroData.quality + "_1");
         img_head_bg.sprite = AtlasUtil.getAtlas_game().GetSprite("kuang_hero_" + heroLogicBase.heroData.quality + "_2");
+
+        if (heroLogicBase.heroData.quality == 2)
+        {
+            img_footShadow.color = CommonUtil.stringToColor("#457dd8");
+        }
+        else if (heroLogicBase.heroData.quality == 3)
+        {
+            img_footShadow.color = CommonUtil.stringToColor("#9146da");
+        }
+        else if (heroLogicBase.heroData.quality == 4)
+        {
+            img_footShadow.color = CommonUtil.stringToColor("#eb9b10");
+        }
 
         text_weaponName.text = "No Weapons";
         obj_weapon1.gameObject.SetActive(false);
