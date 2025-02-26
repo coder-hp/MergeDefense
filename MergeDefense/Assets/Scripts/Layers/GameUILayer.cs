@@ -137,6 +137,26 @@ public class GameUILayer : MonoBehaviour
         {
             tween_changeGold.Restart();
         }
+
+        // 检查召唤金额是否足够
+        if(curGold >= curSummonGold)
+        {
+            btn_summon_gold.color = Color.white;
+        }
+        else
+        {
+            btn_summon_gold.color = Color.red;
+        }
+
+        // 检查锻造金额是否足够
+        if (curGold >= curForgeGold)
+        {
+            btn_forge_gold.color = Color.white;
+        }
+        else
+        {
+            btn_forge_gold.color = Color.red;
+        }
     }
 
     public void onClickPause()
@@ -177,11 +197,13 @@ public class GameUILayer : MonoBehaviour
 
         if (GameLayer.s_instance.addHero())
         {
-            changeGold(-curSummonGold);
+            int costGold = curSummonGold;
 
             // 增加下次召唤金额
             curSummonGold += Consts.summonAddGold;
             btn_summon_gold.text = curSummonGold.ToString();
+
+            changeGold(-costGold);
         }
     }
 
@@ -213,11 +235,13 @@ public class GameUILayer : MonoBehaviour
 
         if (isForgeSuccess)
         {
-            changeGold(-curForgeGold);
+            int costGold = curForgeGold;
 
             // 增加下次锻造金额
             curForgeGold += Consts.forgeAddGold;
             btn_forge_gold.text = curForgeGold.ToString();
+
+            changeGold(-costGold);
         }
     }
 
