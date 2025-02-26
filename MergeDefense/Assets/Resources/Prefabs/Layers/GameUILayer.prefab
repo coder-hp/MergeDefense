@@ -230,6 +230,7 @@ MonoBehaviour:
   curGold: 100
   curSummonGold: 20
   curForgeGold: 20
+  isCanDragWeapon: 1
 --- !u!1 &221675348228140047
 GameObject:
   m_ObjectHideFlags: 0
@@ -487,10 +488,10 @@ RectTransform:
   m_Children: []
   m_Father: {fileID: 4247218047062378611}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 1, y: 0.5}
-  m_AnchorMax: {x: 1, y: 0.5}
-  m_AnchoredPosition: {x: 4, y: 0}
-  m_SizeDelta: {x: 11, y: 16}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: 8.12, y: 0}
+  m_SizeDelta: {x: 108, y: 92}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &6553819796447104987
 CanvasRenderer:
@@ -520,7 +521,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 3d883bcfabd5c5b4d810d9dde8df4c48, type: 3}
+  m_Sprite: {fileID: 21300000, guid: f787d9bacc74de44fa4e5b6fcf6a63cc, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -3711,10 +3712,10 @@ RectTransform:
   m_Children: []
   m_Father: {fileID: 3123178474179466254}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 1, y: 0.5}
-  m_AnchorMax: {x: 1, y: 0.5}
-  m_AnchoredPosition: {x: 4, y: 0}
-  m_SizeDelta: {x: 11, y: 16}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: 8.12, y: 0}
+  m_SizeDelta: {x: 108, y: 92}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &2830919825730255807
 CanvasRenderer:
@@ -3744,7 +3745,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 3d883bcfabd5c5b4d810d9dde8df4c48, type: 3}
+  m_Sprite: {fileID: 21300000, guid: f787d9bacc74de44fa4e5b6fcf6a63cc, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1

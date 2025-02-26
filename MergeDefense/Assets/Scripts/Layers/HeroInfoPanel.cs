@@ -148,7 +148,6 @@ public class HeroInfoPanel : MonoBehaviour
 
                 img_choicedWeapon1.transform.localScale = Vector3.one;
                 img_choicedWeapon2.transform.localScale = Vector3.zero;
-                img_choicedWeapon1.color = Consts.list_weaponColor[heroLogicBase.list_weapon[0].type - 1];
 
                 text_weaponName.text = heroLogicBase.list_weapon[0].name;
             }
@@ -165,7 +164,6 @@ public class HeroInfoPanel : MonoBehaviour
 
                 img_choicedWeapon1.transform.localScale = Vector3.zero;
                 img_choicedWeapon2.transform.localScale = Vector3.one;
-                img_choicedWeapon2.color = Consts.list_weaponColor[heroLogicBase.list_weapon[1].type - 1];
 
                 text_weaponName.text = heroLogicBase.list_weapon[1].name;
             }
