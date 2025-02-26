@@ -114,6 +114,12 @@ public class GameUILayer : MonoBehaviour
         }
     }
 
+    public void forceToBoCi(int boci)
+    {
+        curBoCiRestTime = 1;
+        curBoCi = boci - 1;
+    }
+
     public void refreshEnemyCount()
     {
         text_enemyCount.text = EnemyManager.s_instance.getEnemyCount() + "/" + GameLayer.s_instance.maxEnemyCount;

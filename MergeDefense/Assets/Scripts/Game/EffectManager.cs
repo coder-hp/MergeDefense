@@ -48,7 +48,7 @@ public class EffectManager
 
     static List<GameObject> list_summonHeroEffect = new List<GameObject>();
     static Vector3 summonEffectStartPos;
-    public static void summonHero(Vector3 pos)
+    public static void summonHero(Vector3 targetPos)
     {
         Transform trans = null;
         for (int i = 0; i < list_summonHeroEffect.Count; i++)
@@ -75,17 +75,33 @@ public class EffectManager
         }
 
         trans.transform.position = summonEffectStartPos;
-        trans.transform.DOMove(pos, 1).OnComplete(()=>
-        {
-            trans.gameObject.SetActive(false);
-        });
 
         // 飞行路径动画
-        //Vector3 targetPos = new Vector3(0, 0.1f * (toBlockBaseScript.childBlockPointTrans.childCount - 1), 0);
-        //Vector3[] vec = new Vector3[2];
-        //vec[0] = new Vector3(blockTrans.localPosition.x, targetPos.y + 1f, blockTrans.localPosition.z);       // +1是为了抬高一点，防止穿模
-        //vec[1] = targetPos;
-        //vec[0] = (vec[0] + vec[1]) / 2f;
-        //blockTrans.DOLocalPath(vec, aniTime, PathType.CatmullRom).SetEase(Ease.OutSine).SetDelay(mergeCount * jiangeTime);
+        //{
+        //    Vector3[] vec = new Vector3[2];
+        //    vec[0] = targetPos + new Vector3(0.5f, 0.5f);
+        //    vec[1] = targetPos;
+        //    trans.DOLocalPath(vec, 0.6f, PathType.CatmullRom).SetEase(Ease.OutCubic).OnComplete(() =>
+        //    {
+        //        trans.gameObject.SetActive(false);
+        //    });
+        //}
+
+        // 直线
+        //trans.DOMove(targetPos,0.4f).SetEase(Ease.OutCubic).OnComplete(() =>
+        //{
+        //    trans.gameObject.SetActive(false);
+        //});
+
+        // 飞行路径动画
+        {
+            Vector3[] vec = new Vector3[2];
+            vec[0] = (targetPos + summonEffectStartPos) / 2f + new Vector3(1,0,0);
+            vec[1] = targetPos;
+            trans.DOLocalPath(vec, 0.6f, PathType.CatmullRom).SetEase(Ease.OutCubic).OnComplete(() =>
+            {
+                trans.gameObject.SetActive(false);
+            });
+        }
     }
 }

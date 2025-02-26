@@ -13,6 +13,7 @@ public class GMLayer : MonoBehaviour
     public Text text_fps;
     public Transform addHeroPanel;
     public GameObject prefab_addHero;
+    public InputField inputField_level;
 
     bool isShowFPS = false;
 
@@ -112,6 +113,15 @@ public class GMLayer : MonoBehaviour
     public void onClickDeleteRes()
     {
         Resources.UnloadUnusedAssets();
+    }
+
+    public void onClickChangeLevel()
+    {
+        if(inputField_level.text != "")
+        {
+            GameUILayer.s_instance.forceToBoCi(int.Parse(inputField_level.text));
+            onClickClose();
+        }
     }
 
     public void onClickClose()
