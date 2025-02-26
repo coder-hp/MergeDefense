@@ -1,4 +1,4 @@
-Shader "Kein/Scene/bg_1"
+Shader "Kein/Scene/bg_2"
 {
     Properties
     {
@@ -6,7 +6,7 @@ Shader "Kein/Scene/bg_1"
     }
     SubShader
     {
-        Tags {"Queue" = "Background"}
+        Tags {"Queue" = "Background+1"}
         //Tags { "RenderType"="Opaque" }
         LOD 100
         Pass
