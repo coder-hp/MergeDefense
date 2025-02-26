@@ -230,7 +230,6 @@ MonoBehaviour:
   curGold: 100
   curSummonGold: 20
   curForgeGold: 20
-  summonEffectStartPos: {x: 0, y: 0, z: 0}
 --- !u!1 &292383454900794365
 GameObject:
   m_ObjectHideFlags: 0
@@ -2254,7 +2253,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: e76e8206758379b4190c47aabab1d46d, type: 3}
+  m_Sprite: {fileID: 21300000, guid: b47914f59e60bc648a4cc8427a8f49e2, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -12908,7 +12907,9 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5306224737897007524, guid: ac0a056c3f5403744b03a3a81d2c0d84, type: 3}
       propertyPath: m_Text
-      value: Sort
+      value: 'Bag
+
+'
       objectReference: {fileID: 0}
     - target: {fileID: 5306224737897007524, guid: ac0a056c3f5403744b03a3a81d2c0d84, type: 3}
       propertyPath: m_Color.b
