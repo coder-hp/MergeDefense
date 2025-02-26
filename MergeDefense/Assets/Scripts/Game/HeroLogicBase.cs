@@ -54,19 +54,15 @@ public class HeroLogicBase : MonoBehaviour
     {
         curStandGrid = GameLayer.s_instance.heroGrid.transform.Find(transform.parent.name);
         heroAniEvent = transform.Find("model").GetComponent<HeroAniEvent>();
-        transform.localScale = new Vector3(1.3f, 1.3f, 1.3f);
-        transform.DOScale(0.7f, 0.2f).OnComplete(()=>
-        {
-            transform.DOScale(1f, 0.1f).OnComplete(()=>
-            {
-                isCanUpdate = true;
-            });
-        });
+        
         animator = transform.Find("model").GetComponent<Animator>();
         centerPoint = transform.Find("centerPoint");
 
         heroData = HeroEntity.getInstance().getData(id);
         heroStarData = HeroStarEntity.getInstance().getData(curStar);
+
+        transform.localScale = Vector3.zero;
+        Invoke("summonWaitShow", 0.5f);
 
         // 品质背景板
         {
@@ -88,6 +84,18 @@ public class HeroLogicBase : MonoBehaviour
             emojiTrans.localPosition = CommonUtil.WorldPosToUI(GameLayer.s_instance.camera3D, curStandGrid.position + new Vector3(-0.2f,0.7f,0));
             emojiTrans.localScale = Vector3.zero;
         }
+    }
+
+    void summonWaitShow()
+    {
+        transform.localScale = new Vector3(1.3f, 1.3f, 1.3f);
+        transform.DOScale(0.7f, 0.2f).OnComplete(() =>
+        {
+            transform.DOScale(1f, 0.1f).OnComplete(() =>
+            {
+                isCanUpdate = true;
+            });
+        });
     }
 
     private void Update()
