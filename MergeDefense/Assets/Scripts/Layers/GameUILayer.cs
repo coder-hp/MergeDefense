@@ -129,7 +129,8 @@ public class GameUILayer : MonoBehaviour
         img_enemyCountProgress.fillAmount = EnemyManager.s_instance.getEnemyCount() / 100f;
     }
 
-    Sequence tween_changeGold = null;
+    Sequence tween_changeGoldIcon = null;
+    Sequence tween_changeGoldText = null;
     public void changeGold(int value)
     {
         curGold += value;
@@ -137,20 +138,32 @@ public class GameUILayer : MonoBehaviour
 
         KillGoldManager.s_instance.showKillGold(value);
 
-        if (tween_changeGold == null)
+        if (tween_changeGoldIcon == null)
         {
-            tween_changeGold = DOTween.Sequence();
-            tween_changeGold.Append(curGoldIconTrans.DOScale(1.3f, 0.2f))
+            tween_changeGoldIcon = DOTween.Sequence();
+            tween_changeGoldIcon.Append(curGoldIconTrans.DOScale(1.3f, 0.2f))
                        .Append(curGoldIconTrans.DOScale(1, 0.2f));
-            tween_changeGold.SetAutoKill(false);
+            tween_changeGoldIcon.SetAutoKill(false);
         }
         else
         {
-            tween_changeGold.Restart();
+            tween_changeGoldIcon.Restart();
+        }
+
+        if (tween_changeGoldText == null)
+        {
+            tween_changeGoldText = DOTween.Sequence();
+            tween_changeGoldText.Append(text_gold.transform.DOScale(1.3f, 0.2f))
+                       .Append(text_gold.transform.DOScale(1, 0.2f));
+            tween_changeGoldText.SetAutoKill(false);
+        }
+        else
+        {
+            tween_changeGoldText.Restart();
         }
 
         // 检查召唤金额是否足够
-        if(curGold >= curSummonGold)
+        if (curGold >= curSummonGold)
         {
             btn_summon_gold.color = Color.white;
         }
