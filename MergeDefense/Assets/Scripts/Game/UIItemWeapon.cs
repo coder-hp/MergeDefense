@@ -51,6 +51,11 @@ public class UIItemWeapon : MonoBehaviour
     Transform curDragChoicedHero = null;
     private void OnMouseDown()
     {
+        if (!GameUILayer.s_instance.isCanDragWeapon)
+        {
+            return;
+        }
+
         mergeTarget = null;
         curDragChoicedHero = null;
         transform.SetParent(GameUILayer.s_instance.transform);
@@ -67,6 +72,11 @@ public class UIItemWeapon : MonoBehaviour
 
     private void OnMouseDrag()
     {
+        if(!GameUILayer.s_instance.isCanDragWeapon)
+        {
+            return;
+        }
+
         transform.localPosition = CommonUtil.getCurMousePosToUI();
 
         Transform trans = getMinDisItemWeapon();
@@ -120,6 +130,11 @@ public class UIItemWeapon : MonoBehaviour
 
     private void OnMouseUp()
     {
+        if (!GameUILayer.s_instance.isCanDragWeapon)
+        {
+            return;
+        }
+
         GameLayer.s_instance.weaponChoiceKuang.localScale = Vector3.zero;
 
         // 关闭所有角色的武器适配性emoji
@@ -147,6 +162,7 @@ public class UIItemWeapon : MonoBehaviour
             }
             else
             {
+                parentTrans = mergeTarget;
                 transform.SetParent(mergeTarget);
                 transform.localScale = Vector3.one;
                 transform.localPosition = Vector3.zero;
@@ -182,8 +198,10 @@ public class UIItemWeapon : MonoBehaviour
             }
         }
 
+        GameUILayer.s_instance.isCanDragWeapon = false;
         transform.DOMove(parentTrans.position, 0.2f).OnComplete(()=>
         {
+            GameUILayer.s_instance.isCanDragWeapon = true;
             transform.SetParent(parentTrans);
         });
     }
