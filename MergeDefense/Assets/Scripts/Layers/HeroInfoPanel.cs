@@ -37,6 +37,7 @@ public class HeroInfoPanel : MonoBehaviour
     public HeroLogicBase heroLogicBase;
 
     HeroSkillData[] skillsArray;
+    int sellPrice = 0;
 
     public void show(HeroLogicBase _heroLogicBase)
     {
@@ -111,8 +112,9 @@ public class HeroInfoPanel : MonoBehaviour
 
         // 卖出按钮
         {
+            sellPrice = Mathf.RoundToInt(heroLogicBase.heroStarData.sellPrice * GameUILayer.s_instance.curSummonGold * 0.2f);
             btn_sellHeroTrans.position = heroLogicBase.starTrans.position + new Vector3(0,-0.9f,0);
-            text_sellHeroPrice.text = heroLogicBase.heroStarData.sellPrice.ToString();
+            text_sellHeroPrice.text = sellPrice.ToString();
         }
     }
 
@@ -304,7 +306,7 @@ public class HeroInfoPanel : MonoBehaviour
 
     public void onClickSellHero()
     {
-        GameUILayer.s_instance.changeGold(heroLogicBase.heroStarData.sellPrice);
+        GameUILayer.s_instance.changeGold(sellPrice);
 
         Destroy(heroLogicBase.gameObject);
         onClickClose();

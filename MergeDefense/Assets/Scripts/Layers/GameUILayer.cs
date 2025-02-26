@@ -31,8 +31,10 @@ public class GameUILayer : MonoBehaviour
 
     [HideInInspector]
     public int curGold = Consts.startHaveGold;
-    int curSummonGold = Consts.startSummonGold;
-    int curForgeGold = Consts.startForgeGold;
+    [HideInInspector]
+    public int curSummonGold = Consts.startSummonGold;
+    [HideInInspector]
+    public int curForgeGold = Consts.startForgeGold;
 
     List<EnemyWaveData> waitAddEnemy = new List<EnemyWaveData>();
 
