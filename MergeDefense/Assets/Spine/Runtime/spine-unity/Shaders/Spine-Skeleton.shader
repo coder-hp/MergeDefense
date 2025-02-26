@@ -30,14 +30,15 @@ Shader "Kein/Spine/Skeleton" {
 		// }
         
 		Pass {
-			//Name "Normal"
+			Name "Normal"
             Tags { "Queue"="Transparent" "IgnoreProjector"="True" "RenderType"="Transparent" "PreviewType"="Plane" }
 
             Fog { Mode Off }
             Cull Off
             ZWrite Off
             Blend One OneMinusSrcAlpha
-            Lighting Off
+            //Blend OneMinusSrcAlpha
+            //Lighting Off
 
 			CGPROGRAM
 			#pragma shader_feature _ _STRAIGHT_ALPHA_INPUT

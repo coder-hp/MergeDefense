@@ -6,6 +6,9 @@ Shader "Kein/Hero/hero_1"
         _RimColor("RimColor", Color) = (1,1,1,1)
         _RimPower("RimPower", Range(0.000001, 3.0)) = 0.1
 
+        _Specular("Specular", Color) = (1,1,1,1)
+        _Gloss("Gloss", Range(8.0,256)) = 20
+
         [Toggle]_IsOutLine("IsOutLine",float) = 1.0
         _OutlineCol("OutlineCol", Color) = (1,0,0,1)
         _OutlineFactor("OutlineFactor", Range(0,1)) = 0.1
@@ -17,6 +20,7 @@ Shader "Kein/Hero/hero_1"
 
         Pass
         {
+            Tags{"LightMode" = "ForwardBase"}
             Cull Back
             CGPROGRAM
             #pragma vertex vert
@@ -38,13 +42,18 @@ Shader "Kein/Hero/hero_1"
                 float4 pos : SV_POSITION;
 
                 float3 worldNormal : TEXCOORD1;
-                float3 worldViewDir : TEXCOORD2;
+                //float3 worldViewDir : TEXCOORD2;
+                float3 worldLightDir : TEXCOORD2;
+                float3 worldPos:TEXCOORD3;
             };
 
             sampler2D _MainTex;
             float4 _MainTex_ST;
             fixed4 _RimColor;
             float _RimPower;
+            fixed4 _Specular;
+            float _Gloss;
+
 
             v2f vert (a2v v)
             {
@@ -53,8 +62,11 @@ Shader "Kein/Hero/hero_1"
                 o.uv = TRANSFORM_TEX(v.uv, _MainTex);
 
                 o.worldNormal = mul(v.normal, (float3x3)unity_WorldToObject);
-                float3 worldPos = mul(unity_ObjectToWorld, v.vertex).xyz;
-                o.worldViewDir = _WorldSpaceCameraPos.xyz - worldPos;
+                o.worldPos = mul(unity_ObjectToWorld, v.vertex).xyz;
+                //o.worldViewDir = _WorldSpaceCameraPos.xyz - o.worldPos;
+
+                o.worldLightDir = WorldSpaceLightDir(v.vertex);
+                
 
                 return o;
             }
@@ -63,13 +75,19 @@ Shader "Kein/Hero/hero_1"
             {
                 fixed4 col = tex2D(_MainTex, i.uv);
 
-
                 fixed3 worldNormal = normalize(i.worldNormal);
+                fixed3 worldLightDir = normalize(i.worldLightDir);
+
+                fixed3 diffuse = (dot(worldNormal, worldLightDir) * 0.5 + 0.5) * _LightColor0;
+
                 // 计算 RimLight
-                float3 worldViewDir = normalize(i.worldViewDir);
+                float3 worldViewDir = normalize(_WorldSpaceCameraPos.xyz - i.worldPos.xyz);
                 float rim = 1 - max(0, dot(worldViewDir, worldNormal));
                 fixed3 rimColor = _RimColor * pow(rim, 1 / _RimPower);
 
+
+
+                //col.rgb = lerp(col.rgb,col.rgb * diffuse,1);
                 col.rgb += rimColor;
                 return col;
             }
