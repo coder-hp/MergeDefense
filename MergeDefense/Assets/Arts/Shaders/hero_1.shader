@@ -3,6 +3,8 @@ Shader "Kein/Hero/hero_1"
     Properties
     {
         _MainTex ("Texture", 2D) = "white" {}
+        _Mask ("Mask", 2D) = "white" {}
+        _MatCap ("MatCap", 2D) = "white" {}
         _RimColor("RimColor", Color) = (1,1,1,1)
         _RimPower("RimPower", Range(0.000001, 3.0)) = 0.1
 
@@ -38,16 +40,17 @@ Shader "Kein/Hero/hero_1"
 
             struct v2f
             {
-                float2 uv : TEXCOORD0;
+                float4 uv : TEXCOORD0;
                 float4 pos : SV_POSITION;
 
                 float3 worldNormal : TEXCOORD1;
                 //float3 worldViewDir : TEXCOORD2;
                 float3 worldLightDir : TEXCOORD2;
                 float3 worldPos:TEXCOORD3;
+                //float2 matcapUV : TEXCOORD4;
             };
 
-            sampler2D _MainTex;
+            sampler2D _MainTex,_Mask,_MatCap;
             float4 _MainTex_ST;
             fixed4 _RimColor;
             float _RimPower;
@@ -59,36 +62,46 @@ Shader "Kein/Hero/hero_1"
             {
                 v2f o;
                 o.pos = UnityObjectToClipPos(v.vertex);
-                o.uv = TRANSFORM_TEX(v.uv, _MainTex);
+                o.uv.xy = TRANSFORM_TEX(v.uv, _MainTex);
 
                 o.worldNormal = mul(v.normal, (float3x3)unity_WorldToObject);
                 o.worldPos = mul(unity_ObjectToWorld, v.vertex).xyz;
                 //o.worldViewDir = _WorldSpaceCameraPos.xyz - o.worldPos;
 
                 o.worldLightDir = WorldSpaceLightDir(v.vertex);
-                
+
+                o.uv.z = dot(normalize(UNITY_MATRIX_IT_MV[0].xyz), normalize(v.normal));
+                o.uv.w = dot(normalize(UNITY_MATRIX_IT_MV[1].xyz), normalize(v.normal));
+                o.uv.zw = o.uv.zw * 0.5 + 0.5;
 
                 return o;
             }
 
             fixed4 frag (v2f i) : SV_Target
             {
-                fixed4 col = tex2D(_MainTex, i.uv);
-
+                fixed4 col = tex2D(_MainTex, i.uv.xy);
+                fixed3 matcap = tex2D(_MatCap, i.uv.zw).rgb;
+                fixed mask = tex2D(_Mask, i.uv.xy).r;
+                
                 fixed3 worldNormal = normalize(i.worldNormal);
                 fixed3 worldLightDir = normalize(i.worldLightDir);
 
                 fixed3 diffuse = (dot(worldNormal, worldLightDir) * 0.5 + 0.5) * _LightColor0;
+                fixed3 viewDir = normalize(_WorldSpaceCameraPos.xyz - i.worldPos.xyz);
 
                 // 计算 RimLight
-                float3 worldViewDir = normalize(_WorldSpaceCameraPos.xyz - i.worldPos.xyz);
-                float rim = 1 - max(0, dot(worldViewDir, worldNormal));
+                //float3 worldViewDir = normalize(_WorldSpaceCameraPos.xyz - i.worldPos.xyz);
+                float rim = 1 - max(0, dot(viewDir, worldNormal));
                 fixed3 rimColor = _RimColor * pow(rim, 1 / _RimPower);
 
+                fixed3 halfDir = normalize(worldLightDir + viewDir);
+                fixed3 specular = _LightColor0.rgb * _Specular.rgb * pow(max(0,dot(worldNormal, halfDir)), _Gloss);
 
 
-                //col.rgb = lerp(col.rgb,col.rgb * diffuse,1);
+                col.rgb = lerp(col.rgb,col.rgb * diffuse ,0.2);
                 col.rgb += rimColor;
+                col.rgb = lerp(col.rgb + specular, col.rgb , mask);
+                col.rgb *= matcap;
                 return col;
             }
             ENDCG
