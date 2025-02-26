@@ -93,7 +93,7 @@ public class UIItemWeapon : MonoBehaviour
 
                 mergeTarget = trans;
                 mergeTarget.GetComponent<Image>().color = Color.green;
-                mergeTarget.DOScale(1.2f, 0.2f);
+                mergeTarget.DOScale(1.1f, 0.2f);
             }
             else if (mergeTarget)
             {
