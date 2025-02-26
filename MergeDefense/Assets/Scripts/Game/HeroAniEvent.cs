@@ -34,10 +34,10 @@ public class HeroAniEvent : MonoBehaviour
         if(!heroLogicBase.checkAttack())
         {
             heroLogicBase.playAni(Consts.HeroAniNameIdle, 0.3f);
-            if (transform.localEulerAngles.y != 180)
-            {
-                heroLogicBase.transform.localRotation = Quaternion.Euler(0, 180, 0);
-            }
+            //if (transform.localEulerAngles.y != 180)
+            //{
+            //    heroLogicBase.transform.localRotation = Quaternion.Euler(0, 180, 0);
+            //}
         }
     }
 }

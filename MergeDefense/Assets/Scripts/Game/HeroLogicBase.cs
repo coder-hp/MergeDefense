@@ -157,6 +157,8 @@ public class HeroLogicBase : MonoBehaviour
                 {
                     Transform minDisGridHeroPoint = GameLayer.s_instance.heroPoint.Find(minDisGrid.name);
 
+                    float moveTime = Vector3.Distance(minDisGridHeroPoint.position,curStandGrid.position) * 0.2f;
+
                     // 目标格子没有角色
                     if (minDisGridHeroPoint.childCount == 0)
                     {
@@ -168,7 +170,7 @@ public class HeroLogicBase : MonoBehaviour
                         starTrans.localScale = Vector3.zero;
                         curStandGrid = minDisGrid;
                         transform.SetParent(minDisGridHeroPoint);
-                        transform.DOLocalMove(Vector3.zero, 1).OnComplete(()=>
+                        transform.DOLocalMove(Vector3.zero, moveTime).SetEase(Ease.Linear).OnComplete(()=>
                         {
                             playAni(Consts.HeroAniNameIdle);
                             isCanUpdate = true;
@@ -177,7 +179,7 @@ public class HeroLogicBase : MonoBehaviour
                             starTrans.localPosition = CommonUtil.WorldPosToUI(GameLayer.s_instance.camera3D, transform.position);
                         });
 
-                        heroQualityTrans.DOMove(minDisGrid.position + heroQualityOffset, 1);
+                        heroQualityTrans.DOMove(minDisGrid.position + heroQualityOffset, moveTime).SetEase(Ease.Linear);
                         emojiTrans.localPosition = CommonUtil.WorldPosToUI(GameLayer.s_instance.camera3D, curStandGrid.position + emojiOffset);
                     }
                     // 已有角色，交换位置
@@ -188,23 +190,23 @@ public class HeroLogicBase : MonoBehaviour
                         heroLogicBase_other.starTrans.localScale = Vector3.zero;
                         heroLogicBase_other.curStandGrid = curStandGrid;
                         otherHero.SetParent(transform.parent);
-                        otherHero.DOLocalMove(Vector3.zero, 1).OnComplete(() =>
+                        otherHero.DOLocalMove(Vector3.zero, moveTime).SetEase(Ease.Linear).OnComplete(() =>
                         {
                             heroLogicBase_other.starTrans.localScale = Vector3.one;
                             heroLogicBase_other.starTrans.localPosition = CommonUtil.WorldPosToUI(GameLayer.s_instance.camera3D, otherHero.position);
                         });
-                        heroLogicBase_other.heroQualityTrans.DOMove(heroLogicBase_other.curStandGrid.position + heroQualityOffset, 1);
+                        heroLogicBase_other.heroQualityTrans.DOMove(heroLogicBase_other.curStandGrid.position + heroQualityOffset, moveTime).SetEase(Ease.Linear);
                         heroLogicBase_other.emojiTrans.localPosition = CommonUtil.WorldPosToUI(GameLayer.s_instance.camera3D, heroLogicBase_other.curStandGrid.position + emojiOffset);
 
                         starTrans.localScale = Vector3.zero;
                         curStandGrid = minDisGrid;
                         transform.SetParent(minDisGridHeroPoint);
-                        transform.DOLocalMove(Vector3.zero, 1).OnComplete(() =>
+                        transform.DOLocalMove(Vector3.zero, moveTime).SetEase(Ease.Linear).OnComplete(() =>
                         {
                             starTrans.localScale = Vector3.one;
                             starTrans.localPosition = CommonUtil.WorldPosToUI(GameLayer.s_instance.camera3D, transform.position);
                         });
-                        heroQualityTrans.DOMove(curStandGrid.position + heroQualityOffset, 1);
+                        heroQualityTrans.DOMove(curStandGrid.position + heroQualityOffset, moveTime).SetEase(Ease.Linear);
                         emojiTrans.localPosition = CommonUtil.WorldPosToUI(GameLayer.s_instance.camera3D, curStandGrid.position + emojiOffset);
                     }
                 }
@@ -433,7 +435,12 @@ public class HeroLogicBase : MonoBehaviour
             animator.speed = 1;
         }
 
-        if(crossFadeTime > 0)
+        if (aniName == Consts.HeroAniNameIdle)
+        {
+            transform.localRotation = Quaternion.Euler(0, 180, 0);
+        }
+
+        if (crossFadeTime > 0)
         {
             animator.CrossFade(aniName, crossFadeTime);
         }
