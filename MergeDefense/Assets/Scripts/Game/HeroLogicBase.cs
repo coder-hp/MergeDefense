@@ -214,7 +214,7 @@ public class HeroLogicBase : MonoBehaviour
                         starTrans.localScale = Vector3.zero;
                         curStandGrid = minDisGrid;
                         transform.SetParent(minDisGridHeroPoint);
-                        boxCollider.enabled = true;
+                        boxCollider.enabled = false;
                         transform.DOLocalMove(Vector3.zero, moveTime).SetEase(Ease.Linear).OnComplete(() =>
                         {
                             boxCollider.enabled = true;
