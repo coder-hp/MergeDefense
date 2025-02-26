@@ -33,6 +33,8 @@ public class HeroLogicBase : MonoBehaviour
     public Transform curStandGrid;
     [HideInInspector]
     public bool isCanUpdate = false;
+    [HideInInspector]
+    public BoxCollider boxCollider;
 
     bool isDraging = false;
 
@@ -64,17 +66,21 @@ public class HeroLogicBase : MonoBehaviour
         transform.localScale = Vector3.zero;
         Invoke("summonWaitShow", 0.5f);
 
+        boxCollider = GetComponent<BoxCollider>();
+
         // 品质背景板
         {
             heroQualityTrans = Instantiate(ObjectPool.getPrefab("Prefabs/Games/heroQuality"), GameLayer.s_instance.heroQualityPoint).transform;
             heroQualityTrans.position = curStandGrid.position + heroQualityOffset;
-            material_qualityBg = heroQualityTrans.GetComponent<MeshRenderer>().material;
+            heroQualityTrans.localScale = Vector3.zero;
+            material_qualityBg = heroQualityTrans.GetChild(0).GetComponent<MeshRenderer>().material;
         }
 
         // 星星预设
         {
             starTrans = Instantiate(GameUILayer.s_instance.prefab_heroStar, GameUILayer.s_instance.heroStarPointTrans).transform;
             starTrans.localPosition = CommonUtil.WorldPosToUI(GameLayer.s_instance.camera3D, transform.position);
+            starTrans.localScale = Vector3.zero;
             setStarUI();
         }
 
@@ -88,6 +94,9 @@ public class HeroLogicBase : MonoBehaviour
 
     void summonWaitShow()
     {
+        heroQualityTrans.localScale = Vector3.one;
+        starTrans.localScale = Vector3.one;
+
         transform.localScale = new Vector3(1.3f, 1.3f, 1.3f);
         transform.DOScale(0.7f, 0.2f).OnComplete(() =>
         {
@@ -170,9 +179,11 @@ public class HeroLogicBase : MonoBehaviour
                         starTrans.localScale = Vector3.zero;
                         curStandGrid = minDisGrid;
                         transform.SetParent(minDisGridHeroPoint);
+                        boxCollider.enabled = false;
                         transform.DOLocalMove(Vector3.zero, moveTime).SetEase(Ease.Linear).OnComplete(()=>
                         {
                             playAni(Consts.HeroAniNameIdle);
+                            boxCollider.enabled = true;
                             isCanUpdate = true;
                             isAttacking = false;
                             starTrans.localScale = Vector3.one;
@@ -190,8 +201,10 @@ public class HeroLogicBase : MonoBehaviour
                         heroLogicBase_other.starTrans.localScale = Vector3.zero;
                         heroLogicBase_other.curStandGrid = curStandGrid;
                         otherHero.SetParent(transform.parent);
+                        heroLogicBase_other.boxCollider.enabled = false;
                         otherHero.DOLocalMove(Vector3.zero, moveTime).SetEase(Ease.Linear).OnComplete(() =>
                         {
+                            heroLogicBase_other.boxCollider.enabled = true;
                             heroLogicBase_other.starTrans.localScale = Vector3.one;
                             heroLogicBase_other.starTrans.localPosition = CommonUtil.WorldPosToUI(GameLayer.s_instance.camera3D, otherHero.position);
                         });
@@ -201,8 +214,10 @@ public class HeroLogicBase : MonoBehaviour
                         starTrans.localScale = Vector3.zero;
                         curStandGrid = minDisGrid;
                         transform.SetParent(minDisGridHeroPoint);
+                        boxCollider.enabled = true;
                         transform.DOLocalMove(Vector3.zero, moveTime).SetEase(Ease.Linear).OnComplete(() =>
                         {
+                            boxCollider.enabled = true;
                             starTrans.localScale = Vector3.one;
                             starTrans.localPosition = CommonUtil.WorldPosToUI(GameLayer.s_instance.camera3D, transform.position);
                         });
