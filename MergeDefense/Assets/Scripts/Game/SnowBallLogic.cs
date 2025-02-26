@@ -26,6 +26,8 @@ public class SnowBallLogic : MonoBehaviour
 
             if (Vector3.Distance(transform.position, targetTrans.position) <= 0.1f)
             {
+                Destroy(gameObject);
+
                 if (heroLogicBase)
                 {
                     bool isCrit = RandomUtil.getRandom(1, 100) <= heroLogicBase.getCritRate() ? true : false;
@@ -46,8 +48,6 @@ public class SnowBallLogic : MonoBehaviour
                         enemyLogic.list_buffDatas.Add(new Consts.BuffData(Consts.BuffType.MoveSpeed, -0.2f, 3, "105"));
                     }
                 }
-                
-                Destroy(gameObject);
             }
         }
         else
