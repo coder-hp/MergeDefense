@@ -48,6 +48,8 @@ public class EffectManager
 
     static List<GameObject> list_summonHeroEffect = new List<GameObject>();
     static Vector3 summonEffectStartPos;
+    static Vector3 summonEffectOffset1 = new Vector3(1, 2, 0);
+    static Vector3 summonEffectOffset2 = new Vector3(0.5f, 2f, 0);
     public static void summonHero(Vector3 targetPos)
     {
         Transform trans = null;
@@ -64,6 +66,7 @@ public class EffectManager
         if(list_summonHeroEffect.Count == 0)
         {
             summonEffectStartPos = GameUILayer.s_instance.btn_summon_gold.transform.parent.position;
+            summonEffectStartPos.y -= 1.3f;
             summonEffectStartPos.z = 0;
         }
 
@@ -88,20 +91,27 @@ public class EffectManager
         //}
 
         // 直线
-        //trans.DOMove(targetPos,0.4f).SetEase(Ease.OutCubic).OnComplete(() =>
-        //{
-        //    trans.gameObject.SetActive(false);
-        //});
+        trans.DOMove(targetPos, 0.5f).SetEase(Ease.OutQuad).OnComplete(() =>
+        {
+            trans.gameObject.SetActive(false);
+        });
 
         // 飞行路径动画
-        {
-            Vector3[] vec = new Vector3[2];
-            vec[0] = (targetPos + summonEffectStartPos) / 2f + new Vector3(1,0,0);
-            vec[1] = targetPos;
-            trans.DOLocalPath(vec, 0.6f, PathType.CatmullRom).SetEase(Ease.OutCubic).OnComplete(() =>
-            {
-                trans.gameObject.SetActive(false);
-            });
-        }
+        //{
+        //    Vector3[] vec = new Vector3[2];
+        //    if (targetPos.x >= summonEffectStartPos.x)
+        //    {
+        //        vec[0] = (targetPos + summonEffectStartPos) / 2 - summonEffectOffset1;
+        //    }
+        //    else
+        //    {
+        //        vec[0] = (targetPos + summonEffectStartPos) / 2 + summonEffectOffset2;
+        //    }
+        //    vec[1] = targetPos;
+        //    trans.DOLocalPath(vec, 0.5f, PathType.CatmullRom).SetEase(Ease.OutQuad).OnComplete(() =>
+        //    {
+        //        trans.gameObject.SetActive(false);
+        //    });
+        //}
     }
 }
