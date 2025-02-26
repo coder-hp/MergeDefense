@@ -132,6 +132,7 @@ public class GameLayer : MonoBehaviour
             if (heroPoint.GetChild(i).childCount == 0)
             {
                 Transform heroTrans = Instantiate(ObjectPool.getPrefab("Prefabs/Heros/hero" + RandomUtil.getRandom(101, 105)), heroPoint.GetChild(i)).transform;
+                EffectManager.summonHero(heroTrans.position);
 
                 if (!isMerging)
                 {
@@ -152,6 +153,7 @@ public class GameLayer : MonoBehaviour
             if (heroPoint.GetChild(i).childCount == 0)
             {
                 Transform heroTrans = Instantiate(ObjectPool.getPrefab("Prefabs/Heros/hero" + id), heroPoint.GetChild(i)).transform;
+                EffectManager.summonHero(heroTrans.position);
 
                 if (!isMerging)
                 {
