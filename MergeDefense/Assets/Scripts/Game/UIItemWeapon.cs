@@ -65,7 +65,7 @@ public class UIItemWeapon : MonoBehaviour
         {
             if(GameLayer.s_instance.heroPoint.GetChild(i).childCount > 0)
             {
-                GameLayer.s_instance.heroPoint.GetChild(i).GetChild(0).GetComponent<HeroLogicBase>().showWeaponEmoji(weaponData.type);
+                GameLayer.s_instance.heroPoint.GetChild(i).GetChild(0).GetComponent<HeroLogicBase>().showWeaponEmoji(weaponData);
             }
         }
     }
@@ -112,7 +112,7 @@ public class UIItemWeapon : MonoBehaviour
                         curDragChoicedHero = raycastHit.collider.transform;
                         HeroLogicBase heroLogicBase = curDragChoicedHero.GetComponent<HeroLogicBase>();
 
-                        if (heroLogicBase.isCanAddWeapon(weaponData.type))
+                        if (heroLogicBase.isCanAddWeapon(weaponData))
                         {
                             GameLayer.s_instance.weaponChoiceKuang.position = heroLogicBase.heroQualityTrans.position;
                             GameLayer.s_instance.weaponChoiceKuang.localScale = Vector3.one;
@@ -189,7 +189,7 @@ public class UIItemWeapon : MonoBehaviour
             if (raycastHit.collider && raycastHit.collider.CompareTag("Hero"))
             {
                 HeroLogicBase heroLogicBase = raycastHit.collider.GetComponent<HeroLogicBase>();
-                if (heroLogicBase.isCanAddWeapon(weaponData.type))
+                if (heroLogicBase.isCanAddWeapon(weaponData))
                 {
                     heroLogicBase.addWeapon(weaponData);
                     Destroy(gameObject);

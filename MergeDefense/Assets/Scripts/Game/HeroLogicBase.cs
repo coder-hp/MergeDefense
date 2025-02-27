@@ -442,29 +442,85 @@ public class HeroLogicBase : MonoBehaviour
         return skillRate;
     }
 
-    public bool isCanAddWeapon(int type)
+    public bool isCanAddWeapon(WeaponData weaponData)
     {
-        if(list_weapon.Count >= 2)
+        if (list_weapon.Count == 0)
         {
+            return true;
+        }
+        else if (list_weapon.Count == 1)
+        {
+            if (list_weapon[0].type == weaponData.type && list_weapon[0].level > weaponData.level)
+            {
+                return false;
+            }
+            else if(list_weapon[0].level >= 10)
+            {
+                return false;
+            }
+            else
+            {
+                return true;
+            }
+        }
+        else if (list_weapon.Count == 2)
+        {
+            for (int i = 0; i < list_weapon.Count; i++)
+            {
+                if (list_weapon[i].level <= 9 && list_weapon[i].type == weaponData.type && list_weapon[i].level <= weaponData.level)
+                {
+                    return true;
+                }
+            }
+
             return false;
         }
 
-        //for (int i = 0; i < list_weapon.Count; i++)
-        //{
-        //    if (list_weapon[i].type == type)
-        //    {
-        //        return false;
-        //    }
-        //}
-
-        return true;
+        return false;
     }
 
     public void addWeapon(WeaponData weaponData)
     {
-        //ToastScript.show("增加武器:" + weaponData.name + " level" + weaponData.level);
-        Debug.Log(transform.name + "增加武器:" + weaponData.name + " level" + weaponData.level);
-        list_weapon.Add(weaponData);
+        if (list_weapon.Count == 0)
+        {
+            list_weapon.Add(weaponData);
+        }
+        else if (list_weapon.Count == 1)
+        {
+            if (list_weapon[0].type == weaponData.type)
+            {
+                if(list_weapon[0].level == weaponData.level)
+                {
+                    list_weapon[0] = WeaponEntity.getInstance().getData(weaponData.type, weaponData.level + 1);
+                }
+                else
+                {
+                    list_weapon[0] = weaponData;
+                }
+            }
+            else
+            {
+                list_weapon.Add(weaponData);
+            }
+        }
+        else if (list_weapon.Count == 2)
+        {
+            for (int i = 0; i < list_weapon.Count; i++)
+            {
+                if (list_weapon[i].type == weaponData.type)
+                {
+                    if (list_weapon[i].level == weaponData.level)
+                    {
+                        list_weapon[i] = WeaponEntity.getInstance().getData(weaponData.type, weaponData.level + 1);
+                    }
+                    else
+                    {
+                        list_weapon[i] = weaponData;
+                    }
+                    break;
+                }
+            }
+        }
 
         setWeaponUI();
     }
@@ -573,12 +629,17 @@ public class HeroLogicBase : MonoBehaviour
     }
 
     DG.Tweening.Sequence tween_emoji = null;
-    public void showWeaponEmoji(int type)
+    public void showWeaponEmoji(WeaponData weaponData)
     {
+        if(!isCanAddWeapon(weaponData))
+        {
+            return;
+        }
+
         bool isShowTween = false;
 
         // 优势武器
-        if(heroData.goodWeapon == -1 || type == heroData.goodWeapon)
+        if(heroData.goodWeapon == -1 || weaponData.type == heroData.goodWeapon)
         {
             isShowTween = true;
             emojiTrans.localScale = Vector3.one;
@@ -586,7 +647,7 @@ public class HeroLogicBase : MonoBehaviour
             emojiTrans.GetChild(1).localScale = Vector3.zero;
         }
         // 劣势武器
-        else if (type == heroData.badWeapon)
+        else if (weaponData.type == heroData.badWeapon)
         {
             isShowTween = true;
             emojiTrans.localScale = Vector3.one;
