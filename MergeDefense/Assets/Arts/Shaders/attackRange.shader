@@ -4,7 +4,8 @@ Shader "Kein/Scene/attackRange"
     {
         _Color("Color",color)=(1,1,1,1)
         _OutLineCol("OutLineCol",color)=(1,1,1,1)
-        _OutLineRange("OutLineRange",Range(0.01,1))=0
+        [HideInInspector]_OutLineRange("OutLineRange",float) = 1
+        _SetOutLine("SetOutLine",Range(0.01,1))= 1
     }
     SubShader
     {
@@ -31,7 +32,7 @@ Shader "Kein/Scene/attackRange"
                 float4 vertex : SV_POSITION;
             };
             fixed4 _Color,_OutLineCol;
-            float _OutLineRange;
+            float _OutLineRange,_SetOutLine;
 
             v2f vert (appdata v)
             {
@@ -50,7 +51,7 @@ Shader "Kein/Scene/attackRange"
                 if(dis>0.5)
                 discard;
 
-                if(dis > (0.5 - _OutLineRange * 0.05))
+                if(dis > (0.5 - _OutLineRange * 0.25 * _SetOutLine))
                 col = _OutLineCol;
                 
                 return col;
