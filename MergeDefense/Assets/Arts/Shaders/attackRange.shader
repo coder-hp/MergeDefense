@@ -9,7 +9,7 @@ Shader "Kein/Scene/attackRange"
     }
     SubShader
     {
-        Tags {"Queue" = "Transparent" "IgnoreProjector" = "True" "RenderType " = "Transparent"}
+        Tags {"Queue" = "Transparent-2" "IgnoreProjector" = "True" "RenderType " = "Transparent"}
         Pass
         {
             Blend SrcAlpha OneMinusSrcAlpha
