@@ -479,7 +479,7 @@ public class HeroLogicBase : MonoBehaviour
         {
             return;
         }
-
+        GameLayer.s_instance.attackRangeTrans.GetComponent<MeshRenderer>().material.SetFloat("_OutLineRange", 1.0f / heroData.atkRange);
         isTriggerMouseDown = true;
     }
 
