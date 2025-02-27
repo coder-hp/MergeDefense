@@ -6,6 +6,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
+using UnityEngine.UI;
 
 public class HeroLogicBase : MonoBehaviour
 {
@@ -29,6 +30,8 @@ public class HeroLogicBase : MonoBehaviour
     public Transform heroUITrans;
     [HideInInspector]
     public Transform emojiTrans;
+    [HideInInspector]
+    public Transform weaponUITrans;
     [HideInInspector]
     public Transform curStandGrid;
     [HideInInspector]
@@ -83,9 +86,11 @@ public class HeroLogicBase : MonoBehaviour
             heroUITrans.localPosition = CommonUtil.WorldPosToUI(GameLayer.s_instance.camera3D, curStandGrid.position);
             heroUITrans.localScale = Vector3.zero;
 
-            emojiTrans = heroUITrans.GetChild(1);
+            emojiTrans = heroUITrans.Find("emoji");
+            weaponUITrans = heroUITrans.Find("weapon");
 
             setStarUI();
+            setWeaponUI();
         }
     }
 
@@ -296,6 +301,34 @@ public class HeroLogicBase : MonoBehaviour
         }
     }
 
+    void setWeaponUI()
+    {
+        Transform weapon1 = weaponUITrans.GetChild(0);
+        Transform weapon2 = weaponUITrans.GetChild(1);
+
+        if (list_weapon.Count >= 1)
+        {
+            weapon1.localScale = Vector3.one;
+            weapon1.GetComponent<Image>().color = Consts.list_weaponColor[list_weapon[0].type];
+            weapon1.GetChild(0).GetComponent<Text>().text = list_weapon[0].level.ToString();
+        }
+        else
+        {
+            weapon1.localScale = Vector3.zero;
+        }
+
+        if (list_weapon.Count >= 2)
+        {
+            weapon2.localScale = Vector3.one;
+            weapon2.GetComponent<Image>().color = Consts.list_weaponColor[list_weapon[1].type];
+            weapon2.GetChild(0).GetComponent<Text>().text = list_weapon[1].level.ToString();
+        }
+        else
+        {
+            weapon2.localScale = Vector3.zero;
+        }
+    }
+
     void lookEnemy(EnemyLogic enemyLogic)
     {
         float angle = -CommonUtil.twoPointAngle(curStandGrid.position, enemyLogic.transform.position);
@@ -432,9 +465,11 @@ public class HeroLogicBase : MonoBehaviour
 
     public void addWeapon(WeaponData weaponData)
     {
-        ToastScript.show("增加武器:" + weaponData.name + " level" + weaponData.level);
+        //ToastScript.show("增加武器:" + weaponData.name + " level" + weaponData.level);
         Debug.Log(transform.name + "增加武器:" + weaponData.name + " level" + weaponData.level);
         list_weapon.Add(weaponData);
+
+        setWeaponUI();
     }
 
     public void addStar()
