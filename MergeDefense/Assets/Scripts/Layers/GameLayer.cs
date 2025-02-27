@@ -59,7 +59,7 @@ public class GameLayer : MonoBehaviour
                             heroLogicBase2.isMerge = true;
                             heroLogicBase2.boxCollider.enabled = false;
                             heroLogicBase2.transform.SetParent(transform);
-                            Destroy(heroLogicBase2.starTrans.gameObject);
+                            Destroy(heroLogicBase2.heroUITrans.gameObject);
                             Destroy(heroLogicBase2.heroQualityTrans.gameObject);
 
                             float moveTime = Vector3.Distance(heroLogicBase1.transform.position, heroLogicBase2.transform.position) / 10f;
