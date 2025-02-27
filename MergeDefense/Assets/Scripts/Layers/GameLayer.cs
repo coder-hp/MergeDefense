@@ -22,8 +22,6 @@ public class GameLayer : MonoBehaviour
     [HideInInspector]
     public List<Vector3> list_enemyMoveFourPos = new List<Vector3>();
     [HideInInspector]
-    public int maxEnemyCount = 100;
-    [HideInInspector]
     public int addedEnemyCount = 0;
 
     bool isMerging = false;
@@ -118,7 +116,7 @@ public class GameLayer : MonoBehaviour
 
     public void addEnemy(EnemyWaveData enemyWaveData)
     {
-        if (EnemyManager.s_instance.getEnemyCount() < maxEnemyCount)
+        if (EnemyManager.s_instance.getEnemyCount() < Consts.maxEnemyCount)
         {
             ++addedEnemyCount;
             Instantiate(ObjectPool.getPrefab("Prefabs/Enemys/" + enemyWaveData.prefab), enemyPoint).GetComponent<EnemyLogic>().init(enemyWaveData);

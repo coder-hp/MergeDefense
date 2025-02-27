@@ -16,6 +16,9 @@ public class Consts
     public static int startForgeGold = 20;      // 初始锻造金额
     public static int forgeAddGold = 2;         // 每锻造一次增加的金额
 
+
+    public static int maxEnemyCount = 100;      // 最大存在怪物数量
+
     public enum Layer
     {
         MainLayer,
