@@ -94,8 +94,14 @@ public class HeroLogicBase : MonoBehaviour
 
     void summonWaitShow()
     {
-        heroQualityTrans.localScale = Vector3.one;
-        starTrans.localScale = Vector3.one;
+        if (heroQualityTrans)
+        {
+            heroQualityTrans.localScale = Vector3.one;
+        }
+        if (starTrans)
+        {
+            starTrans.localScale = Vector3.one;
+        }
 
         transform.localScale = new Vector3(1.3f, 1.3f, 1.3f);
         transform.DOScale(0.7f, 0.2f).OnComplete(() =>
