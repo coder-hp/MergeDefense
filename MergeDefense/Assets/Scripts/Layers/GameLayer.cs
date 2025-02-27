@@ -23,6 +23,8 @@ public class GameLayer : MonoBehaviour
     public List<Vector3> list_enemyMoveFourPos = new List<Vector3>();
     [HideInInspector]
     public int addedEnemyCount = 0;
+    [HideInInspector]
+    public Material matrial_attackRange;
 
     bool isMerging = false;
 
@@ -37,6 +39,8 @@ public class GameLayer : MonoBehaviour
         {
             list_enemyMoveFourPos.Add(enemyMoveFourPoint[i].position);
         }
+
+        matrial_attackRange = attackRangeTrans.GetComponent<MeshRenderer>().material;
 
         LayerManager.ShowLayer(Consts.Layer.GameUILayer);
     }
