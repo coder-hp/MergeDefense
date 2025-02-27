@@ -6,7 +6,7 @@ Shader "Kein/Scene/heroGrid"
     }
     SubShader
     {
-        Tags {"Queue" = "Transparent-1" "IgnoreProjector" = "True" "RenderType " = "Transparent"}
+        Tags {"Queue" = "Transparent-3" "IgnoreProjector" = "True" "RenderType " = "Transparent"}
 
         Pass
         {

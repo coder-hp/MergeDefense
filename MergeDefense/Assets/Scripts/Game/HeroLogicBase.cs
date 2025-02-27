@@ -150,6 +150,7 @@ public class HeroLogicBase : MonoBehaviour
 
                     GameLayer.s_instance.attackRangeTrans.position = minDisGrid.position;
                     GameLayer.s_instance.attackRangeTrans.localScale = new Vector3(heroData.atkRange, heroData.atkRange, heroData.atkRange);
+                    GameLayer.s_instance.attackRangeTrans.GetComponent<MeshRenderer>().material.SetFloat("_OutLineRange", 1.0f / heroData.atkRange);
 
                     HeroMoveLine.s_instance.setPos(curStandGrid.position, minDisGrid.position);
                 }
@@ -479,7 +480,7 @@ public class HeroLogicBase : MonoBehaviour
         {
             return;
         }
-        GameLayer.s_instance.attackRangeTrans.GetComponent<MeshRenderer>().material.SetFloat("_OutLineRange", 1.0f / heroData.atkRange);
+        
         isTriggerMouseDown = true;
     }
 
