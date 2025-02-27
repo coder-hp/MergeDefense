@@ -475,7 +475,7 @@ public class HeroLogicBase : MonoBehaviour
     bool isTriggerMouseDown = false;
     private void OnMouseDown()
     {
-        if (!GameUILayer.s_instance.heroInfoPanel.gameObject.activeInHierarchy && isTouchInUI())
+        if (!HeroInfoPanel.s_instance.gameObject.activeInHierarchy && isTouchInUI())
         {
             return;
         }
@@ -485,27 +485,27 @@ public class HeroLogicBase : MonoBehaviour
 
     private void OnMouseUp()
     {
-        if (!GameUILayer.s_instance.heroInfoPanel.gameObject.activeInHierarchy && isTouchInUI())
+        if (!HeroInfoPanel.s_instance.gameObject.activeInHierarchy && isTouchInUI())
         {
             return;
         }
 
         if (isTriggerMouseDown)
         {
-            if(GameUILayer.s_instance.heroInfoPanel.gameObject.activeInHierarchy && GameUILayer.s_instance.heroInfoPanel.heroLogicBase == this)
+            if(HeroInfoPanel.s_instance.gameObject.activeInHierarchy && HeroInfoPanel.s_instance.heroLogicBase == this)
             {
                 // 如果当前角色信息面板显示的是当前点击的角色，则关闭信息面板
                 // 触发的是UI那边的HeroInfoPanel.onClickClose
             }
             else
             {
-                if (GameUILayer.s_instance.heroInfoPanel.gameObject.activeInHierarchy)
+                if (HeroInfoPanel.s_instance.gameObject.activeInHierarchy)
                 {
-                    GameUILayer.s_instance.heroInfoPanel.isCanClose = false;
+                    HeroInfoPanel.s_instance.isCanClose = false;
                 }
 
                 GameLayer.s_instance.attackRangeTrans.position = curStandGrid.position;
-                GameUILayer.s_instance.heroInfoPanel.show(this);
+                HeroInfoPanel.s_instance.show(this);
             }
         }
 

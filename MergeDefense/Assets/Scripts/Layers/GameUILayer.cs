@@ -8,7 +8,6 @@ public class GameUILayer : MonoBehaviour
 {
     public static GameUILayer s_instance = null;
 
-    public HeroInfoPanel heroInfoPanel;
     public GameObject prefab_bloodBar;
     public GameObject prefab_heroStar;
     public GameObject prefab_heroEmoji;
@@ -50,6 +49,11 @@ public class GameUILayer : MonoBehaviour
         btn_forge_gold.text = curForgeGold.ToString();
 
         Invoke("startBoCi",0.5f);
+    }
+
+    private void Start()
+    {
+        LayerManager.ShowLayer(Consts.Layer.HeroInfoPanel);
     }
 
     void startBoCi()

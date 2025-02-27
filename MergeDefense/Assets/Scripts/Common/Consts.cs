@@ -31,6 +31,7 @@ public class Consts
         GamePauseLayer,
         GameLayer,
         ShowRewardLayer,
+        HeroInfoPanel,
     }
 
     public enum BuffType

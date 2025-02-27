@@ -5,6 +5,8 @@ using UnityEngine.UI;
 
 public class HeroInfoPanel : MonoBehaviour
 {
+    public static HeroInfoPanel s_instance = null;
+
     public GameObject bgTrans;
     public Image img_head;
     public Image img_head_bg;
@@ -39,6 +41,12 @@ public class HeroInfoPanel : MonoBehaviour
 
     HeroSkillData[] skillsArray;
     int sellPrice = 0;
+
+    private void Awake()
+    {
+        s_instance = this;
+        gameObject.SetActive(false);
+    }
 
     public void show(HeroLogicBase _heroLogicBase)
     {
