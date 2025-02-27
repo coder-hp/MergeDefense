@@ -2,6 +2,7 @@ Shader "Kein/Scene/bg_2"
 {
     Properties
     {
+        _CullUpDown("上下裁切",Range(0,1)) = 0
         _MainTex ("Texture", 2D) = "white" {}
     }
     SubShader
@@ -28,7 +29,7 @@ Shader "Kein/Scene/bg_2"
                 float2 uv : TEXCOORD0;
                 float4 pos : SV_POSITION;
             };
-
+            float _CullUpDown;
             sampler2D _MainTex;
 
             v2f vert (appdata v)
@@ -42,7 +43,8 @@ Shader "Kein/Scene/bg_2"
             fixed4 frag (v2f i) : SV_Target
             {
                 fixed4 col = tex2D(_MainTex, i.uv);
-
+                if(i.uv.y > _CullUpDown || (1 - i.uv.y) > _CullUpDown)
+                discard;
                 return col;
             }
             ENDCG
