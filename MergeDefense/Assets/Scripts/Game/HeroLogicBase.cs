@@ -55,9 +55,12 @@ public class HeroLogicBase : MonoBehaviour
     public void Awake()
     {
         curStandGrid = GameLayer.s_instance.heroGrid.transform.Find(transform.parent.name);
-        heroAniEvent = transform.Find("model").GetComponent<HeroAniEvent>();
-        
-        animator = transform.Find("model").GetComponent<Animator>();
+
+        Transform modelTrans = transform.Find("model");
+        heroAniEvent = modelTrans.GetComponent<HeroAniEvent>();
+        animator = modelTrans.GetComponent<Animator>();
+        boxCollider = transform.GetComponent<BoxCollider>();
+
         centerPoint = transform.Find("centerPoint");
 
         heroData = HeroEntity.getInstance().getData(id);
@@ -65,8 +68,6 @@ public class HeroLogicBase : MonoBehaviour
 
         transform.localScale = Vector3.zero;
         Invoke("summonWaitShow", 0.5f);
-
-        boxCollider = GetComponent<BoxCollider>();
 
         // 品质背景板
         {
