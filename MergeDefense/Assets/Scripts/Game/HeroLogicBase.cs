@@ -201,7 +201,6 @@ public class HeroLogicBase : MonoBehaviour
                         });
 
                         heroQualityTrans.DOMove(minDisGrid.position + heroQualityOffset, moveTime).SetEase(Ease.Linear);
-                        emojiTrans.localPosition = CommonUtil.WorldPosToUI(GameLayer.s_instance.camera3D, curStandGrid.position + emojiOffset);
                     }
                     // 已有角色，交换位置
                     else
@@ -219,8 +218,7 @@ public class HeroLogicBase : MonoBehaviour
                             heroLogicBase_other.heroUITrans.localPosition = CommonUtil.WorldPosToUI(GameLayer.s_instance.camera3D, heroLogicBase_other.curStandGrid.position);
                         });
                         heroLogicBase_other.heroQualityTrans.DOMove(heroLogicBase_other.curStandGrid.position + heroQualityOffset, moveTime).SetEase(Ease.Linear);
-                        heroLogicBase_other.emojiTrans.localPosition = CommonUtil.WorldPosToUI(GameLayer.s_instance.camera3D, heroLogicBase_other.curStandGrid.position + emojiOffset);
-
+                        
                         heroUITrans.localScale = Vector3.zero;
                         curStandGrid = minDisGrid;
                         transform.SetParent(minDisGridHeroPoint);
@@ -232,7 +230,6 @@ public class HeroLogicBase : MonoBehaviour
                             heroUITrans.localPosition = CommonUtil.WorldPosToUI(GameLayer.s_instance.camera3D, curStandGrid.position);
                         });
                         heroQualityTrans.DOMove(curStandGrid.position + heroQualityOffset, moveTime).SetEase(Ease.Linear);
-                        emojiTrans.localPosition = CommonUtil.WorldPosToUI(GameLayer.s_instance.camera3D, curStandGrid.position + emojiOffset);
                     }
                 }
             }
