@@ -589,7 +589,6 @@ MonoBehaviour:
   flyPoint: {fileID: 4149523117588117092}
   effectPoint: {fileID: 8027066404486135526}
   list_enemyMoveFourPos: []
-  maxEnemyCount: 100
   addedEnemyCount: 0
 --- !u!114 &-7090605276762049441
 MonoBehaviour:
@@ -743,7 +742,7 @@ Transform:
   m_GameObject: {fileID: 3551732279377503336}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0.001}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
