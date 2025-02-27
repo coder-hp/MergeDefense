@@ -62,6 +62,7 @@ public class Consts
 
     public static List<Color> list_weaponColor = new List<Color>()
     {
+        CommonUtil.stringToColor("#FFFFFF"),    // 白色
         CommonUtil.stringToColor("#FFD618"),    // 剑
         CommonUtil.stringToColor("#64D967"),    // 弓
         CommonUtil.stringToColor("#3BD3FF"),    // 斧

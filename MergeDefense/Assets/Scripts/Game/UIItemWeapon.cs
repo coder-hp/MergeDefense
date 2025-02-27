@@ -33,8 +33,8 @@ public class UIItemWeapon : MonoBehaviour
         // 武器icon
         img_icon.sprite = AtlasUtil.getAtlas_icon().GetSprite("weapon_" + type);
 
-        img_level_bg.color = Consts.list_weaponColor[weaponData.type - 1];
-        img_frame.color = Consts.list_weaponColor[weaponData.type - 1];
+        img_level_bg.color = Consts.list_weaponColor[weaponData.type];
+        img_frame.color = Consts.list_weaponColor[weaponData.type];
     }
 
     public void addLevel()
