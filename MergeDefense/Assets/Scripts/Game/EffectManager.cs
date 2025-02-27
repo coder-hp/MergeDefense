@@ -47,6 +47,7 @@ public class EffectManager
     }
 
     static List<GameObject> list_summonHeroEffect = new List<GameObject>();
+    static List<TrailRenderer> list_summonHeroTrail = new List<TrailRenderer>();
     static Vector3 summonEffectStartPos;
     static Vector3 summonEffectOffset1 = new Vector3(1, 2, 0);
     static Vector3 summonEffectOffset2 = new Vector3(0.5f, 2f, 0);
@@ -58,12 +59,14 @@ public class EffectManager
             if (!list_summonHeroEffect[i].activeInHierarchy)
             {
                 trans = list_summonHeroEffect[i].transform;
+                trans.transform.position = summonEffectStartPos;
+                list_summonHeroTrail[i].Clear();
                 trans.gameObject.SetActive(true);
                 break; ;
             }
         }
 
-        if(list_summonHeroEffect.Count == 0)
+        if (list_summonHeroEffect.Count == 0)
         {
             summonEffectStartPos = GameUILayer.s_instance.btn_summon_gold.transform.parent.position;
             summonEffectStartPos.y -= 1.3f;
@@ -74,10 +77,10 @@ public class EffectManager
         {
             GameObject obj = GameObject.Instantiate(ObjectPool.getPrefab("Prefabs/Effects/SummonStar"), GameLayer.s_instance.effectPoint);
             trans = obj.transform;
+            trans.transform.position = summonEffectStartPos;
             list_summonHeroEffect.Add(obj);
+            list_summonHeroTrail.Add(obj.transform.GetChild(1).GetComponent<TrailRenderer>());
         }
-
-        trans.transform.position = summonEffectStartPos;
 
         // 飞行路径动画
         //{
