@@ -117,6 +117,10 @@ public class UIItemWeapon : MonoBehaviour
                             GameLayer.s_instance.weaponChoiceKuang.position = heroLogicBase.heroQualityTrans.position;
                             GameLayer.s_instance.weaponChoiceKuang.localScale = Vector3.one;
                         }
+                        else
+                        {
+                            GameLayer.s_instance.weaponChoiceKuang.localScale = Vector3.zero;
+                        }
                     }
                 }
                 else
