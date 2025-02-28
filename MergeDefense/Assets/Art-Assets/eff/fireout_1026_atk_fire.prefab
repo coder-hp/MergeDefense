@@ -7031,9 +7031,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4494857522992223}
-  - component: {fileID: 114980642366333359}
-  - component: {fileID: 114306107033746032}
-  - component: {fileID: 114951278300836999}
   m_Layer: 7
   m_Name: fireout_1026_atk_fire
   m_TagString: Untagged
@@ -7057,42 +7054,6 @@ Transform:
   - {fileID: 4415637992028730}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: -0, z: -0}
---- !u!114 &114980642366333359
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1216912794724089}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b68cd4aabba10a154f19e596e6cceb09, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!114 &114306107033746032
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1216912794724089}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ff1178157ae9b32abd3f8b597566b4f7, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!114 &114951278300836999
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1216912794724089}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 47dba6a5ff42fa5cad5ee2bccf09a7a7, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &1521170888925414
 GameObject:
   m_ObjectHideFlags: 0
