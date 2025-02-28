@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 874507549140551184}
   - component: {fileID: 2188230204117377359}
   - component: {fileID: 8788114781941360125}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: hole1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2355,7 +2355,7 @@ GameObject:
   - component: {fileID: 7287383257947220898}
   - component: {fileID: 8190497259144667028}
   - component: {fileID: 6595600315785062626}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: hole2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4708,7 +4708,7 @@ GameObject:
   - component: {fileID: 5796476137641109575}
   - component: {fileID: 5796476137622760711}
   - component: {fileID: 5796476137622852775}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: gold
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -9512,7 +9512,7 @@ GameObject:
   - component: {fileID: 4547624541275703663}
   - component: {fileID: 7048351580394436353}
   - component: {fileID: 8501227382447775650}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: SellOut
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -9527,7 +9527,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6914867616578759900}
   serializedVersion: 2
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: -0.17364825, y: 0, z: 0, w: 0.9848078}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -9537,7 +9537,7 @@ Transform:
   - {fileID: 7287383257947220898}
   - {fileID: 5796476137641109575}
   m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 0, y: -0, z: -0}
+  m_LocalEulerAnglesHint: {x: -20, y: -0, z: -0}
 --- !u!198 &7048351580394436353
 ParticleSystem:
   m_ObjectHideFlags: 0
@@ -9548,7 +9548,7 @@ ParticleSystem:
   serializedVersion: 8
   lengthInSec: 1
   simulationSpeed: 1
-  stopAction: 0
+  stopAction: 1
   cullingMode: 0
   ringBufferMode: 0
   ringBufferLoopRange: {x: 0, y: 1}
@@ -11838,7 +11838,7 @@ GameObject:
   - component: {fileID: 2779412431805562911}
   - component: {fileID: 8900575097049201379}
   - component: {fileID: 670584408318533241}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: light
   m_TagString: Untagged
   m_Icon: {fileID: 0}

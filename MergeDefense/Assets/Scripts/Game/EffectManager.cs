@@ -117,4 +117,22 @@ public class EffectManager
         //    });
         //}
     }
+
+    static List<GameObject> list_sellHeroEffect = new List<GameObject>();
+    public static void sellHero(Vector3 pos)
+    {
+        for (int i = 0; i < list_sellHeroEffect.Count; i++)
+        {
+            if (!list_sellHeroEffect[i].activeInHierarchy)
+            {
+                list_sellHeroEffect[i].transform.position = pos;
+                list_sellHeroEffect[i].SetActive(true);
+                return;
+            }
+        }
+
+        GameObject obj = GameObject.Instantiate(ObjectPool.getPrefab("Prefabs/Effects/SellOut"), GameLayer.s_instance.effectPoint);
+        obj.transform.position = pos;
+        list_sellHeroEffect.Add(obj);
+    }
 }

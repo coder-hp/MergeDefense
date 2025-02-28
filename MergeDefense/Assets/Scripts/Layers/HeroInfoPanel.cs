@@ -330,6 +330,7 @@ public class HeroInfoPanel : MonoBehaviour
     {
         GameUILayer.s_instance.changeGold(sellPrice);
 
+        EffectManager.sellHero(heroLogicBase.transform.position);
         Destroy(heroLogicBase.gameObject);
         onClickClose();
     }
