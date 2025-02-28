@@ -9,6 +9,7 @@ public class GameLayer : MonoBehaviour
 
     public List<Transform> enemyMoveFourPoint = new List<Transform>();
     public Camera camera3D;
+    public Camera cameraEffect;
     public Transform enemyPoint;
     public Transform heroPoint;
     public GameObject heroGrid;
@@ -31,6 +32,15 @@ public class GameLayer : MonoBehaviour
     private void Awake()
     {
         s_instance = this;
+
+        // 屏幕适配
+        if((Screen.width / (float)Screen.height) < (1080f / 1920f))
+        {
+            float standardValue = (1080f / 1920f) * 9.6f;
+            float cameraSize = standardValue / ((float)Screen.width / (float)Screen.height);
+            camera3D.orthographicSize = cameraSize;
+            cameraEffect.orthographicSize = cameraSize;
+        }
     }
 
     void Start()

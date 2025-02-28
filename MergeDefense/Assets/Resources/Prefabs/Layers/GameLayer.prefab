@@ -579,6 +579,7 @@ MonoBehaviour:
   - {fileID: 6162854313086487263}
   - {fileID: 6823065894570184334}
   camera3D: {fileID: 1961111538227536871}
+  cameraEffect: {fileID: 8168339296851194868}
   enemyPoint: {fileID: 5070735870438125811}
   heroPoint: {fileID: 3334699292323018052}
   heroGrid: {fileID: 8265745479018369982}
@@ -2190,6 +2191,18 @@ PrefabInstance:
     m_TransformParent: {fileID: 4729789445500738202}
     m_Modifications:
     - target: {fileID: 742355410400482317, guid: 624e86866467d2b44b1f617ed2d5793f, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 1.1
+      objectReference: {fileID: 0}
+    - target: {fileID: 742355410400482317, guid: 624e86866467d2b44b1f617ed2d5793f, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 1.1
+      objectReference: {fileID: 0}
+    - target: {fileID: 742355410400482317, guid: 624e86866467d2b44b1f617ed2d5793f, type: 3}
+      propertyPath: m_LocalScale.z
+      value: 1.1
+      objectReference: {fileID: 0}
+    - target: {fileID: 742355410400482317, guid: 624e86866467d2b44b1f617ed2d5793f, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
       objectReference: {fileID: 0}
@@ -2228,6 +2241,10 @@ PrefabInstance:
     - target: {fileID: 742355410400482317, guid: 624e86866467d2b44b1f617ed2d5793f, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 742355410400482317, guid: 624e86866467d2b44b1f617ed2d5793f, type: 3}
+      propertyPath: m_ConstrainProportionsScale
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8919675130614416294, guid: 624e86866467d2b44b1f617ed2d5793f, type: 3}
       propertyPath: m_Name
