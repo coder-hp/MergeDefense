@@ -742,4 +742,17 @@ public class CommonUtil
 
         return list_weightRandomResult[RandomUtil.getRandom(0, list_weightRandomResult.Count - 1)];
     }
+
+    // 1600->1.6k
+    public static string intToStrK(int num)
+    {
+        if (num >= 1000)
+        {
+            return Math.Round((num / 1000f),2) + "k";
+        }
+        else
+        {
+            return num.ToString();
+        }
+    }
 }

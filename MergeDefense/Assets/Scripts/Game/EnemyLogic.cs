@@ -10,8 +10,8 @@ public class EnemyLogic : MonoBehaviour
     int curTargetPosIndex = 1;
 
     float moveSpeed = 2;
-    float curHP;
-    float fullHP;
+    int curHP;
+    int fullHP;
 
     float defaultSpineSpeed = 1;
     bool isCanMove = true;
@@ -19,6 +19,7 @@ public class EnemyLogic : MonoBehaviour
     Transform bloodPoint;
     Transform bloodBarTrans;
     Image bloodProgressImg;
+    Text bloodText;
 
     EnemyWaveData enemyWaveData;
 
@@ -38,13 +39,6 @@ public class EnemyLogic : MonoBehaviour
         transform.localScale = Vector3.zero;
         transform.DOScale(1,0.5f);
 
-        // 创建血条
-        {
-            bloodBarTrans = Instantiate(GameUILayer.s_instance.prefab_bloodBar, GameUILayer.s_instance.bloodPointTrans).transform;
-            bloodBarTrans.localPosition = CommonUtil.WorldPosToUI(GameLayer.s_instance.camera3D, bloodPoint.position);
-            bloodProgressImg = bloodBarTrans.GetChild(0).GetComponent<Image>();
-        }
-
         propRedColor = new MaterialPropertyBlock();
         meshRenderer = transform.GetChild(0).GetComponent<MeshRenderer>();
         skeletonAnimation = transform.GetChild(0).GetComponent<SkeletonAnimation>();
@@ -60,6 +54,26 @@ public class EnemyLogic : MonoBehaviour
         curHP = enemyWaveData.hp;
         fullHP = curHP;
         moveSpeed *= enemyWaveData.speed;
+
+        // 创建血条
+        {
+            if (enemyWaveData.enemyType == 1)
+            {
+                bloodBarTrans = Instantiate(GameUILayer.s_instance.prefab_bloodBar, GameUILayer.s_instance.bloodPointTrans).transform;
+            }
+            else
+            {
+                bloodBarTrans = Instantiate(GameUILayer.s_instance.prefab_bloodBar_big, GameUILayer.s_instance.bloodPointTrans).transform;
+                bloodText = bloodBarTrans.Find("Text").GetComponent<Text>();
+            }
+            bloodBarTrans.localPosition = CommonUtil.WorldPosToUI(GameLayer.s_instance.camera3D, bloodPoint.position);
+            bloodProgressImg = bloodBarTrans.GetChild(0).GetComponent<Image>();
+        }
+
+        if (enemyWaveData.enemyType > 1)
+        {
+            bloodText.text = CommonUtil.intToStrK(curHP).ToString();
+        }
     }
 
     // 此方法每帧都会调用，所以不用再写一个Update方法
@@ -144,7 +158,12 @@ public class EnemyLogic : MonoBehaviour
                 return true;
             }
 
-            bloodProgressImg.DOFillAmount(curHP / fullHP,0.2f);
+            if (enemyWaveData.enemyType > 1)
+            {
+                bloodText.text = CommonUtil.intToStrK(curHP).ToString();
+            }
+
+            bloodProgressImg.DOFillAmount((float)curHP / (float)fullHP,0.2f);
 
             setHitColorProgress(1);
 
