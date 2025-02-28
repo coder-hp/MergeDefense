@@ -113,6 +113,11 @@ public class GMLayer : MonoBehaviour
         onClickClose();
     }
 
+    public void onClickRefreshWeaponShop()
+    {
+        WeaponShopPanel.s_instance.refreshWeapon();
+    }
+
     public void onClickFPS()
     {
         isShowFPS = true;

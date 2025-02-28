@@ -59,55 +59,98 @@ public class WeaponShopPanel : MonoBehaviour
 
     public void refreshWeapon()
     {
-        int minLevel = 1;
-        int maxLevel = 1;
+        int[] levelArray;
 
         if (GameUILayer.s_instance.curBoCi >= 71)
         {
-            minLevel = 7;
-            maxLevel = 9;
+            levelArray = new int[3];
+            levelArray[0] = 7;
+            levelArray[1] = 8;
+            levelArray[2] = 9;
         }
         else if (GameUILayer.s_instance.curBoCi >= 61)
         {
-            minLevel = 6;
-            maxLevel = 7;
+            levelArray = new int[3];
+            levelArray[0] = 6;
+            levelArray[1] = 7;
+            levelArray[2] = 8;
         }
         else if (GameUILayer.s_instance.curBoCi >= 51)
         {
-            minLevel = 5;
-            maxLevel = 7;
+            levelArray = new int[3];
+            levelArray[0] = 5;
+            levelArray[1] = 6;
+            levelArray[2] = 7;
         }
         else if (GameUILayer.s_instance.curBoCi >= 41)
         {
-            minLevel = 4;
-            maxLevel = 6;
+            levelArray = new int[3];
+            levelArray[0] = 4;
+            levelArray[1] = 5;
+            levelArray[2] = 6;
         }
         else if (GameUILayer.s_instance.curBoCi >= 31)
         {
-            minLevel = 3;
-            maxLevel = 5;
+            levelArray = new int[3];
+            levelArray[0] = 3;
+            levelArray[1] = 4;
+            levelArray[2] = 5;
         }
         else if (GameUILayer.s_instance.curBoCi >= 21)
         {
-            minLevel = 2;
-            maxLevel = 4;
+            levelArray = new int[3];
+            levelArray[0] = 2;
+            levelArray[1] = 3;
+            levelArray[2] = 4;
         }
         else if (GameUILayer.s_instance.curBoCi >= 11)
         {
-            minLevel = 1;
-            maxLevel = 3;
+            levelArray = new int[3];
+            levelArray[0] = 1;
+            levelArray[1] = 2;
+            levelArray[2] = 3;
         }
         else
         {
-            minLevel = 1;
-            maxLevel = 2;
+            levelArray = new int[2];
+            levelArray[0] = 1;
+            levelArray[1] = 2;
         }
 
         for(int i = 0; i <= 2; i++)
         {
             buyStateArray[i] = false;
 
-            weaponArray[i] = WeaponEntity.getInstance().getData(RandomUtil.getRandom(1,5),RandomUtil.getRandom(minLevel,maxLevel));
+            int level = 0;
+            if(levelArray.Length == 2)
+            {
+                int r = RandomUtil.getRandom(1, 100);
+                if (r > 70)
+                {
+                    level = levelArray[1];
+                }
+                else
+                {
+                    level = levelArray[0];
+                }
+            }
+            else
+            {
+                int r = RandomUtil.getRandom(1,100);
+                if(r > 90)
+                {
+                    level = levelArray[2];
+                }
+                else if (r > 70)
+                {
+                    level = levelArray[1];
+                }
+                else
+                {
+                    level = levelArray[0];
+                }
+            }
+            weaponArray[i] = WeaponEntity.getInstance().getData(RandomUtil.getRandom(1,5), level);
 
             Transform weaponTrans = transform.Find("bg/weapon" + i);
             weaponTrans.Find("buyed").localScale = Vector3.zero;
