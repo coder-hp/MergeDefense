@@ -1,0 +1,57 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!21 &2100000
+Material:
+  serializedVersion: 8
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: mh_mat_ring_41
+  m_Shader: {fileID: 4800000, guid: d802f41808fbd4d4eb42518d744ef17d, type: 3}
+  m_Parent: {fileID: 0}
+  m_ModifiedSerializedProperties: 0
+  m_ValidKeywords:
+  - _USE_UV_NOSIZE
+  m_InvalidKeywords: []
+  m_LightmapFlags: 0
+  m_EnableInstancingVariants: 0
+  m_DoubleSidedGI: 0
+  m_CustomRenderQueue: -1
+  stringTagMap: {}
+  disabledShaderPasses: []
+  m_LockedProperties:
+  m_SavedProperties:
+    serializedVersion: 3
+    m_TexEnvs:
+      _tex:
+        m_Texture: {fileID: 2800000, guid: d867a98279844e34d8a1af2172aded7f, type: 3}
+        m_Scale: {x: 2, y: 0.5}
+        m_Offset: {x: 1.6, y: 0}
+      _tex_mask:
+        m_Texture: {fileID: 2800000, guid: a971d6f51da3ee8419e682fa8d028dc5, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+      _uv_nosize_tex:
+        m_Texture: {fileID: 2800000, guid: a2615010193241e48a0c52f1be9ea85a, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    m_Ints: {}
+    m_Floats:
+      _CULLENUM: 0
+      _MASK_UV_SPEED_CUSTOM: 0
+      _fnl_intensity: 1
+      _fnl_size: 1
+      _tex_mask_rotate: 0
+      _tex_rotate: 0
+      _use_fnl: 0
+      _use_uv_nosize: 1
+      _uv_nosize_strength: 0
+      _ztest_on: 4
+    m_Colors:
+      _fnl_color: {r: 1, g: 1, b: 1, a: 1}
+      _tex_color: {r: 1, g: 1, b: 1, a: 1}
+      _tex_mask_uv_speed: {r: 0, g: 0, b: 0, a: 0}
+      _tex_uv_speed: {r: 0, g: -2, b: 0, a: 0}
+      _uv_nosize_speed: {r: 0.2, g: 0, b: 0, a: 0}
+  m_BuildTextureStacks: []
