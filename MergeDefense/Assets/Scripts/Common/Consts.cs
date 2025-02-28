@@ -42,6 +42,7 @@ public class Consts
         CritDamage,         // 3暴击伤害
         MoveSpeed,          // 4移速
         SkillRate,          // 5技能概率
+        Stun,               // 6眩晕
     }
 
     public class BuffData

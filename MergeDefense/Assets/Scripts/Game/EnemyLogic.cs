@@ -13,6 +13,9 @@ public class EnemyLogic : MonoBehaviour
     float curHP;
     float fullHP;
 
+    float defaultSpineSpeed = 1;
+    bool isCanMove = true;
+
     Transform bloodPoint;
     Transform bloodBarTrans;
     Image bloodProgressImg;
@@ -21,9 +24,9 @@ public class EnemyLogic : MonoBehaviour
 
     MeshRenderer meshRenderer;
     MaterialPropertyBlock propRedColor;
+    SkeletonAnimation skeletonAnimation;
 
-    [HideInInspector]
-    public List<Consts.BuffData> list_buffDatas = new List<Consts.BuffData>();
+    List<Consts.BuffData> list_buffDatas = new List<Consts.BuffData>();
 
     private void Awake()
     {
@@ -44,6 +47,9 @@ public class EnemyLogic : MonoBehaviour
 
         propRedColor = new MaterialPropertyBlock();
         meshRenderer = transform.GetChild(0).GetComponent<MeshRenderer>();
+        skeletonAnimation = transform.GetChild(0).GetComponent<SkeletonAnimation>();
+        defaultSpineSpeed = skeletonAnimation.timeScale;
+
         transform.GetChild(0).localPosition -= new Vector3(0,0,GameLayer.s_instance.addedEnemyCount * 0.000001f);
     }
 
@@ -66,10 +72,20 @@ public class EnemyLogic : MonoBehaviour
                 list_buffDatas[i].time -= Time.deltaTime;
                 if(list_buffDatas[i].time <= 0)
                 {
+                    if(list_buffDatas[i].buffType == Consts.BuffType.Stun)
+                    {
+                        isCanMove = true;
+                        skeletonAnimation.timeScale = defaultSpineSpeed;
+                    }
                     list_buffDatas.RemoveAt(i);
                     --i;
                 }
             }
+        }
+
+        if(!isCanMove)
+        {
+            return;
         }
 
         if (curHP > 0)
@@ -150,6 +166,31 @@ public class EnemyLogic : MonoBehaviour
     {
         propRedColor.SetFloat("_Hit", f);
         meshRenderer.SetPropertyBlock(propRedColor);
+    }
+
+    public void addBuff(Consts.BuffData buffData)
+    {
+        for (int i = 0; i < list_buffDatas.Count; i++)
+        {
+            // 如果已存在该buff,则重置时间
+            if (list_buffDatas[i].buffType == buffData.buffType && list_buffDatas[i].from == buffData.from)
+            {
+                list_buffDatas[i].time = buffData.time;
+                return;
+            }
+        }
+
+        list_buffDatas.Add(buffData);
+
+        switch(buffData.buffType)
+        {
+            case Consts.BuffType.Stun:
+                {
+                    isCanMove = false;
+                    skeletonAnimation.timeScale = 0;
+                    break;
+                }
+        }
     }
 
     void die()
