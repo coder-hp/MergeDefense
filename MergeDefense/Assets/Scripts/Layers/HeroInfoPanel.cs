@@ -56,7 +56,8 @@ public class HeroInfoPanel : MonoBehaviour
         gameObject.SetActive(true);
 
         heroLogicBase = _heroLogicBase;
-
+        
+        btn_sellHeroTrans.localScale = Vector3.one;
         text_heroName.text = heroLogicBase.heroData.name;
         text_career.text = heroLogicBase.heroData.career;
         text_atk.text = heroLogicBase.getAtk().ToString();

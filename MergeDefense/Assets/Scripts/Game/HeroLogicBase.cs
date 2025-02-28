@@ -606,6 +606,11 @@ public class HeroLogicBase : MonoBehaviour
             isDraging = true;
 
             GameLayer.s_instance.heroGrid.SetActive(true);
+
+            if(HeroInfoPanel.s_instance.gameObject.activeInHierarchy)
+            {
+                HeroInfoPanel.s_instance.btn_sellHeroTrans.localScale = Vector3.zero;
+            }
         }
     }
 
