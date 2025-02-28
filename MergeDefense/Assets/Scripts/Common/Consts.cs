@@ -11,6 +11,7 @@ public class Consts
     public static long closeBlockRemoveScale = 3200000000;           // 关闭六角片消除缩放动画
 
     public static int startHaveGold = 100;      // 进入游戏初始金币
+    public static int startHaveDiamond = 10;    // 进入游戏初始钻石
     public static int startSummonGold = 20;     // 初始召唤金额
     public static int summonAddGold = 2;        // 每召唤一次增加的金额
     public static int startForgeGold = 20;      // 初始锻造金额
@@ -32,6 +33,7 @@ public class Consts
         GameLayer,
         ShowRewardLayer,
         HeroInfoPanel,
+        WeaponShopPanel,
     }
 
     public enum BuffType

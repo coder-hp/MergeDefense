@@ -97,6 +97,15 @@ public class GMLayer : MonoBehaviour
         ToastScript.show("+1000");
     }
 
+    public void onClickAddDiamond()
+    {
+        if (GameUILayer.s_instance)
+        {
+            GameUILayer.s_instance.changeDiamond(1000);
+        }
+        ToastScript.show("+1000");
+    }
+
     public void onClickUnlockAll()
     {
         

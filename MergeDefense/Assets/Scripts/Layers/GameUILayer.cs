@@ -17,6 +17,7 @@ public class GameUILayer : MonoBehaviour
     public Transform heroUIPointTrans;
     public Transform weaponGridTrans;
     public Transform curGoldIconTrans;
+    public Transform curDiamondIconTrans;
     public Text text_enemyCount;
     public Text text_time;
     public Text text_boci;
@@ -25,11 +26,14 @@ public class GameUILayer : MonoBehaviour
     public Text btn_summon_gold;
     public Text btn_forge_gold;
 
-    int curBoCi = 0;
+    [HideInInspector]
+    public int curBoCi = 0;
     int curBoCiRestTime = 20;
 
     [HideInInspector]
     public int curGold = Consts.startHaveGold;
+    [HideInInspector]
+    public int curDiamond = Consts.startHaveDiamond;
     [HideInInspector]
     public int curSummonGold = Consts.startSummonGold;
     [HideInInspector]
@@ -44,16 +48,21 @@ public class GameUILayer : MonoBehaviour
     {
         s_instance = this;
 
+        curGold = Consts.startHaveGold;
+        curDiamond = Consts.startHaveDiamond;
+
         text_gold.text = curGold.ToString();
+        text_diamond.text = curDiamond.ToString();
         btn_summon_gold.text = curSummonGold.ToString();
         btn_forge_gold.text = curForgeGold.ToString();
-
-        Invoke("startBoCi",0.5f);
     }
 
     private void Start()
     {
         LayerManager.ShowLayer(Consts.Layer.HeroInfoPanel);
+        LayerManager.ShowLayer(Consts.Layer.WeaponShopPanel);
+
+        Invoke("startBoCi", 0.5f);
     }
 
     void startBoCi()
@@ -85,6 +94,9 @@ public class GameUILayer : MonoBehaviour
 
         InvokeRepeating("onInvokeBoCiSecond",1,1);
         InvokeRepeating("onInvokeAddEnemy", 0.6f, 0.6f);
+
+        // 刷新武器商店
+        WeaponShopPanel.s_instance.refreshWeapon();
     }
 
     void onInvokeBoCiSecond()
@@ -140,13 +152,13 @@ public class GameUILayer : MonoBehaviour
         curGold += value;
         text_gold.text = curGold.ToString();
 
-        KillGoldManager.s_instance.showKillGold(value);
+        MoneyChangeTextPoint.s_instance.show(value,1);
 
         if (tween_changeGoldIcon == null)
         {
             tween_changeGoldIcon = DOTween.Sequence();
             tween_changeGoldIcon.Append(curGoldIconTrans.DOScale(1.3f, 0.2f))
-                       .Append(curGoldIconTrans.DOScale(1, 0.2f));
+                                .Append(curGoldIconTrans.DOScale(1, 0.2f));
             tween_changeGoldIcon.SetAutoKill(false);
         }
         else
@@ -158,7 +170,7 @@ public class GameUILayer : MonoBehaviour
         {
             tween_changeGoldText = DOTween.Sequence();
             tween_changeGoldText.Append(text_gold.transform.DOScale(1.3f, 0.2f))
-                       .Append(text_gold.transform.DOScale(1, 0.2f));
+                                .Append(text_gold.transform.DOScale(1, 0.2f));
             tween_changeGoldText.SetAutoKill(false);
         }
         else
@@ -185,6 +197,42 @@ public class GameUILayer : MonoBehaviour
         {
             btn_forge_gold.color = new Color(0.97f, 0.26f, 0.26f, 1);
         }
+    }
+
+    Sequence tween_changeDiamondIcon = null;
+    Sequence tween_changeDiamondText = null;
+    public void changeDiamond(int value)
+    {
+        curDiamond += value;
+        text_diamond.text = curDiamond.ToString();
+
+        MoneyChangeTextPoint.s_instance.show(value,2);
+
+        if (tween_changeDiamondIcon == null)
+        {
+            tween_changeDiamondIcon = DOTween.Sequence();
+            tween_changeDiamondIcon.Append(curDiamondIconTrans.DOScale(1.3f, 0.2f))
+                                   .Append(curDiamondIconTrans.DOScale(1, 0.2f));
+            tween_changeDiamondIcon.SetAutoKill(false);
+        }
+        else
+        {
+            tween_changeDiamondIcon.Restart();
+        }
+
+        if (tween_changeDiamondText == null)
+        {
+            tween_changeDiamondText = DOTween.Sequence();
+            tween_changeDiamondText.Append(text_diamond.transform.DOScale(1.3f, 0.2f))
+                                   .Append(text_diamond.transform.DOScale(1, 0.2f));
+            tween_changeDiamondText.SetAutoKill(false);
+        }
+        else
+        {
+            tween_changeDiamondText.Restart();
+        }
+
+        WeaponShopPanel.s_instance.diamondChanged();
     }
 
     public void onClickPause()
@@ -273,8 +321,21 @@ public class GameUILayer : MonoBehaviour
         }
     }
 
+    public void addWeapon(WeaponData weaponData)
+    {
+        for (int i = 0; i < weaponGridTrans.childCount; i++)
+        {
+            if (weaponGridTrans.GetChild(i).childCount == 0)
+            {
+                UIItemWeapon uIItemWeapon = Instantiate(item_weapon, weaponGridTrans.GetChild(i)).GetComponent<UIItemWeapon>();
+                uIItemWeapon.init(weaponData.type, weaponData.level);
+                break;
+            }
+        }
+    }
+
     public void onClickShop()
     {
-        ToastScript.show("暂未开放");
+        WeaponShopPanel.s_instance.show();
     }
 }

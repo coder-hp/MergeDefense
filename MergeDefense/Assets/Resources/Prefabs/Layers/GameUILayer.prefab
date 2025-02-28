@@ -218,6 +218,7 @@ MonoBehaviour:
   heroUIPointTrans: {fileID: 1159197877803035446}
   weaponGridTrans: {fileID: 1078602792453762366}
   curGoldIconTrans: {fileID: 5244548798837105149}
+  curDiamondIconTrans: {fileID: 8998000147266991726}
   text_enemyCount: {fileID: 8279762320973953388}
   text_time: {fileID: 6593359631840922468}
   text_boci: {fileID: 1186522037032281197}
@@ -226,6 +227,7 @@ MonoBehaviour:
   btn_summon_gold: {fileID: 4481693099585822707}
   btn_forge_gold: {fileID: 7063937017468583406}
   curGold: 100
+  curDiamond: 100
   curSummonGold: 20
   curForgeGold: 20
   isCanDragWeapon: 1
@@ -2355,7 +2357,7 @@ GameObject:
   - component: {fileID: 1587600831097766353}
   - component: {fileID: 6492248247306395880}
   m_Layer: 5
-  m_Name: killGoldPoint
+  m_Name: MoneyChangeTextPoint
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2392,7 +2394,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fa7e99d4acd56244a9a5416ccef4ee41, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  prefab_killGold: {fileID: 8874407117553128663}
+  prefab_moneyChangeText: {fileID: 8874407117553128663}
 --- !u!1 &6034845610398258188
 GameObject:
   m_ObjectHideFlags: 0
@@ -7277,7 +7279,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 1608945188646028440, guid: 99807ca801ef46e448ce608ef576201d, type: 3}
       propertyPath: m_Name
-      value: prefab_killGold
+      value: prefab_moneyChangeText
       objectReference: {fileID: 0}
     - target: {fileID: 2756007894942796871, guid: 99807ca801ef46e448ce608ef576201d, type: 3}
       propertyPath: m_Text
