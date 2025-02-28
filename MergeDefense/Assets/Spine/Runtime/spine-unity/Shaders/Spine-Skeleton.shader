@@ -22,24 +22,29 @@ Shader "Kein/Spine/Skeleton" {
 
 	SubShader {
 		
-
+        Tags { "Queue"="Transparent" "IgnoreProjector"="True" "RenderType"="Transparent" "PreviewType"="Plane" }
 		// Stencil {
 		// 	Ref[_StencilRef]
 		// 	Comp[_StencilComp]
 		// 	Pass Keep
 		// }
-        
+        Pass
+        {
+             ZWrite On
+             ColorMask 0
+        }
+
 		Pass {
 			Name "Normal"
-            Tags { "Queue"="Transparent" "IgnoreProjector"="True" "RenderType"="Transparent" "PreviewType"="Plane" }
+            
 
             Fog { Mode Off }
             Cull Off
             ZWrite Off
             Blend One OneMinusSrcAlpha
             //Blend OneMinusSrcAlpha
-            //Lighting Off
-
+            Lighting Off
+            //ZTest LEqual
 			CGPROGRAM
 			#pragma shader_feature _ _STRAIGHT_ALPHA_INPUT
 			#pragma vertex vert
@@ -126,5 +131,5 @@ Shader "Kein/Spine/Skeleton" {
 		// 	ENDCG
 		// }
 	}
-	CustomEditor "SpineShaderWithOutlineGUI"
+	//CustomEditor "SpineShaderWithOutlineGUI"
 }
