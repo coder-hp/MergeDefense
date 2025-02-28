@@ -70,6 +70,7 @@ public class UIItemWeapon : MonoBehaviour
         }
     }
 
+    Vector2 dragOffset = new Vector2(0, 100);
     private void OnMouseDrag()
     {
         if(!GameUILayer.s_instance.isCanDragWeapon)
@@ -77,7 +78,7 @@ public class UIItemWeapon : MonoBehaviour
             return;
         }
 
-        transform.localPosition = CommonUtil.getCurMousePosToUI();
+        transform.localPosition = CommonUtil.getCurMousePosToUI() + dragOffset;
 
         Transform trans = getMinDisItemWeapon();
         if (trans)
