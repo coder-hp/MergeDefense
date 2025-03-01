@@ -153,6 +153,7 @@ public class WeaponShopPanel : MonoBehaviour
             weaponArray[i] = WeaponEntity.getInstance().getData(RandomUtil.getRandom(1,5), level);
 
             Transform weaponTrans = transform.Find("bg/weapon" + i);
+            weaponTrans.Find("btn_buy").localScale = Vector3.one;
             weaponTrans.Find("buyed").localScale = Vector3.zero;
             weaponTrans.Find("name").GetComponent<Text>().text = weaponArray[i].name;
 
@@ -186,6 +187,7 @@ public class WeaponShopPanel : MonoBehaviour
                 {
                     Transform weaponTrans = transform.Find("bg/weapon" + index);
                     weaponTrans.Find("buyed").localScale = Vector3.one;
+                    weaponTrans.Find("btn_buy").localScale = Vector3.zero;
 
                     GameUILayer.s_instance.changeDiamond(-price);
                     GameUILayer.s_instance.addWeapon(weaponArray[index]);
