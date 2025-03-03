@@ -43,14 +43,12 @@ public class HeroLogicBase : MonoBehaviour
 
     [HideInInspector]
     public Transform heroQualityTrans;
-    Vector3 heroQualityOffset = new Vector3(0, 0f, -0.01f);
     Material material_qualityBg;
 
     [HideInInspector]
     public Action Attack;
 
     HeroAniEvent heroAniEvent;
-    Vector3 emojiOffset = new Vector3(-0.2f, 0.5f, 0);
 
     [HideInInspector]
     public HeroStarData heroStarData;
@@ -75,7 +73,7 @@ public class HeroLogicBase : MonoBehaviour
         // 品质背景板
         {
             heroQualityTrans = Instantiate(ObjectPool.getPrefab("Prefabs/Games/heroQuality"), GameLayer.s_instance.heroQualityPoint).transform;
-            heroQualityTrans.position = curStandGrid.position + heroQualityOffset;
+            heroQualityTrans.position = curStandGrid.position + Consts.heroQualityOffset;
             heroQualityTrans.localScale = Vector3.zero;
             material_qualityBg = heroQualityTrans.GetChild(0).GetComponent<MeshRenderer>().material;
         }
@@ -108,7 +106,7 @@ public class HeroLogicBase : MonoBehaviour
             heroUITrans.localScale = Vector3.one;
         }
 
-        transform.localScale = new Vector3(1.3f, 1.3f, 1.3f);
+        transform.localScale = Consts.summonHeroBigScale;
         transform.DOScale(0.7f, 0.2f).OnComplete(() =>
         {
             transform.DOScale(1f, 0.1f).OnComplete(() =>
@@ -202,7 +200,7 @@ public class HeroLogicBase : MonoBehaviour
                             heroUITrans.localPosition = CommonUtil.WorldPosToUI(GameLayer.s_instance.camera3D, curStandGrid.position);
                         });
 
-                        heroQualityTrans.DOMove(minDisGrid.position + heroQualityOffset, moveTime).SetEase(Ease.Linear);
+                        heroQualityTrans.DOMove(minDisGrid.position + Consts.heroQualityOffset, moveTime).SetEase(Ease.Linear);
                     }
                     // 已有角色，交换位置
                     else
@@ -219,7 +217,7 @@ public class HeroLogicBase : MonoBehaviour
                             heroLogicBase_other.heroUITrans.localScale = Vector3.one;
                             heroLogicBase_other.heroUITrans.localPosition = CommonUtil.WorldPosToUI(GameLayer.s_instance.camera3D, heroLogicBase_other.curStandGrid.position);
                         });
-                        heroLogicBase_other.heroQualityTrans.DOMove(heroLogicBase_other.curStandGrid.position + heroQualityOffset, moveTime).SetEase(Ease.Linear);
+                        heroLogicBase_other.heroQualityTrans.DOMove(heroLogicBase_other.curStandGrid.position + Consts.heroQualityOffset, moveTime).SetEase(Ease.Linear);
                         
                         heroUITrans.localScale = Vector3.zero;
                         curStandGrid = minDisGrid;
@@ -231,7 +229,7 @@ public class HeroLogicBase : MonoBehaviour
                             heroUITrans.localScale = Vector3.one;
                             heroUITrans.localPosition = CommonUtil.WorldPosToUI(GameLayer.s_instance.camera3D, curStandGrid.position);
                         });
-                        heroQualityTrans.DOMove(curStandGrid.position + heroQualityOffset, moveTime).SetEase(Ease.Linear);
+                        heroQualityTrans.DOMove(curStandGrid.position + Consts.heroQualityOffset, moveTime).SetEase(Ease.Linear);
                     }
                 }
             }

@@ -8,6 +8,8 @@ using DG.Tweening;
 public class ToastScript : MonoBehaviour
 {
     static GameObject prefab = null;
+    static Vector3 moveOffset = new Vector3(0, 200, 0);
+
     public static void show (string text)
     {
         try
@@ -19,7 +21,7 @@ public class ToastScript : MonoBehaviour
             GameObject obj = Instantiate(prefab, LaunchScript.s_instance.canvas_top);
             obj.transform.Find("Text").GetComponent<Text>().text = text;
 
-            obj.transform.DOLocalMove(new Vector3(0, 200, 0), 1).OnComplete(() =>
+            obj.transform.DOLocalMove(moveOffset, 1).OnComplete(() =>
             {
                 Destroy(obj);
             });

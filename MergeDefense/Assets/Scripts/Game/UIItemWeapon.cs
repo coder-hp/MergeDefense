@@ -72,7 +72,6 @@ public class UIItemWeapon : MonoBehaviour
         GameUILayer.s_instance.setIsShowBtnWeaponSell(true, weaponData);
     }
 
-    Vector2 dragOffset = new Vector2(0, 100);
     private void OnMouseDrag()
     {
         if(!GameUILayer.s_instance.isCanDragWeapon)
@@ -80,7 +79,7 @@ public class UIItemWeapon : MonoBehaviour
             return;
         }
 
-        transform.localPosition = CommonUtil.getCurMousePosToUI() + dragOffset;
+        transform.localPosition = CommonUtil.getCurMousePosToUI() + Consts.weaponItemDragOffset;
 
         Transform trans = getMinDisItemWeapon();
         if (trans)
@@ -107,7 +106,7 @@ public class UIItemWeapon : MonoBehaviour
             // 检测是否拖到角色上
             else
             {
-                raycastHit = RayUtil.getEndPoint(CommonUtil.mousePosToWorld(GameLayer.s_instance.camera3D));
+                raycastHit = RayUtil.getEndPoint(CommonUtil.mousePosToWorld(GameLayer.s_instance.camera3D) + Consts.mouseRayOffset);
                 if (raycastHit.collider && raycastHit.collider.CompareTag("Hero"))
                 {
                     if(curDragChoicedHero != raycastHit.collider.transform)
@@ -193,7 +192,7 @@ public class UIItemWeapon : MonoBehaviour
 
         // 检测是否拖到角色上
         {
-            raycastHit = RayUtil.getEndPoint(CommonUtil.mousePosToWorld(GameLayer.s_instance.camera3D));
+            raycastHit = RayUtil.getEndPoint(CommonUtil.mousePosToWorld(GameLayer.s_instance.camera3D) + Consts.mouseRayOffset);
             if (raycastHit.collider && raycastHit.collider.CompareTag("Hero"))
             {
                 HeroLogicBase heroLogicBase = raycastHit.collider.GetComponent<HeroLogicBase>();

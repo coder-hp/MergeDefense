@@ -448,11 +448,6 @@ public class CommonUtil
         scrollView.GetComponent<ScrollRect>().enabled = enable;
     }
 
-    static public void setVisible(Transform obj, bool visible)
-    {
-        obj.localScale = new Vector3(visible ? 1 : 0, 1, 1);
-    }
-
     static public float twoObjDistance_3D(GameObject obj1, GameObject obj2)
     {
         return (obj1.transform.position - obj2.transform.position).magnitude;
@@ -560,9 +555,10 @@ public class CommonUtil
     {
         // 获取鼠标在屏幕上的位置
         Vector3 mousePosition = Input.mousePosition;
+        mousePosition.z = 10;
 
         // 将鼠标位置转换为世界坐标
-        Vector3 worldPosition = camera3d.ScreenToWorldPoint(new Vector3(mousePosition.x, mousePosition.y, 10));
+        Vector3 worldPosition = camera3d.ScreenToWorldPoint(mousePosition);
 
         return worldPosition;
     }

@@ -127,11 +127,11 @@ public class EnemyLogic : MonoBehaviour
 
                 if (curTargetPosIndex == 3)
                 {
-                    transform.localScale = new Vector3(-1, 1, 1);
+                    transform.localScale = Consts.vec_flipX;
                 }
                 else if (curTargetPosIndex == 1)
                 {
-                    transform.localScale = new Vector3(1, 1, 1);
+                    transform.localScale = Vector3.one;
                 }
             }
 

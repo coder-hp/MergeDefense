@@ -27,7 +27,7 @@ class LayerManager
     // 出生动画
     public static void LayerShowAni(Transform aniTrans)
     {
-        aniTrans.localScale = new Vector3(0, 0, 0);
+        aniTrans.localScale = Vector3.zero;
         Sequence seq = DOTween.Sequence();
         seq.Append(aniTrans.DOScale(1.1f, 0.3f))
             .Append(aniTrans.DOScale(1, 0.1f));
@@ -37,14 +37,6 @@ class LayerManager
     // 关闭动画
     public static void LayerCloseAni(Transform aniTrans, Action callback)
     {
-        //Sequence seq = DOTween.Sequence();
-        //seq.Append(aniTrans.DOScale(1.2f, 0.1f))
-        //   .Append(aniTrans.DOScale(0, 0.2f)).OnComplete(() =>
-        //   {
-        //       callback();
-        //   });
-        //seq.Play();
-
         aniTrans.DOScale(0.5f, 0.15f).SetEase(Ease.InCubic).OnComplete(()=>
         {
             callback();

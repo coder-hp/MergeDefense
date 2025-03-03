@@ -77,4 +77,11 @@ public class Consts
     public static string HeroAniNameIdle = "idle";
     public static string HeroAniNameAttack = "attack";
     public static string HeroAniNameRun = "run";
+
+    public static Vector3 vec_flipX = new Vector3(-1,1,1);
+    public static Vector2 weaponItemDragOffset = new Vector2(0, 100);
+    public static Vector3 mouseRayOffset = new Vector3(0, 1,0);
+    public static Vector3 heroQualityOffset = new Vector3(0, 0f, -0.01f);
+    public static Vector3 heroSellBtnOffset = new Vector3(0, -0.9f, 0);
+    public static Vector3 summonHeroBigScale = new Vector3(1.3f, 1.3f, 1.3f);
 }
