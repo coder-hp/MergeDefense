@@ -68,6 +68,8 @@ public class UIItemWeapon : MonoBehaviour
                 GameLayer.s_instance.heroPoint.GetChild(i).GetChild(0).GetComponent<HeroLogicBase>().showWeaponEmoji(weaponData);
             }
         }
+
+        GameUILayer.s_instance.setIsShowBtnWeaponSell(true, weaponData);
     }
 
     Vector2 dragOffset = new Vector2(0, 100);
@@ -135,6 +137,8 @@ public class UIItemWeapon : MonoBehaviour
 
     private void OnMouseUp()
     {
+        GameUILayer.s_instance.setIsShowBtnWeaponSell(false);
+
         if (!GameUILayer.s_instance.isCanDragWeapon)
         {
             return;
@@ -199,7 +203,17 @@ public class UIItemWeapon : MonoBehaviour
             }
             else
             {
-                // 未拖到角色上
+                // 未拖到角色上,检测是否拖到了卖出按钮上
+                if(BtnWeaponSellEvent.s_instance.itemWeapon == this)
+                {
+                    // 防止卖出按钮那边检测碰撞
+                    transform.tag = "Untagged";
+
+                    GameUILayer.s_instance.changeDiamond(weaponData.level);
+                    GameUILayer.s_instance.setIsShowBtnWeaponSell(false);
+                    Destroy(gameObject);
+                    return;
+                }
             }
         }
 

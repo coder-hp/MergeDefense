@@ -18,6 +18,9 @@ public class GameUILayer : MonoBehaviour
     public Transform weaponGridTrans;
     public Transform curGoldIconTrans;
     public Transform curDiamondIconTrans;
+    public Transform btn_weaponShop;
+    public Transform btn_weaponSell;
+    public Text text_weaponSellPrice;
     public Text text_enemyCount;
     public Text text_time;
     public Text text_boci;
@@ -143,6 +146,22 @@ public class GameUILayer : MonoBehaviour
     {
         text_enemyCount.text = EnemyManager.s_instance.getEnemyCount() + "/" + Consts.maxEnemyCount;
         img_enemyCountProgress.fillAmount = EnemyManager.s_instance.getEnemyCount() / 100f;
+    }
+
+    public void setIsShowBtnWeaponSell(bool isShow,WeaponData weaponData = null)
+    {
+        if (isShow)
+        {
+            btn_weaponShop.localScale = Vector3.zero;
+            btn_weaponSell.localScale = Vector3.one;
+
+            text_weaponSellPrice.text = weaponData.level.ToString();
+        }
+        else
+        {
+            btn_weaponShop.localScale = Vector3.one;
+            btn_weaponSell.localScale = Vector3.zero;
+        }
     }
 
     Sequence tween_changeGoldIcon = null;
