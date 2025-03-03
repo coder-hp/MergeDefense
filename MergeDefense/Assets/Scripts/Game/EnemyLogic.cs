@@ -146,6 +146,7 @@ public class EnemyLogic : MonoBehaviour
     Tween tween_hitRedColor = null;
     public bool damage(int atk,bool isCrit)
     {
+        AudioScript.s_instance.playSound("enemyDamage");
         if (curHP > 0)
         {
             DamageNumManager.s_instance.showDamageNum(atk,bloodPoint.position);
