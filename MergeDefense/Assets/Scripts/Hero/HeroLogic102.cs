@@ -9,6 +9,7 @@ public class HeroLogic102 : HeroBase
 {
     public override void AttackLogic(EnemyLogic enemyLogic)
     {
+        AudioScript.s_instance.playSound("102_attack");
         Transform arrow = Instantiate(ObjectPool.getPrefab("Prefabs/Games/arrow"), GameLayer.s_instance.flyPoint).transform;
         arrow.position = heroLogicBase.curStandGrid.position;
         arrow.GetComponent<ArrowLogic>().init(heroLogicBase, enemyLogic);

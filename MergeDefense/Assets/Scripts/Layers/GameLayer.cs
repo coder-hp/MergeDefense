@@ -70,6 +70,8 @@ public class GameLayer : MonoBehaviour
                         HeroLogicBase heroLogicBase2 = heroPoint.GetChild(j).GetChild(0).GetComponent<HeroLogicBase>();
                         if ((heroLogicBase1.curStar < heroLogicBase1.heroData.maxStar) && (heroLogicBase1.heroData.id == heroLogicBase2.heroData.id) && (heroLogicBase1.curStar == heroLogicBase2.curStar))
                         {
+                            AudioScript.s_instance.playSound("heroMerge");
+
                             heroLogicBase2.isMerge = true;
                             heroLogicBase2.boxCollider.enabled = false;
                             heroLogicBase2.transform.SetParent(transform);

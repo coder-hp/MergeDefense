@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.IO;
 using System.Collections;
 using System;
-using UnityEngine.Networking;
 
 public class AudioScript : MonoBehaviour
 {
@@ -32,14 +31,13 @@ public class AudioScript : MonoBehaviour
         }
     }
 
-    public void playMusic(string audioPath, bool isLoop)
+    public void playMusic(string name, bool isLoop)
     {
-        isLocalAudio = true;
         if (m_musicAudioSource.isPlaying)
         {
             m_musicAudioSource.Stop();
         }
-        m_musicAudioSource.clip = Resources.Load(audioPath, typeof(AudioClip)) as AudioClip;
+        m_musicAudioSource.clip = Resources.Load("Audios/Music/" + name, typeof(AudioClip)) as AudioClip;
         m_musicAudioSource.time = 0;
         m_musicAudioSource.volume = GameData.getIsOpenMusic();
         m_musicAudioSource.Play();
@@ -103,30 +101,17 @@ public class AudioScript : MonoBehaviour
         }
     }
 
-    bool isLocalAudio = false;
     public void stopMusic()
     {
         m_musicAudioSource.Stop();
         if (m_musicAudioSource.clip)
         {
-            try
-            {
-                // 如果是外部音频，必须Destroy clip，否则无法释放占用内存
-                if (!isLocalAudio)
-                {
-                    Destroy(m_musicAudioSource.clip);
-                }
-            }
-            catch(Exception ex)
-            {
-                Debug.Log(ex);
-            }
             m_musicAudioSource.clip.UnloadAudioData();
         }
     }
 
     public void playSound_btn()
     {
-        playSound("btn");
+        playSound("btn_click");
     }
 }

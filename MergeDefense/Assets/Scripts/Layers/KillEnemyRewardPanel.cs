@@ -23,6 +23,8 @@ public class KillEnemyRewardPanel : MonoBehaviour
 
     public void show(EnemyWaveData _enemyWaveData)
     {
+        AudioScript.s_instance.playSound("killEnemyRewardPanel");
+
         GameUILayer.s_instance.isCanOnInvokeBoCiSecond = false;
         LayerManager.LayerShowAni(transform.Find("bg"));
 
@@ -89,6 +91,7 @@ public class KillEnemyRewardPanel : MonoBehaviour
             weaponTrans.Find("frame").GetComponent<Image>().color = Consts.list_weaponColor[weaponData.type];
             weaponTrans.Find("level_bg").GetComponent<Image>().color = Consts.list_weaponColor[weaponData.type];
             weaponTrans.Find("level_bg/level").GetComponent<Text>().text = weaponData.level.ToString();
+            reward_weapon.Find("name").GetComponent<Text>().text = weaponData.name;
         }
         else
         {

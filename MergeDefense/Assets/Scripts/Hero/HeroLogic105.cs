@@ -9,6 +9,7 @@ public class HeroLogic105 : HeroBase
 {
     public override void AttackLogic(EnemyLogic enemyLogic)
     {
+        AudioScript.s_instance.playSound("105_attack");
         Transform arrow = Instantiate(ObjectPool.getPrefab("Prefabs/Games/snowBall"), GameLayer.s_instance.flyPoint).transform;
         arrow.position = heroLogicBase.curStandGrid.position;
         arrow.GetComponent<SnowBallLogic>().init(heroLogicBase, enemyLogic);

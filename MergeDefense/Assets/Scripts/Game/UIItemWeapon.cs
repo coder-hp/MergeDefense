@@ -160,8 +160,11 @@ public class UIItemWeapon : MonoBehaviour
             if (mergeTarget.childCount > 0)
             {
                 UIItemWeapon uIItemWeapon = mergeTarget.GetChild(0).GetComponent<UIItemWeapon>();
+
+                // 武器合成
                 if (uIItemWeapon.weaponData.type == weaponData.type && uIItemWeapon.weaponData.level == weaponData.level && uIItemWeapon.weaponData.level <= 9)
                 {
+                    AudioScript.s_instance.playSound("weaponMerge");
                     mergeTarget.GetComponent<Image>().color = Color.white;
                     mergeTarget.DOScale(1f, 0.2f);
                     uIItemWeapon.addLevel();
@@ -206,6 +209,8 @@ public class UIItemWeapon : MonoBehaviour
                 // 未拖到角色上,检测是否拖到了卖出按钮上
                 if(BtnWeaponSellEvent.s_instance.itemWeapon == this)
                 {
+                    AudioScript.s_instance.playSound("sellHero");
+
                     // 防止卖出按钮那边检测碰撞
                     transform.tag = "Untagged";
 

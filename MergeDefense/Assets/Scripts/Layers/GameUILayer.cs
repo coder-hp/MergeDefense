@@ -298,6 +298,7 @@ public class GameUILayer : MonoBehaviour
     {
         if (curGold < curSummonGold)
         {
+            AudioScript.s_instance.playSound("summonNotHaveGold");
             ToastScript.show("Coins Not Enough!");
             return;
         }
@@ -319,6 +320,7 @@ public class GameUILayer : MonoBehaviour
     {
         if (curGold < curForgeGold)
         {
+            AudioScript.s_instance.playSound("summonNotHaveGold");
             ToastScript.show("Coins Not Enough!");
             return;
         }

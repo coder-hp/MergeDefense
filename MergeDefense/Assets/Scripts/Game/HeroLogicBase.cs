@@ -96,6 +96,8 @@ public class HeroLogicBase : MonoBehaviour
 
     void summonWaitShow()
     {
+        AudioScript.s_instance.playSound("summonHero" + RandomUtil.getRandom(1, 3));
+
         if (heroQualityTrans)
         {
             heroQualityTrans.localScale = Vector3.one;
@@ -523,6 +525,7 @@ public class HeroLogicBase : MonoBehaviour
         }
 
         setWeaponUI();
+        AudioScript.s_instance.playSound("equipWeapon");
     }
 
     public void addStar()
