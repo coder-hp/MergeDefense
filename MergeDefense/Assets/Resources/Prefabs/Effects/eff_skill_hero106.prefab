@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 1776341824702924960}
   - component: {fileID: 548228240984335334}
   m_Layer: 0
-  m_Name: hero101_daoguang
+  m_Name: eff_skill_hero106
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -26,13 +26,13 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5723372727169039261}
   serializedVersion: 2
-  m_LocalRotation: {x: -0.3061862, y: -0.17677666, z: 0.17677677, w: 0.91855866}
-  m_LocalPosition: {x: -1.338, y: 0.581, z: 0}
+  m_LocalRotation: {x: -0.061393984, y: -0.80270165, z: -0.3481821, w: -0.48028126}
+  m_LocalPosition: {x: 0, y: 0.581, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: -30, y: -30, z: 30}
+  m_LocalEulerAnglesHint: {x: -30, y: -250, z: 30}
 --- !u!198 &1776341824702924960
 ParticleSystem:
   m_ObjectHideFlags: 0
@@ -48,7 +48,7 @@ ParticleSystem:
   ringBufferMode: 0
   ringBufferLoopRange: {x: 0, y: 1}
   emitterVelocityMode: 1
-  looping: 1
+  looping: 0
   prewarm: 0
   playOnAwake: 1
   useUnscaledTime: 0
