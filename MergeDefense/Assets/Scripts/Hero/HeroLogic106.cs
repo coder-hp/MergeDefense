@@ -7,6 +7,7 @@ using UnityEngine;
 // 技能：攻击时，15%概率提升周围单位20%的攻击力，持续5s
 public class HeroLogic106 : HeroBase
 {
+    int baseSkillRate = 15;
     public override void AttackLogic(EnemyLogic enemyLogic)
     {
         AudioScript.s_instance.playSound("106_attack");
@@ -15,7 +16,7 @@ public class HeroLogic106 : HeroBase
         enemyLogic.damage(atk, isCrit);
 
         // 技能判定
-        if (RandomUtil.getRandom(1, 100) <= (150 + heroLogicBase.getAddSkillRate()))
+        if (RandomUtil.getRandom(1, 100) <= (baseSkillRate + heroLogicBase.getAddSkillRate()))
         {
             for (int i = 0; i < GameLayer.s_instance.heroPoint.childCount; i++)
             {
