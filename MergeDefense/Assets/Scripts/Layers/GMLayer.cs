@@ -69,6 +69,11 @@ public class GMLayer : MonoBehaviour
                 text_fps.text = "FPS:" + (int)(1f / Time.deltaTime);
             }
         }
+
+        //if(Input.GetKeyDown(KeyCode.W))
+        //{
+        //    LayerManager.ShowLayer(Consts.Layer.KillEnemyRewardPanel).GetComponent<KillEnemyRewardPanel>().show(EnemyWaveEntity.getInstance().getData(10));
+        //}
     }
 
     public void onClickClearData()

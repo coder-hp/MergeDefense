@@ -34,7 +34,7 @@ public class KillEnemyRewardPanel : MonoBehaviour
         // 精英敌人
         if (enemyWaveData.enemyType == 2)
         {
-            text_title.text = "BOSS SLAIN";
+            text_title.text = "ELITE ENEMY SLAIN";
 
             buff_weapon.localScale = Vector3.one;
             buff_hero.localScale = Vector3.zero;
@@ -42,7 +42,7 @@ public class KillEnemyRewardPanel : MonoBehaviour
         // Boss敌人
         else if (enemyWaveData.enemyType == 3)
         {
-            text_title.text = "ELITE ENEMY SLAIN";
+            text_title.text = "BOSS SLAIN";
 
             buff_weapon.localScale = Vector3.zero;
             buff_hero.localScale = Vector3.one;
