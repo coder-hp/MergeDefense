@@ -1,0 +1,3574 @@
+{
+    "accessors": [
+        {
+            "bufferView": 0,
+            "componentType": 5123,
+            "count": 8931,
+            "name": "accessorIndices",
+            "type": "SCALAR"
+        },
+        {
+            "bufferView": 1,
+            "componentType": 5126,
+            "count": 8931,
+            "name": "accessorPositions",
+            "type": "VEC3"
+        },
+        {
+            "bufferView": 1,
+            "byteOffset": 107172,
+            "componentType": 5126,
+            "count": 8931,
+            "name": "accessorNormals",
+            "type": "VEC3"
+        },
+        {
+            "bufferView": 2,
+            "componentType": 5126,
+            "count": 8931,
+            "name": "accessorUVs",
+            "type": "VEC2"
+        },
+        {
+            "bufferView": 3,
+            "componentType": 5123,
+            "count": 8931,
+            "name": "accessorJoints",
+            "type": "VEC4"
+        },
+        {
+            "bufferView": 4,
+            "componentType": 5126,
+            "count": 8931,
+            "name": "accessorWeights",
+            "type": "VEC4"
+        },
+        {
+            "bufferView": 5,
+            "componentType": 5126,
+            "count": 23,
+            "name": "accessorInverseBindMatrices",
+            "type": "MAT4"
+        }
+    ],
+    "asset": {
+        "generator": "Animcraft glTF exporter for fbx v1.0.0",
+        "version": "2.0"
+    },
+    "bufferViews": [
+        {
+            "buffer": 0,
+            "byteLength": 17862,
+            "byteStride": 2,
+            "name": "bufferViewScalar"
+        },
+        {
+            "buffer": 0,
+            "byteLength": 214344,
+            "byteOffset": 17862,
+            "byteStride": 12,
+            "name": "bufferViewFloatVec3"
+        },
+        {
+            "buffer": 0,
+            "byteLength": 71448,
+            "byteOffset": 232206,
+            "byteStride": 8,
+            "name": "bufferViewFloatVec2"
+        },
+        {
+            "buffer": 0,
+            "byteLength": 71448,
+            "byteOffset": 303654,
+            "byteStride": 8,
+            "name": "bufferViewUnsignedShortVec4"
+        },
+        {
+            "buffer": 0,
+            "byteLength": 142896,
+            "byteOffset": 375102,
+            "byteStride": 16,
+            "name": "bufferViewFloatVec4"
+        },
+        {
+            "buffer": 0,
+            "byteLength": 17664,
+            "byteOffset": 517998,
+            "byteStride": 64,
+            "name": "bufferViewFloatMat4"
+        }
+    ],
+    "buffers": [
+        {
+            "byteLength": 535662,
+            "uri": "buffer.bin"
+        }
+    ],
+    "extensionsUsed": [],
+    "fps": {
+        "fps": 30.0,
+        "frames": 0
+    },
+    "mapping": {
+        "body": [
+            {
+                "brig": "ACBRig_107_2lN",
+                "id": 610,
+                "index": -1,
+                "jt_name": ""
+            },
+            {
+                "brig": "ACBRig_107_1lN",
+                "id": 609,
+                "index": -1,
+                "jt_name": ""
+            },
+            {
+                "brig": "ACBRig_21_1lN",
+                "id": 702,
+                "index": -1,
+                "jt_name": ""
+            },
+            {
+                "brig": "ACBRig_20_1lN",
+                "id": 701,
+                "index": -1,
+                "jt_name": ""
+            },
+            {
+                "brig": "ACBRig_1_1lN",
+                "id": 11,
+                "index": 16,
+                "jt_name": "RigLCollarbone"
+            },
+            {
+                "brig": "ACBRig_2_4lN",
+                "id": 20,
+                "index": 23,
+                "jt_name": "RigRPalm"
+            },
+            {
+                "brig": "ACBRig_2_3lN",
+                "id": 19,
+                "index": 22,
+                "jt_name": "RigRForearm"
+            },
+            {
+                "brig": "ACBRig_2_2lN",
+                "id": 18,
+                "index": 21,
+                "jt_name": "RigRUpperarm"
+            },
+            {
+                "brig": "ACBRig_1_4lN",
+                "id": 14,
+                "index": 19,
+                "jt_name": "RigLPalm"
+            },
+            {
+                "brig": "ACBRig_1_3lN",
+                "id": 13,
+                "index": 18,
+                "jt_name": "RigLForearm"
+            },
+            {
+                "brig": "ACBRig_1_2lN",
+                "id": 12,
+                "index": 17,
+                "jt_name": "RigLUpperarm"
+            },
+            {
+                "brig": "ACBRig_6_1lN",
+                "id": 29,
+                "index": 8,
+                "jt_name": "RigRThigh"
+            },
+            {
+                "brig": "ACBRig_5_1lN",
+                "id": 23,
+                "index": 4,
+                "jt_name": "RigLThigh"
+            },
+            {
+                "brig": "ACBRig_7_1lN",
+                "id": 26,
+                "index": 7,
+                "jt_name": "RigLToes1"
+            },
+            {
+                "brig": "ACBRig_8_1lN",
+                "id": 32,
+                "index": 11,
+                "jt_name": "RigRToes1"
+            },
+            {
+                "brig": "ACBRig_5_3lN",
+                "id": 25,
+                "index": 6,
+                "jt_name": "RigLFoot"
+            },
+            {
+                "brig": "ACBRig_6_3lN",
+                "id": 31,
+                "index": 10,
+                "jt_name": "RigRFoot"
+            },
+            {
+                "brig": "ACBRig_6_2lN",
+                "id": 30,
+                "index": 9,
+                "jt_name": "RigRCalf"
+            },
+            {
+                "brig": "ACBRig_5_2lN",
+                "id": 24,
+                "index": 5,
+                "jt_name": "RigLCalf"
+            },
+            {
+                "brig": "ACBRig_12_1lN",
+                "id": 1,
+                "index": 3,
+                "jt_name": "RigPelvis"
+            },
+            {
+                "brig": "ACBRig_0_1lN",
+                "id": 0,
+                "index": -1,
+                "jt_name": ""
+            },
+            {
+                "brig": "ACBRig_9_1lN",
+                "id": 2,
+                "index": 12,
+                "jt_name": "RigSpine1"
+            },
+            {
+                "brig": "ACBRig_9_2lN",
+                "id": 3,
+                "index": 13,
+                "jt_name": "RigSpine2"
+            },
+            {
+                "brig": "ACBRig_9_3lN",
+                "id": 4,
+                "index": 14,
+                "jt_name": "RigSpine3"
+            },
+            {
+                "brig": "ACBRig_2_1lN",
+                "id": 17,
+                "index": 20,
+                "jt_name": "RigRCollarbone"
+            },
+            {
+                "brig": "ACBRig_17_1lN",
+                "id": 5,
+                "index": 24,
+                "jt_name": "RigNeck"
+            },
+            {
+                "brig": "ACBRig_11_1lN",
+                "id": 6,
+                "index": 25,
+                "jt_name": "RigHead"
+            },
+            {
+                "brig": "ACBRig_102_1lN",
+                "id": 801,
+                "index": -1,
+                "jt_name": ""
+            },
+            {
+                "brig": "ACBRig_102_2lN",
+                "id": 802,
+                "index": -1,
+                "jt_name": ""
+            },
+            {
+                "brig": "ACBRig_104_1lN",
+                "id": 803,
+                "index": -1,
+                "jt_name": ""
+            },
+            {
+                "brig": "ACBRig_104_2lN",
+                "id": 804,
+                "index": -1,
+                "jt_name": ""
+            },
+            {
+                "brig": "ACBRig_101_1lN",
+                "id": 601,
+                "index": -1,
+                "jt_name": ""
+            },
+            {
+                "brig": "ACBRig_101_2lN",
+                "id": 602,
+                "index": -1,
+                "jt_name": ""
+            },
+            {
+                "brig": "ACBRig_103_1lN",
+                "id": 603,
+                "index": -1,
+                "jt_name": ""
+            },
+            {
+                "brig": "ACBRig_103_2lN",
+                "id": 604,
+                "index": -1,
+                "jt_name": ""
+            },
+            {
+                "brig": "ACBRig_105_1lN",
+                "id": 606,
+                "index": -1,
+                "jt_name": ""
+            },
+            {
+                "brig": "ACBRig_105_2lN",
+                "id": 607,
+                "index": -1,
+                "jt_name": ""
+            },
+            {
+                "brig": "ACBRig_106_1lN",
+                "id": 806,
+                "index": -1,
+                "jt_name": ""
+            },
+            {
+                "brig": "ACBRig_106_2lN",
+                "id": 807,
+                "index": -1,
+                "jt_name": ""
+            },
+            {
+                "brig": "ACBRig_108_1lN",
+                "id": 809,
+                "index": -1,
+                "jt_name": ""
+            },
+            {
+                "brig": "ACBRig_108_2lN",
+                "id": 810,
+                "index": -1,
+                "jt_name": ""
+            }
+        ],
+        "fingers": [
+            {
+                "brig": "ACBRig_4_1lN",
+                "id": 320,
+                "index": -1,
+                "jt_name": ""
+            },
+            {
+                "brig": "ACBRig_4_5lN",
+                "id": 324,
+                "index": -1,
+                "jt_name": ""
+            },
+            {
+                "brig": "ACBRig_4_9lN",
+                "id": 328,
+                "index": -1,
+                "jt_name": ""
+            },
+            {
+                "brig": "ACBRig_4_13lN",
+                "id": 332,
+                "index": -1,
+                "jt_name": ""
+            },
+            {
+                "brig": "ACBRig_4_17lN",
+                "id": 336,
+                "index": -1,
+                "jt_name": ""
+            },
+            {
+                "brig": "ACBRig_3_1lN",
+                "id": 300,
+                "index": -1,
+                "jt_name": ""
+            },
+            {
+                "brig": "ACBRig_3_17lN",
+                "id": 316,
+                "index": -1,
+                "jt_name": ""
+            },
+            {
+                "brig": "ACBRig_3_13lN",
+                "id": 312,
+                "index": -1,
+                "jt_name": ""
+            },
+            {
+                "brig": "ACBRig_3_9lN",
+                "id": 308,
+                "index": -1,
+                "jt_name": ""
+            },
+            {
+                "brig": "ACBRig_3_5lN",
+                "id": 304,
+                "index": -1,
+                "jt_name": ""
+            },
+            {
+                "brig": "ACBRig_4_20lN",
+                "id": 339,
+                "index": -1,
+                "jt_name": ""
+            },
+            {
+                "brig": "ACBRig_4_19lN",
+                "id": 338,
+                "index": -1,
+                "jt_name": ""
+            },
+            {
+                "brig": "ACBRig_4_18lN",
+                "id": 337,
+                "index": -1,
+                "jt_name": ""
+            },
+            {
+                "brig": "ACBRig_4_16lN",
+                "id": 335,
+                "index": -1,
+                "jt_name": ""
+            },
+            {
+                "brig": "ACBRig_4_15lN",
+                "id": 334,
+                "index": -1,
+                "jt_name": ""
+            },
+            {
+                "brig": "ACBRig_4_14lN",
+                "id": 333,
+                "index": -1,
+                "jt_name": ""
+            },
+            {
+                "brig": "ACBRig_4_12lN",
+                "id": 331,
+                "index": -1,
+                "jt_name": ""
+            },
+            {
+                "brig": "ACBRig_4_11lN",
+                "id": 330,
+                "index": -1,
+                "jt_name": ""
+            },
+            {
+                "brig": "ACBRig_4_10lN",
+                "id": 329,
+                "index": -1,
+                "jt_name": ""
+            },
+            {
+                "brig": "ACBRig_4_8lN",
+                "id": 327,
+                "index": -1,
+                "jt_name": ""
+            },
+            {
+                "brig": "ACBRig_4_7lN",
+                "id": 326,
+                "index": -1,
+                "jt_name": ""
+            },
+            {
+                "brig": "ACBRig_4_6lN",
+                "id": 325,
+                "index": -1,
+                "jt_name": ""
+            },
+            {
+                "brig": "ACBRig_4_4lN",
+                "id": 323,
+                "index": -1,
+                "jt_name": ""
+            },
+            {
+                "brig": "ACBRig_4_3lN",
+                "id": 322,
+                "index": -1,
+                "jt_name": ""
+            },
+            {
+                "brig": "ACBRig_4_2lN",
+                "id": 321,
+                "index": -1,
+                "jt_name": ""
+            },
+            {
+                "brig": "ACBRig_3_4lN",
+                "id": 303,
+                "index": -1,
+                "jt_name": ""
+            },
+            {
+                "brig": "ACBRig_3_3lN",
+                "id": 302,
+                "index": -1,
+                "jt_name": ""
+            },
+            {
+                "brig": "ACBRig_3_2lN",
+                "id": 301,
+                "index": -1,
+                "jt_name": ""
+            },
+            {
+                "brig": "ACBRig_3_8lN",
+                "id": 307,
+                "index": -1,
+                "jt_name": ""
+            },
+            {
+                "brig": "ACBRig_3_7lN",
+                "id": 306,
+                "index": -1,
+                "jt_name": ""
+            },
+            {
+                "brig": "ACBRig_3_6lN",
+                "id": 305,
+                "index": -1,
+                "jt_name": ""
+            },
+            {
+                "brig": "ACBRig_3_12lN",
+                "id": 311,
+                "index": -1,
+                "jt_name": ""
+            },
+            {
+                "brig": "ACBRig_3_11lN",
+                "id": 310,
+                "index": -1,
+                "jt_name": ""
+            },
+            {
+                "brig": "ACBRig_3_10lN",
+                "id": 309,
+                "index": -1,
+                "jt_name": ""
+            },
+            {
+                "brig": "ACBRig_3_16lN",
+                "id": 315,
+                "index": -1,
+                "jt_name": ""
+            },
+            {
+                "brig": "ACBRig_3_15lN",
+                "id": 314,
+                "index": -1,
+                "jt_name": ""
+            },
+            {
+                "brig": "ACBRig_3_14lN",
+                "id": 313,
+                "index": -1,
+                "jt_name": ""
+            },
+            {
+                "brig": "ACBRig_3_20lN",
+                "id": 319,
+                "index": -1,
+                "jt_name": ""
+            },
+            {
+                "brig": "ACBRig_3_19lN",
+                "id": 318,
+                "index": -1,
+                "jt_name": ""
+            },
+            {
+                "brig": "ACBRig_3_18lN",
+                "id": 317,
+                "index": -1,
+                "jt_name": ""
+            }
+        ],
+        "spine": [
+            {
+                "brig": "ACBRig_9_3lN",
+                "id": 503,
+                "index": 14,
+                "jt_name": "RigSpine3"
+            },
+            {
+                "brig": "ACBRig_9_2lN",
+                "id": 502,
+                "index": 13,
+                "jt_name": "RigSpine2"
+            },
+            {
+                "brig": "ACBRig_9_1lN",
+                "id": 501,
+                "index": 12,
+                "jt_name": "RigSpine1"
+            },
+            {
+                "brig": "ACBRig_9_10lN",
+                "id": 510,
+                "index": -1,
+                "jt_name": ""
+            },
+            {
+                "brig": "ACBRig_9_9lN",
+                "id": 509,
+                "index": -1,
+                "jt_name": ""
+            },
+            {
+                "brig": "ACBRig_9_8lN",
+                "id": 508,
+                "index": -1,
+                "jt_name": ""
+            },
+            {
+                "brig": "ACBRig_9_7lN",
+                "id": 507,
+                "index": -1,
+                "jt_name": ""
+            },
+            {
+                "brig": "ACBRig_9_6lN",
+                "id": 506,
+                "index": -1,
+                "jt_name": ""
+            },
+            {
+                "brig": "ACBRig_9_5lN",
+                "id": 505,
+                "index": -1,
+                "jt_name": ""
+            },
+            {
+                "brig": "ACBRig_9_4lN",
+                "id": 504,
+                "index": -1,
+                "jt_name": ""
+            }
+        ]
+    },
+    "materials": [
+        {
+            "alphaMode": "OPAQUE",
+            "doubleSided": 1,
+            "emissiveFactor": [
+                0.0,
+                0.0,
+                0.0
+            ],
+            "name": "noUV",
+            "pbrMetallicRoughness": {
+                "baseColorFactor": [
+                    0.5,
+                    0.5,
+                    0.6000000238418579,
+                    1.0
+                ],
+                "metallicFactor": 0.0,
+                "roughnessFactor": 1.0
+            }
+        },
+        {
+            "alphaMode": "OPAQUE",
+            "doubleSided": 1,
+            "emissiveFactor": [
+                0.0,
+                0.0,
+                0.0
+            ],
+            "name": "noUV",
+            "pbrMetallicRoughness": {
+                "baseColorFactor": [
+                    0.5,
+                    0.5,
+                    0.6000000238418579,
+                    1.0
+                ],
+                "metallicFactor": 0.0,
+                "roughnessFactor": 1.0
+            }
+        },
+        {
+            "alphaMode": "OPAQUE",
+            "doubleSided": 1,
+            "emissiveFactor": [
+                0.0,
+                0.0,
+                0.0
+            ],
+            "name": "def",
+            "pbrMetallicRoughness": {
+                "baseColorFactor": [
+                    0.699999988079071,
+                    0.6000000238418579,
+                    0.6000000238418579,
+                    1.0
+                ],
+                "metallicFactor": 0.0,
+                "roughnessFactor": 1.0
+            }
+        },
+        {
+            "alphaMode": "OPAQUE",
+            "doubleSided": 1,
+            "emissiveFactor": [
+                0.0,
+                0.0,
+                0.0
+            ],
+            "name": "02 - Default",
+            "pbrMetallicRoughness": {
+                "baseColorFactor": [
+                    0.5882353186607361,
+                    0.5882353186607361,
+                    0.5882353186607361,
+                    1.0,
+                    1.0
+                ],
+                "metallicFactor": 0.0,
+                "roughnessFactor": 1.0
+            }
+        }
+    ],
+    "meshInfo": {
+        "bondbox": [
+            83.66609954833984,
+            -83.66609954833984,
+            43.668174743652344,
+            -52.087181091308594,
+            190.60321044921875,
+            0.03656005859375
+        ],
+        "isHaveMesh": 1
+    },
+    "meshes": [
+        {
+            "name": "Boar",
+            "primitives": [
+                {
+                    "attributes": {
+                        "JOINTS_0": 4,
+                        "NORMAL": 2,
+                        "POSITION": 1,
+                        "TEXCOORD_0": 3,
+                        "WEIGHTS_0": 5
+                    },
+                    "indices": 0,
+                    "material": 3,
+                    "mode": 4
+                }
+            ]
+        }
+    ],
+    "nodes": [
+        {
+            "children": [
+                1,
+                2,
+                3,
+                26,
+                27
+            ],
+            "id": 9,
+            "name": "RootNode",
+            "parent": -1,
+            "parentIdList": [
+                0
+            ],
+            "rotation": [
+                0.0,
+                0.0,
+                0.0,
+                1.0
+            ],
+            "scale": [
+                1.0,
+                1.0,
+                1.0
+            ],
+            "translation": [
+                0.0,
+                0.0,
+                0.0
+            ],
+            "type": "group"
+        },
+        {
+            "id": 70,
+            "mesh": 0,
+            "name": "Boar",
+            "parent": 0,
+            "parentIdList": [
+                1,
+                0
+            ],
+            "rotation": [
+                -0.7071067690849304,
+                -0.0,
+                0.0,
+                0.7071067690849304
+            ],
+            "scale": [
+                1.0,
+                1.0,
+                1.0
+            ],
+            "skin": 0,
+            "translation": [
+                1.824020000640303e-05,
+                0.0,
+                -4.856203304370865e-06
+            ],
+            "type": "mesh"
+        },
+        {
+            "id": 71,
+            "name": "Rig",
+            "parent": 0,
+            "parentIdList": [
+                2,
+                0
+            ],
+            "rotation": [
+                0.5000000596046448,
+                0.5000000596046448,
+                0.4999999701976776,
+                0.4999999701976776
+            ],
+            "scale": [
+                1.0,
+                1.0,
+                1.0
+            ],
+            "translation": [
+                0.0,
+                0.0,
+                0.0
+            ],
+            "type": "group"
+        },
+        {
+            "children": [
+                4,
+                8,
+                12
+            ],
+            "id": 72,
+            "name": "RigPelvis",
+            "parent": 0,
+            "parentIdList": [
+                3,
+                0
+            ],
+            "rotation": [
+                0.49912703037261963,
+                0.5008715391159058,
+                0.49912694096565247,
+                0.500871479511261
+            ],
+            "scale": [
+                1.0,
+                1.0,
+                1.0
+            ],
+            "translation": [
+                -6.285126801230945e-06,
+                37.77088165283203,
+                -3.2395339012145996
+            ],
+            "type": "joint"
+        },
+        {
+            "children": [
+                5
+            ],
+            "id": 73,
+            "name": "RigLThigh",
+            "parent": 3,
+            "parentIdList": [
+                4,
+                3,
+                0
+            ],
+            "rotation": [
+                -0.014248657040297985,
+                0.9983317255973816,
+                0.02375480718910694,
+                -0.050660643726587296
+            ],
+            "scale": [
+                1.0,
+                0.9999999403953552,
+                1.0
+            ],
+            "translation": [
+                -0.7864913940429688,
+                5.902827262878418,
+                23.73238754272461
+            ],
+            "type": "joint"
+        },
+        {
+            "children": [
+                6
+            ],
+            "id": 74,
+            "name": "RigLCalf",
+            "parent": 4,
+            "parentIdList": [
+                5,
+                4,
+                3,
+                0
+            ],
+            "rotation": [
+                0.005936223082244396,
+                -0.006419652607291937,
+                -0.1872968226671219,
+                0.9822644591331482
+            ],
+            "scale": [
+                1.0000005960464478,
+                0.9999994039535522,
+                1.0
+            ],
+            "translation": [
+                18.482662200927734,
+                1.1444091796875e-05,
+                -1.9073486328125e-06
+            ],
+            "type": "joint"
+        },
+        {
+            "children": [
+                7
+            ],
+            "id": 75,
+            "name": "RigLFoot",
+            "parent": 5,
+            "parentIdList": [
+                6,
+                5,
+                4,
+                3,
+                0
+            ],
+            "rotation": [
+                -0.002953266492113471,
+                -0.04723268374800682,
+                0.7660612463951111,
+                0.6410229802131653
+            ],
+            "scale": [
+                1.0000026226043701,
+                0.9999969005584717,
+                1.0000008344650269
+            ],
+            "translation": [
+                16.68773078918457,
+                4.76837158203125e-07,
+                -3.552713678800501e-15
+            ],
+            "type": "joint"
+        },
+        {
+            "id": 76,
+            "name": "RigLToes1",
+            "parent": 6,
+            "parentIdList": [
+                7,
+                6,
+                5,
+                4,
+                3,
+                0
+            ],
+            "rotation": [
+                8.812347914499696e-06,
+                7.777475548209623e-05,
+                0.1121385470032692,
+                0.9936925768852234
+            ],
+            "scale": [
+                0.9999999403953552,
+                0.9999998807907104,
+                1.0
+            ],
+            "translation": [
+                14.89211654663086,
+                0.0,
+                3.552713678800501e-15
+            ],
+            "type": "joint"
+        },
+        {
+            "children": [
+                9
+            ],
+            "id": 77,
+            "name": "RigRThigh",
+            "parent": 3,
+            "parentIdList": [
+                8,
+                3,
+                0
+            ],
+            "rotation": [
+                -0.014249319210648537,
+                0.9983316659927368,
+                -0.02375596947968006,
+                0.050660423934459686
+            ],
+            "scale": [
+                1.0,
+                0.9999999403953552,
+                0.9999999403953552
+            ],
+            "translation": [
+                -0.7864952087402344,
+                5.902827262878418,
+                -23.732383728027344
+            ],
+            "type": "joint"
+        },
+        {
+            "children": [
+                10
+            ],
+            "id": 78,
+            "name": "RigRCalf",
+            "parent": 8,
+            "parentIdList": [
+                9,
+                8,
+                3,
+                0
+            ],
+            "rotation": [
+                -0.005931367166340351,
+                0.006418244447559118,
+                -0.1872970312833786,
+                0.9822644591331482
+            ],
+            "scale": [
+                0.999999463558197,
+                1.0000003576278687,
+                0.9999999403953552
+            ],
+            "translation": [
+                18.4826602935791,
+                1.1682510375976562e-05,
+                3.552713678800501e-15
+            ],
+            "type": "joint"
+        },
+        {
+            "children": [
+                11
+            ],
+            "id": 79,
+            "name": "RigRFoot",
+            "parent": 9,
+            "parentIdList": [
+                10,
+                9,
+                8,
+                3,
+                0
+            ],
+            "rotation": [
+                0.003010850865393877,
+                0.047180503606796265,
+                0.765957236289978,
+                0.6411508917808533
+            ],
+            "scale": [
+                0.9999977350234985,
+                1.0000033378601074,
+                0.999999463558197
+            ],
+            "translation": [
+                16.687728881835938,
+                8.881784197001252e-16,
+                -7.105427357601002e-15
+            ],
+            "type": "joint"
+        },
+        {
+            "id": 80,
+            "name": "RigRToes1",
+            "parent": 10,
+            "parentIdList": [
+                11,
+                10,
+                9,
+                8,
+                3,
+                0
+            ],
+            "rotation": [
+                1.1575565395105514e-06,
+                1.0466991625435185e-05,
+                0.11228565871715546,
+                0.993675947189331
+            ],
+            "scale": [
+                1.0,
+                1.0,
+                1.0
+            ],
+            "translation": [
+                14.89211654663086,
+                -8.881784197001252e-16,
+                0.0
+            ],
+            "type": "joint"
+        },
+        {
+            "children": [
+                13
+            ],
+            "id": 81,
+            "name": "RigSpine1",
+            "parent": 3,
+            "parentIdList": [
+                12,
+                3,
+                0
+            ],
+            "rotation": [
+                -4.25305906048834e-08,
+                1.356277294917163e-07,
+                0.0045438501983881,
+                0.9999896883964539
+            ],
+            "scale": [
+                0.9999999403953552,
+                0.9999999403953552,
+                1.0
+            ],
+            "translation": [
+                11.15310287475586,
+                2.5719778537750244,
+                -1.895172317745164e-06
+            ],
+            "type": "joint"
+        },
+        {
+            "children": [
+                14
+            ],
+            "id": 82,
+            "name": "RigSpine2",
+            "parent": 12,
+            "parentIdList": [
+                13,
+                12,
+                3,
+                0
+            ],
+            "rotation": [
+                3.7862232460383893e-08,
+                -6.332439284051361e-08,
+                -0.028043406084179878,
+                0.999606728553772
+            ],
+            "scale": [
+                1.0000001192092896,
+                1.0000001192092896,
+                1.0
+            ],
+            "translation": [
+                8.297130584716797,
+                0.0,
+                -4.547473508864641e-13
+            ],
+            "type": "joint"
+        },
+        {
+            "children": [
+                15
+            ],
+            "id": 83,
+            "name": "RigSpine3",
+            "parent": 13,
+            "parentIdList": [
+                14,
+                13,
+                12,
+                3,
+                0
+            ],
+            "rotation": [
+                8.015821784113086e-09,
+                -2.0375725995336325e-08,
+                -0.0024455899838358164,
+                0.9999970197677612
+            ],
+            "scale": [
+                0.9999998211860657,
+                0.9999998211860657,
+                1.0
+            ],
+            "translation": [
+                9.71969985961914,
+                2.384185791015625e-07,
+                -4.547473508864641e-13
+            ],
+            "type": "joint"
+        },
+        {
+            "children": [
+                16,
+                20,
+                24
+            ],
+            "id": 84,
+            "name": "RigRibcage",
+            "parent": 14,
+            "parentIdList": [
+                15,
+                14,
+                13,
+                12,
+                3,
+                0
+            ],
+            "rotation": [
+                -2.7531006363545885e-09,
+                -3.211418686532852e-08,
+                0.027689708396792412,
+                0.9996165633201599
+            ],
+            "scale": [
+                1.0,
+                1.0,
+                1.0
+            ],
+            "translation": [
+                10.333320617675781,
+                2.384185791015625e-07,
+                0.0
+            ],
+            "type": "joint"
+        },
+        {
+            "children": [
+                17
+            ],
+            "id": 85,
+            "name": "RigLCollarbone",
+            "parent": 15,
+            "parentIdList": [
+                16,
+                15,
+                14,
+                13,
+                12,
+                3,
+                0
+            ],
+            "rotation": [
+                0.04333988204598427,
+                -0.7546045184135437,
+                -0.17175500094890594,
+                0.6318179368972778
+            ],
+            "scale": [
+                1.0,
+                1.0,
+                1.0
+            ],
+            "translation": [
+                -2.1864242553710938,
+                12.785256385803223,
+                3.793097734451294
+            ],
+            "type": "joint"
+        },
+        {
+            "children": [
+                18
+            ],
+            "id": 86,
+            "name": "RigLUpperarm",
+            "parent": 16,
+            "parentIdList": [
+                17,
+                16,
+                15,
+                14,
+                13,
+                12,
+                3,
+                0
+            ],
+            "rotation": [
+                0.14315961301326752,
+                -0.26629582047462463,
+                0.0987468957901001,
+                0.9480721950531006
+            ],
+            "scale": [
+                0.9999997615814209,
+                1.0,
+                1.000000238418579
+            ],
+            "translation": [
+                40.32532501220703,
+                3.814697265625e-06,
+                -2.288818359375e-05
+            ],
+            "type": "joint"
+        },
+        {
+            "children": [
+                19
+            ],
+            "id": 87,
+            "name": "RigLForearm",
+            "parent": 17,
+            "parentIdList": [
+                18,
+                17,
+                16,
+                15,
+                14,
+                13,
+                12,
+                3,
+                0
+            ],
+            "rotation": [
+                0.027055801823735237,
+                -0.011524203233420849,
+                0.04175325110554695,
+                0.9986950755119324
+            ],
+            "scale": [
+                0.9999992251396179,
+                1.0000008344650269,
+                1.0
+            ],
+            "translation": [
+                17.71139907836914,
+                -9.071826934814453e-05,
+                1.4210854715202004e-14
+            ],
+            "type": "joint"
+        },
+        {
+            "id": 88,
+            "name": "RigLPalm",
+            "parent": 18,
+            "parentIdList": [
+                19,
+                18,
+                17,
+                16,
+                15,
+                14,
+                13,
+                12,
+                3,
+                0
+            ],
+            "rotation": [
+                -0.7324078679084778,
+                0.015489943325519562,
+                -0.0393214114010334,
+                0.679553210735321
+            ],
+            "scale": [
+                1.0,
+                0.9999998211860657,
+                1.0000003576278687
+            ],
+            "translation": [
+                18.11722755432129,
+                -9.393692016601562e-05,
+                -7.62939453125e-06
+            ],
+            "type": "joint"
+        },
+        {
+            "children": [
+                21
+            ],
+            "id": 89,
+            "name": "RigRCollarbone",
+            "parent": 15,
+            "parentIdList": [
+                20,
+                15,
+                14,
+                13,
+                12,
+                3,
+                0
+            ],
+            "rotation": [
+                -0.04333909600973129,
+                0.7546045184135437,
+                -0.17175596952438354,
+                0.6318177580833435
+            ],
+            "scale": [
+                1.0,
+                1.0,
+                1.0
+            ],
+            "translation": [
+                -2.1864242553710938,
+                12.785256385803223,
+                -3.793097734451294
+            ],
+            "type": "joint"
+        },
+        {
+            "children": [
+                22
+            ],
+            "id": 90,
+            "name": "RigRUpperarm",
+            "parent": 20,
+            "parentIdList": [
+                21,
+                20,
+                15,
+                14,
+                13,
+                12,
+                3,
+                0
+            ],
+            "rotation": [
+                -0.14316174387931824,
+                0.2662961781024933,
+                0.09874999523162842,
+                0.9480714797973633
+            ],
+            "scale": [
+                1.000000238418579,
+                1.0,
+                0.9999997615814209
+            ],
+            "translation": [
+                40.32532501220703,
+                -7.62939453125e-06,
+                -2.288818359375e-05
+            ],
+            "type": "joint"
+        },
+        {
+            "children": [
+                23
+            ],
+            "id": 91,
+            "name": "RigRForearm",
+            "parent": 21,
+            "parentIdList": [
+                22,
+                21,
+                20,
+                15,
+                14,
+                13,
+                12,
+                3,
+                0
+            ],
+            "rotation": [
+                -0.027056995779275894,
+                0.0115244435146451,
+                0.04175836965441704,
+                0.9986948370933533
+            ],
+            "scale": [
+                1.0000009536743164,
+                0.9999991655349731,
+                0.9999999403953552
+            ],
+            "translation": [
+                17.71139907836914,
+                9.071826934814453e-05,
+                -7.62939453125e-06
+            ],
+            "type": "joint"
+        },
+        {
+            "id": 92,
+            "name": "RigRPalm",
+            "parent": 22,
+            "parentIdList": [
+                23,
+                22,
+                21,
+                20,
+                15,
+                14,
+                13,
+                12,
+                3,
+                0
+            ],
+            "rotation": [
+                0.7324065566062927,
+                -0.015485787764191628,
+                -0.0393180213868618,
+                0.6795549392700195
+            ],
+            "scale": [
+                1.000000238418579,
+                1.000000238418579,
+                0.9999997019767761
+            ],
+            "translation": [
+                18.117263793945312,
+                9.298324584960938e-05,
+                0.0
+            ],
+            "type": "joint"
+        },
+        {
+            "children": [
+                25
+            ],
+            "id": 93,
+            "name": "RigNeck",
+            "parent": 15,
+            "parentIdList": [
+                24,
+                15,
+                14,
+                13,
+                12,
+                3,
+                0
+            ],
+            "rotation": [
+                7.105429898699844e-15,
+                -2.557174510662251e-14,
+                -7.105427357601002e-15,
+                1.0
+            ],
+            "scale": [
+                1.0,
+                1.0,
+                1.0
+            ],
+            "translation": [
+                0.10002899169921875,
+                -0.4404672384262085,
+                -8.458964657620527e-07
+            ],
+            "type": "joint"
+        },
+        {
+            "id": 94,
+            "name": "RigHead",
+            "parent": 24,
+            "parentIdList": [
+                25,
+                24,
+                15,
+                14,
+                13,
+                12,
+                3,
+                0
+            ],
+            "rotation": [
+                -7.105427357601002e-15,
+                1.327157395076108e-14,
+                7.105427357601002e-15,
+                1.0
+            ],
+            "scale": [
+                1.0,
+                1.0,
+                1.0
+            ],
+            "translation": [
+                7.135528564453125,
+                0.0,
+                1.6940658945086007e-21
+            ],
+            "type": "joint"
+        },
+        {
+            "id": 95,
+            "name": "RigLPlatform",
+            "parent": 0,
+            "parentIdList": [
+                26,
+                0
+            ],
+            "rotation": [
+                0.5000000596046448,
+                0.5000000596046448,
+                0.4999999701976776,
+                0.4999999701976776
+            ],
+            "scale": [
+                1.0,
+                1.0,
+                1.0
+            ],
+            "translation": [
+                26.67603302001953,
+                -2.5091458155657165e-07,
+                2.4419748783111572
+            ],
+            "type": "joint"
+        },
+        {
+            "id": 96,
+            "name": "RigRPlatform",
+            "parent": 0,
+            "parentIdList": [
+                27,
+                0
+            ],
+            "rotation": [
+                0.5000000596046448,
+                0.5000000596046448,
+                0.4999999701976776,
+                0.4999999701976776
+            ],
+            "scale": [
+                1.0,
+                1.0,
+                1.0
+            ],
+            "translation": [
+                -26.67603302001953,
+                -2.5091600264204317e-07,
+                2.4419829845428467
+            ],
+            "type": "joint"
+        }
+    ],
+    "objectInfo": {
+        "objectScale": 0.44267243962231273
+    },
+    "scenes": [
+        {
+            "extensions": {},
+            "nodes": [
+                0
+            ]
+        }
+    ],
+    "skins": [
+        {
+            "inverseBindMatrices": 6,
+            "joints": [
+                8,
+                3,
+                9,
+                10,
+                11,
+                4,
+                5,
+                6,
+                7,
+                20,
+                14,
+                13,
+                16,
+                25,
+                24,
+                15,
+                12,
+                17,
+                21,
+                18,
+                22,
+                23,
+                19
+            ],
+            "name": "test",
+            "skeleton": 1
+        }
+    ],
+    "tpose": [
+        {
+            "children": [
+                1,
+                2,
+                3,
+                26,
+                27
+            ],
+            "id": 9,
+            "mapped": 0,
+            "name": "RootNode",
+            "nodeIndex": 0,
+            "parent": -1,
+            "parentIdList": [
+                0
+            ],
+            "rotation": [
+                0.0,
+                0.0,
+                0.0,
+                1.0
+            ],
+            "scale": [
+                1.0,
+                1.0,
+                1.0
+            ],
+            "translation": [
+                0.0,
+                0.0,
+                0.0
+            ],
+            "type": "group"
+        },
+        {
+            "id": 70,
+            "mapped": 0,
+            "mesh": 0,
+            "name": "Boar",
+            "nodeIndex": 1,
+            "parent": 0,
+            "parentIdList": [
+                1,
+                0
+            ],
+            "rootBone": {
+                "children": [
+                    1,
+                    2,
+                    3,
+                    26,
+                    27
+                ],
+                "id": 9,
+                "mapped": 0,
+                "name": "RootNode",
+                "nodeIndex": 0,
+                "parent": -1,
+                "parentIdList": [
+                    0
+                ],
+                "rotation": [
+                    0.0,
+                    0.0,
+                    0.0,
+                    1.0
+                ],
+                "scale": [
+                    1.0,
+                    1.0,
+                    1.0
+                ],
+                "translation": [
+                    0.0,
+                    0.0,
+                    0.0
+                ],
+                "type": "group"
+            },
+            "rotation": [
+                -0.7071067690849304,
+                -0.0,
+                0.0,
+                0.7071067690849304
+            ],
+            "scale": [
+                1.0,
+                1.0,
+                1.0
+            ],
+            "skin": 0,
+            "translation": [
+                1.824020000640303e-05,
+                0.0,
+                -4.856203304370865e-06
+            ],
+            "type": "mesh"
+        },
+        {
+            "id": 71,
+            "mapped": 0,
+            "name": "Rig",
+            "nodeIndex": 2,
+            "parent": 0,
+            "parentIdList": [
+                2,
+                0
+            ],
+            "rootBone": {
+                "children": [
+                    1,
+                    2,
+                    3,
+                    26,
+                    27
+                ],
+                "id": 9,
+                "mapped": 0,
+                "name": "RootNode",
+                "nodeIndex": 0,
+                "parent": -1,
+                "parentIdList": [
+                    0
+                ],
+                "rotation": [
+                    0.0,
+                    0.0,
+                    0.0,
+                    1.0
+                ],
+                "scale": [
+                    1.0,
+                    1.0,
+                    1.0
+                ],
+                "translation": [
+                    0.0,
+                    0.0,
+                    0.0
+                ],
+                "type": "group"
+            },
+            "rotation": [
+                0.5000000596046448,
+                0.5000000596046448,
+                0.4999999701976776,
+                0.4999999701976776
+            ],
+            "scale": [
+                1.0,
+                1.0,
+                1.0
+            ],
+            "translation": [
+                0.0,
+                0.0,
+                0.0
+            ],
+            "type": "group"
+        },
+        {
+            "children": [
+                4,
+                8,
+                12
+            ],
+            "id": 72,
+            "mapped": 0,
+            "name": "RigPelvis",
+            "nodeIndex": 3,
+            "parent": 0,
+            "parentIdList": [
+                3,
+                0
+            ],
+            "rootBone": {
+                "children": [
+                    1,
+                    2,
+                    3,
+                    26,
+                    27
+                ],
+                "id": 9,
+                "mapped": 0,
+                "name": "RootNode",
+                "nodeIndex": 0,
+                "parent": -1,
+                "parentIdList": [
+                    0
+                ],
+                "rotation": [
+                    0.0,
+                    0.0,
+                    0.0,
+                    1.0
+                ],
+                "scale": [
+                    1.0,
+                    1.0,
+                    1.0
+                ],
+                "translation": [
+                    0.0,
+                    0.0,
+                    0.0
+                ],
+                "type": "group"
+            },
+            "rotation": [
+                0.49912703037261963,
+                0.5008715391159058,
+                0.49912694096565247,
+                0.500871479511261
+            ],
+            "scale": [
+                1.0,
+                1.0,
+                1.0
+            ],
+            "translation": [
+                -6.285126801230945e-06,
+                37.77088165283203,
+                -3.2395339012145996
+            ],
+            "type": "joint"
+        },
+        {
+            "children": [
+                5
+            ],
+            "id": 73,
+            "mapped": 0,
+            "name": "RigLThigh",
+            "nodeIndex": 4,
+            "parent": 3,
+            "parentIdList": [
+                4,
+                3,
+                0
+            ],
+            "rootBone": {
+                "children": [
+                    1,
+                    2,
+                    3,
+                    26,
+                    27
+                ],
+                "id": 9,
+                "mapped": 0,
+                "name": "RootNode",
+                "nodeIndex": 0,
+                "parent": -1,
+                "parentIdList": [
+                    0
+                ],
+                "rotation": [
+                    0.0,
+                    0.0,
+                    0.0,
+                    1.0
+                ],
+                "scale": [
+                    1.0,
+                    1.0,
+                    1.0
+                ],
+                "translation": [
+                    0.0,
+                    0.0,
+                    0.0
+                ],
+                "type": "group"
+            },
+            "rotation": [
+                -0.014248657040297985,
+                0.9983317255973816,
+                0.02375480718910694,
+                -0.050660643726587296
+            ],
+            "scale": [
+                1.0,
+                0.9999999403953552,
+                1.0
+            ],
+            "translation": [
+                -0.7864913940429688,
+                5.902827262878418,
+                23.73238754272461
+            ],
+            "type": "joint"
+        },
+        {
+            "children": [
+                6
+            ],
+            "id": 74,
+            "mapped": 0,
+            "name": "RigLCalf",
+            "nodeIndex": 5,
+            "parent": 4,
+            "parentIdList": [
+                5,
+                4,
+                3,
+                0
+            ],
+            "rootBone": {
+                "children": [
+                    1,
+                    2,
+                    3,
+                    26,
+                    27
+                ],
+                "id": 9,
+                "mapped": 0,
+                "name": "RootNode",
+                "nodeIndex": 0,
+                "parent": -1,
+                "parentIdList": [
+                    0
+                ],
+                "rotation": [
+                    0.0,
+                    0.0,
+                    0.0,
+                    1.0
+                ],
+                "scale": [
+                    1.0,
+                    1.0,
+                    1.0
+                ],
+                "translation": [
+                    0.0,
+                    0.0,
+                    0.0
+                ],
+                "type": "group"
+            },
+            "rotation": [
+                0.005936223082244396,
+                -0.006419652607291937,
+                -0.1872968226671219,
+                0.9822644591331482
+            ],
+            "scale": [
+                1.0000005960464478,
+                0.9999994039535522,
+                1.0
+            ],
+            "translation": [
+                18.482662200927734,
+                1.1444091796875e-05,
+                -1.9073486328125e-06
+            ],
+            "type": "joint"
+        },
+        {
+            "children": [
+                7
+            ],
+            "id": 75,
+            "mapped": 0,
+            "name": "RigLFoot",
+            "nodeIndex": 6,
+            "parent": 5,
+            "parentIdList": [
+                6,
+                5,
+                4,
+                3,
+                0
+            ],
+            "rootBone": {
+                "children": [
+                    1,
+                    2,
+                    3,
+                    26,
+                    27
+                ],
+                "id": 9,
+                "mapped": 0,
+                "name": "RootNode",
+                "nodeIndex": 0,
+                "parent": -1,
+                "parentIdList": [
+                    0
+                ],
+                "rotation": [
+                    0.0,
+                    0.0,
+                    0.0,
+                    1.0
+                ],
+                "scale": [
+                    1.0,
+                    1.0,
+                    1.0
+                ],
+                "translation": [
+                    0.0,
+                    0.0,
+                    0.0
+                ],
+                "type": "group"
+            },
+            "rotation": [
+                -0.002953266492113471,
+                -0.04723268374800682,
+                0.7660612463951111,
+                0.6410229802131653
+            ],
+            "scale": [
+                1.0000026226043701,
+                0.9999969005584717,
+                1.0000008344650269
+            ],
+            "translation": [
+                16.68773078918457,
+                4.76837158203125e-07,
+                -3.552713678800501e-15
+            ],
+            "type": "joint"
+        },
+        {
+            "id": 76,
+            "mapped": 0,
+            "name": "RigLToes1",
+            "nodeIndex": 7,
+            "parent": 6,
+            "parentIdList": [
+                7,
+                6,
+                5,
+                4,
+                3,
+                0
+            ],
+            "rootBone": {
+                "children": [
+                    1,
+                    2,
+                    3,
+                    26,
+                    27
+                ],
+                "id": 9,
+                "mapped": 0,
+                "name": "RootNode",
+                "nodeIndex": 0,
+                "parent": -1,
+                "parentIdList": [
+                    0
+                ],
+                "rotation": [
+                    0.0,
+                    0.0,
+                    0.0,
+                    1.0
+                ],
+                "scale": [
+                    1.0,
+                    1.0,
+                    1.0
+                ],
+                "translation": [
+                    0.0,
+                    0.0,
+                    0.0
+                ],
+                "type": "group"
+            },
+            "rotation": [
+                8.812347914499696e-06,
+                7.777475548209623e-05,
+                0.1121385470032692,
+                0.9936925768852234
+            ],
+            "scale": [
+                0.9999999403953552,
+                0.9999998807907104,
+                1.0
+            ],
+            "translation": [
+                14.89211654663086,
+                0.0,
+                3.552713678800501e-15
+            ],
+            "type": "joint"
+        },
+        {
+            "children": [
+                9
+            ],
+            "id": 77,
+            "mapped": 0,
+            "name": "RigRThigh",
+            "nodeIndex": 8,
+            "parent": 3,
+            "parentIdList": [
+                8,
+                3,
+                0
+            ],
+            "rootBone": {
+                "children": [
+                    1,
+                    2,
+                    3,
+                    26,
+                    27
+                ],
+                "id": 9,
+                "mapped": 0,
+                "name": "RootNode",
+                "nodeIndex": 0,
+                "parent": -1,
+                "parentIdList": [
+                    0
+                ],
+                "rotation": [
+                    0.0,
+                    0.0,
+                    0.0,
+                    1.0
+                ],
+                "scale": [
+                    1.0,
+                    1.0,
+                    1.0
+                ],
+                "translation": [
+                    0.0,
+                    0.0,
+                    0.0
+                ],
+                "type": "group"
+            },
+            "rotation": [
+                -0.014249319210648537,
+                0.9983316659927368,
+                -0.02375596947968006,
+                0.050660423934459686
+            ],
+            "scale": [
+                1.0,
+                0.9999999403953552,
+                0.9999999403953552
+            ],
+            "translation": [
+                -0.7864952087402344,
+                5.902827262878418,
+                -23.732383728027344
+            ],
+            "type": "joint"
+        },
+        {
+            "children": [
+                10
+            ],
+            "id": 78,
+            "mapped": 0,
+            "name": "RigRCalf",
+            "nodeIndex": 9,
+            "parent": 8,
+            "parentIdList": [
+                9,
+                8,
+                3,
+                0
+            ],
+            "rootBone": {
+                "children": [
+                    1,
+                    2,
+                    3,
+                    26,
+                    27
+                ],
+                "id": 9,
+                "mapped": 0,
+                "name": "RootNode",
+                "nodeIndex": 0,
+                "parent": -1,
+                "parentIdList": [
+                    0
+                ],
+                "rotation": [
+                    0.0,
+                    0.0,
+                    0.0,
+                    1.0
+                ],
+                "scale": [
+                    1.0,
+                    1.0,
+                    1.0
+                ],
+                "translation": [
+                    0.0,
+                    0.0,
+                    0.0
+                ],
+                "type": "group"
+            },
+            "rotation": [
+                -0.005931367166340351,
+                0.006418244447559118,
+                -0.1872970312833786,
+                0.9822644591331482
+            ],
+            "scale": [
+                0.999999463558197,
+                1.0000003576278687,
+                0.9999999403953552
+            ],
+            "translation": [
+                18.4826602935791,
+                1.1682510375976562e-05,
+                3.552713678800501e-15
+            ],
+            "type": "joint"
+        },
+        {
+            "children": [
+                11
+            ],
+            "id": 79,
+            "mapped": 0,
+            "name": "RigRFoot",
+            "nodeIndex": 10,
+            "parent": 9,
+            "parentIdList": [
+                10,
+                9,
+                8,
+                3,
+                0
+            ],
+            "rootBone": {
+                "children": [
+                    1,
+                    2,
+                    3,
+                    26,
+                    27
+                ],
+                "id": 9,
+                "mapped": 0,
+                "name": "RootNode",
+                "nodeIndex": 0,
+                "parent": -1,
+                "parentIdList": [
+                    0
+                ],
+                "rotation": [
+                    0.0,
+                    0.0,
+                    0.0,
+                    1.0
+                ],
+                "scale": [
+                    1.0,
+                    1.0,
+                    1.0
+                ],
+                "translation": [
+                    0.0,
+                    0.0,
+                    0.0
+                ],
+                "type": "group"
+            },
+            "rotation": [
+                0.003010850865393877,
+                0.047180503606796265,
+                0.765957236289978,
+                0.6411508917808533
+            ],
+            "scale": [
+                0.9999977350234985,
+                1.0000033378601074,
+                0.999999463558197
+            ],
+            "translation": [
+                16.687728881835938,
+                8.881784197001252e-16,
+                -7.105427357601002e-15
+            ],
+            "type": "joint"
+        },
+        {
+            "id": 80,
+            "mapped": 0,
+            "name": "RigRToes1",
+            "nodeIndex": 11,
+            "parent": 10,
+            "parentIdList": [
+                11,
+                10,
+                9,
+                8,
+                3,
+                0
+            ],
+            "rootBone": {
+                "children": [
+                    1,
+                    2,
+                    3,
+                    26,
+                    27
+                ],
+                "id": 9,
+                "mapped": 0,
+                "name": "RootNode",
+                "nodeIndex": 0,
+                "parent": -1,
+                "parentIdList": [
+                    0
+                ],
+                "rotation": [
+                    0.0,
+                    0.0,
+                    0.0,
+                    1.0
+                ],
+                "scale": [
+                    1.0,
+                    1.0,
+                    1.0
+                ],
+                "translation": [
+                    0.0,
+                    0.0,
+                    0.0
+                ],
+                "type": "group"
+            },
+            "rotation": [
+                1.1575565395105514e-06,
+                1.0466991625435185e-05,
+                0.11228565871715546,
+                0.993675947189331
+            ],
+            "scale": [
+                1.0,
+                1.0,
+                1.0
+            ],
+            "translation": [
+                14.89211654663086,
+                -8.881784197001252e-16,
+                0.0
+            ],
+            "type": "joint"
+        },
+        {
+            "children": [
+                13
+            ],
+            "id": 81,
+            "mapped": 0,
+            "name": "RigSpine1",
+            "nodeIndex": 12,
+            "parent": 3,
+            "parentIdList": [
+                12,
+                3,
+                0
+            ],
+            "rootBone": {
+                "children": [
+                    1,
+                    2,
+                    3,
+                    26,
+                    27
+                ],
+                "id": 9,
+                "mapped": 0,
+                "name": "RootNode",
+                "nodeIndex": 0,
+                "parent": -1,
+                "parentIdList": [
+                    0
+                ],
+                "rotation": [
+                    0.0,
+                    0.0,
+                    0.0,
+                    1.0
+                ],
+                "scale": [
+                    1.0,
+                    1.0,
+                    1.0
+                ],
+                "translation": [
+                    0.0,
+                    0.0,
+                    0.0
+                ],
+                "type": "group"
+            },
+            "rotation": [
+                -4.25305906048834e-08,
+                1.356277294917163e-07,
+                0.0045438501983881,
+                0.9999896883964539
+            ],
+            "scale": [
+                0.9999999403953552,
+                0.9999999403953552,
+                1.0
+            ],
+            "translation": [
+                11.15310287475586,
+                2.5719778537750244,
+                -1.895172317745164e-06
+            ],
+            "type": "joint"
+        },
+        {
+            "children": [
+                14
+            ],
+            "id": 82,
+            "mapped": 0,
+            "name": "RigSpine2",
+            "nodeIndex": 13,
+            "parent": 12,
+            "parentIdList": [
+                13,
+                12,
+                3,
+                0
+            ],
+            "rootBone": {
+                "children": [
+                    1,
+                    2,
+                    3,
+                    26,
+                    27
+                ],
+                "id": 9,
+                "mapped": 0,
+                "name": "RootNode",
+                "nodeIndex": 0,
+                "parent": -1,
+                "parentIdList": [
+                    0
+                ],
+                "rotation": [
+                    0.0,
+                    0.0,
+                    0.0,
+                    1.0
+                ],
+                "scale": [
+                    1.0,
+                    1.0,
+                    1.0
+                ],
+                "translation": [
+                    0.0,
+                    0.0,
+                    0.0
+                ],
+                "type": "group"
+            },
+            "rotation": [
+                3.7862232460383893e-08,
+                -6.332439284051361e-08,
+                -0.028043406084179878,
+                0.999606728553772
+            ],
+            "scale": [
+                1.0000001192092896,
+                1.0000001192092896,
+                1.0
+            ],
+            "translation": [
+                8.297130584716797,
+                0.0,
+                -4.547473508864641e-13
+            ],
+            "type": "joint"
+        },
+        {
+            "children": [
+                15
+            ],
+            "id": 83,
+            "mapped": 0,
+            "name": "RigSpine3",
+            "nodeIndex": 14,
+            "parent": 13,
+            "parentIdList": [
+                14,
+                13,
+                12,
+                3,
+                0
+            ],
+            "rootBone": {
+                "children": [
+                    1,
+                    2,
+                    3,
+                    26,
+                    27
+                ],
+                "id": 9,
+                "mapped": 0,
+                "name": "RootNode",
+                "nodeIndex": 0,
+                "parent": -1,
+                "parentIdList": [
+                    0
+                ],
+                "rotation": [
+                    0.0,
+                    0.0,
+                    0.0,
+                    1.0
+                ],
+                "scale": [
+                    1.0,
+                    1.0,
+                    1.0
+                ],
+                "translation": [
+                    0.0,
+                    0.0,
+                    0.0
+                ],
+                "type": "group"
+            },
+            "rotation": [
+                8.015821784113086e-09,
+                -2.0375725995336325e-08,
+                -0.0024455899838358164,
+                0.9999970197677612
+            ],
+            "scale": [
+                0.9999998211860657,
+                0.9999998211860657,
+                1.0
+            ],
+            "translation": [
+                9.71969985961914,
+                2.384185791015625e-07,
+                -4.547473508864641e-13
+            ],
+            "type": "joint"
+        },
+        {
+            "children": [
+                16,
+                20,
+                24
+            ],
+            "id": 84,
+            "mapped": 0,
+            "name": "RigRibcage",
+            "nodeIndex": 15,
+            "parent": 14,
+            "parentIdList": [
+                15,
+                14,
+                13,
+                12,
+                3,
+                0
+            ],
+            "rootBone": {
+                "children": [
+                    1,
+                    2,
+                    3,
+                    26,
+                    27
+                ],
+                "id": 9,
+                "mapped": 0,
+                "name": "RootNode",
+                "nodeIndex": 0,
+                "parent": -1,
+                "parentIdList": [
+                    0
+                ],
+                "rotation": [
+                    0.0,
+                    0.0,
+                    0.0,
+                    1.0
+                ],
+                "scale": [
+                    1.0,
+                    1.0,
+                    1.0
+                ],
+                "translation": [
+                    0.0,
+                    0.0,
+                    0.0
+                ],
+                "type": "group"
+            },
+            "rotation": [
+                -2.7531006363545885e-09,
+                -3.211418686532852e-08,
+                0.027689708396792412,
+                0.9996165633201599
+            ],
+            "scale": [
+                1.0,
+                1.0,
+                1.0
+            ],
+            "translation": [
+                10.333320617675781,
+                2.384185791015625e-07,
+                0.0
+            ],
+            "type": "joint"
+        },
+        {
+            "children": [
+                17
+            ],
+            "id": 85,
+            "mapped": 0,
+            "name": "RigLCollarbone",
+            "nodeIndex": 16,
+            "parent": 15,
+            "parentIdList": [
+                16,
+                15,
+                14,
+                13,
+                12,
+                3,
+                0
+            ],
+            "rootBone": {
+                "children": [
+                    1,
+                    2,
+                    3,
+                    26,
+                    27
+                ],
+                "id": 9,
+                "mapped": 0,
+                "name": "RootNode",
+                "nodeIndex": 0,
+                "parent": -1,
+                "parentIdList": [
+                    0
+                ],
+                "rotation": [
+                    0.0,
+                    0.0,
+                    0.0,
+                    1.0
+                ],
+                "scale": [
+                    1.0,
+                    1.0,
+                    1.0
+                ],
+                "translation": [
+                    0.0,
+                    0.0,
+                    0.0
+                ],
+                "type": "group"
+            },
+            "rotation": [
+                0.04333988204598427,
+                -0.7546045184135437,
+                -0.17175500094890594,
+                0.6318179368972778
+            ],
+            "scale": [
+                1.0,
+                1.0,
+                1.0
+            ],
+            "translation": [
+                -2.1864242553710938,
+                12.785256385803223,
+                3.793097734451294
+            ],
+            "type": "joint"
+        },
+        {
+            "children": [
+                18
+            ],
+            "id": 86,
+            "mapped": 0,
+            "name": "RigLUpperarm",
+            "nodeIndex": 17,
+            "parent": 16,
+            "parentIdList": [
+                17,
+                16,
+                15,
+                14,
+                13,
+                12,
+                3,
+                0
+            ],
+            "rootBone": {
+                "children": [
+                    1,
+                    2,
+                    3,
+                    26,
+                    27
+                ],
+                "id": 9,
+                "mapped": 0,
+                "name": "RootNode",
+                "nodeIndex": 0,
+                "parent": -1,
+                "parentIdList": [
+                    0
+                ],
+                "rotation": [
+                    0.0,
+                    0.0,
+                    0.0,
+                    1.0
+                ],
+                "scale": [
+                    1.0,
+                    1.0,
+                    1.0
+                ],
+                "translation": [
+                    0.0,
+                    0.0,
+                    0.0
+                ],
+                "type": "group"
+            },
+            "rotation": [
+                0.14315961301326752,
+                -0.26629582047462463,
+                0.0987468957901001,
+                0.9480721950531006
+            ],
+            "scale": [
+                0.9999997615814209,
+                1.0,
+                1.000000238418579
+            ],
+            "translation": [
+                40.32532501220703,
+                3.814697265625e-06,
+                -2.288818359375e-05
+            ],
+            "type": "joint"
+        },
+        {
+            "children": [
+                19
+            ],
+            "id": 87,
+            "mapped": 0,
+            "name": "RigLForearm",
+            "nodeIndex": 18,
+            "parent": 17,
+            "parentIdList": [
+                18,
+                17,
+                16,
+                15,
+                14,
+                13,
+                12,
+                3,
+                0
+            ],
+            "rootBone": {
+                "children": [
+                    1,
+                    2,
+                    3,
+                    26,
+                    27
+                ],
+                "id": 9,
+                "mapped": 0,
+                "name": "RootNode",
+                "nodeIndex": 0,
+                "parent": -1,
+                "parentIdList": [
+                    0
+                ],
+                "rotation": [
+                    0.0,
+                    0.0,
+                    0.0,
+                    1.0
+                ],
+                "scale": [
+                    1.0,
+                    1.0,
+                    1.0
+                ],
+                "translation": [
+                    0.0,
+                    0.0,
+                    0.0
+                ],
+                "type": "group"
+            },
+            "rotation": [
+                0.027055801823735237,
+                -0.011524203233420849,
+                0.04175325110554695,
+                0.9986950755119324
+            ],
+            "scale": [
+                0.9999992251396179,
+                1.0000008344650269,
+                1.0
+            ],
+            "translation": [
+                17.71139907836914,
+                -9.071826934814453e-05,
+                1.4210854715202004e-14
+            ],
+            "type": "joint"
+        },
+        {
+            "id": 88,
+            "mapped": 0,
+            "name": "RigLPalm",
+            "nodeIndex": 19,
+            "parent": 18,
+            "parentIdList": [
+                19,
+                18,
+                17,
+                16,
+                15,
+                14,
+                13,
+                12,
+                3,
+                0
+            ],
+            "rootBone": {
+                "children": [
+                    1,
+                    2,
+                    3,
+                    26,
+                    27
+                ],
+                "id": 9,
+                "mapped": 0,
+                "name": "RootNode",
+                "nodeIndex": 0,
+                "parent": -1,
+                "parentIdList": [
+                    0
+                ],
+                "rotation": [
+                    0.0,
+                    0.0,
+                    0.0,
+                    1.0
+                ],
+                "scale": [
+                    1.0,
+                    1.0,
+                    1.0
+                ],
+                "translation": [
+                    0.0,
+                    0.0,
+                    0.0
+                ],
+                "type": "group"
+            },
+            "rotation": [
+                -0.7324078679084778,
+                0.015489943325519562,
+                -0.0393214114010334,
+                0.679553210735321
+            ],
+            "scale": [
+                1.0,
+                0.9999998211860657,
+                1.0000003576278687
+            ],
+            "translation": [
+                18.11722755432129,
+                -9.393692016601562e-05,
+                -7.62939453125e-06
+            ],
+            "type": "joint"
+        },
+        {
+            "children": [
+                21
+            ],
+            "id": 89,
+            "mapped": 0,
+            "name": "RigRCollarbone",
+            "nodeIndex": 20,
+            "parent": 15,
+            "parentIdList": [
+                20,
+                15,
+                14,
+                13,
+                12,
+                3,
+                0
+            ],
+            "rootBone": {
+                "children": [
+                    1,
+                    2,
+                    3,
+                    26,
+                    27
+                ],
+                "id": 9,
+                "mapped": 0,
+                "name": "RootNode",
+                "nodeIndex": 0,
+                "parent": -1,
+                "parentIdList": [
+                    0
+                ],
+                "rotation": [
+                    0.0,
+                    0.0,
+                    0.0,
+                    1.0
+                ],
+                "scale": [
+                    1.0,
+                    1.0,
+                    1.0
+                ],
+                "translation": [
+                    0.0,
+                    0.0,
+                    0.0
+                ],
+                "type": "group"
+            },
+            "rotation": [
+                -0.04333909600973129,
+                0.7546045184135437,
+                -0.17175596952438354,
+                0.6318177580833435
+            ],
+            "scale": [
+                1.0,
+                1.0,
+                1.0
+            ],
+            "translation": [
+                -2.1864242553710938,
+                12.785256385803223,
+                -3.793097734451294
+            ],
+            "type": "joint"
+        },
+        {
+            "children": [
+                22
+            ],
+            "id": 90,
+            "mapped": 0,
+            "name": "RigRUpperarm",
+            "nodeIndex": 21,
+            "parent": 20,
+            "parentIdList": [
+                21,
+                20,
+                15,
+                14,
+                13,
+                12,
+                3,
+                0
+            ],
+            "rootBone": {
+                "children": [
+                    1,
+                    2,
+                    3,
+                    26,
+                    27
+                ],
+                "id": 9,
+                "mapped": 0,
+                "name": "RootNode",
+                "nodeIndex": 0,
+                "parent": -1,
+                "parentIdList": [
+                    0
+                ],
+                "rotation": [
+                    0.0,
+                    0.0,
+                    0.0,
+                    1.0
+                ],
+                "scale": [
+                    1.0,
+                    1.0,
+                    1.0
+                ],
+                "translation": [
+                    0.0,
+                    0.0,
+                    0.0
+                ],
+                "type": "group"
+            },
+            "rotation": [
+                -0.14316174387931824,
+                0.2662961781024933,
+                0.09874999523162842,
+                0.9480714797973633
+            ],
+            "scale": [
+                1.000000238418579,
+                1.0,
+                0.9999997615814209
+            ],
+            "translation": [
+                40.32532501220703,
+                -7.62939453125e-06,
+                -2.288818359375e-05
+            ],
+            "type": "joint"
+        },
+        {
+            "children": [
+                23
+            ],
+            "id": 91,
+            "mapped": 0,
+            "name": "RigRForearm",
+            "nodeIndex": 22,
+            "parent": 21,
+            "parentIdList": [
+                22,
+                21,
+                20,
+                15,
+                14,
+                13,
+                12,
+                3,
+                0
+            ],
+            "rootBone": {
+                "children": [
+                    1,
+                    2,
+                    3,
+                    26,
+                    27
+                ],
+                "id": 9,
+                "mapped": 0,
+                "name": "RootNode",
+                "nodeIndex": 0,
+                "parent": -1,
+                "parentIdList": [
+                    0
+                ],
+                "rotation": [
+                    0.0,
+                    0.0,
+                    0.0,
+                    1.0
+                ],
+                "scale": [
+                    1.0,
+                    1.0,
+                    1.0
+                ],
+                "translation": [
+                    0.0,
+                    0.0,
+                    0.0
+                ],
+                "type": "group"
+            },
+            "rotation": [
+                -0.027056995779275894,
+                0.0115244435146451,
+                0.04175836965441704,
+                0.9986948370933533
+            ],
+            "scale": [
+                1.0000009536743164,
+                0.9999991655349731,
+                0.9999999403953552
+            ],
+            "translation": [
+                17.71139907836914,
+                9.071826934814453e-05,
+                -7.62939453125e-06
+            ],
+            "type": "joint"
+        },
+        {
+            "id": 92,
+            "mapped": 0,
+            "name": "RigRPalm",
+            "nodeIndex": 23,
+            "parent": 22,
+            "parentIdList": [
+                23,
+                22,
+                21,
+                20,
+                15,
+                14,
+                13,
+                12,
+                3,
+                0
+            ],
+            "rootBone": {
+                "children": [
+                    1,
+                    2,
+                    3,
+                    26,
+                    27
+                ],
+                "id": 9,
+                "mapped": 0,
+                "name": "RootNode",
+                "nodeIndex": 0,
+                "parent": -1,
+                "parentIdList": [
+                    0
+                ],
+                "rotation": [
+                    0.0,
+                    0.0,
+                    0.0,
+                    1.0
+                ],
+                "scale": [
+                    1.0,
+                    1.0,
+                    1.0
+                ],
+                "translation": [
+                    0.0,
+                    0.0,
+                    0.0
+                ],
+                "type": "group"
+            },
+            "rotation": [
+                0.7324065566062927,
+                -0.015485787764191628,
+                -0.0393180213868618,
+                0.6795549392700195
+            ],
+            "scale": [
+                1.000000238418579,
+                1.000000238418579,
+                0.9999997019767761
+            ],
+            "translation": [
+                18.117263793945312,
+                9.298324584960938e-05,
+                0.0
+            ],
+            "type": "joint"
+        },
+        {
+            "children": [
+                25
+            ],
+            "id": 93,
+            "mapped": 0,
+            "name": "RigNeck",
+            "nodeIndex": 24,
+            "parent": 15,
+            "parentIdList": [
+                24,
+                15,
+                14,
+                13,
+                12,
+                3,
+                0
+            ],
+            "rootBone": {
+                "children": [
+                    1,
+                    2,
+                    3,
+                    26,
+                    27
+                ],
+                "id": 9,
+                "mapped": 0,
+                "name": "RootNode",
+                "nodeIndex": 0,
+                "parent": -1,
+                "parentIdList": [
+                    0
+                ],
+                "rotation": [
+                    0.0,
+                    0.0,
+                    0.0,
+                    1.0
+                ],
+                "scale": [
+                    1.0,
+                    1.0,
+                    1.0
+                ],
+                "translation": [
+                    0.0,
+                    0.0,
+                    0.0
+                ],
+                "type": "group"
+            },
+            "rotation": [
+                7.105429898699844e-15,
+                -2.557174510662251e-14,
+                -7.105427357601002e-15,
+                1.0
+            ],
+            "scale": [
+                1.0,
+                1.0,
+                1.0
+            ],
+            "translation": [
+                0.10002899169921875,
+                -0.4404672384262085,
+                -8.458964657620527e-07
+            ],
+            "type": "joint"
+        },
+        {
+            "id": 94,
+            "mapped": 0,
+            "name": "RigHead",
+            "nodeIndex": 25,
+            "parent": 24,
+            "parentIdList": [
+                25,
+                24,
+                15,
+                14,
+                13,
+                12,
+                3,
+                0
+            ],
+            "rootBone": {
+                "children": [
+                    1,
+                    2,
+                    3,
+                    26,
+                    27
+                ],
+                "id": 9,
+                "mapped": 0,
+                "name": "RootNode",
+                "nodeIndex": 0,
+                "parent": -1,
+                "parentIdList": [
+                    0
+                ],
+                "rotation": [
+                    0.0,
+                    0.0,
+                    0.0,
+                    1.0
+                ],
+                "scale": [
+                    1.0,
+                    1.0,
+                    1.0
+                ],
+                "translation": [
+                    0.0,
+                    0.0,
+                    0.0
+                ],
+                "type": "group"
+            },
+            "rotation": [
+                -7.105427357601002e-15,
+                1.327157395076108e-14,
+                7.105427357601002e-15,
+                1.0
+            ],
+            "scale": [
+                1.0,
+                1.0,
+                1.0
+            ],
+            "translation": [
+                7.135528564453125,
+                0.0,
+                1.6940658945086007e-21
+            ],
+            "type": "joint"
+        },
+        {
+            "id": 95,
+            "mapped": 0,
+            "name": "RigLPlatform",
+            "nodeIndex": 26,
+            "parent": 0,
+            "parentIdList": [
+                26,
+                0
+            ],
+            "rootBone": {
+                "children": [
+                    1,
+                    2,
+                    3,
+                    26,
+                    27
+                ],
+                "id": 9,
+                "mapped": 0,
+                "name": "RootNode",
+                "nodeIndex": 0,
+                "parent": -1,
+                "parentIdList": [
+                    0
+                ],
+                "rotation": [
+                    0.0,
+                    0.0,
+                    0.0,
+                    1.0
+                ],
+                "scale": [
+                    1.0,
+                    1.0,
+                    1.0
+                ],
+                "translation": [
+                    0.0,
+                    0.0,
+                    0.0
+                ],
+                "type": "group"
+            },
+            "rotation": [
+                0.5000000596046448,
+                0.5000000596046448,
+                0.4999999701976776,
+                0.4999999701976776
+            ],
+            "scale": [
+                1.0,
+                1.0,
+                1.0
+            ],
+            "translation": [
+                26.67603302001953,
+                -2.5091458155657165e-07,
+                2.4419748783111572
+            ],
+            "type": "joint"
+        },
+        {
+            "id": 96,
+            "mapped": 0,
+            "name": "RigRPlatform",
+            "nodeIndex": 27,
+            "parent": 0,
+            "parentIdList": [
+                27,
+                0
+            ],
+            "rootBone": {
+                "children": [
+                    1,
+                    2,
+                    3,
+                    26,
+                    27
+                ],
+                "id": 9,
+                "mapped": 0,
+                "name": "RootNode",
+                "nodeIndex": 0,
+                "parent": -1,
+                "parentIdList": [
+                    0
+                ],
+                "rotation": [
+                    0.0,
+                    0.0,
+                    0.0,
+                    1.0
+                ],
+                "scale": [
+                    1.0,
+                    1.0,
+                    1.0
+                ],
+                "translation": [
+                    0.0,
+                    0.0,
+                    0.0
+                ],
+                "type": "group"
+            },
+            "rotation": [
+                0.5000000596046448,
+                0.5000000596046448,
+                0.4999999701976776,
+                0.4999999701976776
+            ],
+            "scale": [
+                1.0,
+                1.0,
+                1.0
+            ],
+            "translation": [
+                -26.67603302001953,
+                -2.5091600264204317e-07,
+                2.4419829845428467
+            ],
+            "type": "joint"
+        }
+    ]
+}
