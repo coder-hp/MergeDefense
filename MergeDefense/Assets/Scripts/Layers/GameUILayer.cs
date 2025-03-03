@@ -102,6 +102,18 @@ public class GameUILayer : MonoBehaviour
 
         // 刷新武器商店
         WeaponShopPanel.s_instance.refreshWeapon();
+
+        // bgm
+        {
+            if(curBoCi % 10 == 0)
+            {
+                AudioScript.s_instance.playMusic("bgm_battle_boss", true);
+            }
+            else if (curBoCi % 10 == 1)
+            {
+                AudioScript.s_instance.playMusic("bgm_battle", true);
+            }
+        }
     }
 
     void onInvokeBoCiSecond()
