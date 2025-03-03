@@ -34,6 +34,7 @@ public class Consts
         ShowRewardLayer,
         HeroInfoPanel,
         WeaponShopPanel,
+        KillEnemyRewardPanel,
     }
 
     public enum BuffType
