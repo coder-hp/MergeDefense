@@ -46,6 +46,8 @@ public class GameUILayer : MonoBehaviour
 
     [HideInInspector]
     public bool isCanDragWeapon = true;
+    [HideInInspector]
+    public bool isCanOnInvokeBoCiSecond = true;
 
     private void Awake()
     {
@@ -104,7 +106,17 @@ public class GameUILayer : MonoBehaviour
 
     void onInvokeBoCiSecond()
     {
+        if(!isCanOnInvokeBoCiSecond)
+        {
+            return;
+        }
+
         --curBoCiRestTime;
+
+        if(curBoCiRestTime < 0)
+        {
+            curBoCiRestTime = 0;
+        }
 
         if(curBoCiRestTime >= 10)
         {
@@ -138,7 +150,7 @@ public class GameUILayer : MonoBehaviour
 
     public void forceToBoCi(int boci)
     {
-        curBoCiRestTime = 1;
+        curBoCiRestTime = 0;
         curBoCi = boci - 1;
     }
 

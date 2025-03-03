@@ -13,6 +13,7 @@ public class KillEnemyRewardPanel : MonoBehaviour
     public Text text_title;
     public Text text_diamond;
 
+    EnemyWaveData enemyWaveData;
     KillRewardData killRewardData;
 
     int heroId;
@@ -20,10 +21,12 @@ public class KillEnemyRewardPanel : MonoBehaviour
     int weaponType;
     int weaponLevel;
 
-    public void show(EnemyWaveData enemyWaveData)
+    public void show(EnemyWaveData _enemyWaveData)
     {
+        GameUILayer.s_instance.isCanOnInvokeBoCiSecond = false;
         LayerManager.LayerShowAni(transform.Find("bg"));
 
+        enemyWaveData = _enemyWaveData;
         killRewardData = KillRewardEntity.getInstance().getData(enemyWaveData.wave);
 
         // 精英敌人
@@ -91,12 +94,22 @@ public class KillEnemyRewardPanel : MonoBehaviour
         {
             reward_weapon.gameObject.SetActive(false);
         }
+
+        Invoke("onClickClose",5);
     }
 
+    bool isClosed = false;
     public void onClickClose()
     {
+        if(isClosed)
+        {
+            return;
+        }
+        isClosed = true;
+
         LayerManager.LayerCloseAni(transform.Find("bg"), () =>
         {
+            GameUILayer.s_instance.isCanOnInvokeBoCiSecond = true;
             GameUILayer.s_instance.changeDiamond(killRewardData.diamond);
             if(killRewardData.heroStar != 0)
             {
@@ -108,6 +121,12 @@ public class KillEnemyRewardPanel : MonoBehaviour
             }
 
             Destroy(gameObject);
+
+            // 如果场上没有敌人，直接开始下一波
+            if(EnemyManager.s_instance.list_enemy.Count == 0)
+            {
+                GameUILayer.s_instance.forceToBoCi(enemyWaveData.wave + 1);
+            }
         });
     }
 }
