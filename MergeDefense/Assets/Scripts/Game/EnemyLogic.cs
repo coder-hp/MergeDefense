@@ -148,8 +148,26 @@ public class EnemyLogic : MonoBehaviour
     public bool damage(int atk,bool isCrit)
     {
         AudioScript.s_instance.playSound("enemyDamage");
+
         if (curHP > 0)
         {
+            // 检查是否有增加伤害buff
+            {
+                float damageXiShu = 1;
+                for (int i = 0; i < list_buffDatas.Count; i++)
+                {
+                    if (list_buffDatas[i].time > 0)
+                    {
+                        if (list_buffDatas[i].buffType == Consts.BuffType.DamageBaiFenBi)
+                        {
+                            damageXiShu += list_buffDatas[i].value;
+                        }
+                    }
+                }
+
+                atk = Mathf.RoundToInt(atk * damageXiShu);
+            }
+
             DamageNumManager.s_instance.showDamageNum(atk,bloodPoint.position);
 
             curHP -= atk;

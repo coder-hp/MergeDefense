@@ -110,6 +110,8 @@ public class KillEnemyRewardPanel : MonoBehaviour
         }
         isClosed = true;
 
+        AudioScript.s_instance.playSound_btn();
+
         LayerManager.LayerCloseAni(transform.Find("bg"), () =>
         {
             GameUILayer.s_instance.isCanOnInvokeBoCiSecond = true;

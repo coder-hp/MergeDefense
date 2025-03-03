@@ -144,6 +144,8 @@ public class HeroInfoPanel : MonoBehaviour
 
     public void onClickWeaponIcon(int index)
     {
+        AudioScript.s_instance.playSound_btn();
+
         if (index == 0 && heroLogicBase.list_weapon.Count == 0)
         {
             return;
@@ -302,6 +304,8 @@ public class HeroInfoPanel : MonoBehaviour
 
     public void onClickSkillIcon(int index)
     {
+        AudioScript.s_instance.playSound_btn();
+
         img_choicedWeapon1.transform.localScale = Vector3.zero;
         img_choicedWeapon2.transform.localScale = Vector3.zero;
 
@@ -328,6 +332,8 @@ public class HeroInfoPanel : MonoBehaviour
 
     public void onClickSellHero()
     {
+        AudioScript.s_instance.playSound_btn();
+
         GameUILayer.s_instance.changeGold(sellPrice);
 
         EffectManager.sellHero(heroLogicBase.transform.position);
@@ -342,6 +348,8 @@ public class HeroInfoPanel : MonoBehaviour
             isCanClose = true;
             return;
         }
+
+        AudioScript.s_instance.playSound_btn();
 
         heroLogicBase = null;
         gameObject.SetActive(false);

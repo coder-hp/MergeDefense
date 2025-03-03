@@ -177,6 +177,8 @@ public class WeaponShopPanel : MonoBehaviour
 
     public void onClickBuy(int index)
     {
+        AudioScript.s_instance.playSound_btn();
+
         int price = weaponArray[index].level * 5;
         if (GameUILayer.s_instance.curDiamond >= price)
         {
@@ -205,6 +207,8 @@ public class WeaponShopPanel : MonoBehaviour
 
     public void onClickClose()
     {
+        AudioScript.s_instance.playSound_btn();
+
         bgTrans.DOLocalMoveY(bgStartPos.y + posDownOffset.y, 0.4f).OnComplete(()=>
         {
             gameObject.SetActive(false);

@@ -47,6 +47,7 @@ public class Consts
         SkillRate,          // 5技能概率
         Stun,               // 6眩晕
         AtkBaiFenBi,        // 7攻击力百分比
+        DamageBaiFenBi      // 8受到伤害增加百分比
     }
 
     public class BuffData

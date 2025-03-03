@@ -8,6 +8,7 @@ public class MainLayer : MonoBehaviour
     {
         Destroy(gameObject);
 
+        AudioScript.s_instance.playSound_btn();
         LayerManager.ShowLayer(Consts.Layer.GameLayer);
     }
 }

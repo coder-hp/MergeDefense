@@ -268,7 +268,9 @@ public class GameUILayer : MonoBehaviour
 
     public void onClickPause()
     {
-        if(Time.timeScale == 0)
+        AudioScript.s_instance.playSound_btn();
+
+        if (Time.timeScale == 0)
         {
             Time.timeScale = 1;
         }
@@ -280,22 +282,30 @@ public class GameUILayer : MonoBehaviour
 
     public void onClickSort()
     {
+        AudioScript.s_instance.playSound_btn();
+
         ToastScript.show("暂未开放");
     }
 
     public void onClickAutoMake()
     {
+        AudioScript.s_instance.playSound_btn();
+
         ToastScript.show("暂未开放");
     }
 
     public void onClickMyth()
     {
+        AudioScript.s_instance.playSound_btn();
+
         ToastScript.show("暂未开放");
     }
 
     // 召唤
     public void onClickHero()
     {
+        AudioScript.s_instance.playSound_btn();
+
         if (curGold < curSummonGold)
         {
             AudioScript.s_instance.playSound("summonNotHaveGold");
@@ -318,6 +328,8 @@ public class GameUILayer : MonoBehaviour
     // 锻造
     public void onClickForge()
     {
+        AudioScript.s_instance.playSound_btn();
+
         if (curGold < curForgeGold)
         {
             AudioScript.s_instance.playSound("summonNotHaveGold");
@@ -369,6 +381,8 @@ public class GameUILayer : MonoBehaviour
 
     public void onClickShop()
     {
+        AudioScript.s_instance.playSound_btn();
+
         WeaponShopPanel.s_instance.show();
     }
 }
