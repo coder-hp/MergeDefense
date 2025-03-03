@@ -19,6 +19,7 @@ public class Consts
 
 
     public static int maxEnemyCount = 60;      // 最大存在怪物数量
+    public static int heroMaxId = 108;         // 英雄最大的id
 
     public enum Layer
     {
