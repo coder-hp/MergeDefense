@@ -127,37 +127,6 @@ Transform:
   - {fileID: 4815264164766295265}
   m_Father: {fileID: 3617028264132830640}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &1425037978319469346
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1646443283926873168}
-  m_Layer: 0
-  m_Name: centerPoint
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &1646443283926873168
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1425037978319469346}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0.54, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 1424779052366672914}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1698890777967237785
 GameObject:
   m_ObjectHideFlags: 0
@@ -767,7 +736,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1424779052366672914}
   - component: {fileID: 7384110952235753725}
-  - component: {fileID: 3433070749723480747}
+  - component: {fileID: 781321393060602356}
   - component: {fileID: 5333269904741635981}
   m_Layer: 0
   m_Name: hero106
@@ -790,7 +759,6 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 3817056274926712909}
-  - {fileID: 1646443283926873168}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 180, z: 0}
 --- !u!114 &7384110952235753725
@@ -808,7 +776,6 @@ MonoBehaviour:
   id: 106
   curStar: 1
   animator: {fileID: 0}
-  centerPoint: {fileID: 0}
   isAttacking: 0
   isMerge: 0
   heroUITrans: {fileID: 0}
@@ -818,7 +785,7 @@ MonoBehaviour:
   isCanUpdate: 0
   boxCollider: {fileID: 0}
   heroQualityTrans: {fileID: 0}
---- !u!114 &3433070749723480747
+--- !u!114 &781321393060602356
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -827,7 +794,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 4301457524428072430}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 319f5a5f01d2c2a4b801ba4055bd343c, type: 3}
+  m_Script: {fileID: 11500000, guid: f806193c89a95fb48bc6fb4d1d5ca318, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   heroLogicBase: {fileID: 0}

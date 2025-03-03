@@ -19,8 +19,6 @@ public class HeroLogicBase : MonoBehaviour
     [HideInInspector]
     public Animator animator;
     [HideInInspector]
-    public Transform centerPoint;
-    [HideInInspector]
     public List<WeaponData> list_weapon = new List<WeaponData>();
     [HideInInspector]
     public bool isAttacking = false;
@@ -53,6 +51,8 @@ public class HeroLogicBase : MonoBehaviour
     [HideInInspector]
     public HeroStarData heroStarData;
 
+    List<Consts.BuffData> list_buffDatas = new List<Consts.BuffData>();
+
     public void Start()
     {
         curStandGrid = GameLayer.s_instance.heroGrid.transform.Find(transform.parent.name);
@@ -61,8 +61,6 @@ public class HeroLogicBase : MonoBehaviour
         heroAniEvent = modelTrans.GetComponent<HeroAniEvent>();
         animator = modelTrans.GetComponent<Animator>();
         boxCollider = transform.GetComponent<BoxCollider>();
-
-        centerPoint = transform.Find("centerPoint");
 
         heroData = HeroEntity.getInstance().getData(id);
         heroStarData = HeroStarEntity.getInstance().getData(curStar);
@@ -128,7 +126,21 @@ public class HeroLogicBase : MonoBehaviour
             return;
         }
 
-        if(isDraging)
+        // buff倒计时
+        for (int i = 0; i < list_buffDatas.Count; i++)
+        {
+            if (list_buffDatas[i].time > 0)
+            {
+                list_buffDatas[i].time -= Time.deltaTime;
+                if (list_buffDatas[i].time <= 0)
+                {
+                    list_buffDatas.RemoveAt(i);
+                    --i;
+                }
+            }
+        }
+
+        if (isDraging)
         {
             Vector3 mousePos = CommonUtil.mousePosToWorld(GameLayer.s_instance.camera3D);
             float minDis = 100;
@@ -359,6 +371,15 @@ public class HeroLogicBase : MonoBehaviour
             }
         }
 
+        // buff加成
+        for (int i = 0; i < list_buffDatas.Count; i++)
+        {
+            if(list_buffDatas[i].buffType == Consts.BuffType.AtkBaiFenBi)
+            {
+                atkXiShu += list_buffDatas[i].value;
+            }
+        }
+
         return Mathf.RoundToInt(atk * atkXiShu);
     }
 
@@ -440,6 +461,21 @@ public class HeroLogicBase : MonoBehaviour
         }
 
         return skillRate;
+    }
+
+    public void addBuff(Consts.BuffData buffData)
+    {
+        for (int i = 0; i < list_buffDatas.Count; i++)
+        {
+            // 如果已存在该buff,则重置时间
+            if (list_buffDatas[i].buffType == buffData.buffType && list_buffDatas[i].from == buffData.from)
+            {
+                list_buffDatas[i].time = buffData.time;
+                return;
+            }
+        }
+
+        list_buffDatas.Add(buffData);
     }
 
     public bool isCanAddWeapon(WeaponData weaponData)
