@@ -57,23 +57,7 @@ public class RoleDemonstrationScript : MonoBehaviour
     }
     string GetHeroName(int _heroId)
     {
-        string _heroName = "";
-        switch (_heroId)
-        {
-            case 0:
-                _heroName = "剑士";
-                break;
-            case 1:
-                _heroName = "弓箭";
-                break;
-            case 2:
-                _heroName = "法师";
-                break;
-            case 3:
-                _heroName = "斧手";
-                break;
-        }
-        return _heroName;
+        return heroTrans.GetChild(herpId).gameObject.name;
     }
     void RefreshHeroName()
     {
