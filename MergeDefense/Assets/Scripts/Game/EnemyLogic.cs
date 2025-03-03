@@ -225,5 +225,10 @@ public class EnemyLogic : MonoBehaviour
         {
             tween_hitRedColor.Kill();
         }
+
+        if(enemyWaveData.enemyType >= 2)
+        {
+            LayerManager.ShowLayer(Consts.Layer.KillEnemyRewardPanel).GetComponent<KillEnemyRewardPanel>().show(enemyWaveData);
+        }
     }
 }

@@ -55,7 +55,7 @@ public class HeroLogicBase : MonoBehaviour
     [HideInInspector]
     public HeroStarData heroStarData;
 
-    public void Awake()
+    public void Start()
     {
         curStandGrid = GameLayer.s_instance.heroGrid.transform.Find(transform.parent.name);
 
