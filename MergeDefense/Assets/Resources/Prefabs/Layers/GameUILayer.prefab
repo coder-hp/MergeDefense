@@ -235,6 +235,7 @@ MonoBehaviour:
   curSummonGold: 20
   curForgeGold: 20
   isCanDragWeapon: 1
+  isCanOnInvokeBoCiSecond: 1
 --- !u!1 &245932757020445255
 GameObject:
   m_ObjectHideFlags: 0
@@ -6372,7 +6373,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2756007894942796871, guid: 99807ca801ef46e448ce608ef576201d, type: 3}
       propertyPath: m_Text
-      value: 0/100
+      value: 0/60
       objectReference: {fileID: 0}
     - target: {fileID: 2756007894942796871, guid: 99807ca801ef46e448ce608ef576201d, type: 3}
       propertyPath: m_Color.b
@@ -7974,6 +7975,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6dc3b74156f4e4e46adc24ad6d7829d3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  itemWeapon: {fileID: 0}
 --- !u!1 &8837694196482756907 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 831116885394886779, guid: ac0a056c3f5403744b03a3a81d2c0d84, type: 3}

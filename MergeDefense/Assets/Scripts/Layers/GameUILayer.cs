@@ -169,7 +169,7 @@ public class GameUILayer : MonoBehaviour
     public void refreshEnemyCount()
     {
         text_enemyCount.text = EnemyManager.s_instance.getEnemyCount() + "/" + Consts.maxEnemyCount;
-        img_enemyCountProgress.fillAmount = EnemyManager.s_instance.getEnemyCount() / 100f;
+        img_enemyCountProgress.fillAmount = EnemyManager.s_instance.getEnemyCount() / Consts.maxEnemyCount;
     }
 
     public void setIsShowBtnWeaponSell(bool isShow,WeaponData weaponData = null)
