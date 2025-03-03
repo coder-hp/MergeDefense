@@ -7,6 +7,7 @@ using UnityEngine;
 // 技能：攻击时，15%概率造成一次攻击力150%的斩击
 public class HeroLogic101 : HeroBase
 {
+    int baseSkillRate = 15;
     public override void AttackLogic(EnemyLogic enemyLogic)
     {
         AudioScript.s_instance.playSound("101_attack");
@@ -14,7 +15,7 @@ public class HeroLogic101 : HeroBase
         int atk = Mathf.RoundToInt(heroLogicBase.getAtk() * (isCrit ? heroLogicBase.getCritDamageXiShu() : 1));
         if (!enemyLogic.damage(atk, isCrit))
         {
-            if(RandomUtil.getRandom(1, 100) <= (15 + heroLogicBase.getAddSkillRate()))
+            if(RandomUtil.getRandom(1, 100) <= (baseSkillRate + heroLogicBase.getAddSkillRate()))
             {
                 enemyLogic.damage(Mathf.RoundToInt(heroLogicBase.getAtk() * 1.5f),false);
             }

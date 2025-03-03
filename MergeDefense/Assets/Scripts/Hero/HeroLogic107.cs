@@ -7,6 +7,7 @@ using UnityEngine;
 // 技能：攻击时，10%概率造成0.8s[眩晕]
 public class HeroLogic107 : HeroBase
 {
+    int baseSkillRate = 10;
     public override void AttackLogic(EnemyLogic enemyLogic)
     {
         AudioScript.s_instance.playSound("107_attack");
@@ -15,7 +16,7 @@ public class HeroLogic107 : HeroBase
         if (!enemyLogic.damage(atk, isCrit))
         {
             // 如果没死，则判定技能
-            if (RandomUtil.getRandom(1, 100) <= (10 + heroLogicBase.getAddSkillRate()))
+            if (RandomUtil.getRandom(1, 100) <= (baseSkillRate + heroLogicBase.getAddSkillRate()))
             {
                 enemyLogic.addBuff(new Consts.BuffData(Consts.BuffType.Stun, 0, 0.8f, "107"));
             }

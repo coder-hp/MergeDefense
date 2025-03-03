@@ -1,36 +1,5 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1 &1425037978319469346
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1646443283926873168}
-  m_Layer: 0
-  m_Name: centerPoint
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &1646443283926873168
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1425037978319469346}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0.54, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 1424779052366672914}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &4301457524428072430
 GameObject:
   m_ObjectHideFlags: 0
@@ -64,7 +33,6 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 2707770307614153304}
-  - {fileID: 1646443283926873168}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 180, z: 0}
 --- !u!114 &7384110952235753725
@@ -82,13 +50,14 @@ MonoBehaviour:
   id: 103
   curStar: 1
   animator: {fileID: 0}
-  centerPoint: {fileID: 0}
   isAttacking: 0
   isMerge: 0
-  starTrans: {fileID: 0}
+  heroUITrans: {fileID: 0}
   emojiTrans: {fileID: 0}
+  weaponUITrans: {fileID: 0}
   curStandGrid: {fileID: 0}
   isCanUpdate: 0
+  boxCollider: {fileID: 0}
   heroQualityTrans: {fileID: 0}
 --- !u!114 &-8087005266816749509
 MonoBehaviour:

@@ -79,6 +79,7 @@ public class EnemyLogic : MonoBehaviour
     // 此方法每帧都会调用，所以不用再写一个Update方法
     public void move()
     {
+        // buff倒计时
         for (int i = 0; i < list_buffDatas.Count; i++)
         {
             if(list_buffDatas[i].time > 0)

@@ -7,6 +7,7 @@ using UnityEngine;
 // 技能：攻击时，25%概率射出2支箭
 public class HeroLogic102 : HeroBase
 {
+    int baseSkillRate = 25;
     public override void AttackLogic(EnemyLogic enemyLogic)
     {
         AudioScript.s_instance.playSound("102_attack");
@@ -14,7 +15,7 @@ public class HeroLogic102 : HeroBase
         arrow.position = heroLogicBase.curStandGrid.position;
         arrow.GetComponent<ArrowLogic>().init(heroLogicBase, enemyLogic);
 
-        if(RandomUtil.getRandom(1,100) <= (25 + heroLogicBase.getAddSkillRate()))
+        if(RandomUtil.getRandom(1,100) <= (baseSkillRate + heroLogicBase.getAddSkillRate()))
         {
             Transform arrow2 = Instantiate(ObjectPool.getPrefab("Prefabs/Games/arrow"), GameLayer.s_instance.flyPoint).transform;
             arrow2.position = heroLogicBase.curStandGrid.position;
