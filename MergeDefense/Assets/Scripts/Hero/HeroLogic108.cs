@@ -13,7 +13,6 @@ public class HeroLogic108 : HeroBase
         AudioScript.s_instance.playSound("108_attack");
         bool isCrit = RandomUtil.getRandom(1, 100) <= heroLogicBase.getCritRate() ? true : false;
         int atk = Mathf.RoundToInt(heroLogicBase.getAtk() * (isCrit ? heroLogicBase.getCritDamageXiShu() : 1));
-        EffectManager.heroAttack(transform.position, heroLogicBase.id);
         if (!enemyLogic.damage(atk, isCrit))
         {
             // 如果没死，则判定技能
