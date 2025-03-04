@@ -18,6 +18,7 @@ public class HeroLogic108 : HeroBase
             // 如果没死，则判定技能
             if (RandomUtil.getRandom(1, 100) <= (baseSkillRate + heroLogicBase.getAddSkillRate()))
             {
+                EffectManager.heroSkill(transform.position, heroLogicBase.id);
                 enemyLogic.addBuff(new Consts.BuffData(Consts.BuffType.DamageBaiFenBi, 0.2f, 5, "108"));
             }
         }

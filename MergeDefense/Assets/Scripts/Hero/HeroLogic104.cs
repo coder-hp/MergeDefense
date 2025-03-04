@@ -14,6 +14,8 @@ public class HeroLogic104 : HeroBase
         bool isCrit = false;
         if (++atkCount == 3)
         {
+            EffectManager.heroSkill(transform.position, heroLogicBase.id);
+
             isCrit = true;
             atkCount = 0;
         }

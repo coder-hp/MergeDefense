@@ -160,4 +160,29 @@ public class EffectManager
         obj.transform.position = pos;
         dic_enemyDamage[effectName].Add(obj);
     }
+
+    static Dictionary<string, List<GameObject>> dic_heroSkill = new Dictionary<string, List<GameObject>>();
+    public static void heroSkill(Vector3 pos, int heroId)
+    {
+        string effectName = "eff_skill_hero" + heroId;
+
+        if (!dic_heroSkill.ContainsKey(effectName))
+        {
+            dic_heroSkill[effectName] = new List<GameObject>();
+        }
+
+        for (int i = 0; i < dic_heroSkill[effectName].Count; i++)
+        {
+            if (!dic_heroSkill[effectName][i].activeInHierarchy)
+            {
+                dic_heroSkill[effectName][i].transform.position = pos;
+                dic_heroSkill[effectName][i].SetActive(true);
+                return;
+            }
+        }
+
+        GameObject obj = GameObject.Instantiate(ObjectPool.getPrefab("Prefabs/Effects/" + effectName), GameLayer.s_instance.effectPoint);
+        obj.transform.position = pos;
+        dic_heroSkill[effectName].Add(obj);
+    }
 }
