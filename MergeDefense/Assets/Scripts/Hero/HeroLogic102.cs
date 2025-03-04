@@ -11,15 +11,15 @@ public class HeroLogic102 : HeroBase
     public override void AttackLogic(EnemyLogic enemyLogic)
     {
         AudioScript.s_instance.playSound("102_attack");
-        Transform arrow = Instantiate(ObjectPool.getPrefab("Prefabs/Games/arrow"), GameLayer.s_instance.flyPoint).transform;
+        Transform arrow = Instantiate(ObjectPool.getPrefab("Prefabs/Games/heroFlyWeapon102"), GameLayer.s_instance.flyPoint).transform;
         arrow.position = heroLogicBase.curStandGrid.position;
-        arrow.GetComponent<ArrowLogic>().init(heroLogicBase, enemyLogic);
+        arrow.GetComponent<heroFlyWeapon102>().init(heroLogicBase, enemyLogic);
 
         if(RandomUtil.getRandom(1,100) <= (baseSkillRate + heroLogicBase.getAddSkillRate()))
         {
-            Transform arrow2 = Instantiate(ObjectPool.getPrefab("Prefabs/Games/arrow"), GameLayer.s_instance.flyPoint).transform;
+            Transform arrow2 = Instantiate(ObjectPool.getPrefab("Prefabs/Games/heroFlyWeapon102"), GameLayer.s_instance.flyPoint).transform;
             arrow2.position = heroLogicBase.curStandGrid.position;
-            arrow2.GetComponent<ArrowLogic>().init(heroLogicBase, enemyLogic);
+            arrow2.GetComponent<heroFlyWeapon102>().init(heroLogicBase, enemyLogic);
 
             // 把第一支箭往前挪一挪
             arrow.position = Vector3.MoveTowards(arrow.position, enemyLogic.transform.position, 1);

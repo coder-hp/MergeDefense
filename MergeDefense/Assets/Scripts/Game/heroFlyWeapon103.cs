@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class MagicBallLogic : MonoBehaviour
+public class heroFlyWeapon103 : MonoBehaviour
 {
     HeroLogicBase heroLogicBase;
     EnemyLogic enemyLogic;
@@ -38,6 +38,7 @@ public class MagicBallLogic : MonoBehaviour
                         {
                             bool isCrit = RandomUtil.getRandom(1, 100) <= heroLogicBase.getCritRate() ? true : false;
                             int atk = Mathf.RoundToInt(heroLogicBase.getAtk() * (isCrit ? heroLogicBase.getCritDamageXiShu() : 1));
+                            EffectManager.enemyDamage(EnemyManager.s_instance.list_enemy[i].transform.position, heroLogicBase.id);
                             if (EnemyManager.s_instance.list_enemy[i].damage(atk, isCrit))
                             {
                                 --i;

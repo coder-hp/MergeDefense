@@ -4886,9 +4886,9 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5132981429021884362}
-  - component: {fileID: 237724220762547846}
+  - component: {fileID: 6424119017049753433}
   m_Layer: 0
-  m_Name: forkBall
+  m_Name: heroFlyWeapon107
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -4914,7 +4914,7 @@ Transform:
   - {fileID: 6881205425012919604}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &237724220762547846
+--- !u!114 &6424119017049753433
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -4923,7 +4923,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 4092514217549044481}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b7010bd911e1c814f88233801a625983, type: 3}
+  m_Script: {fileID: 11500000, guid: a04b7180b1834a443a181cb95affd985, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1 &4355619774970145924
