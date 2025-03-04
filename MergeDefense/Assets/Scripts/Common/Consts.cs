@@ -87,4 +87,5 @@ public class Consts
     public static Vector3 heroQualityOffset = new Vector3(0, 0f, -0.01f);
     public static Vector3 heroSellBtnOffset = new Vector3(0, -0.9f, 0);
     public static Vector3 summonHeroBigScale = new Vector3(1.3f, 1.3f, 1.3f);
+    public static Vector3 weapinUIIconStartScale = new Vector3(1.4f, 1.4f, 1.4f);
 }

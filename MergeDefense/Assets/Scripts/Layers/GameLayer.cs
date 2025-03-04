@@ -97,6 +97,7 @@ public class GameLayer : MonoBehaviour
                             heroLogicBase2.transform.DOMove(heroLogicBase1.transform.position + new Vector3(0, jumpHight, 0), moveTime).SetEase(Ease.Linear).OnComplete(() =>
                             {
                                 heroLogicBase1.addStar();
+                                heroLogicBase1.mergeWeapon(heroLogicBase2.list_weapon);
                                 EffectManager.heroMerge(heroLogicBase1.transform.position);
 
                                 // 升星角色的合并动画
