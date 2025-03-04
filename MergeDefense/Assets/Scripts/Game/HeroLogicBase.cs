@@ -582,6 +582,18 @@ public class HeroLogicBase : MonoBehaviour
         setStarUI();
     }
 
+    public void mergeWeapon(List<WeaponData> weaponDatas)
+    {
+        //for(int i = 0; i < list_weapon.Count; i++)
+        //{
+        //    if(heroData.goodWeapon != -1 && (heroData.goodWeapon != list_weapon[i].type))
+        //    {
+        //        list_weapon.RemoveAt(i);
+        //        --i;
+        //    }
+        //}
+    }
+
     public void playAni(string aniName,float crossFadeTime = 0)
     {
         if(aniName == Consts.HeroAniNameAttack)
