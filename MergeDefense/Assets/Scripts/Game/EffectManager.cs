@@ -164,6 +164,7 @@ public class EffectManager
     static Dictionary<string, List<GameObject>> dic_heroSkill = new Dictionary<string, List<GameObject>>();
     public static void heroSkill(Vector3 pos, int heroId)
     {
+        return;
         string effectName = "eff_skill_hero" + heroId;
 
         if (!dic_heroSkill.ContainsKey(effectName))
@@ -184,5 +185,30 @@ public class EffectManager
         GameObject obj = GameObject.Instantiate(ObjectPool.getPrefab("Prefabs/Effects/" + effectName), GameLayer.s_instance.effectPoint);
         obj.transform.position = pos;
         dic_heroSkill[effectName].Add(obj);
+    }
+
+    static Dictionary<string, List<GameObject>> dic_heroAttack = new Dictionary<string, List<GameObject>>();
+    public static void heroAttack(Vector3 pos, int heroId)
+    {
+        string effectName = "eff_attack_hero" + heroId;
+
+        if (!dic_heroAttack.ContainsKey(effectName))
+        {
+            dic_heroAttack[effectName] = new List<GameObject>();
+        }
+
+        for (int i = 0; i < dic_heroAttack[effectName].Count; i++)
+        {
+            if (!dic_heroAttack[effectName][i].activeInHierarchy)
+            {
+                dic_heroAttack[effectName][i].transform.position = pos;
+                dic_heroAttack[effectName][i].SetActive(true);
+                return;
+            }
+        }
+
+        GameObject obj = GameObject.Instantiate(ObjectPool.getPrefab("Prefabs/Effects/" + effectName), GameLayer.s_instance.effectPoint);
+        obj.transform.position = pos;
+        dic_heroAttack[effectName].Add(obj);
     }
 }

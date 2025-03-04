@@ -20,6 +20,7 @@ public class HeroLogic104 : HeroBase
             atkCount = 0;
         }
 
+        EffectManager.heroAttack(transform.position, heroLogicBase.id);
         for (int i = 0; i < EnemyManager.s_instance.list_enemy.Count; i++)
         {
             if (Vector3.Distance(heroLogicBase.curStandGrid.position, EnemyManager.s_instance.list_enemy[i].transform.position) <= heroLogicBase.heroData.atkRange)
