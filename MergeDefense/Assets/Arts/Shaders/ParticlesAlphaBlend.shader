@@ -7,7 +7,7 @@ Shader "Kein/Particles/AlphaBlend"
     }
     SubShader
     {
-        Tags {"Queue" = "Transparent" "IgnoreProjector" = "True" "RenderType " = "Transparent"}
+        Tags {"Queue" = "Transparent+5" "IgnoreProjector" = "True" "RenderType " = "Transparent"}
 
         Pass
         {
