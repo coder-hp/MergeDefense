@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 1776341824702924960}
   - component: {fileID: 548228240984335334}
   m_Layer: 0
-  m_Name: eff_skill_hero108
+  m_Name: eff_attack_hero106
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -26,13 +26,13 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5723372727169039261}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.3535534, y: -0.61237246, z: -0.3535534, w: -0.61237246}
-  m_LocalPosition: {x: 0, y: 0.867, z: 0}
+  m_LocalRotation: {x: -0.061393984, y: -0.80270165, z: -0.3481821, w: -0.48028126}
+  m_LocalPosition: {x: 0, y: 0.581, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: -60, y: -270, z: 0}
+  m_LocalEulerAnglesHint: {x: -30, y: -250, z: 30}
 --- !u!198 &1776341824702924960
 ParticleSystem:
   m_ObjectHideFlags: 0
@@ -41,7 +41,7 @@ ParticleSystem:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5723372727169039261}
   serializedVersion: 8
-  lengthInSec: 0.3
+  lengthInSec: 1
   simulationSpeed: 1
   stopAction: 0
   cullingMode: 0
@@ -115,7 +115,7 @@ ParticleSystem:
       serializedVersion: 2
       minMaxState: 0
       minColor: {r: 1, g: 1, b: 1, a: 1}
-      maxColor: {r: 1, g: 0.3254717, b: 0.9671676, a: 1}
+      maxColor: {r: 0.6784314, g: 0.98039216, b: 0.9080836, a: 1}
       maxGradient:
         serializedVersion: 2
         key0: {r: 1, g: 1, b: 1, a: 1}
