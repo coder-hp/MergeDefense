@@ -146,7 +146,7 @@ public class GameLayer : MonoBehaviour
         {
             if (heroPoint.GetChild(i).childCount == 0)
             {
-                Transform heroTrans = Instantiate(ObjectPool.getPrefab("Prefabs/Heros/hero" + RandomUtil.getRandom(101, Consts.heroMaxId)), heroPoint.GetChild(i)).transform;
+                Transform heroTrans = Instantiate(ObjectPool.getPrefab("Prefabs/Heros/hero" + RandomUtil.getRandom(101, getSummonHeroMaxId())), heroPoint.GetChild(i)).transform;
                 EffectManager.summonHero(heroGrid.transform.GetChild(i).position);
 
                 if (!isMerging)
@@ -198,5 +198,22 @@ public class GameLayer : MonoBehaviour
                 return;
             }
         }
+    }
+
+    public int getSummonHeroMaxId()
+    {
+        if(GameUILayer.s_instance.curBoCi > 20)
+        {
+            return 108;
+
+            // 等新角色加进来再改回来
+            return 110;
+        }
+        else if (GameUILayer.s_instance.curBoCi > 10)
+        {
+            return 108;
+        }
+
+        return 105;
     }
 }
