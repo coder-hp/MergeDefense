@@ -8,6 +8,7 @@ public class KillRewardData
 {
     public int wave;
     public int diamond;
+    public int heroQuality;
     public int heroStar;
     public int weaponLevel;
 }
