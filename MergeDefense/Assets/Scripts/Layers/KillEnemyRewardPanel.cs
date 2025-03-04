@@ -52,7 +52,7 @@ public class KillEnemyRewardPanel : MonoBehaviour
 
         if (killRewardData.heroStar != 0)
         {
-            heroId = RandomUtil.getRandom(101,Consts.heroMaxId);
+            heroId = RandomUtil.getRandom(101, GameLayer.s_instance.getSummonHeroMaxId());
             heroStar = killRewardData.heroStar;
 
             HeroData heroData = HeroEntity.getInstance().getData(heroId);

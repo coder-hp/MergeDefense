@@ -114,6 +114,15 @@ public class GameUILayer : MonoBehaviour
                 AudioScript.s_instance.playMusic("bgm_battle", true);
             }
         }
+
+        if(curBoCi == 11)
+        {
+            ToastScript.show("Rare Heroes Now Available!");
+        }
+        else if (curBoCi == 21)
+        {
+            ToastScript.show("Epic Heroes Now Available!");
+        }
     }
 
     void onInvokeBoCiSecond()
@@ -142,7 +151,7 @@ public class GameUILayer : MonoBehaviour
         if (curBoCiRestTime <= 0)
         {
             CancelInvoke("onInvokeBoCiSecond");
-            Invoke("startBoCi", 2);
+            Invoke("startBoCi", 1);
         }
     }
 
