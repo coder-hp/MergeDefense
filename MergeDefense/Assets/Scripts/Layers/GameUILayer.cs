@@ -75,6 +75,12 @@ public class GameUILayer : MonoBehaviour
     {
         ++curBoCi;
 
+        if(curBoCi > EnemyWaveEntity.getInstance().list[EnemyWaveEntity.getInstance().list.Count - 1].wave)
+        {
+            ToastScript.show("已通关");
+            return;
+        }
+
         // ToastScript.show("WAVE：" + curBoCi);
 
         EnemyWaveData enemyWaveData = EnemyWaveEntity.getInstance().getData(curBoCi);
