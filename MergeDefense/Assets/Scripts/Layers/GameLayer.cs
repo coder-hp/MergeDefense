@@ -26,6 +26,8 @@ public class GameLayer : MonoBehaviour
     public int addedEnemyCount = 0;
     [HideInInspector]
     public Material matrial_attackRange;
+    [HideInInspector]
+    public Material matrial_weaponChoiceKuang;
 
     bool isMerging = false;
 
@@ -51,6 +53,7 @@ public class GameLayer : MonoBehaviour
         }
 
         matrial_attackRange = attackRangeTrans.GetComponent<MeshRenderer>().material;
+        matrial_weaponChoiceKuang = weaponChoiceKuang.GetChild(0).GetComponent<MeshRenderer>().material;
 
         LayerManager.ShowLayer(Consts.Layer.GameUILayer);
     }
