@@ -263,16 +263,19 @@ public class HeroLogicBase : MonoBehaviour
                 playAni(Consts.HeroAniNameAttack);
 
                 // 攻击特效
-                switch(id)
+                if (!isDraging)
                 {
-                    case 101:
-                    case 104:
-                    case 106:
-                    case 108:
-                        {
-                            EffectManager.heroAttack(this);
-                            break;
-                        }
+                    switch (id)
+                    {
+                        case 101:
+                        case 104:
+                        case 106:
+                        case 108:
+                            {
+                                EffectManager.heroAttack(this);
+                                break;
+                            }
+                    }
                 }
 
                 return true;
