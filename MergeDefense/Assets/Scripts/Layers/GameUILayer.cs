@@ -299,10 +299,12 @@ public class GameUILayer : MonoBehaviour
         if (Time.timeScale == 0)
         {
             Time.timeScale = 1;
+            AudioScript.s_instance.resumeMusic();
         }
         else
         {
             Time.timeScale = 0;
+            AudioScript.s_instance.pauseMusic();
         }
     }
 
