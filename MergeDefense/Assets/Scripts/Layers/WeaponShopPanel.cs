@@ -19,6 +19,7 @@ public class WeaponShopPanel : MonoBehaviour
     bool[] buyStateArray = new bool[3];
 
     Vector2 bgStartPos;
+    bool isClosed = false;
 
     private void Awake()
     {
@@ -31,6 +32,8 @@ public class WeaponShopPanel : MonoBehaviour
     Vector3 posDownOffset = new Vector3(0,-740,0);
     public void show()
     {
+        isClosed = false;
+
         bgTrans.localPosition += posDownOffset;
         bgTrans.DOLocalMoveY(bgStartPos.y,0.4f);
 
@@ -217,6 +220,11 @@ public class WeaponShopPanel : MonoBehaviour
 
     public void onClickClose()
     {
+        if(isClosed)
+        {
+            return;
+        }
+        isClosed = true;
         CancelInvoke("refreshTime");
         AudioScript.s_instance.playSound_btn();
 
