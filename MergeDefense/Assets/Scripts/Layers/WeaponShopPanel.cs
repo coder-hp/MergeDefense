@@ -10,6 +10,7 @@ public class WeaponShopPanel : MonoBehaviour
 
     public Transform bgTrans;
     public Text text_curDiamond;
+    public Text text_time;
     public Transform weapinTrans0;
     public Transform weapinTrans1;
     public Transform weapinTrans2;
@@ -35,6 +36,15 @@ public class WeaponShopPanel : MonoBehaviour
 
         text_curDiamond.text = GameUILayer.s_instance.curDiamond.ToString();
         gameObject.SetActive(true);
+
+        refreshTime();
+
+        InvokeRepeating("refreshTime",0.1f, 0.1f);
+    }
+
+    void refreshTime()
+    {
+        text_time.text = GameUILayer.s_instance.curBoCiRestTime + "s";
     }
 
     public void diamondChanged()
@@ -207,6 +217,7 @@ public class WeaponShopPanel : MonoBehaviour
 
     public void onClickClose()
     {
+        CancelInvoke("refreshTime");
         AudioScript.s_instance.playSound_btn();
 
         bgTrans.DOLocalMoveY(bgStartPos.y + posDownOffset.y, 0.4f).OnComplete(()=>

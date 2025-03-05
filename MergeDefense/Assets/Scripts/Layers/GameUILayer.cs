@@ -31,7 +31,8 @@ public class GameUILayer : MonoBehaviour
 
     [HideInInspector]
     public int curBoCi = 0;
-    int curBoCiRestTime = 20;
+    [HideInInspector]
+    public int curBoCiRestTime = 20;
 
     [HideInInspector]
     public int curGold = Consts.startHaveGold;
