@@ -143,6 +143,14 @@ public class GMLayer : MonoBehaviour
         }
     }
 
+    public void onClickGameOver()
+    {
+        if (GameUILayer.s_instance)
+        {
+            GameUILayer.s_instance.gameOver();
+        }
+    }
+
     public void onClickClose()
     {
         bg.SetActive(false);

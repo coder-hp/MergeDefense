@@ -34,7 +34,7 @@ public class HeroLogic108 : HeroBase
 
         if(isTriggerSkill)
         {
-            EffectManager.heroSkill(transform.position, heroLogicBase.id);
+            //EffectManager.heroSkill(transform.position, heroLogicBase.id);
         }
     }
 }

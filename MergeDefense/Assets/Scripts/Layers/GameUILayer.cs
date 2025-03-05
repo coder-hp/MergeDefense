@@ -78,7 +78,8 @@ public class GameUILayer : MonoBehaviour
 
         if(curBoCi > EnemyWaveEntity.getInstance().list[EnemyWaveEntity.getInstance().list.Count - 1].wave)
         {
-            ToastScript.show("已通关");
+            curBoCi = EnemyWaveEntity.getInstance().list[EnemyWaveEntity.getInstance().list.Count - 1].wave;
+            gameOver();
             return;
         }
 
@@ -201,6 +202,11 @@ public class GameUILayer : MonoBehaviour
     {
         text_enemyCount.text = EnemyManager.s_instance.getEnemyCount() + "/" + Consts.maxEnemyCount;
         img_enemyCountProgress.fillAmount = EnemyManager.s_instance.getEnemyCount() / (float)Consts.maxEnemyCount;
+
+        if(EnemyManager.s_instance.getEnemyCount() >= Consts.maxEnemyCount)
+        {
+            gameOver();
+        }
     }
 
     public void setIsShowBtnWeaponSell(bool isShow,WeaponData weaponData = null)
@@ -429,5 +435,20 @@ public class GameUILayer : MonoBehaviour
         AudioScript.s_instance.playSound_btn();
 
         WeaponShopPanel.s_instance.show();
+    }
+
+    bool isCalledGameOver = false;
+    public void gameOver()
+    {
+        if(isCalledGameOver)
+        {
+            return;
+        }
+        isCalledGameOver = true;
+        CancelInvoke("startBoCi");
+        CancelInvoke("onInvokeBoCiSecond");
+        CancelInvoke("onInvokeAddEnemy");
+        LayerManager.ShowLayer(Consts.Layer.GameOverLayer);
+        AudioScript.s_instance.stopMusic();
     }
 }

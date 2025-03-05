@@ -18,7 +18,7 @@ public class HeroLogic106 : HeroBase
         // 技能判定
         if (RandomUtil.getRandom(1, 100) <= (baseSkillRate + heroLogicBase.getAddSkillRate()))
         {
-            EffectManager.heroSkill(transform.position, heroLogicBase.id);
+            //EffectManager.heroSkill(transform.position, heroLogicBase.id);
             for (int i = 0; i < GameLayer.s_instance.heroPoint.childCount; i++)
             {
                 if (GameLayer.s_instance.heroPoint.GetChild(i).childCount > 0)

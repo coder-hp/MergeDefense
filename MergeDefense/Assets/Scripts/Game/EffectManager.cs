@@ -10,6 +10,11 @@ public class EffectManager
     public static void clear()
     {
         dic_saveObj.Clear();
+        list_enemyDieEffect.Clear();
+        list_summonHeroEffect.Clear();
+        list_summonHeroTrail.Clear();
+        list_sellHeroEffect.Clear();
+        dic_enemyDamage.Clear();
     }
 
     public static void heroMerge(Vector3 pos)
@@ -159,31 +164,5 @@ public class EffectManager
         GameObject obj = GameObject.Instantiate(ObjectPool.getPrefab("Prefabs/Effects/" + effectName), GameLayer.s_instance.effectPoint);
         obj.transform.position = pos;
         dic_enemyDamage[effectName].Add(obj);
-    }
-
-    static Dictionary<string, List<GameObject>> dic_heroSkill = new Dictionary<string, List<GameObject>>();
-    public static void heroSkill(Vector3 pos, int heroId)
-    {
-        return;
-        string effectName = "eff_skill_hero" + heroId;
-
-        if (!dic_heroSkill.ContainsKey(effectName))
-        {
-            dic_heroSkill[effectName] = new List<GameObject>();
-        }
-
-        for (int i = 0; i < dic_heroSkill[effectName].Count; i++)
-        {
-            if (!dic_heroSkill[effectName][i].activeInHierarchy)
-            {
-                dic_heroSkill[effectName][i].transform.position = pos;
-                dic_heroSkill[effectName][i].SetActive(true);
-                return;
-            }
-        }
-
-        GameObject obj = GameObject.Instantiate(ObjectPool.getPrefab("Prefabs/Effects/" + effectName), GameLayer.s_instance.effectPoint);
-        obj.transform.position = pos;
-        dic_heroSkill[effectName].Add(obj);
     }
 }

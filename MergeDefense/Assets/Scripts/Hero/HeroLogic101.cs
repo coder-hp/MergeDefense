@@ -18,7 +18,7 @@ public class HeroLogic101 : HeroBase
         {
             if(RandomUtil.getRandom(1, 100) <= (baseSkillRate + heroLogicBase.getAddSkillRate()))
             {
-                EffectManager.heroSkill(transform.position,heroLogicBase.id);
+                //EffectManager.heroSkill(transform.position,heroLogicBase.id);
                 enemyLogic.damage(Mathf.RoundToInt(heroLogicBase.getAtk() * 1.5f),false);
             }
         }

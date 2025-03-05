@@ -219,4 +219,13 @@ public class GameLayer : MonoBehaviour
 
         return 105;
     }
+
+    private void OnDestroy()
+    {
+        EffectManager.clear();
+        if (GameUILayer.s_instance)
+        {
+            Destroy(GameUILayer.s_instance.gameObject);
+        }
+    }
 }
