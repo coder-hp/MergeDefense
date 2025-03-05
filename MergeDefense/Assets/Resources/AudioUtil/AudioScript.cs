@@ -56,13 +56,23 @@ public class AudioScript : MonoBehaviour
         return audioClip;
     }
 
-    public AudioSource playSound(string audioName,float volume = 1,bool isLoop = false)
+    Dictionary<string, long> dic_soundPlayTime = new Dictionary<string, long>();
+    public void playSound(string audioName,float volume = 1,bool isLoop = false)
     {
         if (GameData.getIsOpenSound() == 0)
         {
-            return null;
-
+            return;
         }
+
+        if(dic_soundPlayTime.ContainsKey(audioName))
+        {
+            if ((CommonUtil.getTimeStamp_Millisecond() - dic_soundPlayTime[audioName]) < 100)
+            {
+                return;
+            }
+        }
+
+        dic_soundPlayTime[audioName] = CommonUtil.getTimeStamp_Millisecond();
         for (int i = 0; i < m_soundAudioSource.Count; i++)
         {
             if (!m_soundAudioSource[i].isPlaying)
@@ -72,7 +82,7 @@ public class AudioScript : MonoBehaviour
                 m_soundAudioSource[i].clip = getSoundAudioClip(audioName);
                 m_soundAudioSource[i].Play();
 
-                return m_soundAudioSource[i];
+                return;
             }
         }
 
@@ -81,7 +91,7 @@ public class AudioScript : MonoBehaviour
         m_soundAudioSource[0].loop = isLoop;
         m_soundAudioSource[0].clip = getSoundAudioClip(audioName);
         m_soundAudioSource[0].Play();
-        return m_soundAudioSource[0];
+        return;
     }
     
     public void pauseMusic()

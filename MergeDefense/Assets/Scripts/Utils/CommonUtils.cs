@@ -12,16 +12,15 @@ public class CommonUtil
     static long time_start = 0;
 
     // 13位时间戳：毫秒
+    static DateTime original = new DateTime(1970, 1, 1, 0, 0, 0);
     public static long getTimeStamp_Millisecond()
     {
-        DateTime original = new DateTime(1970, 1, 1, 0, 0, 0);
         return (long)(DateTime.Now.ToUniversalTime() - original).TotalMilliseconds;
     }
 
     // 10位时间戳：秒
     public static long getTimeStamp_Second()
     {
-        DateTime original = new DateTime(1970, 1, 1, 0, 0, 0);
         return (long)(DateTime.Now.ToUniversalTime() - original).TotalSeconds;
     }
 
