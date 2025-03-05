@@ -332,7 +332,8 @@ public class HeroInfoPanel : MonoBehaviour
 
     public void onClickSellHero()
     {
-        AudioScript.s_instance.playSound_btn();
+        //AudioScript.s_instance.playSound_btn();
+        AudioScript.s_instance.playSound("sellHero");
 
         GameUILayer.s_instance.changeGold(sellPrice);
 
