@@ -21,7 +21,8 @@ public class EnemyLogic : MonoBehaviour
     Image bloodProgressImg;
     Text bloodText;
 
-    EnemyWaveData enemyWaveData;
+    [HideInInspector]
+    public EnemyWaveData enemyWaveData;
 
     MeshRenderer meshRenderer;
     MaterialPropertyBlock propRedColor;

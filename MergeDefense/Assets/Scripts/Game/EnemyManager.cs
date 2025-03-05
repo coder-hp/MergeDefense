@@ -55,4 +55,42 @@ public class EnemyManager : MonoBehaviour
         }
         return enemyLogic;
     }
+
+    public EnemyLogic getHeroAtkTarget(HeroLogicBase heroLogicBase)
+    {
+        // 优先攻击boss
+        for (int i = 0; i < list_enemy.Count; i++)
+        {
+            if(list_enemy[i].enemyWaveData.enemyType == 3)
+            {
+                if(Vector3.Distance(heroLogicBase.curStandGrid.position, list_enemy[i].transform.position) <= heroLogicBase.heroData.atkRange)
+                {
+                    return list_enemy[i];
+                }
+            }
+        }
+
+        // 其次攻击精英怪
+        for (int i = 0; i < list_enemy.Count; i++)
+        {
+            if (list_enemy[i].enemyWaveData.enemyType == 2)
+            {
+                if (Vector3.Distance(heroLogicBase.curStandGrid.position, list_enemy[i].transform.position) <= heroLogicBase.heroData.atkRange)
+                {
+                    return list_enemy[i];
+                }
+            }
+        }
+
+        // 最后攻击小怪
+        for (int i = 0; i < list_enemy.Count; i++)
+        {
+            if (Vector3.Distance(heroLogicBase.curStandGrid.position, list_enemy[i].transform.position) <= heroLogicBase.heroData.atkRange)
+            {
+                return list_enemy[i];
+            }
+        }
+
+        return null;
+    }
 }

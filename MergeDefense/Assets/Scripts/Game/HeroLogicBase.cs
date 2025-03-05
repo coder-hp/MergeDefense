@@ -254,8 +254,10 @@ public class HeroLogicBase : MonoBehaviour
     {
         if (!isAttacking)
         {
-            EnemyLogic enemyLogic = EnemyManager.s_instance.getMinDisTarget(curStandGrid);
-            if (enemyLogic && Vector3.Distance(curStandGrid.position, enemyLogic.transform.position) <= heroData.atkRange)
+            //EnemyLogic enemyLogic = EnemyManager.s_instance.getMinDisTarget(curStandGrid);
+            //if (enemyLogic && Vector3.Distance(curStandGrid.position, enemyLogic.transform.position) <= heroData.atkRange)
+            EnemyLogic enemyLogic = EnemyManager.s_instance.getHeroAtkTarget(this);
+            if(enemyLogic)
             {
                 heroAniEvent.enemyLogic = enemyLogic;
                 lookEnemy(enemyLogic);
