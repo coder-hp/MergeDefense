@@ -535,8 +535,10 @@ public class HeroLogicBase : MonoBehaviour
 
     public void addWeapon(WeaponData weaponData)
     {
+        int weaponIndex = 0;
         if (list_weapon.Count == 0)
         {
+            weaponIndex = 1;
             list_weapon.Add(weaponData);
         }
         else if (list_weapon.Count == 1)
@@ -545,15 +547,18 @@ public class HeroLogicBase : MonoBehaviour
             {
                 if(list_weapon[0].level == weaponData.level)
                 {
+                    weaponIndex = 1;
                     list_weapon[0] = WeaponEntity.getInstance().getData(weaponData.type, weaponData.level + 1);
                 }
                 else
                 {
+                    weaponIndex = 1;
                     list_weapon[0] = weaponData;
                 }
             }
             else
             {
+                weaponIndex = 2;
                 list_weapon.Add(weaponData);
             }
         }
@@ -571,6 +576,7 @@ public class HeroLogicBase : MonoBehaviour
                     {
                         list_weapon[i] = weaponData;
                     }
+                    weaponIndex = i + 1;
                     break;
                 }
             }
@@ -578,6 +584,12 @@ public class HeroLogicBase : MonoBehaviour
 
         setWeaponUI();
         AudioScript.s_instance.playSound("equipWeapon");
+
+        Transform weaponTrans = heroUITrans.Find("weapon/" + weaponIndex);
+        weaponTrans.DOScale(1.3f, 0.2f).OnComplete(()=>
+        {
+            weaponTrans.DOScale(1f, 0.2f);
+        });
     }
 
     public void addStar()
