@@ -654,7 +654,12 @@ public class HeroLogicBase : MonoBehaviour
         {
             return;
         }
-        
+
+        if(BtnSellHero.s_instance && BtnSellHero.s_instance.isClicked)
+        {
+            return;
+        }
+
         isTriggerMouseDown = true;
     }
 
@@ -665,9 +670,14 @@ public class HeroLogicBase : MonoBehaviour
             return;
         }
 
+        if (BtnSellHero.s_instance && BtnSellHero.s_instance.isClicked)
+        {
+            return;
+        }
+
         if (isTriggerMouseDown)
         {
-            if(HeroInfoPanel.s_instance.gameObject.activeInHierarchy && HeroInfoPanel.s_instance.heroLogicBase == this)
+            if (HeroInfoPanel.s_instance.gameObject.activeInHierarchy && HeroInfoPanel.s_instance.heroLogicBase == this)
             {
                 // 如果当前角色信息面板显示的是当前点击的角色，则关闭信息面板
                 // 触发的是UI那边的HeroInfoPanel.onClickClose
