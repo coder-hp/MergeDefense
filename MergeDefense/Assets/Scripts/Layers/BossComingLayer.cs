@@ -9,6 +9,7 @@ public class BossComingLayer : MonoBehaviour
 
     void Start()
     {
+        AudioScript.s_instance.playSound("bossComing");
         text_wave.text = "WAVE " + (GameUILayer.s_instance.curBoCi + 1);
 
         Destroy(gameObject,2);

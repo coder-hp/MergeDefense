@@ -210,7 +210,7 @@ public class UIItemWeapon : MonoBehaviour
                 // 未拖到角色上,检测是否拖到了卖出按钮上
                 if(BtnWeaponSellEvent.s_instance.itemWeapon == this)
                 {
-                    AudioScript.s_instance.playSound("sellWeapom");
+                    AudioScript.s_instance.playSound("sellWeapon");
 
                     // 防止卖出按钮那边检测碰撞
                     transform.tag = "Untagged";
