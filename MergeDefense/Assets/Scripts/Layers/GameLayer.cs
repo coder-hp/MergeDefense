@@ -118,7 +118,7 @@ public class GameLayer : MonoBehaviour
                                 }
 
                                 Destroy(heroLogicBase2.gameObject, moveTime * 0.5f);
-                                Invoke("checkHeroMerge", 0.6f);
+                                Invoke("checkHeroMerge", 0.65f);
                             });
 
                             return;
@@ -152,7 +152,7 @@ public class GameLayer : MonoBehaviour
                 if (!isMerging)
                 {
                     isMerging = true;
-                    Invoke("checkHeroMerge", 0.6f);
+                    Invoke("checkHeroMerge", 0.65f);
                 }
                 return true;
             }
