@@ -152,6 +152,11 @@ public class GameUILayer : MonoBehaviour
         {
             CancelInvoke("onInvokeBoCiSecond");
             Invoke("startBoCi", 1);
+
+            if ((curBoCi + 1) % 10 == 0)
+            {
+                LayerManager.ShowLayer(Consts.Layer.BossComingLayer);
+            }
         }
     }
 
