@@ -53,6 +53,10 @@ public class UIItemWeapon : MonoBehaviour
     Transform curDragChoicedHero = null;
     private void OnMouseDown()
     {
+        if (GameLayer.s_instance.isGameOver)
+        {
+            return;
+        }
         if (!GameUILayer.s_instance.isCanDragWeapon)
         {
             return;
@@ -76,7 +80,11 @@ public class UIItemWeapon : MonoBehaviour
 
     private void OnMouseDrag()
     {
-        if(!GameUILayer.s_instance.isCanDragWeapon)
+        if (GameLayer.s_instance.isGameOver)
+        {
+            return;
+        }
+        if (!GameUILayer.s_instance.isCanDragWeapon)
         {
             return;
         }
@@ -141,6 +149,10 @@ public class UIItemWeapon : MonoBehaviour
 
     private void OnMouseUp()
     {
+        if (GameLayer.s_instance.isGameOver)
+        {
+            return;
+        }
         GameUILayer.s_instance.setIsShowBtnWeaponSell(false);
 
         if (!GameUILayer.s_instance.isCanDragWeapon)

@@ -30,6 +30,8 @@ public class GameLayer : MonoBehaviour
     public Material matrial_weaponChoiceKuang;
 
     bool isMerging = false;
+    [HideInInspector]
+    public  bool isGameOver = false;
 
     private void Awake()
     {

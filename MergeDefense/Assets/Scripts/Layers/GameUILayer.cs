@@ -446,6 +446,7 @@ public class GameUILayer : MonoBehaviour
             return;
         }
         isCalledGameOver = true;
+        GameLayer.s_instance.isGameOver = true;
         CancelInvoke("startBoCi");
         CancelInvoke("onInvokeBoCiSecond");
         CancelInvoke("onInvokeAddEnemy");

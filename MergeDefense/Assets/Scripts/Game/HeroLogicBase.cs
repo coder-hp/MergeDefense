@@ -128,6 +128,11 @@ public class HeroLogicBase : MonoBehaviour
             return;
         }
 
+        if(GameLayer.s_instance.isGameOver)
+        {
+            return;
+        }
+
         // buff倒计时
         for (int i = 0; i < list_buffDatas.Count; i++)
         {
@@ -650,6 +655,11 @@ public class HeroLogicBase : MonoBehaviour
     bool isTriggerMouseDown = false;
     private void OnMouseDown()
     {
+        if (GameLayer.s_instance.isGameOver)
+        {
+            return;
+        }
+
         if (!HeroInfoPanel.s_instance.gameObject.activeInHierarchy && isTouchInUI())
         {
             return;
@@ -665,6 +675,11 @@ public class HeroLogicBase : MonoBehaviour
 
     private void OnMouseUp()
     {
+        if (GameLayer.s_instance.isGameOver)
+        {
+            return;
+        }
+
         if (!HeroInfoPanel.s_instance.gameObject.activeInHierarchy && isTouchInUI())
         {
             return;
@@ -699,6 +714,11 @@ public class HeroLogicBase : MonoBehaviour
 
     private void OnMouseExit()
     {
+        if (GameLayer.s_instance.isGameOver)
+        {
+            return;
+        }
+
         if (isTriggerMouseDown)
         {
             isTriggerMouseDown = false;
