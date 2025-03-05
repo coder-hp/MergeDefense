@@ -592,6 +592,7 @@ MonoBehaviour:
   list_enemyMoveFourPos: []
   addedEnemyCount: 0
   matrial_attackRange: {fileID: 0}
+  matrial_weaponChoiceKuang: {fileID: 0}
 --- !u!114 &-7090605276762049441
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1097,8 +1098,8 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0.497, z: 0}
-  m_LocalScale: {x: 0, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
+  m_LocalScale: {x: 0, y: 0, z: 0}
+  m_ConstrainProportionsScale: 1
   m_Children:
   - {fileID: 6276045987764663666}
   m_Father: {fileID: 1737212649471613696}
