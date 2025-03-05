@@ -67,7 +67,11 @@ public class HeroInfoPanel : MonoBehaviour
         img_head_kuang.sprite = AtlasUtil.getAtlas_game().GetSprite("kuang_hero_" + heroLogicBase.heroData.quality + "_1");
         img_head_bg.sprite = AtlasUtil.getAtlas_game().GetSprite("kuang_hero_" + heroLogicBase.heroData.quality + "_2");
 
-        if (heroLogicBase.heroData.quality == 2)
+        if (heroLogicBase.heroData.quality == 1)
+        {
+            img_footShadow.color = CommonUtil.stringToColor("#6E8999");
+        }
+        else if (heroLogicBase.heroData.quality == 2)
         {
             img_footShadow.color = CommonUtil.stringToColor("#457dd8");
         }

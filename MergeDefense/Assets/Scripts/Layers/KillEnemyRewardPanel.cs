@@ -84,7 +84,11 @@ public class KillEnemyRewardPanel : MonoBehaviour
             reward_hero.Find("head_bg/kuang").GetComponent<Image>().sprite = AtlasUtil.getAtlas_game().GetSprite("kuang_hero_" + heroData.quality + "_1");
             reward_hero.Find("head_bg").GetComponent<Image>().sprite = AtlasUtil.getAtlas_game().GetSprite("kuang_hero_" + heroData.quality + "_2");
 
-            if (heroData.quality == 2)
+            if (heroData.quality == 1)
+            {
+                reward_hero.Find("head_bg/shadow").GetComponent<Image>().color = CommonUtil.stringToColor("#6E8999");
+            }
+            else if (heroData.quality == 2)
             {
                 reward_hero.Find("head_bg/shadow").GetComponent<Image>().color = CommonUtil.stringToColor("#457dd8");
             }

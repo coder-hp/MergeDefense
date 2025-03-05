@@ -117,11 +117,11 @@ public class GameUILayer : MonoBehaviour
 
         if(curBoCi == 11)
         {
-            ToastScript.show("Rare Heroes Now Available!");
+            ToastScript.show("<color=\"#698AFF\">Rare</color> Heroes Now Available!");
         }
         else if (curBoCi == 21)
         {
-            ToastScript.show("Epic Heroes Now Available!");
+            ToastScript.show("<color=\"#BD2DE7\">Epic</color> Heroes Now Available!");
         }
     }
 
