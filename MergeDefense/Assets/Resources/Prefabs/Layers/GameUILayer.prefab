@@ -189,8 +189,8 @@ RectTransform:
   - {fileID: 1159197877803035446}
   - {fileID: 190100468494353453}
   - {fileID: 1587600831097766353}
-  - {fileID: 6570850258471740439}
   - {fileID: 4425263426003187024}
+  - {fileID: 6570850258471740439}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
@@ -214,6 +214,7 @@ MonoBehaviour:
   prefab_bloodBar_big: {fileID: 245932757020445255}
   prefab_heroUI: {fileID: 1407184696613700501}
   item_weapon: {fileID: 8597224232747892432}
+  obj_bossRedKuang: {fileID: 5371699374343370392}
   img_enemyCountProgress: {fileID: 2884777209870039736}
   bloodPointTrans: {fileID: 6469946548303348863}
   heroUIPointTrans: {fileID: 1159197877803035446}
@@ -5946,6 +5947,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: bossTime
       objectReference: {fileID: 0}
+    - target: {fileID: 1125081593171210593, guid: c39fc8e01e690484893e520a8a1f4b85, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 8680892801788080809, guid: c39fc8e01e690484893e520a8a1f4b85, type: 3}
       propertyPath: m_Pivot.x
       value: 0.5
@@ -6034,6 +6039,11 @@ PrefabInstance:
 --- !u!224 &4425263426003187024 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 8680892801788080809, guid: c39fc8e01e690484893e520a8a1f4b85, type: 3}
+  m_PrefabInstance: {fileID: 4976771850808870905}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &5371699374343370392 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1125081593171210593, guid: c39fc8e01e690484893e520a8a1f4b85, type: 3}
   m_PrefabInstance: {fileID: 4976771850808870905}
   m_PrefabAsset: {fileID: 0}
 --- !u!1001 &5288973982636789422

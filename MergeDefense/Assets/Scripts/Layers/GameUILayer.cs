@@ -12,6 +12,7 @@ public class GameUILayer : MonoBehaviour
     public GameObject prefab_bloodBar_big;
     public GameObject prefab_heroUI;
     public GameObject item_weapon;
+    public GameObject obj_bossRedKuang;
     public Image img_enemyCountProgress;
     public Transform bloodPointTrans;
     public Transform heroUIPointTrans;
@@ -120,6 +121,15 @@ public class GameUILayer : MonoBehaviour
             {
                 AudioScript.s_instance.playMusic("bgm_battle", true);
             }
+        }
+
+        if (curBoCi % 10 == 0)
+        {
+            obj_bossRedKuang.SetActive(true);
+        }
+        else
+        {
+            obj_bossRedKuang.SetActive(false);
         }
 
         if(curBoCi == 11)
