@@ -186,31 +186,4 @@ public class EffectManager
         obj.transform.position = pos;
         dic_heroSkill[effectName].Add(obj);
     }
-
-    static Dictionary<string, List<GameObject>> dic_heroAttack = new Dictionary<string, List<GameObject>>();
-    public static void heroAttack(HeroLogicBase heroLogicBase)
-    {
-        string effectName = "eff_attack_hero" + heroLogicBase.id;
-
-        if (!dic_heroAttack.ContainsKey(effectName))
-        {
-            dic_heroAttack[effectName] = new List<GameObject>();
-        }
-
-        for (int i = 0; i < dic_heroAttack[effectName].Count; i++)
-        {
-            if (!dic_heroAttack[effectName][i].activeInHierarchy)
-            {
-                dic_heroAttack[effectName][i].transform.position = heroLogicBase.transform.position;
-                dic_heroAttack[effectName][i].transform.rotation = heroLogicBase.transform.rotation;
-                dic_heroAttack[effectName][i].SetActive(true);
-                return;
-            }
-        }
-
-        GameObject obj = GameObject.Instantiate(ObjectPool.getPrefab("Prefabs/Effects/" + effectName), GameLayer.s_instance.effectPoint);
-        obj.transform.position = heroLogicBase.transform.position;
-        obj.transform.rotation = heroLogicBase.transform.rotation;
-        dic_heroAttack[effectName].Add(obj);
-    }
 }

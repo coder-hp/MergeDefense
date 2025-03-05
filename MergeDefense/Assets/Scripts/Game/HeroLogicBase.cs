@@ -53,6 +53,8 @@ public class HeroLogicBase : MonoBehaviour
 
     List<Consts.BuffData> list_buffDatas = new List<Consts.BuffData>();
 
+    GameObject obj_attackEffect = null;
+
     public void Start()
     {
         curStandGrid = GameLayer.s_instance.heroGrid.transform.Find(transform.parent.name);
@@ -274,7 +276,15 @@ public class HeroLogicBase : MonoBehaviour
                         case 106:
                         case 108:
                             {
-                                EffectManager.heroAttack(this);
+                                if(obj_attackEffect)
+                                {
+                                    obj_attackEffect.SetActive(true);
+                                }
+                                else
+                                {
+                                    obj_attackEffect = GameObject.Instantiate(ObjectPool.getPrefab("Prefabs/Effects/eff_attack_hero" + id), transform);
+                                }
+                                //EffectManager.heroAttack(this);
                                 break;
                             }
                     }
