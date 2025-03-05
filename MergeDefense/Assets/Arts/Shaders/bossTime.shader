@@ -4,6 +4,7 @@ Shader "Kein/UI/bossTime"
     {
         _Color("Color",color)=(1,1,1,1)
         _MainTex ("Texture", 2D) = "white" {}
+        _Speed("Speed",Range(0.0001,5)) = 1.5
     }
     SubShader
     {
@@ -40,7 +41,7 @@ Shader "Kein/UI/bossTime"
             fixed4 _Color;
             sampler2D _MainTex;
             float4 _MainTex_ST;
-
+            float _Speed;
             v2f vert (appdata v)
             {
                 v2f o;
@@ -55,7 +56,7 @@ Shader "Kein/UI/bossTime"
                
                 fixed4 col = tex2D(_MainTex, i.uv) * _Color * i.color;
                 //fixed4 col = _Color * i.color;
-                col.a *= abs(sin(_Time.y * 1.5));
+                col.a *= abs(sin(_Time.y * _Speed));
 
                 return col;
             }
