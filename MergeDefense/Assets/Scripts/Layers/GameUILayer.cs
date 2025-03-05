@@ -76,9 +76,10 @@ public class GameUILayer : MonoBehaviour
     {
         ++curBoCi;
 
-        if(curBoCi > EnemyWaveEntity.getInstance().list[EnemyWaveEntity.getInstance().list.Count - 1].wave)
+        int maxWave = EnemyWaveEntity.getInstance().list[EnemyWaveEntity.getInstance().list.Count - 1].wave;
+        if (curBoCi > maxWave)
         {
-            curBoCi = EnemyWaveEntity.getInstance().list[EnemyWaveEntity.getInstance().list.Count - 1].wave;
+            curBoCi = maxWave;
             gameOver();
             return;
         }

@@ -249,7 +249,12 @@ public class EnemyLogic : MonoBehaviour
 
         if(enemyWaveData.enemyType >= 2)
         {
-            LayerManager.ShowLayer(Consts.Layer.KillEnemyRewardPanel).GetComponent<KillEnemyRewardPanel>().show(enemyWaveData);
+            // 最后一关没有奖励
+            int maxWave = EnemyWaveEntity.getInstance().list[EnemyWaveEntity.getInstance().list.Count - 1].wave;
+            if (GameUILayer.s_instance.curBoCi < maxWave)
+            {
+                LayerManager.ShowLayer(Consts.Layer.KillEnemyRewardPanel).GetComponent<KillEnemyRewardPanel>().show(enemyWaveData);
+            }
         }
     }
 }
