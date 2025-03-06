@@ -447,7 +447,7 @@ public class GameUILayer : MonoBehaviour
                         .Append(bellTrans.DOLocalRotateQuaternion(Quaternion.Euler(0, 0, 15), 0.08f).SetEase(Ease.Linear))
                         .Append(bellTrans.DOLocalRotateQuaternion(Quaternion.Euler(0, 0, -15), 0.16f).SetEase(Ease.Linear))
                         .Append(bellTrans.DOLocalRotateQuaternion(Quaternion.Euler(0, 0, 0), 0.08f))
-                        .Append(bellTrans.DOLocalRotateQuaternion(Quaternion.Euler(0, 0, 0), 2f).SetEase(Ease.Linear)).SetLoops(-1);
+                        .Append(bellTrans.DOLocalRotateQuaternion(Quaternion.Euler(0, 0, 0), 1.5f).SetEase(Ease.Linear)).SetLoops(-1);
                 seq_bell.SetAutoKill(false);
             }
             else
