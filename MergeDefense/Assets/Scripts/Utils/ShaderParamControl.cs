@@ -1,8 +1,9 @@
-﻿using DG.Tweening;
+using DG.Tweening;
 using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class ShaderParamControl : MonoBehaviour
 {
@@ -11,9 +12,12 @@ public class ShaderParamControl : MonoBehaviour
         MeshRenderer,
         SkinnedMeshRenderer,
         TrailRenderer,
+        Image,
     }
 
+    [HideInInspector]
     public Material material;
+
     public bool isSmallToBig = true;
     public string paramName;
     public float minValue = 0;
@@ -27,6 +31,16 @@ public class ShaderParamControl : MonoBehaviour
 
     private void Awake()
     {
+        initMaterial();
+    }
+
+    void initMaterial()
+    {
+        if(material)
+        {
+            return;
+        }
+
         switch (rendererType)
         {
             case RendererType.MeshRenderer:
@@ -46,6 +60,12 @@ public class ShaderParamControl : MonoBehaviour
                     material = GetComponent<TrailRenderer>().material;
                     break;
                 }
+
+            case RendererType.Image:
+                {
+                    material = GetComponent<Image>().material;
+                    break;
+                }
         }
     }
 
@@ -57,14 +77,25 @@ public class ShaderParamControl : MonoBehaviour
         }
     }
 
-    public void start(Ease ease, Action _callback = null)
+    public void start(Ease ease, Action _callback = null, float delayTime = 0)
     {
+        initMaterial();
+
+        if (isSmallToBig)
+        {
+            material.SetFloat(paramName, minValue);
+        }
+        else
+        {
+            material.SetFloat(paramName, maxValue);
+        }
+
         callback = _callback;
         isStart = true;
 
         curValueVec3.x = isSmallToBig ? minValue : maxValue;
         DOTween.To(() => curValueVec3, x => curValueVec3 = x, new Vector3(isSmallToBig ? maxValue : minValue, 0, 0), durTime)
-        .SetEase(ease)
+        .SetDelay(delayTime).SetEase(ease)
         .OnComplete(() =>
         {
             Update();

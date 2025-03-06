@@ -14,12 +14,15 @@ public class WeaponShopPanel : MonoBehaviour
     public Transform weapinTrans0;
     public Transform weapinTrans1;
     public Transform weapinTrans2;
+    public ShaderParamControl shaderParamControl;
 
     WeaponData[] weaponArray = new WeaponData[3];
     bool[] buyStateArray = new bool[3];
 
     Vector2 bgStartPos;
     bool isClosed = false;
+
+    int beforeShowFlowingLightBoCi = 0;
 
     private void Awake()
     {
@@ -35,7 +38,13 @@ public class WeaponShopPanel : MonoBehaviour
         isClosed = false;
 
         bgTrans.localPosition += posDownOffset;
-        bgTrans.DOLocalMoveY(bgStartPos.y,0.4f);
+        bgTrans.DOLocalMoveY(bgStartPos.y, 0.4f);
+
+        if(beforeShowFlowingLightBoCi != GameUILayer.s_instance.curBoCi)
+        {
+            beforeShowFlowingLightBoCi = GameUILayer.s_instance.curBoCi;
+            showFlowingLight(0.4f);
+        }
 
         text_curDiamond.text = GameUILayer.s_instance.curDiamond.ToString();
         gameObject.SetActive(true);
@@ -72,6 +81,12 @@ public class WeaponShopPanel : MonoBehaviour
 
     public void refreshWeapon()
     {
+        if(gameObject.activeInHierarchy)
+        {
+            beforeShowFlowingLightBoCi = GameUILayer.s_instance.curBoCi;
+            showFlowingLight(0);
+        }
+
         if (GameUILayer.s_instance.curBoCi > 1)
         {
             GameUILayer.s_instance.setIsShowBell(true);
@@ -191,6 +206,11 @@ public class WeaponShopPanel : MonoBehaviour
             weaponTrans.Find("weapon/level_bg").GetComponent<Image>().color = Consts.list_weaponColor[weaponArray[i].type];
             weaponTrans.Find("weapon/level_bg/level").GetComponent<Text>().text = weaponArray[i].level.ToString();
         }
+    }
+
+    void showFlowingLight(float delayTime)
+    {
+        shaderParamControl.start(Ease.Linear,null, delayTime);
     }
 
     public void onClickBuy(int index)
