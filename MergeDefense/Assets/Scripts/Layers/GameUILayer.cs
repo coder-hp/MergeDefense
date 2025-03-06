@@ -442,11 +442,11 @@ public class GameUILayer : MonoBehaviour
             if(seq_bell == null)
             {
                 seq_bell = DOTween.Sequence();
-                seq_bell.Append(bellTrans.DOLocalRotateQuaternion(Quaternion.Euler(0, 0, 15), 0.1f).SetEase(Ease.Linear))
-                        .Append(bellTrans.DOLocalRotateQuaternion(Quaternion.Euler(0, 0, -15), 0.2f).SetEase(Ease.Linear))
-                        .Append(bellTrans.DOLocalRotateQuaternion(Quaternion.Euler(0, 0, 15), 0.2f).SetEase(Ease.Linear))
-                        .Append(bellTrans.DOLocalRotateQuaternion(Quaternion.Euler(0, 0, -15), 0.2f).SetEase(Ease.Linear))
-                        .Append(bellTrans.DOLocalRotateQuaternion(Quaternion.Euler(0, 0, 0), 0.1f))
+                seq_bell.Append(bellTrans.DOLocalRotateQuaternion(Quaternion.Euler(0, 0, 15), 0.08f).SetEase(Ease.Linear))
+                        .Append(bellTrans.DOLocalRotateQuaternion(Quaternion.Euler(0, 0, -15), 0.16f).SetEase(Ease.Linear))
+                        .Append(bellTrans.DOLocalRotateQuaternion(Quaternion.Euler(0, 0, 15), 0.08f).SetEase(Ease.Linear))
+                        .Append(bellTrans.DOLocalRotateQuaternion(Quaternion.Euler(0, 0, -15), 0.16f).SetEase(Ease.Linear))
+                        .Append(bellTrans.DOLocalRotateQuaternion(Quaternion.Euler(0, 0, 0), 0.08f))
                         .Append(bellTrans.DOLocalRotateQuaternion(Quaternion.Euler(0, 0, 0), 2f).SetEase(Ease.Linear)).SetLoops(-1);
                 seq_bell.SetAutoKill(false);
             }
