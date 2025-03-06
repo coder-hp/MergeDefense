@@ -72,6 +72,11 @@ public class WeaponShopPanel : MonoBehaviour
 
     public void refreshWeapon()
     {
+        if (GameUILayer.s_instance.curBoCi > 1)
+        {
+            GameUILayer.s_instance.setIsShowBell(true);
+        }
+
         int[] levelArray;
 
         if (GameUILayer.s_instance.curBoCi >= 71)
@@ -227,6 +232,7 @@ public class WeaponShopPanel : MonoBehaviour
         isClosed = true;
         CancelInvoke("refreshTime");
         AudioScript.s_instance.playSound_btn();
+        GameUILayer.s_instance.setIsShowBell(false);
 
         bgTrans.DOLocalMoveY(bgStartPos.y + posDownOffset.y, 0.4f).OnComplete(()=>
         {

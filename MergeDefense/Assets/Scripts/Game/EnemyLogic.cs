@@ -257,4 +257,12 @@ public class EnemyLogic : MonoBehaviour
             }
         }
     }
+
+    private void OnDestroy()
+    {
+        if(tween_hitRedColor != null)
+        {
+            tween_hitRedColor.Kill();
+        }
+    }
 }

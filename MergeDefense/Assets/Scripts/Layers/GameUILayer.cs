@@ -21,6 +21,7 @@ public class GameUILayer : MonoBehaviour
     public Transform curDiamondIconTrans;
     public Transform btn_weaponShop;
     public Transform btn_weaponSell;
+    public Transform bellTrans;
     public Text text_weaponSellPrice;
     public Text text_enemyCount;
     public Text text_time;
@@ -91,7 +92,7 @@ public class GameUILayer : MonoBehaviour
         curBoCiRestTime = enemyWaveData.time;
         text_boci.text = "WAVE：" + curBoCi + "/80";
 
-        if(curBoCiRestTime == 60)
+        if (curBoCiRestTime == 60)
         {
             text_time.text = "01:00";
         }
@@ -101,13 +102,13 @@ public class GameUILayer : MonoBehaviour
         }
 
         waitAddEnemy.Clear();
-        for(int i = 0; i < enemyWaveData.count; i++)
+        for (int i = 0; i < enemyWaveData.count; i++)
         {
             //enemyWaveData.prefab = "enemy29";
             waitAddEnemy.Add(enemyWaveData);
         }
 
-        InvokeRepeating("onInvokeBoCiSecond",1,1);
+        InvokeRepeating("onInvokeBoCiSecond", 1, 1);
         InvokeRepeating("onInvokeAddEnemy", 0.6f, 0.6f);
 
         // 刷新武器商店
@@ -115,7 +116,7 @@ public class GameUILayer : MonoBehaviour
 
         // bgm
         {
-            if(curBoCi % 10 == 0)
+            if (curBoCi % 10 == 0)
             {
                 AudioScript.s_instance.playMusic("bgm_battle_boss", true);
             }
@@ -134,7 +135,7 @@ public class GameUILayer : MonoBehaviour
             obj_bossRedKuang.SetActive(false);
         }
 
-        if(curBoCi == 11)
+        if (curBoCi == 11)
         {
             ToastScript.show("<color=\"#698AFF\">Rare</color> Heroes Now Available!");
         }
@@ -146,19 +147,19 @@ public class GameUILayer : MonoBehaviour
 
     void onInvokeBoCiSecond()
     {
-        if(!isCanOnInvokeBoCiSecond)
+        if (!isCanOnInvokeBoCiSecond)
         {
             return;
         }
 
         --curBoCiRestTime;
 
-        if(curBoCiRestTime < 0)
+        if (curBoCiRestTime < 0)
         {
             curBoCiRestTime = 0;
         }
 
-        if(curBoCiRestTime >= 10)
+        if (curBoCiRestTime >= 10)
         {
             text_time.text = "00:" + curBoCiRestTime;
         }
@@ -181,7 +182,7 @@ public class GameUILayer : MonoBehaviour
 
     void onInvokeAddEnemy()
     {
-        if(waitAddEnemy.Count > 0)
+        if (waitAddEnemy.Count > 0)
         {
             GameLayer.s_instance.addEnemy(waitAddEnemy[0]);
             waitAddEnemy.RemoveAt(0);
@@ -204,13 +205,13 @@ public class GameUILayer : MonoBehaviour
         text_enemyCount.text = EnemyManager.s_instance.getEnemyCount() + "/" + Consts.maxEnemyCount;
         img_enemyCountProgress.fillAmount = EnemyManager.s_instance.getEnemyCount() / (float)Consts.maxEnemyCount;
 
-        if(EnemyManager.s_instance.getEnemyCount() >= Consts.maxEnemyCount)
+        if (EnemyManager.s_instance.getEnemyCount() >= Consts.maxEnemyCount)
         {
             gameOver();
         }
     }
 
-    public void setIsShowBtnWeaponSell(bool isShow,WeaponData weaponData = null)
+    public void setIsShowBtnWeaponSell(bool isShow, WeaponData weaponData = null)
     {
         if (isShow)
         {
@@ -233,7 +234,7 @@ public class GameUILayer : MonoBehaviour
         curGold += value;
         text_gold.text = curGold.ToString();
 
-        MoneyChangeTextPoint.s_instance.show(value,1);
+        MoneyChangeTextPoint.s_instance.show(value, 1);
 
         if (tween_changeGoldIcon == null)
         {
@@ -287,7 +288,7 @@ public class GameUILayer : MonoBehaviour
         curDiamond += value;
         text_diamond.text = curDiamond.ToString();
 
-        MoneyChangeTextPoint.s_instance.show(value,2);
+        MoneyChangeTextPoint.s_instance.show(value, 2);
 
         if (tween_changeDiamondIcon == null)
         {
@@ -431,10 +432,45 @@ public class GameUILayer : MonoBehaviour
         }
     }
 
+    Sequence seq_bell = null;
+    public void setIsShowBell(bool isShow)
+    {
+        if(isShow)
+        {
+            bellTrans.localScale = Vector3.one;
+
+            if(seq_bell == null)
+            {
+                seq_bell = DOTween.Sequence();
+                seq_bell.Append(bellTrans.DOLocalRotateQuaternion(Quaternion.Euler(0, 0, 10), 0.1f).SetEase(Ease.Linear))
+                        .Append(bellTrans.DOLocalRotateQuaternion(Quaternion.Euler(0, 0, -10), 0.2f).SetEase(Ease.Linear))
+                        .Append(bellTrans.DOLocalRotateQuaternion(Quaternion.Euler(0, 0, 10), 0.2f).SetEase(Ease.Linear))
+                        .Append(bellTrans.DOLocalRotateQuaternion(Quaternion.Euler(0, 0, -10), 0.2f).SetEase(Ease.Linear))
+                        .Append(bellTrans.DOLocalRotateQuaternion(Quaternion.Euler(0, 0, 0), 0.1f))
+                        .Append(bellTrans.DOLocalRotateQuaternion(Quaternion.Euler(0, 0, 0), 2f).SetEase(Ease.Linear)).SetLoops(-1);
+                seq_bell.SetAutoKill(false);
+            }
+            else
+            {
+                seq_bell.Restart();
+            }
+        }
+        else
+        {
+            bellTrans.localScale = Vector3.zero;
+
+            if (seq_bell != null)
+            {
+                seq_bell.Pause();
+            }
+        }
+    }
+
     public void onClickShop()
     {
         AudioScript.s_instance.playSound_btn();
 
+        setIsShowBell(false);
         WeaponShopPanel.s_instance.show();
     }
 
@@ -452,5 +488,23 @@ public class GameUILayer : MonoBehaviour
         CancelInvoke("onInvokeAddEnemy");
         LayerManager.ShowLayer(Consts.Layer.GameOverLayer);
         AudioScript.s_instance.stopMusic();
+    }
+
+    private void OnDestroy()
+    {
+        if (tween_changeDiamondIcon != null)
+        {
+            tween_changeDiamondIcon.Kill();
+        }
+
+        if (tween_changeDiamondText != null)
+        {
+            tween_changeDiamondText.Kill();
+        }
+
+        if (seq_bell != null)
+        {
+            seq_bell.Kill();
+        }
     }
 }
