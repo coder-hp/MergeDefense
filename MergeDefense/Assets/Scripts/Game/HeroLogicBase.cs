@@ -601,7 +601,7 @@ public class HeroLogicBase : MonoBehaviour
         AudioScript.s_instance.playSound("equipWeapon");
 
         Transform weaponTrans = heroUITrans.Find("weapon/" + weaponIndex);
-        weaponTrans.DOScale(1.3f, 0.2f).OnComplete(()=>
+        weaponTrans.DOScale(1.6f, 0.2f).OnComplete(()=>
         {
             weaponTrans.DOScale(1f, 0.2f);
         });
