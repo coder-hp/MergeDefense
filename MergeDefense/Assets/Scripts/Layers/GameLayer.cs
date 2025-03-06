@@ -225,9 +225,20 @@ public class GameLayer : MonoBehaviour
     private void OnDestroy()
     {
         EffectManager.clear();
+
         if (GameUILayer.s_instance)
         {
             Destroy(GameUILayer.s_instance.gameObject);
+        }
+
+        if(HeroInfoPanel.s_instance)
+        {
+            Destroy(HeroInfoPanel.s_instance.gameObject);
+        }
+
+        if (WeaponShopPanel.s_instance)
+        {
+            Destroy(WeaponShopPanel.s_instance.gameObject);
         }
     }
 }
