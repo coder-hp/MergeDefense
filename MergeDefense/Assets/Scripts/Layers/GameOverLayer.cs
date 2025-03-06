@@ -10,6 +10,7 @@ public class GameOverLayer : MonoBehaviour
 
     void Start()
     {
+        AudioScript.s_instance.playSound("gameOver");
         text_wave.text = GameUILayer.s_instance.curBoCi.ToString();
         LayerManager.LayerShowAni(transform.Find("bg"));
     }

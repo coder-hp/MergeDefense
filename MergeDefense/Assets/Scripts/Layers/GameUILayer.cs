@@ -454,6 +454,8 @@ public class GameUILayer : MonoBehaviour
             {
                 seq_bell.Restart();
             }
+
+            AudioScript.s_instance.playSound("shopNotice");
         }
         else
         {
