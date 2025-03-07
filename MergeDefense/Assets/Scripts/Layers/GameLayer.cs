@@ -1,6 +1,7 @@
 using DG.Tweening;
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class GameLayer : MonoBehaviour
@@ -29,9 +30,14 @@ public class GameLayer : MonoBehaviour
     [HideInInspector]
     public Material matrial_weaponChoiceKuang;
 
+    [HideInInspector]
+    public List<int> list_heroWeight;
+    [HideInInspector]
+    public List<int> list_weaponWeight;
+
     bool isMerging = false;
     [HideInInspector]
-    public  bool isGameOver = false;
+    public bool isGameOver = false;
 
     private void Awake()
     {
@@ -49,7 +55,10 @@ public class GameLayer : MonoBehaviour
 
     void Start()
     {
-        for(int i = 0; i < enemyMoveFourPoint.Count; i++)
+        list_heroWeight = new List<int>() { 100, 0, 0, 0, 0, 0, 0, 0, 00, 0 };          // 角色1-10星的召唤权重
+        list_weaponWeight = new List<int>() { 100, 0, 0, 0, 0, 0, 0, 0, 0, 0 };         // 武器1-10级的锻造权重
+
+        for (int i = 0; i < enemyMoveFourPoint.Count; i++)
         {
             list_enemyMoveFourPos.Add(enemyMoveFourPoint[i].position);
         }
@@ -152,6 +161,7 @@ public class GameLayer : MonoBehaviour
             if (heroPoint.GetChild(i).childCount == 0)
             {
                 Transform heroTrans = Instantiate(ObjectPool.getPrefab("Prefabs/Heros/hero" + RandomUtil.getRandom(101, getSummonHeroMaxId())), heroPoint.GetChild(i)).transform;
+                heroTrans.GetComponent<HeroLogicBase>().curStar = RandomUtil.SelectProbability(list_heroWeight) + 1;
                 EffectManager.summonHero(heroGrid.transform.GetChild(i).position);
 
                 if (!isMerging)
@@ -173,6 +183,7 @@ public class GameLayer : MonoBehaviour
             if (heroPoint.GetChild(i).childCount == 0)
             {
                 Transform heroTrans = Instantiate(ObjectPool.getPrefab("Prefabs/Heros/hero" + id), heroPoint.GetChild(i)).transform;
+                heroTrans.GetComponent<HeroLogicBase>().curStar = RandomUtil.SelectProbability(list_heroWeight) + 1;
                 EffectManager.summonHero(heroGrid.transform.GetChild(i).position);
 
                 if (!isMerging)

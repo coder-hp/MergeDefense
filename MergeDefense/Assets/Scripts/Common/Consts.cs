@@ -51,6 +51,16 @@ public class Consts
         DamageBaiFenBi      // 8受到伤害增加百分比
     }
 
+    public enum WeaponType
+    {
+        Sword = 1,          // 刀剑
+        Arrow,              // 弓箭
+        Axe,                // 斧头
+        Knuckle,            // 拳套
+        Staff,              // 法杖
+        End
+    }
+
     public class BuffData
     {
         public BuffType buffType;

@@ -11,6 +11,11 @@ public class KillRewardData
     public int heroQuality;
     public int heroStar;
     public int weaponLevel;
+    public string heroWeight;
+    public string weaponWeight;
+
+    public List<int> list_heroWeight = new List<int>();
+    public List<int> list_weaponWeight = new List<int>();
 }
 
 public class KillRewardEntity
@@ -32,6 +37,34 @@ public class KillRewardEntity
     public void init()
     {
         list = JsonUtils.loadJsonToList<KillRewardData>("killReward");
+
+        for (int i = 0; i < list.Count; i++)
+        {
+            {
+                string[] array = list[i].heroWeight.Split("_");
+                for (int j = 0; j < array.Length; j++)
+                {
+                    list[i].list_heroWeight.Add(int.Parse(array[j]));
+                }
+            }
+
+            {
+                string[] array = list[i].weaponWeight.Split("_");
+                for (int j = 0; j < array.Length; j++)
+                {
+                    list[i].list_weaponWeight.Add(int.Parse(array[j]));
+                }
+            }
+
+            if (list[i].list_heroWeight.Count != 10)
+            {
+                Debug.LogError("killReward配置表异常");
+            }
+            if (list[i].list_weaponWeight.Count != 10)
+            {
+                Debug.LogError("killReward配置表异常");
+            }
+        }
     }
 
     public KillRewardData getData(int wave)

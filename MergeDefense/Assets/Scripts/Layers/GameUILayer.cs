@@ -401,7 +401,8 @@ public class GameUILayer : MonoBehaviour
                     isForgeSuccess = true;
 
                     UIItemWeapon uIItemWeapon = Instantiate(item_weapon, weaponGridTrans.GetChild(i)).GetComponent<UIItemWeapon>();
-                    uIItemWeapon.init(RandomUtil.getRandom(1, 5), 1);
+                    int weaponLevel = RandomUtil.SelectProbability(GameLayer.s_instance.list_weaponWeight) + 1;
+                    uIItemWeapon.init(RandomUtil.getRandom(1,5), weaponLevel);
                     break;
                 }
             }
