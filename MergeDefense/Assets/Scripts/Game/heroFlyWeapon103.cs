@@ -15,6 +15,7 @@ public class heroFlyWeapon103 : MonoBehaviour
         heroLogicBase = _heroLogicBase;
         enemyLogic = _enemyLogic;
         targetTrans = enemyLogic.transform;
+        transform.position = heroLogicBase.flyWeaponPoint.position;
     }
 
     void Update()

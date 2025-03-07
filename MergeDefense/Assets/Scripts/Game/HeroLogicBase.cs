@@ -36,6 +36,8 @@ public class HeroLogicBase : MonoBehaviour
     public bool isCanUpdate = false;
     [HideInInspector]
     public BoxCollider boxCollider;
+    [HideInInspector]
+    public Transform flyWeaponPoint;
 
     bool isDraging = false;
 
@@ -63,6 +65,7 @@ public class HeroLogicBase : MonoBehaviour
         heroAniEvent = modelTrans.GetComponent<HeroAniEvent>();
         animator = modelTrans.GetComponent<Animator>();
         boxCollider = transform.GetComponent<BoxCollider>();
+        flyWeaponPoint = transform.Find("flyWeaponPoint");
 
         heroData = HeroEntity.getInstance().getData(id);
         heroStarData = HeroStarEntity.getInstance().getData(curStar);
@@ -371,10 +374,20 @@ public class HeroLogicBase : MonoBehaviour
         }
     }
 
+    Tween tween_rotate = null;
     void lookEnemy(EnemyLogic enemyLogic)
     {
         float angle = -CommonUtil.twoPointAngle(curStandGrid.position, enemyLogic.transform.position);
-        transform.localRotation = Quaternion.Euler(0, angle, 0);
+
+        //transform.localRotation = Quaternion.Euler(0, angle, 0);
+
+        if(tween_rotate != null)
+        {
+            tween_rotate.Kill();
+        }
+
+        tween_rotate = transform.DOLocalRotate(new Vector3(0, angle, 0), 0.2f, DG.Tweening.RotateMode.Fast);
+        //tween_rotate = transform.DOLocalRotateQuaternion(Quaternion.Euler(0, angle, 0),0.2f);
     }
 
     public int getAtk()
@@ -639,7 +652,18 @@ public class HeroLogicBase : MonoBehaviour
 
         if (aniName == Consts.HeroAniNameIdle)
         {
-            transform.localRotation = Quaternion.Euler(0, 180, 0);
+            if (tween_rotate != null)
+            {
+                tween_rotate.Kill();
+            }
+            tween_rotate = transform.DOLocalRotate(Consts.heroIdleAngle, 0.2f,DG.Tweening.RotateMode.Fast);
+        }
+        else if (aniName == Consts.HeroAniNameRun)
+        {
+            if (tween_rotate != null)
+            {
+                tween_rotate.Kill();
+            }
         }
 
         if (crossFadeTime > 0)

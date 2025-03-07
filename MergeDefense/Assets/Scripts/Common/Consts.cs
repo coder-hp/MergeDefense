@@ -109,6 +109,7 @@ public class Consts
     public static Vector3 heroSellBtnOffset = new Vector3(0, -0.9f, 0);
     public static Vector3 summonHeroBigScale = new Vector3(1.3f, 1.3f, 1.3f);
     public static Vector3 weapinUIIconStartScale = new Vector3(1.6f, 1.6f, 1.6f);
+    public static Vector3 heroIdleAngle = new Vector3(0, 180, 0);
 
     public static Color color_weaponCantEquip = new Color(1,0,0, 0.5f);
 }

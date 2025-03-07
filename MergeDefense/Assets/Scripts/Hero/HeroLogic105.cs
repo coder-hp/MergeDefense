@@ -11,7 +11,6 @@ public class HeroLogic105 : HeroBase
     {
         AudioScript.s_instance.playSound("105_attack");
         Transform arrow = Instantiate(ObjectPool.getPrefab("Prefabs/Games/heroFlyWeapon105"), GameLayer.s_instance.flyPoint).transform;
-        arrow.position = heroLogicBase.curStandGrid.position;
         arrow.GetComponent<heroFlyWeapon105>().init(heroLogicBase, enemyLogic);
     }
 }
