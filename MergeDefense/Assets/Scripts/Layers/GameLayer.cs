@@ -87,6 +87,7 @@ public class GameLayer : MonoBehaviour
                             AudioScript.s_instance.playSound("heroMerge");
 
                             heroLogicBase2.isMerge = true;
+                            heroLogicBase2.playAni(Consts.HeroAniNameIdle);
                             heroLogicBase2.boxCollider.enabled = false;
                             heroLogicBase2.transform.SetParent(transform);
                             Destroy(heroLogicBase2.heroUITrans.gameObject);
@@ -108,7 +109,7 @@ public class GameLayer : MonoBehaviour
                                 jumpHight = 1f;
                             }
 
-                            heroLogicBase2.transform.DOMove(heroLogicBase1.transform.position + new Vector3(0, jumpHight, 0), moveTime).SetEase(Ease.Linear).OnComplete(() =>
+                            heroLogicBase2.transform.DOMove(heroLogicBase1.transform.position, moveTime).SetEase(Ease.Linear).OnComplete(() =>
                             {
                                 heroLogicBase1.addStar();
                                 heroLogicBase1.mergeWeapon(heroLogicBase2.list_weapon);
@@ -117,22 +118,27 @@ public class GameLayer : MonoBehaviour
                                 // 升星角色的合并动画
                                 {
                                     Transform trans = heroLogicBase1.transform.Find("model");
-                                    trans.DOLocalMoveY(jumpHight * 0.7f, moveTime * 0.5f).SetEase(Ease.OutCubic).OnComplete(() =>
+                                    trans.DOLocalMoveY(0.3f, 0.1f).SetEase(Ease.OutCubic).OnComplete(() =>
                                     {
                                         trans.DOLocalMoveY(0f, 0.1f).SetEase(Ease.InCubic);
                                     });
 
-                                    trans.DOScaleY(1.3f, moveTime * 0.5f).SetEase(Ease.OutCubic).OnComplete(() =>
+                                    trans.DOScaleY(1.2f, 0.1f).SetEase(Ease.OutCubic).OnComplete(() =>
                                     {
-                                        trans.DOScaleY(0.5f, 0.1f).SetEase(Ease.InCubic).OnComplete(() =>
+                                        trans.DOScaleY(0.8f, 0.1f).SetEase(Ease.InCubic).OnComplete(() =>
                                         {
                                             trans.DOScaleY(1f, 0.1f).SetEase(Ease.OutCubic);
                                         });
                                     });
                                 }
 
-                                Destroy(heroLogicBase2.gameObject, moveTime * 0.5f);
+                                Destroy(heroLogicBase2.gameObject);
                                 Invoke("checkHeroMerge", 0.65f);
+                            });
+
+                            heroLogicBase2.transform.GetChild(0).DOLocalMoveY(jumpHight, moveTime * 0.5f).SetEase(Ease.OutSine).OnComplete(() =>
+                            {
+                                heroLogicBase2.transform.GetChild(0).DOLocalMoveY(0, moveTime * 0.5f).SetEase(Ease.InSine);
                             });
 
                             return;

@@ -40,11 +40,15 @@ public class KillRewardEntity
 
         for (int i = 0; i < list.Count; i++)
         {
+            int heroAllWeight = 0;
+            int weaponAllWeight = 0;
+
             {
                 string[] array = list[i].heroWeight.Split("_");
                 for (int j = 0; j < array.Length; j++)
                 {
                     list[i].list_heroWeight.Add(int.Parse(array[j]));
+                    heroAllWeight += int.Parse(array[j]);
                 }
             }
 
@@ -53,7 +57,18 @@ public class KillRewardEntity
                 for (int j = 0; j < array.Length; j++)
                 {
                     list[i].list_weaponWeight.Add(int.Parse(array[j]));
+                    weaponAllWeight += int.Parse(array[j]);
                 }
+            }
+
+            if(heroAllWeight != 100)
+            {
+                Debug.LogError("killReward配置表异常");
+            }
+
+            if (weaponAllWeight != 100)
+            {
+                Debug.LogError("killReward配置表异常");
             }
 
             if (list[i].list_heroWeight.Count != 10)
