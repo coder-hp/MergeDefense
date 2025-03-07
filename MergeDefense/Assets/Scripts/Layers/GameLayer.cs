@@ -251,5 +251,10 @@ public class GameLayer : MonoBehaviour
         {
             Destroy(WeaponShopPanel.s_instance.gameObject);
         }
+
+        if (KillEnemyRewardPanel.s_instance)
+        {
+            Destroy(KillEnemyRewardPanel.s_instance.gameObject);
+        }
     }
 }

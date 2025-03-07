@@ -5,6 +5,8 @@ using UnityEngine.UI;
 
 public class KillEnemyRewardPanel : MonoBehaviour
 {
+    public static KillEnemyRewardPanel s_instance = null;
+
     public Transform reward_money;
     public Transform reward_hero;
     public Transform reward_weapon;
@@ -20,6 +22,11 @@ public class KillEnemyRewardPanel : MonoBehaviour
     int heroStar;
     int weaponType;
     int weaponLevel;
+
+    private void Awake()
+    {
+        s_instance = this;
+    }
 
     public void show(EnemyWaveData _enemyWaveData)
     {
