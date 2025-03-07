@@ -12,7 +12,6 @@ public class GameUILayer : MonoBehaviour
     public GameObject prefab_bloodBar_big;
     public GameObject prefab_heroUI;
     public GameObject item_weapon;
-    public GameObject obj_bossRedKuang;
     public Image img_enemyCountProgress;
     public Transform bloodPointTrans;
     public Transform heroUIPointTrans;
@@ -22,6 +21,7 @@ public class GameUILayer : MonoBehaviour
     public Transform btn_weaponShop;
     public Transform btn_weaponSell;
     public Transform bellTrans;
+    public Transform bossRedKuangTrans;
     public Text text_weaponSellPrice;
     public Text text_enemyCount;
     public Text text_time;
@@ -126,15 +126,6 @@ public class GameUILayer : MonoBehaviour
             }
         }
 
-        if (curBoCi % 10 == 0)
-        {
-            obj_bossRedKuang.SetActive(true);
-        }
-        else
-        {
-            obj_bossRedKuang.SetActive(false);
-        }
-
         if (curBoCi == 11)
         {
             ToastScript.show("<color=\"#698AFF\">Rare</color> Heroes Now Available!");
@@ -168,9 +159,25 @@ public class GameUILayer : MonoBehaviour
             text_time.text = "00:0" + curBoCiRestTime;
         }
 
+        checkIsShowBossRedKuang();
+
         if (curBoCiRestTime <= 0)
         {
             CancelInvoke("onInvokeBoCiSecond");
+
+            // 如果是boss波次，并且没有击杀，则直接游戏结束
+            if (curBoCi % 10 == 0)
+            {
+                for(int i = 0; i < EnemyManager.s_instance.list_enemy.Count; i++)
+                {
+                    if (EnemyManager.s_instance.list_enemy[i].enemyWaveData.enemyType == 3)
+                    {
+                        gameOver();
+                        return;
+                    }
+                }
+            }
+
             Invoke("startBoCi", 1);
 
             if ((curBoCi + 1) % 10 == 0)
@@ -209,6 +216,23 @@ public class GameUILayer : MonoBehaviour
         {
             gameOver();
         }
+    }
+
+    public void checkIsShowBossRedKuang()
+    {
+        if(curBoCi % 10 == 0 && curBoCiRestTime <= 20)
+        {
+            bossRedKuangTrans.localScale = Vector3.one;
+            return;
+        }
+
+        if (EnemyManager.s_instance.getEnemyCount() >= 40)
+        {
+            bossRedKuangTrans.localScale = Vector3.one;
+            return;
+        }
+
+        bossRedKuangTrans.localScale = Vector3.zero;
     }
 
     public void setIsShowBtnWeaponSell(bool isShow, WeaponData weaponData = null)
@@ -484,6 +508,7 @@ public class GameUILayer : MonoBehaviour
         {
             return;
         }
+
         isCalledGameOver = true;
         GameLayer.s_instance.isGameOver = true;
         CancelInvoke("startBoCi");

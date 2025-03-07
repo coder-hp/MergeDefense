@@ -31,12 +31,14 @@ public class EnemyManager : MonoBehaviour
     {
         list_enemy.Add(enemyLogic);
         GameUILayer.s_instance.refreshEnemyCount();
+        GameUILayer.s_instance.checkIsShowBossRedKuang();
     }
 
     public void removeEnemy(EnemyLogic enemyLogic)
     {
         list_enemy.Remove(enemyLogic);
         GameUILayer.s_instance.refreshEnemyCount();
+        GameUILayer.s_instance.checkIsShowBossRedKuang();
     }
 
     public EnemyLogic getMinDisTarget(Transform hero)
@@ -58,7 +60,7 @@ public class EnemyManager : MonoBehaviour
 
     public EnemyLogic getHeroAtkTarget(HeroLogicBase heroLogicBase)
     {
-        // ÓÅÏÈ¹¥»÷boss
+        // ä¼˜å…ˆæ”»å‡»boss
         for (int i = 0; i < list_enemy.Count; i++)
         {
             if(list_enemy[i].enemyWaveData.enemyType == 3)
@@ -70,7 +72,7 @@ public class EnemyManager : MonoBehaviour
             }
         }
 
-        // Æä´Î¹¥»÷¾«Ó¢¹Ö
+        // å…¶æ¬¡æ”»å‡»ç²¾è‹±æ€ª
         for (int i = 0; i < list_enemy.Count; i++)
         {
             if (list_enemy[i].enemyWaveData.enemyType == 2)
@@ -82,7 +84,7 @@ public class EnemyManager : MonoBehaviour
             }
         }
 
-        // ×îºó¹¥»÷Ð¡¹Ö
+        // æœ€åŽæ”»å‡»å°æ€ª
         for (int i = 0; i < list_enemy.Count; i++)
         {
             if (Vector3.Distance(heroLogicBase.curStandGrid.position, list_enemy[i].transform.position) <= heroLogicBase.heroData.atkRange)
