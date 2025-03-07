@@ -180,7 +180,7 @@ RectTransform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
+  m_ConstrainProportionsScale: 1
   m_Children:
   - {fileID: 3637059923821640620}
   - {fileID: 5497201549750432375}
@@ -214,7 +214,6 @@ MonoBehaviour:
   prefab_bloodBar_big: {fileID: 245932757020445255}
   prefab_heroUI: {fileID: 1407184696613700501}
   item_weapon: {fileID: 8597224232747892432}
-  obj_bossRedKuang: {fileID: 5371699374343370392}
   img_enemyCountProgress: {fileID: 2884777209870039736}
   bloodPointTrans: {fileID: 6469946548303348863}
   heroUIPointTrans: {fileID: 1159197877803035446}
@@ -224,6 +223,7 @@ MonoBehaviour:
   btn_weaponShop: {fileID: 8764574124107680769}
   btn_weaponSell: {fileID: 6862225440991156087}
   bellTrans: {fileID: 2084414326649064832}
+  bossRedKuangTrans: {fileID: 4425263426003187024}
   text_weaponSellPrice: {fileID: 1063686933988036042}
   text_enemyCount: {fileID: 8279762320973953388}
   text_time: {fileID: 6593359631840922468}
@@ -6025,7 +6025,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1125081593171210593, guid: c39fc8e01e690484893e520a8a1f4b85, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8680892801788080809, guid: c39fc8e01e690484893e520a8a1f4b85, type: 3}
       propertyPath: m_Pivot.x
@@ -6057,6 +6057,18 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8680892801788080809, guid: c39fc8e01e690484893e520a8a1f4b85, type: 3}
       propertyPath: m_SizeDelta.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8680892801788080809, guid: c39fc8e01e690484893e520a8a1f4b85, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8680892801788080809, guid: c39fc8e01e690484893e520a8a1f4b85, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8680892801788080809, guid: c39fc8e01e690484893e520a8a1f4b85, type: 3}
+      propertyPath: m_LocalScale.z
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8680892801788080809, guid: c39fc8e01e690484893e520a8a1f4b85, type: 3}
@@ -6107,6 +6119,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 8680892801788080809, guid: c39fc8e01e690484893e520a8a1f4b85, type: 3}
+      propertyPath: m_ConstrainProportionsScale
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -6115,11 +6131,6 @@ PrefabInstance:
 --- !u!224 &4425263426003187024 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 8680892801788080809, guid: c39fc8e01e690484893e520a8a1f4b85, type: 3}
-  m_PrefabInstance: {fileID: 4976771850808870905}
-  m_PrefabAsset: {fileID: 0}
---- !u!1 &5371699374343370392 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 1125081593171210593, guid: c39fc8e01e690484893e520a8a1f4b85, type: 3}
   m_PrefabInstance: {fileID: 4976771850808870905}
   m_PrefabAsset: {fileID: 0}
 --- !u!1001 &5288973982636789422

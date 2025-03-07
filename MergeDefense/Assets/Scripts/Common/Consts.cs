@@ -77,6 +77,7 @@ public class Consts
         }
     }
 
+    // 不同武器对应的颜色
     public static List<Color> list_weaponColor = new List<Color>()
     {
         CommonUtil.stringToColor("#FFFFFF"),    // 白色
@@ -85,6 +86,16 @@ public class Consts
         CommonUtil.stringToColor("#3BD3FF"),    // 斧
         CommonUtil.stringToColor("#FF6F6F"),    // 拳套
         CommonUtil.stringToColor("#E28BFF"),    // 魔杖
+    };
+
+    // 角色不同品质的颜色
+    public static List<Color> list_heroQualityColor = new List<Color>()
+    {
+        CommonUtil.stringToColor("#FFFFFF"),    // 默认色
+        CommonUtil.stringToColor("#6E8999"),    // 白
+        CommonUtil.stringToColor("#457dd8"),    // 蓝
+        CommonUtil.stringToColor("#9146da"),    // 紫
+        CommonUtil.stringToColor("#eb9b10"),    // 橙
     };
 
     public static string HeroAniNameIdle = "idle";
