@@ -226,7 +226,7 @@ public class GameUILayer : MonoBehaviour
 
     public void checkIsShowBossRedKuang()
     {
-        if(curBoCi % 10 == 0 && curBoCiRestTime <= 20)
+        if(curBoCi % 10 == 0 && curBoCiRestTime == 20)
         {
             bossRedKuangTrans.localScale = Vector3.one;
             return;
