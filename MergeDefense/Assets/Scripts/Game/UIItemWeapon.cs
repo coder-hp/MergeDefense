@@ -18,6 +18,7 @@ public class UIItemWeapon : MonoBehaviour
     Transform mergeTarget = null;
 
     RaycastHit raycastHit;
+    Transform dragTriggerWeaponBar = null;
 
     public void init(int type,int level)
     {
@@ -268,6 +269,17 @@ public class UIItemWeapon : MonoBehaviour
                     Destroy(gameObject);
                     return;
                 }
+                // 检测是否拖到了武器栏
+                else if(dragTriggerWeaponBar != null)
+                {
+                    // 防止卖出按钮那边检测碰撞
+                    transform.tag = "Untagged";
+
+                    dragTriggerWeaponBar.GetComponent<WeaponBar>().setData(weaponData);
+
+                    Destroy(gameObject);
+                    return;
+                }
             }
         }
 
@@ -299,5 +311,37 @@ public class UIItemWeapon : MonoBehaviour
         }
 
         return trans;
+    }
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.CompareTag("WeaponBar") && int.Parse(collision.transform.name) == weaponData.type)
+        {
+            dragTriggerWeaponBar = collision.transform;
+
+            for(int i = 0; i < GameUILayer.s_instance.weaponBarPointTrans.childCount; i++)
+            {
+                if(GameUILayer.s_instance.weaponBarPointTrans.GetChild(i) == dragTriggerWeaponBar)
+                {
+                    GameUILayer.s_instance.weaponBarPointTrans.GetChild(i).Find("choiced").localScale = Vector3.one;
+                }
+                else
+                {
+                    GameUILayer.s_instance.weaponBarPointTrans.GetChild(i).Find("choiced").localScale = Vector3.zero;
+                }
+            }
+        }
+    }
+
+    private void OnTriggerExit2D(Collider2D collision)
+    {
+        if (collision.CompareTag("WeaponBar"))
+        {
+            if(dragTriggerWeaponBar == collision.transform)
+            {
+                dragTriggerWeaponBar.Find("choiced").localScale = Vector3.zero;
+                dragTriggerWeaponBar = null;
+            }
+        }
     }
 }

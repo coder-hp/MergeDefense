@@ -22,6 +22,7 @@ public class GameUILayer : MonoBehaviour
     public Transform btn_weaponSell;
     public Transform bellTrans;
     public Transform bossRedKuangTrans;
+    public Transform weaponBarPointTrans;
     public Text text_weaponSellPrice;
     public Text text_enemyCount;
     public Text text_time;
