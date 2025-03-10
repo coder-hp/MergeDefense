@@ -83,7 +83,6 @@ public class UIItemWeapon : MonoBehaviour
         text_level.text = weaponData.level.ToString();
     }
 
-    Transform curDragChoicedHero = null;
     private void OnMouseDown()
     {
         if (GameLayer.s_instance.isGameOver)
@@ -96,7 +95,6 @@ public class UIItemWeapon : MonoBehaviour
         }
 
         mergeTarget = null;
-        curDragChoicedHero = null;
         transform.SetParent(GameUILayer.s_instance.transform);
 
         // 显示所有角色的武器适配性emoji
@@ -146,37 +144,6 @@ public class UIItemWeapon : MonoBehaviour
                 mergeTarget.DOScale(1f, 0.2f);
                 mergeTarget = null;
             }
-            // 检测是否拖到角色上
-            else
-            {
-                raycastHit = RayUtil.getEndPoint(CommonUtil.mousePosToWorld(GameLayer.s_instance.camera3D) + Consts.mouseRayOffset);
-                if (raycastHit.collider && raycastHit.collider.CompareTag("Hero"))
-                {
-                    if(curDragChoicedHero != raycastHit.collider.transform)
-                    {
-                        curDragChoicedHero = raycastHit.collider.transform;
-                        HeroLogicBase heroLogicBase = curDragChoicedHero.GetComponent<HeroLogicBase>();
-
-                        if (heroLogicBase.isCanAddWeapon(weaponData))
-                        {
-                            GameLayer.s_instance.weaponChoiceKuang.position = heroLogicBase.heroQualityTrans.position;
-                            GameLayer.s_instance.weaponChoiceKuang.localScale = Vector3.one;
-                            GameLayer.s_instance.matrial_weaponChoiceKuang.SetColor("_Color", Color.white);
-                        }
-                        else
-                        {
-                            GameLayer.s_instance.weaponChoiceKuang.position = heroLogicBase.heroQualityTrans.position;
-                            GameLayer.s_instance.weaponChoiceKuang.localScale = Vector3.one;
-                            GameLayer.s_instance.matrial_weaponChoiceKuang.SetColor("_Color", Consts.color_weaponCantEquip);
-                        }
-                    }
-                }
-                else
-                {
-                    curDragChoicedHero = null;
-                    GameLayer.s_instance.weaponChoiceKuang.localScale = Vector3.zero;
-                }
-            }
         }
     }
 
@@ -193,8 +160,6 @@ public class UIItemWeapon : MonoBehaviour
         {
             return;
         }
-
-        GameLayer.s_instance.weaponChoiceKuang.localScale = Vector3.zero;
 
         // 关闭所有角色的武器适配性emoji
         for (int i = 0; i < GameLayer.s_instance.heroPoint.childCount; i++)
@@ -241,46 +206,29 @@ public class UIItemWeapon : MonoBehaviour
             mergeTarget.DOScale(1f, 0.2f);
         }
 
-        // 检测是否拖到角色上
+        // 未拖到角色上,检测是否拖到了卖出按钮上
+        if (BtnWeaponSellEvent.s_instance.itemWeapon == this)
         {
-            raycastHit = RayUtil.getEndPoint(CommonUtil.mousePosToWorld(GameLayer.s_instance.camera3D) + Consts.mouseRayOffset);
-            if (raycastHit.collider && raycastHit.collider.CompareTag("Hero"))
-            {
-                HeroLogicBase heroLogicBase = raycastHit.collider.GetComponent<HeroLogicBase>();
-                if (heroLogicBase.isCanAddWeapon(weaponData))
-                {
-                    heroLogicBase.addWeapon(weaponData);
-                    Destroy(gameObject);
-                    return;
-                }
-            }
-            else
-            {
-                // 未拖到角色上,检测是否拖到了卖出按钮上
-                if(BtnWeaponSellEvent.s_instance.itemWeapon == this)
-                {
-                    AudioScript.s_instance.playSound("sellWeapon");
+            AudioScript.s_instance.playSound("sellWeapon");
 
-                    // 防止卖出按钮那边检测碰撞
-                    transform.tag = "Untagged";
+            // 防止卖出按钮那边检测碰撞
+            transform.tag = "Untagged";
 
-                    GameUILayer.s_instance.changeDiamond(weaponData.level);
-                    GameUILayer.s_instance.setIsShowBtnWeaponSell(false);
-                    Destroy(gameObject);
-                    return;
-                }
-                // 检测是否拖到了武器栏
-                else if(dragTriggerWeaponBar != null)
-                {
-                    // 防止卖出按钮那边检测碰撞
-                    transform.tag = "Untagged";
+            GameUILayer.s_instance.changeDiamond(weaponData.level);
+            GameUILayer.s_instance.setIsShowBtnWeaponSell(false);
+            Destroy(gameObject);
+            return;
+        }
+        // 检测是否拖到了武器栏
+        else if (dragTriggerWeaponBar != null)
+        {
+            // 防止卖出按钮那边检测碰撞
+            transform.tag = "Untagged";
 
-                    dragTriggerWeaponBar.GetComponent<WeaponBar>().setData(weaponData);
+            dragTriggerWeaponBar.GetComponent<WeaponBar>().setData(weaponData);
 
-                    Destroy(gameObject);
-                    return;
-                }
-            }
+            Destroy(gameObject);
+            return;
         }
 
         isCanDrag = false;

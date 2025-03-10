@@ -16,7 +16,6 @@ public class GameLayer : MonoBehaviour
     public GameObject heroGrid;
     public Transform heroGridChoiced;
     public Transform attackRangeTrans;
-    public Transform weaponChoiceKuang;
     public Transform heroQualityPoint;
     public Transform flyPoint;
     public Transform effectPoint;
@@ -27,8 +26,6 @@ public class GameLayer : MonoBehaviour
     public int addedEnemyCount = 0;
     [HideInInspector]
     public Material matrial_attackRange;
-    [HideInInspector]
-    public Material matrial_weaponChoiceKuang;
 
     [HideInInspector]
     public List<int> list_heroWeight;
@@ -63,7 +60,6 @@ public class GameLayer : MonoBehaviour
         }
 
         matrial_attackRange = attackRangeTrans.GetComponent<MeshRenderer>().material;
-        matrial_weaponChoiceKuang = weaponChoiceKuang.GetChild(0).GetComponent<MeshRenderer>().material;
 
         LayerManager.ShowLayer(Consts.Layer.GameUILayer);
     }
