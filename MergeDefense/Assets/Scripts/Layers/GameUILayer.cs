@@ -48,8 +48,6 @@ public class GameUILayer : MonoBehaviour
     List<EnemyWaveData> waitAddEnemy = new List<EnemyWaveData>();
 
     [HideInInspector]
-    public bool isCanDragWeapon = true;
-    [HideInInspector]
     public bool isCanOnInvokeBoCiSecond = true;
 
     private void Awake()

@@ -13,6 +13,8 @@ public class UIItemWeapon : MonoBehaviour
 
     [HideInInspector]
     public WeaponData weaponData;
+    [HideInInspector]
+    public bool isCanDrag = false;
 
     Transform parentTrans;
     Transform mergeTarget = null;
@@ -33,10 +35,48 @@ public class UIItemWeapon : MonoBehaviour
         // 武器icon
         img_icon.sprite = AtlasUtil.getAtlas_icon().GetSprite("weapon_" + type);
         img_icon.transform.localScale = Consts.weapinUIIconStartScale;
-        img_icon.transform.DOScale(1, 0.25f);
+        img_icon.transform.DOScale(1, 0.25f).OnComplete(()=>
+        {
+            checkMerge();
+        });
 
         img_level_bg.color = Consts.list_weaponColor[weaponData.type];
         img_frame.color = Consts.list_weaponColor[weaponData.type];
+    }
+
+    public void checkMerge()
+    {
+        isCanDrag = false;
+
+        // 检测是否可以合并
+        for (int i = 0; i < GameUILayer.s_instance.weaponGridTrans.childCount; i++)
+        {
+            if (GameUILayer.s_instance.weaponGridTrans.GetChild(i).childCount == 1 && GameUILayer.s_instance.weaponGridTrans.GetChild(i) != transform.parent)
+            {
+                UIItemWeapon uiItemWeapon_to = GameUILayer.s_instance.weaponGridTrans.GetChild(i).GetChild(0).GetComponent<UIItemWeapon>();
+                if ((uiItemWeapon_to.isCanDrag) && (uiItemWeapon_to.weaponData.type == weaponData.type) && (uiItemWeapon_to.weaponData.level == weaponData.level) && (weaponData.level < 10))
+                {
+                    uiItemWeapon_to.isCanDrag = false;
+                    transform.SetParent(GameUILayer.s_instance.transform);
+                    
+                    float moveTime = Vector3.Distance(transform.position, uiItemWeapon_to.transform.position) / 10f;
+                    if (moveTime > 0.3f)
+                    {
+                        moveTime = 0.3f;
+                    }
+
+                    transform.DOMove(uiItemWeapon_to.transform.position, moveTime).SetEase(Ease.Linear).OnComplete(() =>
+                    {
+                        uiItemWeapon_to.init(RandomUtil.getRandom(1,(int)(Consts.WeaponType.End - 1)), uiItemWeapon_to.weaponData.level + 1);
+                        Destroy(gameObject);
+                    });
+
+                    return;
+                }
+            }
+        }
+
+        isCanDrag = true;
     }
 
     public void addLevel()
@@ -57,7 +97,7 @@ public class UIItemWeapon : MonoBehaviour
         {
             return;
         }
-        if (!GameUILayer.s_instance.isCanDragWeapon)
+        if (!isCanDrag)
         {
             return;
         }
@@ -84,7 +124,7 @@ public class UIItemWeapon : MonoBehaviour
         {
             return;
         }
-        if (!GameUILayer.s_instance.isCanDragWeapon)
+        if (!isCanDrag)
         {
             return;
         }
@@ -153,9 +193,10 @@ public class UIItemWeapon : MonoBehaviour
         {
             return;
         }
+
         GameUILayer.s_instance.setIsShowBtnWeaponSell(false);
 
-        if (!GameUILayer.s_instance.isCanDragWeapon)
+        if (!isCanDrag)
         {
             return;
         }
@@ -238,10 +279,10 @@ public class UIItemWeapon : MonoBehaviour
             }
         }
 
-        GameUILayer.s_instance.isCanDragWeapon = false;
+        isCanDrag = false;
         transform.DOMove(parentTrans.position, 0.2f).OnComplete(()=>
         {
-            GameUILayer.s_instance.isCanDragWeapon = true;
+            isCanDrag = true;
             transform.SetParent(parentTrans);
         });
     }

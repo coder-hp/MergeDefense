@@ -131,7 +131,6 @@ public class HeroLogicBase : MonoBehaviour
                 {
                     AudioScript.s_instance.playSound("heroMerge");
 
-                    isCanUpdate = false;
                     heroLogicBase_to.isCanUpdate = false;
                     playAni(Consts.HeroAniNameIdle);
                     boxCollider.enabled = false;
