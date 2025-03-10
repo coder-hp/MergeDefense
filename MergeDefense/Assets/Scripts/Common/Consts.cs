@@ -78,17 +78,6 @@ public class Consts
         }
     }
 
-    // 不同武器对应的颜色
-    public static List<Color> list_weaponColor = new List<Color>()
-    {
-        CommonUtil.stringToColor("#FFFFFF"),    // 白色
-        CommonUtil.stringToColor("#FFD618"),    // 剑
-        CommonUtil.stringToColor("#64D967"),    // 弓
-        CommonUtil.stringToColor("#3BD3FF"),    // 斧
-        CommonUtil.stringToColor("#FF6F6F"),    // 拳套
-        CommonUtil.stringToColor("#E28BFF"),    // 魔杖
-    };
-
     // 角色不同品质的颜色
     public static List<Color> list_heroQualityColor = new List<Color>()
     {

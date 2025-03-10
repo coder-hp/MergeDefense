@@ -14,8 +14,6 @@ public class HeroInfoPanel : MonoBehaviour
     public Image img_footShadow;
     public Image img_weaponIcon1;
     public Image img_weaponIcon2;
-    public Image img_weaponFrame1;
-    public Image img_weaponFrame2;
     public Image img_choicedWeapon1;
     public Image img_choicedWeapon2;
     public GameObject obj_weapon1;
@@ -78,9 +76,7 @@ public class HeroInfoPanel : MonoBehaviour
         {
             obj_weapon1.gameObject.SetActive(true);
             img_weaponIcon1.sprite = AtlasUtil.getAtlas_icon().GetSprite("weapon_" + heroLogicBase.list_weapon[0].type);
-            img_weaponFrame1.color = Consts.list_weaponColor[heroLogicBase.list_weapon[0].type];
-            obj_weapon1.transform.Find("level_bg").GetComponent<Image>().color = Consts.list_weaponColor[heroLogicBase.list_weapon[0].type];
-            obj_weapon1.transform.Find("level_bg/level").GetComponent<Text>().text = heroLogicBase.list_weapon[0].level.ToString();
+            obj_weapon1.transform.Find("level").GetComponent<Text>().text = heroLogicBase.list_weapon[0].level.ToString();
 
             onClickWeaponIcon(0);
         }
@@ -89,9 +85,7 @@ public class HeroInfoPanel : MonoBehaviour
         {
             obj_weapon2.gameObject.SetActive(true);
             img_weaponIcon2.sprite = AtlasUtil.getAtlas_icon().GetSprite("weapon_" + heroLogicBase.list_weapon[1].type);
-            img_weaponFrame2.color = Consts.list_weaponColor[heroLogicBase.list_weapon[1].type];
-            obj_weapon2.transform.Find("level_bg").GetComponent<Image>().color = Consts.list_weaponColor[heroLogicBase.list_weapon[1].type];
-            obj_weapon2.transform.Find("level_bg/level").GetComponent<Text>().text = heroLogicBase.list_weapon[1].level.ToString();
+            obj_weapon2.transform.Find("level").GetComponent<Text>().text = heroLogicBase.list_weapon[1].level.ToString();
         }
 
         // 技能

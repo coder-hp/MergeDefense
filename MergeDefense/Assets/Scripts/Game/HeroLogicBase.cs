@@ -427,7 +427,6 @@ public class HeroLogicBase : MonoBehaviour
         if (list_weapon.Count >= 1)
         {
             weapon1.localScale = Vector3.one;
-            weapon1.GetComponent<Image>().color = Consts.list_weaponColor[list_weapon[0].type];
             weapon1.GetChild(0).GetComponent<Text>().text = list_weapon[0].level.ToString();
         }
         else
@@ -438,7 +437,6 @@ public class HeroLogicBase : MonoBehaviour
         if (list_weapon.Count >= 2)
         {
             weapon2.localScale = Vector3.one;
-            weapon2.GetComponent<Image>().color = Consts.list_weaponColor[list_weapon[1].type];
             weapon2.GetChild(0).GetComponent<Text>().text = list_weapon[1].level.ToString();
         }
         else

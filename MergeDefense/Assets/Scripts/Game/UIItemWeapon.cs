@@ -7,8 +7,6 @@ using UnityEngine.UI;
 public class UIItemWeapon : MonoBehaviour
 {
     public Image img_icon;
-    public Image img_frame;
-    public Image img_level_bg;
     public Text text_level;
 
     [HideInInspector]
@@ -29,9 +27,6 @@ public class UIItemWeapon : MonoBehaviour
 
         text_level.text = level.ToString();
 
-        // 品质框
-        transform.GetComponent<Image>().sprite = AtlasUtil.getAtlas_game().GetSprite("dikuang_A");
-
         // 武器icon
         img_icon.sprite = AtlasUtil.getAtlas_icon().GetSprite("weapon_" + type);
         img_icon.transform.localScale = Consts.weapinUIIconStartScale;
@@ -39,9 +34,6 @@ public class UIItemWeapon : MonoBehaviour
         {
             checkMerge();
         });
-
-        img_level_bg.color = Consts.list_weaponColor[weaponData.type];
-        img_frame.color = Consts.list_weaponColor[weaponData.type];
     }
 
     public void checkMerge()

@@ -109,9 +109,7 @@ public class KillEnemyRewardPanel : MonoBehaviour
 
             Transform weaponTrans = reward_weapon.Find("item_weapon");
             weaponTrans.Find("icon").GetComponent<Image>().sprite = AtlasUtil.getAtlas_icon().GetSprite("weapon_" + weaponData.type);
-            weaponTrans.Find("frame").GetComponent<Image>().color = Consts.list_weaponColor[weaponData.type];
-            weaponTrans.Find("level_bg").GetComponent<Image>().color = Consts.list_weaponColor[weaponData.type];
-            weaponTrans.Find("level_bg/level").GetComponent<Text>().text = weaponData.level.ToString();
+            weaponTrans.Find("level").GetComponent<Text>().text = weaponData.level.ToString();
             reward_weapon.Find("name").GetComponent<Text>().text = weaponData.name;
         }
         else

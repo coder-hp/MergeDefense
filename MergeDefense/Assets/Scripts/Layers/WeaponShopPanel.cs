@@ -202,9 +202,7 @@ public class WeaponShopPanel : MonoBehaviour
             }
 
             weaponTrans.Find("weapon/icon").GetComponent<Image>().sprite = AtlasUtil.getAtlas_icon().GetSprite("weapon_" + weaponArray[i].type);
-            weaponTrans.Find("weapon/frame").GetComponent<Image>().color = Consts.list_weaponColor[weaponArray[i].type];
-            weaponTrans.Find("weapon/level_bg").GetComponent<Image>().color = Consts.list_weaponColor[weaponArray[i].type];
-            weaponTrans.Find("weapon/level_bg/level").GetComponent<Text>().text = weaponArray[i].level.ToString();
+            weaponTrans.Find("weapon/level").GetComponent<Text>().text = weaponArray[i].level.ToString();
         }
     }
 
