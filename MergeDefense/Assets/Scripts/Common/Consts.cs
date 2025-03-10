@@ -102,4 +102,5 @@ public class Consts
     public static Vector3 heroIdleAngle = new Vector3(0, 180, 0);
 
     public static Color color_weaponCantEquip = new Color(1,0,0, 0.5f);
+    public static Color color_critText = new Color(1, 0.294f, 0.298f, 1);
 }

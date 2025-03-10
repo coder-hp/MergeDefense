@@ -169,7 +169,7 @@ public class EnemyLogic : MonoBehaviour
                 atk = Mathf.RoundToInt(atk * damageXiShu);
             }
 
-            DamageNumManager.s_instance.showDamageNum(atk,bloodPoint.position);
+            DamageNumManager.s_instance.showDamageNum(atk,bloodPoint.position, isCrit);
 
             curHP -= atk;
             if (curHP <= 0)

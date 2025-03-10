@@ -18,7 +18,7 @@ public class DamageNumManager : MonoBehaviour
         s_instance = this;
     }
 
-    public void showDamageNum(int num, Vector3 worldPos)
+    public void showDamageNum(int num, Vector3 worldPos,bool isCrit)
     {
         Transform damageNumTrans = null;
         for (int i = 0; i < list_damageNum.Count; i++)
@@ -28,6 +28,15 @@ public class DamageNumManager : MonoBehaviour
                 damageNumTrans = list_damageNum[i];
                 damageNumTrans.localScale = Vector3.one;
                 list_damageNumText[i].text = num.ToString();
+
+                if (isCrit)
+                {
+                    list_damageNumText[i].color = Consts.color_critText;
+                }
+                else
+                {
+                    list_damageNumText[i].color = Color.white;
+                }
                 break;
             }
         }
@@ -38,6 +47,11 @@ public class DamageNumManager : MonoBehaviour
             list_damageNum.Add(damageNumTrans);
             list_damageNumText.Add(damageNumTrans.GetChild(0).GetComponent<Text>());
             list_damageNumText[list_damageNumText.Count - 1].text = num.ToString();
+
+            if (isCrit)
+            {
+                list_damageNumText[list_damageNumText.Count - 1].color = Consts.color_critText;
+            }
         }
 
         damageNumTrans.localPosition = CommonUtil.WorldPosToUI(GameLayer.s_instance.camera3D, worldPos);
