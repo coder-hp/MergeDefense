@@ -12,7 +12,7 @@ public class BossComingLayer : MonoBehaviour
     {
         AudioScript.s_instance.playSound("bossComing");
 
-        img_icon.sprite = AtlasUtil.getAtlas_game().GetSprite(EnemyWaveEntity.getInstance().getData(GameUILayer.s_instance.curBoCi + 1).prefab);
+        img_icon.sprite = AtlasUtil.getAtlas_icon().GetSprite(EnemyWaveEntity.getInstance().getData(GameUILayer.s_instance.curBoCi + 1).prefab);
         text_wave.text = "WAVE " + (GameUILayer.s_instance.curBoCi + 1);
 
         Destroy(gameObject,2);
