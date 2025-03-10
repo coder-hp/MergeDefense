@@ -401,21 +401,33 @@ public class HeroLogicBase : MonoBehaviour
         if (curStar > 9)
         {
             material_qualityBg.SetFloat("_ColorID", 4.0f);
+            heroUITrans.GetChild(0).GetChild(0).GetComponent<Image>().sprite = AtlasUtil.getAtlas_game().GetSprite("star_quality_4");
+            heroUITrans.GetChild(0).GetChild(1).GetComponent<Image>().sprite = AtlasUtil.getAtlas_game().GetSprite("star_quality_4");
+            heroUITrans.GetChild(0).GetChild(2).GetComponent<Image>().sprite = AtlasUtil.getAtlas_game().GetSprite("star_quality_4");
         }
         // 紫色
         else if (curStar > 6)
         {
             material_qualityBg.SetFloat("_ColorID", 3.0f);
+            heroUITrans.GetChild(0).GetChild(0).GetComponent<Image>().sprite = AtlasUtil.getAtlas_game().GetSprite("star_quality_3");
+            heroUITrans.GetChild(0).GetChild(1).GetComponent<Image>().sprite = AtlasUtil.getAtlas_game().GetSprite("star_quality_3");
+            heroUITrans.GetChild(0).GetChild(2).GetComponent<Image>().sprite = AtlasUtil.getAtlas_game().GetSprite("star_quality_3");
         }
         // 蓝色
         else if (curStar > 3)
         {
             material_qualityBg.SetFloat("_ColorID", 2.0f);
+            heroUITrans.GetChild(0).GetChild(0).GetComponent<Image>().sprite = AtlasUtil.getAtlas_game().GetSprite("star_quality_2");
+            heroUITrans.GetChild(0).GetChild(1).GetComponent<Image>().sprite = AtlasUtil.getAtlas_game().GetSprite("star_quality_2");
+            heroUITrans.GetChild(0).GetChild(2).GetComponent<Image>().sprite = AtlasUtil.getAtlas_game().GetSprite("star_quality_2");
         }
         // 白色
         else if (curStar > 0)
         {
             material_qualityBg.SetFloat("_ColorID", 1.0f);
+            heroUITrans.GetChild(0).GetChild(0).GetComponent<Image>().sprite = AtlasUtil.getAtlas_game().GetSprite("star_quality_1");
+            heroUITrans.GetChild(0).GetChild(1).GetComponent<Image>().sprite = AtlasUtil.getAtlas_game().GetSprite("star_quality_1");
+            heroUITrans.GetChild(0).GetChild(2).GetComponent<Image>().sprite = AtlasUtil.getAtlas_game().GetSprite("star_quality_1");
         }
     }
 
