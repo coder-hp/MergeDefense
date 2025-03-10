@@ -45,6 +45,14 @@ SpriteAtlas:
     secondaryTextureSettings: {}
     variantMultiplier: 1
     packables:
+    - {fileID: 21300000, guid: b0848f30966865e439ab7ad060e45c16, type: 3}
+    - {fileID: 21300000, guid: dc6b207ce467c2349b56b16c5c3edb92, type: 3}
+    - {fileID: 21300000, guid: 587fcdf968c04d344921c90a9eef2201, type: 3}
+    - {fileID: 21300000, guid: 33dd525dfc2e06d488d7f5dc1ff4b737, type: 3}
+    - {fileID: 21300000, guid: ac5c4f0ea6017a14ebcab89091ac2dbe, type: 3}
+    - {fileID: 21300000, guid: 4b21fddb5068fd54b8e47979caf615ad, type: 3}
+    - {fileID: 21300000, guid: 54525e1a5b6b1ac419536f7a1f4634a7, type: 3}
+    - {fileID: 21300000, guid: 5b537eea3b9cc694b84ddfa0a1f9d91f, type: 3}
     - {fileID: 21300000, guid: a7d5b23b23e062c47b9f9d59f4e2d6e1, type: 3}
     - {fileID: 21300000, guid: 414f5637b7cbee2428d263001a058cf5, type: 3}
     - {fileID: 21300000, guid: d3fcead7d0733634787b24c6fdcada1a, type: 3}
@@ -59,13 +67,6 @@ SpriteAtlas:
     - {fileID: 21300000, guid: 9ea196582d49cc54b880c48e241c16dc, type: 3}
     - {fileID: 21300000, guid: 52b1b37a6ef033f459e1460f1262acf0, type: 3}
     - {fileID: 21300000, guid: 5ff6e6e3fd16f524b86e1425a0fe5974, type: 3}
-    - {fileID: 21300000, guid: b0848f30966865e439ab7ad060e45c16, type: 3}
-    - {fileID: 21300000, guid: dc6b207ce467c2349b56b16c5c3edb92, type: 3}
-    - {fileID: 21300000, guid: 587fcdf968c04d344921c90a9eef2201, type: 3}
-    - {fileID: 21300000, guid: 33dd525dfc2e06d488d7f5dc1ff4b737, type: 3}
-    - {fileID: 21300000, guid: ac5c4f0ea6017a14ebcab89091ac2dbe, type: 3}
-    - {fileID: 21300000, guid: 4b21fddb5068fd54b8e47979caf615ad, type: 3}
-    - {fileID: 21300000, guid: 5b537eea3b9cc694b84ddfa0a1f9d91f, type: 3}
     - {fileID: 21300000, guid: c2f58e9ada4323741887a9a1b6ac641c, type: 3}
     - {fileID: 21300000, guid: 19b85aa7418bf9c4bbc3b03998b0968d, type: 3}
     - {fileID: 21300000, guid: 379443b281a21194fb0d8d663576dfcb, type: 3}
@@ -98,6 +99,7 @@ SpriteAtlas:
     - 9ea196582d49cc54b880c48e241c16dc: 21300000
     - b84968295b6097849842ed00272817d6: 21300000
     - 587fcdf968c04d344921c90a9eef2201: 21300000
+    - 54525e1a5b6b1ac419536f7a1f4634a7: 21300000
     - 61f9c92a8b4a2dd4c8e13c960851e503: 21300000
     - 52b1b37a6ef033f459e1460f1262acf0: 21300000
     - c2f58e9ada4323741887a9a1b6ac641c: 21300000
@@ -134,6 +136,7 @@ SpriteAtlas:
   - {fileID: 21300000, guid: 9ea196582d49cc54b880c48e241c16dc, type: 3}
   - {fileID: 21300000, guid: b84968295b6097849842ed00272817d6, type: 3}
   - {fileID: 21300000, guid: 587fcdf968c04d344921c90a9eef2201, type: 3}
+  - {fileID: 21300000, guid: 54525e1a5b6b1ac419536f7a1f4634a7, type: 3}
   - {fileID: 21300000, guid: 61f9c92a8b4a2dd4c8e13c960851e503, type: 3}
   - {fileID: 21300000, guid: 52b1b37a6ef033f459e1460f1262acf0, type: 3}
   - {fileID: 21300000, guid: c2f58e9ada4323741887a9a1b6ac641c, type: 3}
@@ -154,7 +157,7 @@ SpriteAtlas:
   - {fileID: 21300000, guid: ac5c4f0ea6017a14ebcab89091ac2dbe, type: 3}
   - {fileID: 21300000, guid: ee017e9fb8b1f4c47bc194f31d3d1b13, type: 3}
   m_PackedSpriteNamesToIndex:
-  - head_boss1
+  - boss1
   - skill_106
   - head_105
   - skill_103
@@ -168,25 +171,26 @@ SpriteAtlas:
   - buff_4
   - head_106
   - skill_107
-  - head_boss3
+  - boss3
+  - boss7
   - weapon_5
   - head_107
   - skill_101
   - skill_104
   - head_102
-  - head_boss8
+  - boss8
   - buff_0
-  - head_boss6
+  - boss6
   - skill_108
   - weapon_1
-  - head_boss2
+  - boss2
   - buff_3
   - buff_5
   - skill_105
-  - head_boss4
+  - boss4
   - head_104
   - head_101
-  - head_boss5
+  - boss5
   - head_103
   m_RenderDataMap: {}
   m_Tag: icon
