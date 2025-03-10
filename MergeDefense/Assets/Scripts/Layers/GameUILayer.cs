@@ -31,6 +31,7 @@ public class GameUILayer : MonoBehaviour
     public Text text_diamond;
     public Text btn_summon_gold;
     public Text btn_forge_gold;
+    public List<WeaponBar> list_weaponBar = new List<WeaponBar>();
 
     [HideInInspector]
     public int curBoCi = 0;

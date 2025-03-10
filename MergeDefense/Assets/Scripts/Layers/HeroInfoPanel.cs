@@ -72,21 +72,21 @@ public class HeroInfoPanel : MonoBehaviour
         img_choicedWeapon1.transform.localScale = Vector3.zero;
         img_choicedWeapon2.transform.localScale = Vector3.zero;
 
-        if (heroLogicBase.list_weapon.Count >= 1)
-        {
-            obj_weapon1.gameObject.SetActive(true);
-            img_weaponIcon1.sprite = AtlasUtil.getAtlas_icon().GetSprite("weapon_" + heroLogicBase.list_weapon[0].type);
-            obj_weapon1.transform.Find("level").GetComponent<Text>().text = heroLogicBase.list_weapon[0].level.ToString();
+        //if (heroLogicBase.list_weapon.Count >= 1)
+        //{
+        //    obj_weapon1.gameObject.SetActive(true);
+        //    img_weaponIcon1.sprite = AtlasUtil.getAtlas_icon().GetSprite("weapon_" + heroLogicBase.list_weapon[0].type);
+        //    obj_weapon1.transform.Find("level").GetComponent<Text>().text = heroLogicBase.list_weapon[0].level.ToString();
 
-            onClickWeaponIcon(0);
-        }
+        //    onClickWeaponIcon(0);
+        //}
 
-        if (heroLogicBase.list_weapon.Count >= 2)
-        {
-            obj_weapon2.gameObject.SetActive(true);
-            img_weaponIcon2.sprite = AtlasUtil.getAtlas_icon().GetSprite("weapon_" + heroLogicBase.list_weapon[1].type);
-            obj_weapon2.transform.Find("level").GetComponent<Text>().text = heroLogicBase.list_weapon[1].level.ToString();
-        }
+        //if (heroLogicBase.list_weapon.Count >= 2)
+        //{
+        //    obj_weapon2.gameObject.SetActive(true);
+        //    img_weaponIcon2.sprite = AtlasUtil.getAtlas_icon().GetSprite("weapon_" + heroLogicBase.list_weapon[1].type);
+        //    obj_weapon2.transform.Find("level").GetComponent<Text>().text = heroLogicBase.list_weapon[1].level.ToString();
+        //}
 
         // 技能
         {
@@ -107,14 +107,14 @@ public class HeroInfoPanel : MonoBehaviour
             }
         }
 
-        if(heroLogicBase.list_weapon.Count > 0)
-        {
-            onClickWeaponIcon(0);
-        }
-        else if (skillsArray.Length > 0)
-        {
-            onClickSkillIcon(0);
-        }
+        //if(heroLogicBase.list_weapon.Count > 0)
+        //{
+        //    onClickWeaponIcon(0);
+        //}
+        //else if (skillsArray.Length > 0)
+        //{
+        //    onClickSkillIcon(0);
+        //}
 
         // 卖出按钮
         {
@@ -128,54 +128,54 @@ public class HeroInfoPanel : MonoBehaviour
     {
         AudioScript.s_instance.playSound_btn();
 
-        if (index == 0 && heroLogicBase.list_weapon.Count == 0)
-        {
-            return;
-        }
-        else if (index == 1 && heroLogicBase.list_weapon.Count < 2)
-        {
-            return;
-        }
+        //if (index == 0 && heroLogicBase.list_weapon.Count == 0)
+        //{
+        //    return;
+        //}
+        //else if (index == 1 && heroLogicBase.list_weapon.Count < 2)
+        //{
+        //    return;
+        //}
 
-        tab_weaponTrans.localScale = Vector3.one;
-        tab_skillTrans.localScale = Vector3.zero;
+        //tab_weaponTrans.localScale = Vector3.one;
+        //tab_skillTrans.localScale = Vector3.zero;
 
-        weaponBuffsTrans.localScale = Vector3.zero;
-        text_skillDesc.transform.localScale = Vector3.zero;
+        //weaponBuffsTrans.localScale = Vector3.zero;
+        //text_skillDesc.transform.localScale = Vector3.zero;
 
-        for (int i = 0; i < skillTrans.childCount; i++)
-        {
-            skillTrans.Find(i + "/choiced").localScale = Vector3.zero;
-        }
+        //for (int i = 0; i < skillTrans.childCount; i++)
+        //{
+        //    skillTrans.Find(i + "/choiced").localScale = Vector3.zero;
+        //}
 
-        if (index == 0)
-        {
-            if (heroLogicBase.list_weapon.Count >= 1)
-            {
-                showWeaponBuffInfo(heroLogicBase.list_weapon[0]);
+        //if (index == 0)
+        //{
+        //    if (heroLogicBase.list_weapon.Count >= 1)
+        //    {
+        //        showWeaponBuffInfo(heroLogicBase.list_weapon[0]);
 
-                img_choicedWeapon1.transform.localScale = Vector3.one;
-                img_choicedWeapon2.transform.localScale = Vector3.zero;
+        //        img_choicedWeapon1.transform.localScale = Vector3.one;
+        //        img_choicedWeapon2.transform.localScale = Vector3.zero;
 
-                text_weaponName.text = heroLogicBase.list_weapon[0].name;
-            }
-            else
-            {
-                return;
-            }
-        }
-        else if (index == 1)
-        {
-            if (heroLogicBase.list_weapon.Count >= 2)
-            {
-                showWeaponBuffInfo(heroLogicBase.list_weapon[1]);
+        //        text_weaponName.text = heroLogicBase.list_weapon[0].name;
+        //    }
+        //    else
+        //    {
+        //        return;
+        //    }
+        //}
+        //else if (index == 1)
+        //{
+        //    if (heroLogicBase.list_weapon.Count >= 2)
+        //    {
+        //        showWeaponBuffInfo(heroLogicBase.list_weapon[1]);
 
-                img_choicedWeapon1.transform.localScale = Vector3.zero;
-                img_choicedWeapon2.transform.localScale = Vector3.one;
+        //        img_choicedWeapon1.transform.localScale = Vector3.zero;
+        //        img_choicedWeapon2.transform.localScale = Vector3.one;
 
-                text_weaponName.text = heroLogicBase.list_weapon[1].name;
-            }
-        }
+        //        text_weaponName.text = heroLogicBase.list_weapon[1].name;
+        //    }
+        //}
     }
 
     void showWeaponBuffInfo(WeaponData weaponData)
@@ -188,16 +188,10 @@ public class HeroInfoPanel : MonoBehaviour
             string buffValue = atk.ToString();
 
             // 擅长
-            if ((heroLogicBase.heroData.goodWeapon == -1) || (heroLogicBase.heroData.goodWeapon == weaponData.type))
+            if (heroLogicBase.heroData.goodWeapon == weaponData.type)
             {
                 atk = Mathf.RoundToInt(atk * 1.2f);
                 buffValue = "<color=\"#60D262\">(+" + (atk - weaponData.buff1) + ") </color>" + atk;
-            }
-            // 不擅长
-            else if ((heroLogicBase.heroData.badWeapon == -1) || (heroLogicBase.heroData.badWeapon == weaponData.type))
-            {
-                atk = Mathf.RoundToInt(atk * 0.8f);
-                buffValue = "<color=\"#FB6061\">(" + (atk - weaponData.buff1) + ") </color>" + atk;
             }
             
             weaponBuffsTrans.Find("buff1/value").GetComponent<Text>().text = buffValue;
@@ -209,16 +203,10 @@ public class HeroInfoPanel : MonoBehaviour
             string buffValue = atk + "%";
 
             // 擅长
-            if ((heroLogicBase.heroData.goodWeapon == -1) || (heroLogicBase.heroData.goodWeapon == weaponData.type))
+            if (heroLogicBase.heroData.goodWeapon == weaponData.type)
             {
                 int newAtk = Mathf.RoundToInt(weaponData.buff2 * 1.2f * 100f);
                 buffValue = "<color=\"#60D262\">(+" + (newAtk - atk) + "%) </color>" + newAtk + "%";
-            }
-            // 不擅长
-            else if ((heroLogicBase.heroData.badWeapon == -1) || (heroLogicBase.heroData.badWeapon == weaponData.type))
-            {
-                int newAtk = Mathf.RoundToInt(weaponData.buff2 * 0.8f * 100f);
-                buffValue = "<color=\"#FB6061\">(" + (newAtk - atk) + "%) </color>" + newAtk + "%";
             }
 
             weaponBuffsTrans.Find("buff2/value").GetComponent<Text>().text = buffValue;
@@ -266,7 +254,7 @@ public class HeroInfoPanel : MonoBehaviour
             }
 
             // 未激活
-            if((heroLogicBase.heroData.badWeapon == -1) || (heroLogicBase.heroData.badWeapon == weaponData.type))
+            if(heroLogicBase.heroData.goodWeapon != weaponData.type)
             {
                 Color color = new Color(0.28f,0.3f,0.42f);
                 weaponBuffsTrans.Find("buff3/icon").GetComponent<Image>().color = color;

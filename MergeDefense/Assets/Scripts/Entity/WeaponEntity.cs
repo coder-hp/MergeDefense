@@ -11,8 +11,8 @@ public class WeaponData
     public string name;
     public int level;
     public int buff1;      // 攻击力
-    public float buff2;    // 攻速
-    public string buff3;   // 不固定
+    public float buff2;    // 攻击力百分比
+    public string buff3;   // 不固定：暴击率、爆伤、攻速、技能概率
 
     public Consts.BuffType buff3Type;
     public string buff3ValueStr;

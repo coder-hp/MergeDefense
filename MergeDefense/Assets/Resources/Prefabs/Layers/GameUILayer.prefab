@@ -104,7 +104,7 @@ RectTransform:
   m_GameObject: {fileID: 130174187175642525}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 0, y: 0, z: 0}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 8153983632455077766}
@@ -233,6 +233,12 @@ MonoBehaviour:
   text_diamond: {fileID: 3502357396282039785}
   btn_summon_gold: {fileID: 4481693099585822707}
   btn_forge_gold: {fileID: 7063937017468583406}
+  list_weaponBar:
+  - {fileID: 4644282293547389165}
+  - {fileID: 7633676190158919955}
+  - {fileID: 1340758214737035000}
+  - {fileID: 8371498130273900965}
+  - {fileID: 5521982577989079863}
   curBoCi: 0
   curBoCiRestTime: 20
   curGold: 100
@@ -4931,7 +4937,7 @@ RectTransform:
   m_GameObject: {fileID: 7901186090529006385}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 0, y: 0, z: 0}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 6674600764874902718}

@@ -19,8 +19,6 @@ public class HeroLogicBase : MonoBehaviour
     [HideInInspector]
     public Animator animator;
     [HideInInspector]
-    public List<WeaponData> list_weapon = new List<WeaponData>();
-    [HideInInspector]
     public bool isAttacking = false;
     [HideInInspector]
     public Transform heroUITrans;
@@ -157,7 +155,6 @@ public class HeroLogicBase : MonoBehaviour
                     transform.DOMove(heroLogicBase_to.transform.position, moveTime).SetEase(Ease.Linear).OnComplete(() =>
                     {
                         heroLogicBase_to.addStar();
-                        heroLogicBase_to.mergeWeapon(list_weapon);
                         EffectManager.heroMerge(heroLogicBase_to.transform.position);
 
                         // 升星角色的合并动画
@@ -433,28 +430,7 @@ public class HeroLogicBase : MonoBehaviour
 
     void setWeaponUI()
     {
-        Transform weapon1 = weaponUITrans.GetChild(0);
-        Transform weapon2 = weaponUITrans.GetChild(1);
-
-        if (list_weapon.Count >= 1)
-        {
-            weapon1.localScale = Vector3.one;
-            weapon1.GetChild(0).GetComponent<Text>().text = list_weapon[0].level.ToString();
-        }
-        else
-        {
-            weapon1.localScale = Vector3.zero;
-        }
-
-        if (list_weapon.Count >= 2)
-        {
-            weapon2.localScale = Vector3.one;
-            weapon2.GetChild(0).GetComponent<Text>().text = list_weapon[1].level.ToString();
-        }
-        else
-        {
-            weapon2.localScale = Vector3.zero;
-        }
+        
     }
 
     Tween tween_rotate = null;
@@ -479,24 +455,16 @@ public class HeroLogicBase : MonoBehaviour
         float atkXiShu = heroStarData.baseAtkXiShu;
 
         // 武器加成
-        for (int i = 0; i < list_weapon.Count; i++)
+        for (int i = 0; i < GameUILayer.s_instance.list_weaponBar.Count; i++)
         {
-            // 擅长
-            if ((heroData.goodWeapon == -1) || (heroData.goodWeapon == list_weapon[i].type))
+            if (GameUILayer.s_instance.list_weaponBar[i].weaponData != null)
             {
-                atk += Mathf.RoundToInt(list_weapon[i].buff1 * 1.2f);
-                atkXiShu += list_weapon[i].buff2 * 1.2f;
-            }
-            // 不擅长
-            else if ((heroData.badWeapon == -1) || (heroData.badWeapon == list_weapon[i].type))
-            {
-                atk += Mathf.RoundToInt(list_weapon[i].buff1 * 0.8f);
-                atkXiShu += list_weapon[i].buff2 * 0.8f;
-            }
-            else
-            {
-                atk += list_weapon[i].buff1;
-                atkXiShu += list_weapon[i].buff2;
+                // 擅长
+                if (heroData.goodWeapon == GameUILayer.s_instance.list_weaponBar[i].weaponData.type)
+                {
+                    atk += Mathf.RoundToInt(GameUILayer.s_instance.list_weaponBar[i].weaponData.buff1);
+                    atkXiShu += GameUILayer.s_instance.list_weaponBar[i].weaponData.buff2;
+                }
             }
         }
 
@@ -517,14 +485,17 @@ public class HeroLogicBase : MonoBehaviour
         float atkSpeed = heroData.atkSpeed;
 
         // 武器加成
-        for (int i = 0; i < list_weapon.Count; i++)
+        for (int i = 0; i < GameUILayer.s_instance.list_weaponBar.Count; i++)
         {
-            // Buff3激活
-            if ((heroData.badWeapon != -1) && (heroData.badWeapon != list_weapon[i].type))
+            if (GameUILayer.s_instance.list_weaponBar[i].weaponData != null)
             {
-                if(list_weapon[i].buff3Type == Consts.BuffType.AtkSpeed)
+                // 擅长、Buff3激活
+                if (heroData.goodWeapon == GameUILayer.s_instance.list_weaponBar[i].weaponData.type)
                 {
-                    atkSpeed += float.Parse(list_weapon[i].buff3ValueStr);
+                    if (GameUILayer.s_instance.list_weaponBar[i].weaponData.buff3Type == Consts.BuffType.AtkSpeed)
+                    {
+                        atkSpeed += float.Parse(GameUILayer.s_instance.list_weaponBar[i].weaponData.buff3ValueStr);
+                    }
                 }
             }
         }
@@ -537,14 +508,17 @@ public class HeroLogicBase : MonoBehaviour
         int critRate = heroData.critRate;
 
         // 武器加成
-        for (int i = 0; i < list_weapon.Count; i++)
+        for (int i = 0; i < GameUILayer.s_instance.list_weaponBar.Count; i++)
         {
-            // Buff3激活
-            if ((heroData.badWeapon != -1) && (heroData.badWeapon != list_weapon[i].type))
+            if (GameUILayer.s_instance.list_weaponBar[i].weaponData != null)
             {
-                if (list_weapon[i].buff3Type == Consts.BuffType.CritRate)
+                // 擅长、Buff3激活
+                if (heroData.goodWeapon == GameUILayer.s_instance.list_weaponBar[i].weaponData.type)
                 {
-                    critRate += Mathf.RoundToInt(float.Parse(list_weapon[i].buff3ValueStr));
+                    if (GameUILayer.s_instance.list_weaponBar[i].weaponData.buff3Type == Consts.BuffType.CritRate)
+                    {
+                        critRate += Mathf.RoundToInt(float.Parse(GameUILayer.s_instance.list_weaponBar[i].weaponData.buff3ValueStr));
+                    }
                 }
             }
         }
@@ -557,14 +531,17 @@ public class HeroLogicBase : MonoBehaviour
         float critDamage = heroData.critDamage;
 
         // 武器加成
-        for (int i = 0; i < list_weapon.Count; i++)
+        for (int i = 0; i < GameUILayer.s_instance.list_weaponBar.Count; i++)
         {
-            // Buff3激活
-            if ((heroData.badWeapon != -1) && (heroData.badWeapon != list_weapon[i].type))
+            if (GameUILayer.s_instance.list_weaponBar[i].weaponData != null)
             {
-                if (list_weapon[i].buff3Type == Consts.BuffType.CritDamage)
+                // 擅长、Buff3激活
+                if (heroData.goodWeapon == GameUILayer.s_instance.list_weaponBar[i].weaponData.type)
                 {
-                    critDamage += float.Parse(list_weapon[i].buff3ValueStr);
+                    if (GameUILayer.s_instance.list_weaponBar[i].weaponData.buff3Type == Consts.BuffType.CritDamage)
+                    {
+                        critDamage += Mathf.RoundToInt(float.Parse(GameUILayer.s_instance.list_weaponBar[i].weaponData.buff3ValueStr));
+                    }
                 }
             }
         }
@@ -577,14 +554,17 @@ public class HeroLogicBase : MonoBehaviour
         int skillRate = 0;
 
         // 武器加成
-        for (int i = 0; i < list_weapon.Count; i++)
+        for (int i = 0; i < GameUILayer.s_instance.list_weaponBar.Count; i++)
         {
-            // Buff3激活
-            if ((heroData.badWeapon != -1) && (heroData.badWeapon != list_weapon[i].type))
+            if (GameUILayer.s_instance.list_weaponBar[i].weaponData != null)
             {
-                if (list_weapon[i].buff3Type == Consts.BuffType.SkillRate)
+                // 擅长、Buff3激活
+                if (heroData.goodWeapon == GameUILayer.s_instance.list_weaponBar[i].weaponData.type)
                 {
-                    skillRate += Mathf.RoundToInt(float.Parse(list_weapon[i].buff3ValueStr));
+                    if (GameUILayer.s_instance.list_weaponBar[i].weaponData.buff3Type == Consts.BuffType.SkillRate)
+                    {
+                        skillRate += Mathf.RoundToInt(float.Parse(GameUILayer.s_instance.list_weaponBar[i].weaponData.buff3ValueStr));
+                    }
                 }
             }
         }
@@ -607,119 +587,11 @@ public class HeroLogicBase : MonoBehaviour
         list_buffDatas.Add(buffData);
     }
 
-    public bool isCanAddWeapon(WeaponData weaponData)
-    {
-        if (list_weapon.Count == 0)
-        {
-            return true;
-        }
-        else if (list_weapon.Count == 1)
-        {
-            if (list_weapon[0].type == weaponData.type && list_weapon[0].level > weaponData.level)
-            {
-                return false;
-            }
-            else if(list_weapon[0].level >= 10)
-            {
-                return false;
-            }
-            else
-            {
-                return true;
-            }
-        }
-        else if (list_weapon.Count == 2)
-        {
-            for (int i = 0; i < list_weapon.Count; i++)
-            {
-                if (list_weapon[i].level <= 9 && list_weapon[i].type == weaponData.type && list_weapon[i].level <= weaponData.level)
-                {
-                    return true;
-                }
-            }
-
-            return false;
-        }
-
-        return false;
-    }
-
-    public void addWeapon(WeaponData weaponData)
-    {
-        int weaponIndex = 0;
-        if (list_weapon.Count == 0)
-        {
-            weaponIndex = 1;
-            list_weapon.Add(weaponData);
-        }
-        else if (list_weapon.Count == 1)
-        {
-            if (list_weapon[0].type == weaponData.type)
-            {
-                if(list_weapon[0].level == weaponData.level)
-                {
-                    weaponIndex = 1;
-                    list_weapon[0] = WeaponEntity.getInstance().getData(weaponData.type, weaponData.level + 1);
-                }
-                else
-                {
-                    weaponIndex = 1;
-                    list_weapon[0] = weaponData;
-                }
-            }
-            else
-            {
-                weaponIndex = 2;
-                list_weapon.Add(weaponData);
-            }
-        }
-        else if (list_weapon.Count == 2)
-        {
-            for (int i = 0; i < list_weapon.Count; i++)
-            {
-                if (list_weapon[i].type == weaponData.type)
-                {
-                    if (list_weapon[i].level == weaponData.level)
-                    {
-                        list_weapon[i] = WeaponEntity.getInstance().getData(weaponData.type, weaponData.level + 1);
-                    }
-                    else
-                    {
-                        list_weapon[i] = weaponData;
-                    }
-                    weaponIndex = i + 1;
-                    break;
-                }
-            }
-        }
-
-        setWeaponUI();
-        AudioScript.s_instance.playSound("equipWeapon");
-
-        Transform weaponTrans = heroUITrans.Find("weapon/" + weaponIndex);
-        weaponTrans.DOScale(1.8f, 0.15f).OnComplete(()=>
-        {
-            weaponTrans.DOScale(1f, 0.15f);
-        });
-    }
-
     public void addStar()
     {
         ++curStar;
         heroStarData = HeroStarEntity.getInstance().getData(curStar);
         setStarUI();
-    }
-
-    public void mergeWeapon(List<WeaponData> weaponDatas)
-    {
-        //for(int i = 0; i < list_weapon.Count; i++)
-        //{
-        //    if(heroData.goodWeapon != -1 && (heroData.goodWeapon != list_weapon[i].type))
-        //    {
-        //        list_weapon.RemoveAt(i);
-        //        --i;
-        //    }
-        //}
     }
 
     public void playAni(string aniName,float crossFadeTime = 0)
@@ -862,28 +734,15 @@ public class HeroLogicBase : MonoBehaviour
     DG.Tweening.Sequence tween_emoji = null;
     public void showWeaponEmoji(WeaponData weaponData)
     {
-        if(!isCanAddWeapon(weaponData))
-        {
-            return;
-        }
-
         bool isShowTween = false;
 
         // 优势武器
-        if(heroData.goodWeapon == -1 || weaponData.type == heroData.goodWeapon)
+        if(weaponData.type == heroData.goodWeapon)
         {
             isShowTween = true;
             emojiTrans.localScale = Vector3.one;
             emojiTrans.GetChild(0).localScale = Vector3.one;
             emojiTrans.GetChild(1).localScale = Vector3.zero;
-        }
-        // 劣势武器
-        else if (weaponData.type == heroData.badWeapon)
-        {
-            isShowTween = true;
-            emojiTrans.localScale = Vector3.one;
-            emojiTrans.GetChild(0).localScale = Vector3.zero;
-            emojiTrans.GetChild(1).localScale = Vector3.one;
         }
         else
         {
