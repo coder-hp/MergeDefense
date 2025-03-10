@@ -35,7 +35,6 @@ public class GameLayer : MonoBehaviour
     [HideInInspector]
     public List<int> list_weaponWeight;
 
-    bool isMerging = false;
     [HideInInspector]
     public bool isGameOver = false;
 
@@ -69,88 +68,6 @@ public class GameLayer : MonoBehaviour
         LayerManager.ShowLayer(Consts.Layer.GameUILayer);
     }
 
-    public void checkHeroMerge()
-    {
-        // 检测是否可以合并
-        for (int i = 0; i < heroPoint.childCount; i++)
-        {
-            for (int j = 0; j < heroPoint.childCount; j++)
-            {
-                if(i != j)
-                {
-                    if (heroPoint.GetChild(i).childCount == 1 && heroPoint.GetChild(j).childCount == 1)
-                    {
-                        HeroLogicBase heroLogicBase1 = heroPoint.GetChild(i).GetChild(0).GetComponent<HeroLogicBase>();
-                        HeroLogicBase heroLogicBase2 = heroPoint.GetChild(j).GetChild(0).GetComponent<HeroLogicBase>();
-                        if ((heroLogicBase1.curStar < heroLogicBase1.heroData.maxStar) && (heroLogicBase1.heroData.id == heroLogicBase2.heroData.id) && (heroLogicBase1.curStar == heroLogicBase2.curStar))
-                        {
-                            AudioScript.s_instance.playSound("heroMerge");
-
-                            heroLogicBase2.isMerge = true;
-                            heroLogicBase2.playAni(Consts.HeroAniNameIdle);
-                            heroLogicBase2.boxCollider.enabled = false;
-                            heroLogicBase2.transform.SetParent(transform);
-                            Destroy(heroLogicBase2.heroUITrans.gameObject);
-                            Destroy(heroLogicBase2.heroQualityTrans.gameObject);
-
-                            float moveTime = Vector3.Distance(heroLogicBase1.transform.position, heroLogicBase2.transform.position) / 10f;
-                            if(moveTime > 0.3f)
-                            {
-                                moveTime = 0.3f;
-                            }
-
-                            float jumpHight = Vector3.Distance(heroLogicBase1.transform.position, heroLogicBase2.transform.position) / 5f;
-                            if (jumpHight < 0.5f)
-                            {
-                                jumpHight = 0.5f;
-                            }
-                            else if (jumpHight > 1)
-                            {
-                                jumpHight = 1f;
-                            }
-
-                            heroLogicBase2.transform.DOMove(heroLogicBase1.transform.position, moveTime).SetEase(Ease.Linear).OnComplete(() =>
-                            {
-                                heroLogicBase1.addStar();
-                                heroLogicBase1.mergeWeapon(heroLogicBase2.list_weapon);
-                                EffectManager.heroMerge(heroLogicBase1.transform.position);
-
-                                // 升星角色的合并动画
-                                {
-                                    Transform trans = heroLogicBase1.transform.Find("model");
-                                    trans.DOLocalMoveY(0.3f, 0.1f).SetEase(Ease.OutCubic).OnComplete(() =>
-                                    {
-                                        trans.DOLocalMoveY(0f, 0.1f).SetEase(Ease.InCubic);
-                                    });
-
-                                    trans.DOScaleY(1.2f, 0.1f).SetEase(Ease.OutCubic).OnComplete(() =>
-                                    {
-                                        trans.DOScaleY(0.8f, 0.1f).SetEase(Ease.InCubic).OnComplete(() =>
-                                        {
-                                            trans.DOScaleY(1f, 0.1f).SetEase(Ease.OutCubic);
-                                        });
-                                    });
-                                }
-
-                                Destroy(heroLogicBase2.gameObject);
-                                Invoke("checkHeroMerge", 0.65f);
-                            });
-
-                            heroLogicBase2.transform.GetChild(0).DOLocalMoveY(jumpHight, moveTime * 0.5f).SetEase(Ease.OutSine).OnComplete(() =>
-                            {
-                                heroLogicBase2.transform.GetChild(0).DOLocalMoveY(0, moveTime * 0.5f).SetEase(Ease.InSine);
-                            });
-
-                            return;
-                        }
-                    }
-                }
-            }
-        }
-
-        isMerging = false;
-    }
-
     public void addEnemy(EnemyWaveData enemyWaveData)
     {
         if (EnemyManager.s_instance.getEnemyCount() < Consts.maxEnemyCount)
@@ -169,12 +86,6 @@ public class GameLayer : MonoBehaviour
                 Transform heroTrans = Instantiate(ObjectPool.getPrefab("Prefabs/Heros/hero" + RandomUtil.getRandom(101, getSummonHeroMaxId())), heroPoint.GetChild(i)).transform;
                 heroTrans.GetComponent<HeroLogicBase>().curStar = RandomUtil.SelectProbability(list_heroWeight) + 1;
                 EffectManager.summonHero(heroGrid.transform.GetChild(i).position);
-
-                if (!isMerging)
-                {
-                    isMerging = true;
-                    Invoke("checkHeroMerge", 0.65f);
-                }
                 return true;
             }
         }
@@ -192,11 +103,6 @@ public class GameLayer : MonoBehaviour
                 heroTrans.GetComponent<HeroLogicBase>().curStar = RandomUtil.SelectProbability(list_heroWeight) + 1;
                 EffectManager.summonHero(heroGrid.transform.GetChild(i).position);
 
-                if (!isMerging)
-                {
-                    isMerging = true;
-                    Invoke("checkHeroMerge", 0.6f);
-                }
                 return;
             }
         }
@@ -211,12 +117,6 @@ public class GameLayer : MonoBehaviour
                 Transform heroTrans = Instantiate(ObjectPool.getPrefab("Prefabs/Heros/hero" + id), heroPoint.GetChild(i)).transform;
                 heroTrans.GetComponent<HeroLogicBase>().curStar = star;
                 EffectManager.summonHero(heroGrid.transform.GetChild(i).position);
-
-                if (!isMerging)
-                {
-                    isMerging = true;
-                    Invoke("checkHeroMerge", 0.6f);
-                }
                 return;
             }
         }

@@ -96,7 +96,7 @@ public class EnemyManager : MonoBehaviour
         // 攻击最近的怪
         {
             EnemyLogic enemyLogic = getMinDisTarget(heroLogicBase.transform);
-            if (Vector3.Distance(heroLogicBase.curStandGrid.position, enemyLogic.transform.position) <= heroLogicBase.heroData.atkRange)
+            if (enemyLogic && Vector3.Distance(heroLogicBase.curStandGrid.position, enemyLogic.transform.position) <= heroLogicBase.heroData.atkRange)
             {
                 return enemyLogic;
             }

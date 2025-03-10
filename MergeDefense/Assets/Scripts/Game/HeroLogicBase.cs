@@ -23,8 +23,6 @@ public class HeroLogicBase : MonoBehaviour
     [HideInInspector]
     public bool isAttacking = false;
     [HideInInspector]
-    public bool isMerge = false;
-    [HideInInspector]
     public Transform heroUITrans;
     [HideInInspector]
     public Transform emojiTrans;
@@ -114,19 +112,95 @@ public class HeroLogicBase : MonoBehaviour
         {
             transform.DOScale(1f, 0.1f).OnComplete(() =>
             {
-                isCanUpdate = true;
+                checkMerge();
             });
         });
+    }
+
+    public void checkMerge()
+    {
+        isCanUpdate = false;
+
+        // 检测是否可以合并
+        for (int i = 0; i < GameLayer.s_instance.heroPoint.childCount; i++)
+        {
+            if (GameLayer.s_instance.heroPoint.GetChild(i).childCount == 1 && GameLayer.s_instance.heroPoint.GetChild(i) != transform.parent)
+            {
+                HeroLogicBase heroLogicBase_to = GameLayer.s_instance.heroPoint.GetChild(i).GetChild(0).GetComponent<HeroLogicBase>();
+                if ((heroLogicBase_to.isCanUpdate) && (heroLogicBase_to.curStar < heroLogicBase_to.heroData.maxStar) && (heroLogicBase_to.heroData.id == heroData.id) && (heroLogicBase_to.curStar == curStar))
+                {
+                    AudioScript.s_instance.playSound("heroMerge");
+
+                    isCanUpdate = false;
+                    heroLogicBase_to.isCanUpdate = false;
+                    playAni(Consts.HeroAniNameIdle);
+                    boxCollider.enabled = false;
+                    transform.SetParent(transform);
+                    Destroy(heroUITrans.gameObject);
+                    Destroy(heroQualityTrans.gameObject);
+
+                    float moveTime = Vector3.Distance(transform.position, heroLogicBase_to.transform.position) / 10f;
+                    if (moveTime > 0.3f)
+                    {
+                        moveTime = 0.3f;
+                    }
+
+                    float jumpHight = Vector3.Distance(heroLogicBase_to.transform.position, transform.position) / 5f;
+                    if (jumpHight < 0.5f)
+                    {
+                        jumpHight = 0.5f;
+                    }
+                    else if (jumpHight > 1)
+                    {
+                        jumpHight = 1f;
+                    }
+
+                    transform.DOMove(heroLogicBase_to.transform.position, moveTime).SetEase(Ease.Linear).OnComplete(() =>
+                    {
+                        heroLogicBase_to.addStar();
+                        heroLogicBase_to.mergeWeapon(list_weapon);
+                        EffectManager.heroMerge(heroLogicBase_to.transform.position);
+
+                        // 升星角色的合并动画
+                        {
+                            Transform trans = heroLogicBase_to.transform.Find("model");
+                            trans.DOLocalMoveY(0.3f, 0.1f).SetEase(Ease.OutCubic).OnComplete(() =>
+                            {
+                                trans.DOLocalMoveY(0f, 0.1f).SetEase(Ease.InCubic);
+                            });
+
+                            trans.DOScaleY(1.2f, 0.1f).SetEase(Ease.OutCubic).OnComplete(() =>
+                            {
+                                trans.DOScaleY(0.8f, 0.1f).SetEase(Ease.InCubic).OnComplete(() =>
+                                {
+                                    trans.DOScaleY(1f, 0.1f).SetEase(Ease.OutCubic).OnComplete(() =>
+                                    {
+                                        heroLogicBase_to.checkMerge();
+                                    });
+                                });
+                            });
+                        }
+
+                        Destroy(gameObject);
+                        //Invoke("checkHeroMerge", 0.65f);
+                    });
+
+                    transform.GetChild(0).DOLocalMoveY(jumpHight, moveTime * 0.5f).SetEase(Ease.OutSine).OnComplete(() =>
+                    {
+                        transform.GetChild(0).DOLocalMoveY(0, moveTime * 0.5f).SetEase(Ease.InSine);
+                    });
+
+                    return;
+                }
+            }
+        }
+
+        isCanUpdate = true;
     }
 
     private void Update()
     {
         if(!isCanUpdate)
-        {
-            return;
-        }
-
-        if(isMerge)
         {
             return;
         }
