@@ -85,11 +85,20 @@ public class EnemyManager : MonoBehaviour
         }
 
         // 最后攻击小怪
-        for (int i = 0; i < list_enemy.Count; i++)
+        //for (int i = 0; i < list_enemy.Count; i++)
+        //{
+        //    if (Vector3.Distance(heroLogicBase.curStandGrid.position, list_enemy[i].transform.position) <= heroLogicBase.heroData.atkRange)
+        //    {
+        //        return list_enemy[i];
+        //    }
+        //}
+
+        // 攻击最近的怪
         {
-            if (Vector3.Distance(heroLogicBase.curStandGrid.position, list_enemy[i].transform.position) <= heroLogicBase.heroData.atkRange)
+            EnemyLogic enemyLogic = getMinDisTarget(heroLogicBase.transform);
+            if (Vector3.Distance(heroLogicBase.curStandGrid.position, enemyLogic.transform.position) <= heroLogicBase.heroData.atkRange)
             {
-                return list_enemy[i];
+                return enemyLogic;
             }
         }
 

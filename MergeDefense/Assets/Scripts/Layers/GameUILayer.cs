@@ -185,6 +185,12 @@ public class GameUILayer : MonoBehaviour
                 LayerManager.ShowLayer(Consts.Layer.BossComingLayer);
             }
         }
+
+        // boss波次,小于20秒时显示警告弹窗
+        if ((curBoCiRestTime == 20) && (curBoCi % 10 == 0))
+        {
+            LayerManager.ShowLayer(Consts.Layer.BossNoticeLayer);
+        }
     }
 
     void onInvokeAddEnemy()
