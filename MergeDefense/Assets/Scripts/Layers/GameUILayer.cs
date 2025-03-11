@@ -421,7 +421,8 @@ public class GameUILayer : MonoBehaviour
         }
 
         bool isForgeSuccess = false;
-        int forgeCount = RandomUtil.getRandom(1, 3);
+        // int forgeCount = RandomUtil.getRandom(1, 3);
+        int forgeCount = 1;
         for (int c = 0; c < forgeCount; c++)
         {
             for (int i = 0; i < weaponGridTrans.childCount; i++)
