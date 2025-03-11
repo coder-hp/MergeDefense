@@ -69,7 +69,10 @@ public class BossRewardPanel : MonoBehaviour
         }
     }
 
-    // 1武器币     // 2增加角色高星概率     // 3增加武器高等级概率     // 4从召唤池中删除角色
+    // 1武器币 
+    // 2增加角色高星概率 
+    // 3增加武器高等级概率 
+    // 4从召唤池中删除角色
     public void onClickReward(int rewardType)
     {
         AudioScript.s_instance.playSound_btn();
@@ -142,7 +145,7 @@ public class BossRewardPanel : MonoBehaviour
 
     void showDeleteHeroPanel()
     {
-        text_tip.text = "Select unwanted hero";
+        text_tip.text = "Pick Hero to Dump";
 
         choiceRewardPanel.localScale = Vector3.zero;
         deleteHeroPanel.localScale = Vector3.one;
