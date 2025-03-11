@@ -18,5 +18,7 @@ public class WeaponBar : MonoBehaviour
         img_icon.sprite = AtlasUtil.getAtlas_icon().GetSprite("weapon_" + weaponData.type);
 
         transform.Find("bg").localScale = Vector3.one;
+
+        AudioScript.s_instance.playSound("equipWeapon");
     }
 }
