@@ -142,7 +142,7 @@ public class BossRewardPanel : MonoBehaviour
 
     void showDeleteHeroPanel()
     {
-        text_tip.text = "Please select the hero you want to exclude";
+        text_tip.text = "Select unwanted hero";
 
         choiceRewardPanel.localScale = Vector3.zero;
         deleteHeroPanel.localScale = Vector3.one;
