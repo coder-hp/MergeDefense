@@ -263,7 +263,7 @@ public class UIItemWeapon : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.CompareTag("WeaponBar") && int.Parse(collision.transform.name) == weaponData.type)
+        if (collision.CompareTag("WeaponBar"))
         {
             dragTriggerWeaponBar = collision.transform;
 

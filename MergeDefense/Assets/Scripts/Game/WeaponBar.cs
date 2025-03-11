@@ -6,6 +6,7 @@ using UnityEngine.UI;
 public class WeaponBar : MonoBehaviour
 {
     public Text text_level;
+    public Image img_icon;
 
     [HideInInspector]
     public WeaponData weaponData;
@@ -14,6 +15,7 @@ public class WeaponBar : MonoBehaviour
     {
         weaponData = _weaponData;
         text_level.text = weaponData.level.ToString();
+        img_icon.sprite = AtlasUtil.getAtlas_icon().GetSprite("weapon_" + weaponData.type);
 
         transform.Find("bg").localScale = Vector3.one;
     }
