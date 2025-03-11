@@ -13,6 +13,11 @@ public class WeaponBar : MonoBehaviour
 
     public void setData(WeaponData _weaponData)
     {
+        if(weaponData != null)
+        {
+            GameUILayer.s_instance.addWeapon(weaponData);
+        }
+
         weaponData = _weaponData;
         text_level.text = weaponData.level.ToString();
         img_icon.sprite = AtlasUtil.getAtlas_icon().GetSprite("weapon_" + weaponData.type);
