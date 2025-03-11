@@ -6,9 +6,14 @@ public class GameFightData : MonoBehaviour
 {
     public static GameFightData s_instance = null;
 
-    [HideInInspector]
+    private void Awake()
+    {
+        s_instance = this;
+    }
+
+    //[HideInInspector]
     public List<int> list_heroWeight = new List<int>() { 100, 0, 0, 0, 0, 0, 0, 0, 00, 0 };          // 角色1-10星的召唤权重
-    [HideInInspector]
+    //[HideInInspector]
     public List<int> list_weaponWeight = new List<int>() { 100, 0, 0, 0, 0, 0, 0, 0, 0, 0 };         // 武器1-10级的锻造权重
 
     [HideInInspector]
@@ -31,8 +36,80 @@ public class GameFightData : MonoBehaviour
     [HideInInspector]
     public int curForgeGold = Consts.startForgeGold;
 
-    private void Awake()
+    int heroHighStarRate = 0;
+    int weaponHighLevelRate = 0;
+
+    public void changeHeroHighStarRate(int rate)
     {
-        s_instance = this;
+        heroHighStarRate += rate;
+
+        // 溢出的概率
+        int restRate = 0;
+
+        for (int i = 0; i < list_heroWeight.Count; i++)
+        {
+            if (list_heroWeight[i] > 0 && (i < list_heroWeight.Count - 1))
+            {
+                if(list_heroWeight[i] < rate)
+                {
+                    restRate = rate - list_heroWeight[i];
+                    rate = list_heroWeight[i];
+                }
+                list_heroWeight[i] -= rate;
+                list_heroWeight[i + 1] += rate;
+                break;
+            }
+        }
+
+        if(restRate > 0)
+        {
+            changeHeroHighStarRate(restRate);
+        }
+    }
+
+    public void changeWeaponHighLevelRate(int rate)
+    {
+        weaponHighLevelRate += rate;
+
+        // 溢出的概率
+        int restRate = 0;
+
+        for (int i = 0; i < list_weaponWeight.Count; i++)
+        {
+            if (list_weaponWeight[i] > 0 && (i < list_weaponWeight.Count - 1))
+            {
+                if (list_weaponWeight[i] < rate)
+                {
+                    restRate = rate - list_weaponWeight[i];
+                    rate = list_weaponWeight[i];
+                }
+                list_weaponWeight[i] -= rate;
+                list_weaponWeight[i + 1] += rate;
+                break;
+            }
+        }
+
+        if (restRate > 0)
+        {
+            changeWeaponHighLevelRate(restRate);
+        }
+    }
+
+    public void changeHeroWeight(List<int> list)
+    {
+        list_heroWeight = list;
+
+        int temp = heroHighStarRate;
+        heroHighStarRate = 0;
+        changeHeroHighStarRate(temp);
+    }
+
+    public void changeWeaponWeight(List<int> list)
+    {
+        list_weaponWeight = list;
+
+        int temp = weaponHighLevelRate;
+        weaponHighLevelRate = 0;
+        changeWeaponHighLevelRate(temp);
     }
 }

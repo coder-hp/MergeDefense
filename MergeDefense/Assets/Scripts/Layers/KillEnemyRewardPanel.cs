@@ -38,8 +38,8 @@ public class KillEnemyRewardPanel : MonoBehaviour
         enemyWaveData = _enemyWaveData;
         killRewardData = KillRewardEntity.getInstance().getData(enemyWaveData.wave);
 
-        GameFightData.s_instance.list_heroWeight = killRewardData.list_heroWeight;
-        GameFightData.s_instance.list_weaponWeight = killRewardData.list_weaponWeight;
+        GameFightData.s_instance.changeHeroWeight(killRewardData.list_heroWeight);
+        GameFightData.s_instance.changeWeaponWeight(killRewardData.list_weaponWeight);
 
         // 精英敌人
         if (enemyWaveData.enemyType == 2)

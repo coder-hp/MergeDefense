@@ -151,6 +151,22 @@ public class GMLayer : MonoBehaviour
         }
     }
 
+    public void onClickAddHeroRate()
+    {
+        if (GameFightData.s_instance)
+        {
+            GameFightData.s_instance.changeHeroHighStarRate(10);
+        }
+    }
+
+    public void onClickAddWeaponRate()
+    {
+        if (GameFightData.s_instance)
+        {
+            GameFightData.s_instance.changeWeaponHighLevelRate(15);
+        }
+    }
+
     public void onClickClose()
     {
         bg.SetActive(false);
