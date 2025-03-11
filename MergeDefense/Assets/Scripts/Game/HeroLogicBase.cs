@@ -290,6 +290,7 @@ public class HeroLogicBase : MonoBehaviour
                             isAttacking = false;
                             heroUITrans.localScale = Vector3.one;
                             heroUITrans.localPosition = CommonUtil.WorldPosToUI(GameLayer.s_instance.camera3D, curStandGrid.position);
+                            checkMerge();
                         });
 
                         heroQualityTrans.DOMove(minDisGrid.position + Consts.heroQualityOffset, moveTime).SetEase(Ease.Linear);
