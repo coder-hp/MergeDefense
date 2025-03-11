@@ -31,6 +31,7 @@ public class WeaponBar : MonoBehaviour
     {
         if (weaponData != null)
         {
+            AudioScript.s_instance.playSound_btn();
             WeaponInfoPanel.s_instance.show(weaponData);
         }
     }
