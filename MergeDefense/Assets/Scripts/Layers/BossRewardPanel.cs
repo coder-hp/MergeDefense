@@ -145,7 +145,7 @@ public class BossRewardPanel : MonoBehaviour
 
     void showDeleteHeroPanel()
     {
-        text_tip.text = "Pick Hero to Dump";
+        text_tip.text = "Pick Hero to Remove";
 
         choiceRewardPanel.localScale = Vector3.zero;
         deleteHeroPanel.localScale = Vector3.one;
