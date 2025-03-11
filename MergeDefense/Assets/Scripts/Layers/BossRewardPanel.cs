@@ -45,6 +45,7 @@ public class BossRewardPanel : MonoBehaviour
         {
             CancelInvoke("onInvokeSecond");
             onClickReward(2);
+            onClickConfirm();
         }
     }
 
