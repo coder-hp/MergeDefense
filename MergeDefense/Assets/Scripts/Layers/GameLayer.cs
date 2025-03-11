@@ -66,7 +66,7 @@ public class GameLayer : MonoBehaviour
         {
             if (heroPoint.GetChild(i).childCount == 0)
             {
-                Transform heroTrans = Instantiate(ObjectPool.getPrefab("Prefabs/Heros/hero" + RandomUtil.getRandom(101, getSummonHeroMaxId())), heroPoint.GetChild(i)).transform;
+                Transform heroTrans = Instantiate(ObjectPool.getPrefab("Prefabs/Heros/hero" + GameFightData.s_instance.randomSummonHero()), heroPoint.GetChild(i)).transform;
                 heroTrans.GetComponent<HeroLogicBase>().curStar = RandomUtil.SelectProbability(GameFightData.s_instance.list_heroWeight) + 1;
                 EffectManager.summonHero(heroGrid.transform.GetChild(i).position);
                 return true;
@@ -105,23 +105,6 @@ public class GameLayer : MonoBehaviour
         }
     }
 
-    public int getSummonHeroMaxId()
-    {
-        if(GameFightData.s_instance.curBoCi > 20)
-        {
-            return 108;
-
-            // 等新角色加进来再改回来
-            return 110;
-        }
-        else if (GameFightData.s_instance.curBoCi > 10)
-        {
-            return 108;
-        }
-
-        return 105;
-    }
-
     private void OnDestroy()
     {
         EffectManager.clear();
@@ -149,6 +132,11 @@ public class GameLayer : MonoBehaviour
         if (KillEnemyRewardPanel.s_instance)
         {
             Destroy(KillEnemyRewardPanel.s_instance.gameObject);
+        }
+
+        if (BossRewardPanel.s_instance)
+        {
+            Destroy(BossRewardPanel.s_instance.gameObject);
         }
     }
 }

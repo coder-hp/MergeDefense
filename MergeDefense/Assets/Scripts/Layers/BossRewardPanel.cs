@@ -1,19 +1,33 @@
 using DG.Tweening;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
-using static Consts;
 
 public class BossRewardPanel : MonoBehaviour
 {
+    public static BossRewardPanel s_instance = null;
+
+    public Transform choiceRewardPanel;
+    public Transform deleteHeroPanel;
     public Transform rewardItemsTrans;
+    public Transform herosTrans;
     public Transform btn_ok;
+    public Transform btn_delete;
+    public Text text_tip;
 
     EnemyWaveData enemyWaveData;
     KillRewardData killRewardData;
 
     int choicedRewardType = -1;
+    int choiceDeleteHeroIndex;
+    List<int> canChoiceDeleteHero = new List<int>();
+
+    private void Awake()
+    {
+        s_instance = this;
+    }
 
     public void init(EnemyWaveData _enemyWaveData, KillRewardData _killRewardData)
     {
@@ -86,9 +100,77 @@ public class BossRewardPanel : MonoBehaviour
             // 4从召唤池中删除角色
             case 4:
                 {
-                    break;
+                    showDeleteHeroPanel();
+                    return;
                 }
         }
+
+        Destroy(gameObject);
+
+        GameFightData.s_instance.isCanOnInvokeBoCiSecond = true;
+        GameUILayer.s_instance.changeDiamond(killRewardData.diamond);
+
+        // 如果场上没有敌人，直接开始下一波
+        //if(EnemyManager.s_instance.list_enemy.Count == 0)
+        {
+            GameUILayer.s_instance.forceToBoCi(enemyWaveData.wave + 1);
+        }
+    }
+
+    void showDeleteHeroPanel()
+    {
+        text_tip.text = "Please select the hero you want to exclude";
+
+        choiceRewardPanel.localScale = Vector3.zero;
+        deleteHeroPanel.localScale = Vector3.one;
+
+        List<int> list_canSummonHero = new List<int>();
+        for (int i = 0; i < GameFightData.s_instance.list_canSummonHero.Count; i++)
+        {
+            list_canSummonHero.Add(GameFightData.s_instance.list_canSummonHero[i]);
+        }
+        while (canChoiceDeleteHero.Count < 3)
+        {
+            int heroId = list_canSummonHero[RandomUtil.getRandom(0, list_canSummonHero.Count - 1)];
+            canChoiceDeleteHero.Add(heroId);
+            list_canSummonHero.Remove(heroId);
+        }
+
+        for (int i = 0; i < herosTrans.childCount; i++)
+        {
+            HeroData heroData = HeroEntity.getInstance().getData(canChoiceDeleteHero[i]);
+            herosTrans.GetChild(i).Find("name_bg/name").GetComponent<Text>().text = heroData.name;
+            herosTrans.GetChild(i).Find("head").GetComponent<Image>().sprite = AtlasUtil.getAtlas_icon().GetSprite("head_" + canChoiceDeleteHero[i]);
+            herosTrans.GetChild(i).GetComponent<Image>().sprite = AtlasUtil.getAtlas_game().GetSprite("kuang_hero_" + heroData.quality + "_2");
+            herosTrans.GetChild(i).Find("kuang").GetComponent<Image>().sprite = AtlasUtil.getAtlas_game().GetSprite("kuang_hero_" + heroData.quality + "_1");
+        }
+    }
+
+    public void onClickHero(int index)
+    {
+        AudioScript.s_instance.playSound_btn();
+
+        btn_delete.localScale = Vector3.one;
+        choiceDeleteHeroIndex = index;
+
+        for (int i = 0; i < herosTrans.childCount; i++)
+        {
+            if (i == index)
+            {
+                herosTrans.GetChild(i).Find("choiced").localScale = new Vector3(0.8f, 0.8f, 0.8f);
+            }
+            else
+            {
+                herosTrans.GetChild(i).Find("choiced").localScale = Vector3.zero;
+            }
+        }
+    }
+
+    public void onClickDeleteHero()
+    {
+        AudioScript.s_instance.playSound_btn();
+
+        GameFightData.s_instance.list_canSummonHero.Remove(canChoiceDeleteHero[choiceDeleteHeroIndex]);
 
         Destroy(gameObject);
 

@@ -12,6 +12,8 @@ public class GameFightData : MonoBehaviour
     }
 
     //[HideInInspector]
+    public List<int> list_canSummonHero = new List<int>() {101,102,103,104,105 };                    // 初始可以召唤的角色
+    //[HideInInspector]
     public List<int> list_heroWeight = new List<int>() { 100, 0, 0, 0, 0, 0, 0, 0, 00, 0 };          // 角色1-10星的召唤权重
     //[HideInInspector]
     public List<int> list_weaponWeight = new List<int>() { 100, 0, 0, 0, 0, 0, 0, 0, 0, 0 };         // 武器1-10级的锻造权重
@@ -111,5 +113,10 @@ public class GameFightData : MonoBehaviour
         int temp = weaponHighLevelRate;
         weaponHighLevelRate = 0;
         changeWeaponHighLevelRate(temp);
+    }
+
+    public int randomSummonHero()
+    {
+        return list_canSummonHero[RandomUtil.getRandom(0, list_canSummonHero.Count - 1)];
     }
 }

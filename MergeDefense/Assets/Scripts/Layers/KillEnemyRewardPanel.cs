@@ -58,13 +58,25 @@ public class KillEnemyRewardPanel : MonoBehaviour
             buff_hero.localScale = Vector3.one;
         }
 
-        text_diamond.text = "+"+killRewardData.diamond;
+        if(enemyWaveData.wave == 10)
+        {
+            GameFightData.s_instance.list_canSummonHero.Add(106);
+            GameFightData.s_instance.list_canSummonHero.Add(107);
+            GameFightData.s_instance.list_canSummonHero.Add(108);
+        }
+        else if (enemyWaveData.wave == 20)
+        {
+            GameFightData.s_instance.list_canSummonHero.Add(109);
+            GameFightData.s_instance.list_canSummonHero.Add(110);
+        }
+
+        text_diamond.text = "+" + killRewardData.diamond;
 
         if (killRewardData.heroStar != 0)
         {
             if(killRewardData.heroQuality == -1)
             {
-                heroId = RandomUtil.getRandom(101, GameLayer.s_instance.getSummonHeroMaxId());
+                heroId = GameFightData.s_instance.randomSummonHero();
             }
             else
             {
@@ -82,7 +94,7 @@ public class KillEnemyRewardPanel : MonoBehaviour
                 }
                 else
                 {
-                    heroId = RandomUtil.getRandom(101, GameLayer.s_instance.getSummonHeroMaxId());
+                    heroId = GameFightData.s_instance.randomSummonHero();
                 }
             }
 
