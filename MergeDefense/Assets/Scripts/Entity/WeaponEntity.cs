@@ -15,7 +15,7 @@ public class WeaponData
     public string buff3;   // 不固定：暴击率、爆伤、攻速、技能概率
 
     public Consts.BuffType buff3Type;
-    public string buff3ValueStr;
+    public float buff3Value;
 }
 
 public class WeaponEntity
@@ -42,7 +42,7 @@ public class WeaponEntity
         {
             string[] strArray = list[i].buff3.Split('_');
             list[i].buff3Type = (Consts.BuffType)int.Parse(strArray[0]);
-            list[i].buff3ValueStr = strArray[1];
+            list[i].buff3Value = float.Parse(strArray[1]);
         }
     }
 

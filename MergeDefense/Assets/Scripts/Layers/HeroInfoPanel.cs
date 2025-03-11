@@ -40,6 +40,8 @@ public class HeroInfoPanel : MonoBehaviour
     HeroSkillData[] skillsArray;
     int sellPrice = 0;
 
+    List<int> list_weaponType = new List<int>();
+
     private void Awake()
     {
         s_instance = this;
@@ -54,7 +56,8 @@ public class HeroInfoPanel : MonoBehaviour
         gameObject.SetActive(true);
 
         heroLogicBase = _heroLogicBase;
-        
+        list_weaponType.Clear();
+
         btn_sellHeroTrans.localScale = Vector3.one;
         text_heroName.text = heroLogicBase.heroData.name;
         text_career.text = heroLogicBase.heroData.career;
@@ -72,21 +75,26 @@ public class HeroInfoPanel : MonoBehaviour
         img_choicedWeapon1.transform.localScale = Vector3.zero;
         img_choicedWeapon2.transform.localScale = Vector3.zero;
 
-        //if (heroLogicBase.list_weapon.Count >= 1)
-        //{
-        //    obj_weapon1.gameObject.SetActive(true);
-        //    img_weaponIcon1.sprite = AtlasUtil.getAtlas_icon().GetSprite("weapon_" + heroLogicBase.list_weapon[0].type);
-        //    obj_weapon1.transform.Find("level").GetComponent<Text>().text = heroLogicBase.list_weapon[0].level.ToString();
+        for(int i = 0; i < GameUILayer.s_instance.list_weaponBar.Count; i++)
+        {
+            if (GameUILayer.s_instance.list_weaponBar[i].weaponData != null && GameUILayer.s_instance.list_weaponBar[i].weaponData.type == heroLogicBase.heroData.goodWeapon)
+            {
+                list_weaponType.Add(GameUILayer.s_instance.list_weaponBar[i].weaponData.type);
+                break;
+            }
+        }
 
-        //    onClickWeaponIcon(0);
-        //}
+        if (list_weaponType.Count >= 1)
+        {
+            obj_weapon1.gameObject.SetActive(true);
+            img_weaponIcon1.sprite = AtlasUtil.getAtlas_icon().GetSprite("weapon_" + list_weaponType[0]);
+        }
 
-        //if (heroLogicBase.list_weapon.Count >= 2)
-        //{
-        //    obj_weapon2.gameObject.SetActive(true);
-        //    img_weaponIcon2.sprite = AtlasUtil.getAtlas_icon().GetSprite("weapon_" + heroLogicBase.list_weapon[1].type);
-        //    obj_weapon2.transform.Find("level").GetComponent<Text>().text = heroLogicBase.list_weapon[1].level.ToString();
-        //}
+        if (list_weaponType.Count >= 2)
+        {
+            obj_weapon2.gameObject.SetActive(true);
+            img_weaponIcon2.sprite = AtlasUtil.getAtlas_icon().GetSprite("weapon_" + list_weaponType[1]);
+        }
 
         // 技能
         {
@@ -107,14 +115,14 @@ public class HeroInfoPanel : MonoBehaviour
             }
         }
 
-        //if(heroLogicBase.list_weapon.Count > 0)
-        //{
-        //    onClickWeaponIcon(0);
-        //}
-        //else if (skillsArray.Length > 0)
-        //{
-        //    onClickSkillIcon(0);
-        //}
+        if (list_weaponType.Count > 0)
+        {
+            onClickWeaponIcon(0);
+        }
+        else if (skillsArray.Length > 0)
+        {
+            onClickSkillIcon(0);
+        }
 
         // 卖出按钮
         {
@@ -128,101 +136,107 @@ public class HeroInfoPanel : MonoBehaviour
     {
         AudioScript.s_instance.playSound_btn();
 
-        //if (index == 0 && heroLogicBase.list_weapon.Count == 0)
-        //{
-        //    return;
-        //}
-        //else if (index == 1 && heroLogicBase.list_weapon.Count < 2)
-        //{
-        //    return;
-        //}
+        if (index == 0 && list_weaponType.Count == 0)
+        {
+            return;
+        }
+        else if (index == 1 && list_weaponType.Count < 2)
+        {
+            return;
+        }
 
-        //tab_weaponTrans.localScale = Vector3.one;
-        //tab_skillTrans.localScale = Vector3.zero;
+        tab_weaponTrans.localScale = Vector3.one;
+        tab_skillTrans.localScale = Vector3.zero;
 
-        //weaponBuffsTrans.localScale = Vector3.zero;
-        //text_skillDesc.transform.localScale = Vector3.zero;
+        weaponBuffsTrans.localScale = Vector3.zero;
+        text_skillDesc.transform.localScale = Vector3.zero;
 
-        //for (int i = 0; i < skillTrans.childCount; i++)
-        //{
-        //    skillTrans.Find(i + "/choiced").localScale = Vector3.zero;
-        //}
+        for (int i = 0; i < skillTrans.childCount; i++)
+        {
+            skillTrans.Find(i + "/choiced").localScale = Vector3.zero;
+        }
 
-        //if (index == 0)
-        //{
-        //    if (heroLogicBase.list_weapon.Count >= 1)
-        //    {
-        //        showWeaponBuffInfo(heroLogicBase.list_weapon[0]);
+        if (index == 0)
+        {
+            if (list_weaponType.Count >= 1)
+            {
+                showWeaponBuffInfo(list_weaponType[0]);
 
-        //        img_choicedWeapon1.transform.localScale = Vector3.one;
-        //        img_choicedWeapon2.transform.localScale = Vector3.zero;
+                img_choicedWeapon1.transform.localScale = Vector3.one;
+                img_choicedWeapon2.transform.localScale = Vector3.zero;
 
-        //        text_weaponName.text = heroLogicBase.list_weapon[0].name;
-        //    }
-        //    else
-        //    {
-        //        return;
-        //    }
-        //}
-        //else if (index == 1)
-        //{
-        //    if (heroLogicBase.list_weapon.Count >= 2)
-        //    {
-        //        showWeaponBuffInfo(heroLogicBase.list_weapon[1]);
+                text_weaponName.text = WeaponEntity.getInstance().getData(list_weaponType[0],1).name;
+            }
+            else
+            {
+                return;
+            }
+        }
+        else if (index == 1)
+        {
+            if (list_weaponType.Count >= 2)
+            {
+                showWeaponBuffInfo(list_weaponType[1]);
 
-        //        img_choicedWeapon1.transform.localScale = Vector3.zero;
-        //        img_choicedWeapon2.transform.localScale = Vector3.one;
+                img_choicedWeapon1.transform.localScale = Vector3.zero;
+                img_choicedWeapon2.transform.localScale = Vector3.one;
 
-        //        text_weaponName.text = heroLogicBase.list_weapon[1].name;
-        //    }
-        //}
+                text_weaponName.text = WeaponEntity.getInstance().getData(list_weaponType[1], 1).name;
+            }
+        }
     }
 
-    void showWeaponBuffInfo(WeaponData weaponData)
+    void showWeaponBuffInfo(int type)
     {
         weaponBuffsTrans.localScale = Vector3.one;
 
         // 攻击力
         {
-            int atk = weaponData.buff1;
-            string buffValue = atk.ToString();
-
-            // 擅长
-            if (heroLogicBase.heroData.goodWeapon == weaponData.type)
+            int atk = 0;
+            for (int i = 0; i < GameUILayer.s_instance.list_weaponBar.Count; i++)
             {
-                atk = Mathf.RoundToInt(atk * 1.2f);
-                buffValue = "<color=\"#60D262\">(+" + (atk - weaponData.buff1) + ") </color>" + atk;
+                if (GameUILayer.s_instance.list_weaponBar[i].weaponData != null && GameUILayer.s_instance.list_weaponBar[i].weaponData.type == type)
+                {
+                    atk += GameUILayer.s_instance.list_weaponBar[i].weaponData.buff1;
+                }
             }
-            
-            weaponBuffsTrans.Find("buff1/value").GetComponent<Text>().text = buffValue;
+            weaponBuffsTrans.Find("buff1/value").GetComponent<Text>().text = atk.ToString();
         }
 
         // 攻击力百分比加成
         {
-            int atk = Mathf.RoundToInt(weaponData.buff2 * 100f);
-            string buffValue = atk + "%";
-
-            // 擅长
-            if (heroLogicBase.heroData.goodWeapon == weaponData.type)
+            int atkBaiFenBi = 0;
+            for (int i = 0; i < GameUILayer.s_instance.list_weaponBar.Count; i++)
             {
-                int newAtk = Mathf.RoundToInt(weaponData.buff2 * 1.2f * 100f);
-                buffValue = "<color=\"#60D262\">(+" + (newAtk - atk) + "%) </color>" + newAtk + "%";
+                if (GameUILayer.s_instance.list_weaponBar[i].weaponData != null && GameUILayer.s_instance.list_weaponBar[i].weaponData.type == type)
+                {
+                    atkBaiFenBi += Mathf.RoundToInt(GameUILayer.s_instance.list_weaponBar[i].weaponData.buff2 * 100f);
+                }
             }
-
-            weaponBuffsTrans.Find("buff2/value").GetComponent<Text>().text = buffValue;
+            weaponBuffsTrans.Find("buff2/value").GetComponent<Text>().text = atkBaiFenBi + "%";
         }
-
 
         // 第三个任意属性Buff
         {
-            weaponBuffsTrans.Find("buff3/icon").GetComponent<Image>().sprite = AtlasUtil.getAtlas_icon().GetSprite("buff_" + (int)weaponData.buff3Type);
-            switch (weaponData.buff3Type)
+            Consts.BuffType buff3Type = Consts.BuffType.Atk;
+            float buff3Value = 0;
+            for (int i = 0; i < GameUILayer.s_instance.list_weaponBar.Count; i++)
+            {
+                if (GameUILayer.s_instance.list_weaponBar[i].weaponData != null && GameUILayer.s_instance.list_weaponBar[i].weaponData.type == type)
+                {
+                    buff3Type = GameUILayer.s_instance.list_weaponBar[i].weaponData.buff3Type;
+                    buff3Value += GameUILayer.s_instance.list_weaponBar[i].weaponData.buff3Value;
+                }
+            }
+            weaponBuffsTrans.Find("buff3/icon").GetComponent<Image>().sprite = AtlasUtil.getAtlas_icon().GetSprite("buff_" + (int)buff3Type);
+
+            switch (buff3Type)
             {
                 case Consts.BuffType.CritRate:
                     {
                         weaponBuffsTrans.Find("buff3/name").GetComponent<Text>().text = "Crit Rate";
 
-                        int value = Mathf.RoundToInt(float.Parse(weaponData.buff3ValueStr));
+                        int value = Mathf.RoundToInt(buff3Value);
                         weaponBuffsTrans.Find("buff3/value").GetComponent<Text>().text = value + "%";
                         break;
                     }
@@ -231,7 +245,7 @@ public class HeroInfoPanel : MonoBehaviour
                     {
                         weaponBuffsTrans.Find("buff3/name").GetComponent<Text>().text = "Crit Damage";
 
-                        int value = Mathf.RoundToInt(float.Parse(weaponData.buff3ValueStr) * 100);
+                        int value = Mathf.RoundToInt(buff3Value * 100);
                         weaponBuffsTrans.Find("buff3/value").GetComponent<Text>().text = value + "%";
                         break;
                     }
@@ -239,7 +253,7 @@ public class HeroInfoPanel : MonoBehaviour
                 case Consts.BuffType.AtkSpeed:
                     {
                         weaponBuffsTrans.Find("buff3/name").GetComponent<Text>().text = "Attack Speed";
-                        weaponBuffsTrans.Find("buff3/value").GetComponent<Text>().text = float.Parse(weaponData.buff3ValueStr).ToString();
+                        weaponBuffsTrans.Find("buff3/value").GetComponent<Text>().text = buff3Value.ToString();
                         break;
                     }
 
@@ -247,27 +261,10 @@ public class HeroInfoPanel : MonoBehaviour
                     {
                         weaponBuffsTrans.Find("buff3/name").GetComponent<Text>().text = "Proc Chance";
 
-                        int value = Mathf.RoundToInt(float.Parse(weaponData.buff3ValueStr));
+                        int value = Mathf.RoundToInt(buff3Value);
                         weaponBuffsTrans.Find("buff3/value").GetComponent<Text>().text = value + "%";
                         break;
                     }
-            }
-
-            // 未激活
-            if(heroLogicBase.heroData.goodWeapon != weaponData.type)
-            {
-                Color color = new Color(0.28f,0.3f,0.42f);
-                weaponBuffsTrans.Find("buff3/icon").GetComponent<Image>().color = color;
-                weaponBuffsTrans.Find("buff3/name").GetComponent<Text>().color = color;
-                weaponBuffsTrans.Find("buff3/value").GetComponent<Text>().color = color;
-            }
-            // 激活
-            else
-            {
-                Color color = weaponBuffsTrans.Find("buff1/icon").GetComponent<Image>().color;
-                weaponBuffsTrans.Find("buff3/icon").GetComponent<Image>().color = color;
-                weaponBuffsTrans.Find("buff3/name").GetComponent<Text>().color = color;
-                weaponBuffsTrans.Find("buff3/value").GetComponent<Text>().color = color;
             }
         }
     }

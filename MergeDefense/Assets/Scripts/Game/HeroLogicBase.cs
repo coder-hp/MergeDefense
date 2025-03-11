@@ -482,7 +482,7 @@ public class HeroLogicBase : MonoBehaviour
                 {
                     if (GameUILayer.s_instance.list_weaponBar[i].weaponData.buff3Type == Consts.BuffType.AtkSpeed)
                     {
-                        atkSpeed += float.Parse(GameUILayer.s_instance.list_weaponBar[i].weaponData.buff3ValueStr);
+                        atkSpeed += GameUILayer.s_instance.list_weaponBar[i].weaponData.buff3Value;
                     }
                 }
             }
@@ -505,7 +505,7 @@ public class HeroLogicBase : MonoBehaviour
                 {
                     if (GameUILayer.s_instance.list_weaponBar[i].weaponData.buff3Type == Consts.BuffType.CritRate)
                     {
-                        critRate += Mathf.RoundToInt(float.Parse(GameUILayer.s_instance.list_weaponBar[i].weaponData.buff3ValueStr));
+                        critRate += Mathf.RoundToInt(GameUILayer.s_instance.list_weaponBar[i].weaponData.buff3Value);
                     }
                 }
             }
@@ -528,7 +528,7 @@ public class HeroLogicBase : MonoBehaviour
                 {
                     if (GameUILayer.s_instance.list_weaponBar[i].weaponData.buff3Type == Consts.BuffType.CritDamage)
                     {
-                        critDamage += Mathf.RoundToInt(float.Parse(GameUILayer.s_instance.list_weaponBar[i].weaponData.buff3ValueStr));
+                        critDamage += Mathf.RoundToInt(GameUILayer.s_instance.list_weaponBar[i].weaponData.buff3Value);
                     }
                 }
             }
@@ -551,7 +551,7 @@ public class HeroLogicBase : MonoBehaviour
                 {
                     if (GameUILayer.s_instance.list_weaponBar[i].weaponData.buff3Type == Consts.BuffType.SkillRate)
                     {
-                        skillRate += Mathf.RoundToInt(float.Parse(GameUILayer.s_instance.list_weaponBar[i].weaponData.buff3ValueStr));
+                        skillRate += Mathf.RoundToInt(GameUILayer.s_instance.list_weaponBar[i].weaponData.buff3Value);
                     }
                 }
             }
