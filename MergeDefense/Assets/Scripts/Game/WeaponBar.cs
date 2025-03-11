@@ -21,4 +21,12 @@ public class WeaponBar : MonoBehaviour
 
         AudioScript.s_instance.playSound("equipWeapon");
     }
+
+    public void onClick()
+    {
+        if (weaponData != null)
+        {
+            WeaponInfoPanel.s_instance.show(weaponData);
+        }
+    }
 }

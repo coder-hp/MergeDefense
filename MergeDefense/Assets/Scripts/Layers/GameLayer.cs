@@ -149,6 +149,11 @@ public class GameLayer : MonoBehaviour
             Destroy(HeroInfoPanel.s_instance.gameObject);
         }
 
+        if (WeaponInfoPanel.s_instance)
+        {
+            Destroy(WeaponInfoPanel.s_instance.gameObject);
+        }
+
         if (WeaponShopPanel.s_instance)
         {
             Destroy(WeaponShopPanel.s_instance.gameObject);

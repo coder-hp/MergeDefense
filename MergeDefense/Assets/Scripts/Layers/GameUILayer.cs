@@ -68,6 +68,7 @@ public class GameUILayer : MonoBehaviour
     private void Start()
     {
         LayerManager.ShowLayer(Consts.Layer.HeroInfoPanel);
+        LayerManager.ShowLayer(Consts.Layer.WeaponInfoPanel);
         LayerManager.ShowLayer(Consts.Layer.WeaponShopPanel);
 
         Invoke("startBoCi", 0.5f);

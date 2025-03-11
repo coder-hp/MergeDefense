@@ -33,6 +33,7 @@ public class Consts
         GameLayer,
         ShowRewardLayer,
         HeroInfoPanel,
+        WeaponInfoPanel,
         WeaponShopPanel,
         KillEnemyRewardPanel,
         BossComingLayer,

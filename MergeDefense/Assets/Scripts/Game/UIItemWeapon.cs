@@ -94,6 +94,8 @@ public class UIItemWeapon : MonoBehaviour
             return;
         }
 
+        WeaponInfoPanel.s_instance.show(weaponData);
+
         mergeTarget = null;
         transform.SetParent(GameUILayer.s_instance.transform);
 
@@ -160,6 +162,8 @@ public class UIItemWeapon : MonoBehaviour
         {
             return;
         }
+
+        WeaponInfoPanel.s_instance.close();
 
         // 关闭所有角色的武器适配性emoji
         for (int i = 0; i < GameLayer.s_instance.heroPoint.childCount; i++)
