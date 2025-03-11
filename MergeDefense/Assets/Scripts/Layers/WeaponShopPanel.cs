@@ -40,13 +40,13 @@ public class WeaponShopPanel : MonoBehaviour
         bgTrans.localPosition += posDownOffset;
         bgTrans.DOLocalMoveY(bgStartPos.y, 0.4f);
 
-        if(beforeShowFlowingLightBoCi != GameUILayer.s_instance.curBoCi)
+        if(beforeShowFlowingLightBoCi != GameFightData.s_instance.curBoCi)
         {
-            beforeShowFlowingLightBoCi = GameUILayer.s_instance.curBoCi;
+            beforeShowFlowingLightBoCi = GameFightData.s_instance.curBoCi;
             showFlowingLight(0.4f);
         }
 
-        text_curDiamond.text = GameUILayer.s_instance.curDiamond.ToString();
+        text_curDiamond.text = GameFightData.s_instance.curDiamond.ToString();
         gameObject.SetActive(true);
 
         refreshTime();
@@ -56,19 +56,19 @@ public class WeaponShopPanel : MonoBehaviour
 
     void refreshTime()
     {
-        text_time.text = GameUILayer.s_instance.curBoCiRestTime + "s";
+        text_time.text = GameFightData.s_instance.curBoCiRestTime + "s";
     }
 
     public void diamondChanged()
     {
-        text_curDiamond.text = GameUILayer.s_instance.curDiamond.ToString();
+        text_curDiamond.text = GameFightData.s_instance.curDiamond.ToString();
 
         for (int i = 0; i <= 2; i++)
         {
             Transform weaponTrans = transform.Find("bg/weapon" + i);
             int price = weaponArray[i].level * 5;
             weaponTrans.Find("btn_buy/price").GetComponent<Text>().text = price.ToString();
-            if (price <= GameUILayer.s_instance.curDiamond)
+            if (price <= GameFightData.s_instance.curDiamond)
             {
                 weaponTrans.Find("btn_buy/price").GetComponent<Text>().color = Color.white;
             }
@@ -83,60 +83,60 @@ public class WeaponShopPanel : MonoBehaviour
     {
         if(gameObject.activeInHierarchy)
         {
-            beforeShowFlowingLightBoCi = GameUILayer.s_instance.curBoCi;
+            beforeShowFlowingLightBoCi = GameFightData.s_instance.curBoCi;
             showFlowingLight(0);
         }
 
-        if (GameUILayer.s_instance.curBoCi > 1)
+        if (GameFightData.s_instance.curBoCi > 1)
         {
             GameUILayer.s_instance.setIsShowBell(true);
         }
 
         int[] levelArray;
 
-        if (GameUILayer.s_instance.curBoCi >= 71)
+        if (GameFightData.s_instance.curBoCi >= 71)
         {
             levelArray = new int[3];
             levelArray[0] = 7;
             levelArray[1] = 8;
             levelArray[2] = 9;
         }
-        else if (GameUILayer.s_instance.curBoCi >= 61)
+        else if (GameFightData.s_instance.curBoCi >= 61)
         {
             levelArray = new int[3];
             levelArray[0] = 6;
             levelArray[1] = 7;
             levelArray[2] = 8;
         }
-        else if (GameUILayer.s_instance.curBoCi >= 51)
+        else if (GameFightData.s_instance.curBoCi >= 51)
         {
             levelArray = new int[3];
             levelArray[0] = 5;
             levelArray[1] = 6;
             levelArray[2] = 7;
         }
-        else if (GameUILayer.s_instance.curBoCi >= 41)
+        else if (GameFightData.s_instance.curBoCi >= 41)
         {
             levelArray = new int[3];
             levelArray[0] = 4;
             levelArray[1] = 5;
             levelArray[2] = 6;
         }
-        else if (GameUILayer.s_instance.curBoCi >= 31)
+        else if (GameFightData.s_instance.curBoCi >= 31)
         {
             levelArray = new int[3];
             levelArray[0] = 3;
             levelArray[1] = 4;
             levelArray[2] = 5;
         }
-        else if (GameUILayer.s_instance.curBoCi >= 21)
+        else if (GameFightData.s_instance.curBoCi >= 21)
         {
             levelArray = new int[3];
             levelArray[0] = 2;
             levelArray[1] = 3;
             levelArray[2] = 4;
         }
-        else if (GameUILayer.s_instance.curBoCi >= 11)
+        else if (GameFightData.s_instance.curBoCi >= 11)
         {
             levelArray = new int[3];
             levelArray[0] = 1;
@@ -192,7 +192,7 @@ public class WeaponShopPanel : MonoBehaviour
 
             int price = weaponArray[i].level * 5;
             weaponTrans.Find("btn_buy/price").GetComponent<Text>().text = price.ToString();
-            if(price <= GameUILayer.s_instance.curDiamond)
+            if(price <= GameFightData.s_instance.curDiamond)
             {
                 weaponTrans.Find("btn_buy/price").GetComponent<Text>().color = Color.white;
             }
@@ -216,7 +216,7 @@ public class WeaponShopPanel : MonoBehaviour
         AudioScript.s_instance.playSound_btn();
 
         int price = weaponArray[index].level * 5;
-        if (GameUILayer.s_instance.curDiamond >= price)
+        if (GameFightData.s_instance.curDiamond >= price)
         {
             // 检测是否有空格子
             for (int i = 0; i < GameUILayer.s_instance.weaponGridTrans.childCount; i++)

@@ -85,7 +85,7 @@ public class UIItemWeapon : MonoBehaviour
 
     private void OnMouseDown()
     {
-        if (GameLayer.s_instance.isGameOver)
+        if (GameFightData.s_instance.isGameOver)
         {
             return;
         }
@@ -113,7 +113,7 @@ public class UIItemWeapon : MonoBehaviour
 
     private void OnMouseDrag()
     {
-        if (GameLayer.s_instance.isGameOver)
+        if (GameFightData.s_instance.isGameOver)
         {
             return;
         }
@@ -151,7 +151,7 @@ public class UIItemWeapon : MonoBehaviour
 
     private void OnMouseUp()
     {
-        if (GameLayer.s_instance.isGameOver)
+        if (GameFightData.s_instance.isGameOver)
         {
             return;
         }

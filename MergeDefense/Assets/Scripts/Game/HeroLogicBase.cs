@@ -201,7 +201,7 @@ public class HeroLogicBase : MonoBehaviour
             return;
         }
 
-        if(GameLayer.s_instance.isGameOver)
+        if(GameFightData.s_instance.isGameOver)
         {
             return;
         }
@@ -622,7 +622,7 @@ public class HeroLogicBase : MonoBehaviour
     bool isTriggerMouseDown = false;
     private void OnMouseDown()
     {
-        if (GameLayer.s_instance.isGameOver)
+        if (GameFightData.s_instance.isGameOver)
         {
             return;
         }
@@ -642,7 +642,7 @@ public class HeroLogicBase : MonoBehaviour
 
     private void OnMouseUp()
     {
-        if (GameLayer.s_instance.isGameOver)
+        if (GameFightData.s_instance.isGameOver)
         {
             return;
         }
@@ -681,7 +681,7 @@ public class HeroLogicBase : MonoBehaviour
 
     private void OnMouseExit()
     {
-        if (GameLayer.s_instance.isGameOver)
+        if (GameFightData.s_instance.isGameOver)
         {
             return;
         }

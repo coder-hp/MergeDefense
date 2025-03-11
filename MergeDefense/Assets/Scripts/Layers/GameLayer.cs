@@ -23,17 +23,7 @@ public class GameLayer : MonoBehaviour
     [HideInInspector]
     public List<Vector3> list_enemyMoveFourPos = new List<Vector3>();
     [HideInInspector]
-    public int addedEnemyCount = 0;
-    [HideInInspector]
     public Material matrial_attackRange;
-
-    [HideInInspector]
-    public List<int> list_heroWeight;
-    [HideInInspector]
-    public List<int> list_weaponWeight;
-
-    [HideInInspector]
-    public bool isGameOver = false;
 
     private void Awake()
     {
@@ -51,9 +41,6 @@ public class GameLayer : MonoBehaviour
 
     void Start()
     {
-        list_heroWeight = new List<int>() { 100, 0, 0, 0, 0, 0, 0, 0, 00, 0 };          // 角色1-10星的召唤权重
-        list_weaponWeight = new List<int>() { 100, 0, 0, 0, 0, 0, 0, 0, 0, 0 };         // 武器1-10级的锻造权重
-
         for (int i = 0; i < enemyMoveFourPoint.Count; i++)
         {
             list_enemyMoveFourPos.Add(enemyMoveFourPoint[i].position);
@@ -68,7 +55,7 @@ public class GameLayer : MonoBehaviour
     {
         if (EnemyManager.s_instance.getEnemyCount() < Consts.maxEnemyCount)
         {
-            ++addedEnemyCount;
+            ++GameFightData.s_instance.addedEnemyCount;
             Instantiate(ObjectPool.getPrefab("Prefabs/Enemys/" + enemyWaveData.prefab), enemyPoint).GetComponent<EnemyLogic>().init(enemyWaveData);
         }
     }
@@ -80,7 +67,7 @@ public class GameLayer : MonoBehaviour
             if (heroPoint.GetChild(i).childCount == 0)
             {
                 Transform heroTrans = Instantiate(ObjectPool.getPrefab("Prefabs/Heros/hero" + RandomUtil.getRandom(101, getSummonHeroMaxId())), heroPoint.GetChild(i)).transform;
-                heroTrans.GetComponent<HeroLogicBase>().curStar = RandomUtil.SelectProbability(list_heroWeight) + 1;
+                heroTrans.GetComponent<HeroLogicBase>().curStar = RandomUtil.SelectProbability(GameFightData.s_instance.list_heroWeight) + 1;
                 EffectManager.summonHero(heroGrid.transform.GetChild(i).position);
                 return true;
             }
@@ -96,7 +83,7 @@ public class GameLayer : MonoBehaviour
             if (heroPoint.GetChild(i).childCount == 0)
             {
                 Transform heroTrans = Instantiate(ObjectPool.getPrefab("Prefabs/Heros/hero" + id), heroPoint.GetChild(i)).transform;
-                heroTrans.GetComponent<HeroLogicBase>().curStar = RandomUtil.SelectProbability(list_heroWeight) + 1;
+                heroTrans.GetComponent<HeroLogicBase>().curStar = RandomUtil.SelectProbability(GameFightData.s_instance.list_heroWeight) + 1;
                 EffectManager.summonHero(heroGrid.transform.GetChild(i).position);
 
                 return;
@@ -120,14 +107,14 @@ public class GameLayer : MonoBehaviour
 
     public int getSummonHeroMaxId()
     {
-        if(GameUILayer.s_instance.curBoCi > 20)
+        if(GameFightData.s_instance.curBoCi > 20)
         {
             return 108;
 
             // 等新角色加进来再改回来
             return 110;
         }
-        else if (GameUILayer.s_instance.curBoCi > 10)
+        else if (GameFightData.s_instance.curBoCi > 10)
         {
             return 108;
         }

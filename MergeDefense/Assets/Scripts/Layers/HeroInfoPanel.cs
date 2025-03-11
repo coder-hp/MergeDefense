@@ -126,7 +126,7 @@ public class HeroInfoPanel : MonoBehaviour
 
         // 卖出按钮
         {
-            sellPrice = Mathf.RoundToInt(heroLogicBase.heroStarData.sellPrice * GameUILayer.s_instance.curSummonGold * 0.2f);
+            sellPrice = Mathf.RoundToInt(heroLogicBase.heroStarData.sellPrice * GameFightData.s_instance.curSummonGold * 0.2f);
             btn_sellHeroTrans.position = heroLogicBase.heroUITrans.position + Consts.heroSellBtnOffset;
             text_sellHeroPrice.text = sellPrice.ToString();
         }

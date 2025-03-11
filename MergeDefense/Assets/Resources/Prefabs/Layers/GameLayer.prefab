@@ -529,6 +529,7 @@ GameObject:
   - component: {fileID: 4729789445500738202}
   - component: {fileID: 7212460890321329611}
   - component: {fileID: -7090605276762049441}
+  - component: {fileID: 4118238420357257641}
   m_Layer: 0
   m_Name: GameLayer
   m_TagString: Untagged
@@ -584,14 +585,12 @@ MonoBehaviour:
   heroGrid: {fileID: 8265745479018369982}
   heroGridChoiced: {fileID: 2135443028451985268}
   attackRangeTrans: {fileID: 1889172472041156528}
-  weaponChoiceKuang: {fileID: 0}
   heroQualityPoint: {fileID: 7220120283883626461}
   flyPoint: {fileID: 4149523117588117092}
   effectPoint: {fileID: 8027066404486135526}
   list_enemyMoveFourPos: []
   addedEnemyCount: 0
   matrial_attackRange: {fileID: 0}
-  matrial_weaponChoiceKuang: {fileID: 0}
   list_heroWeight: 
   list_weaponWeight: 
   isGameOver: 0
@@ -608,6 +607,18 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   list_enemy: []
+--- !u!114 &4118238420357257641
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3154725897590284526}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 81981f037ee52e34a99374dd3d010c01, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &3376967586139326472
 GameObject:
   m_ObjectHideFlags: 0

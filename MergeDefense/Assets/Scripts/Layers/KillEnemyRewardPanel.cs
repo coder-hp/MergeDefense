@@ -32,14 +32,14 @@ public class KillEnemyRewardPanel : MonoBehaviour
     {
         AudioScript.s_instance.playSound("killEnemyRewardPanel");
 
-        GameUILayer.s_instance.isCanOnInvokeBoCiSecond = false;
+        GameFightData.s_instance.isCanOnInvokeBoCiSecond = false;
         LayerManager.LayerShowAni(transform.Find("bg"));
 
         enemyWaveData = _enemyWaveData;
         killRewardData = KillRewardEntity.getInstance().getData(enemyWaveData.wave);
 
-        GameLayer.s_instance.list_heroWeight = killRewardData.list_heroWeight;
-        GameLayer.s_instance.list_weaponWeight = killRewardData.list_weaponWeight;
+        GameFightData.s_instance.list_heroWeight = killRewardData.list_heroWeight;
+        GameFightData.s_instance.list_weaponWeight = killRewardData.list_weaponWeight;
 
         // 精英敌人
         if (enemyWaveData.enemyType == 2)
@@ -149,7 +149,7 @@ public class KillEnemyRewardPanel : MonoBehaviour
             }
             else
             {
-                GameUILayer.s_instance.isCanOnInvokeBoCiSecond = true;
+                GameFightData.s_instance.isCanOnInvokeBoCiSecond = true;
                 
                 // 如果场上没有敌人，直接开始下一波
                 //if(EnemyManager.s_instance.list_enemy.Count == 0)

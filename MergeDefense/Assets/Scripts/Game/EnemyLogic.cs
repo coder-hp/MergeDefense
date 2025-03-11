@@ -45,7 +45,7 @@ public class EnemyLogic : MonoBehaviour
         skeletonAnimation = transform.GetChild(0).GetComponent<SkeletonAnimation>();
         defaultSpineSpeed = skeletonAnimation.timeScale;
 
-        transform.GetChild(0).localPosition -= new Vector3(0,0,GameLayer.s_instance.addedEnemyCount * 0.000001f);
+        transform.GetChild(0).localPosition -= new Vector3(0,0, GameFightData.s_instance.addedEnemyCount * 0.000001f);
     }
 
     public void init(EnemyWaveData _enemyWaveData)
@@ -251,7 +251,7 @@ public class EnemyLogic : MonoBehaviour
         {
             // 最后一关没有奖励
             int maxWave = EnemyWaveEntity.getInstance().list[EnemyWaveEntity.getInstance().list.Count - 1].wave;
-            if (GameUILayer.s_instance.curBoCi < maxWave)
+            if (GameFightData.s_instance.curBoCi < maxWave)
             {
                 LayerManager.ShowLayer(Consts.Layer.KillEnemyRewardPanel).GetComponent<KillEnemyRewardPanel>().show(enemyWaveData);
             }

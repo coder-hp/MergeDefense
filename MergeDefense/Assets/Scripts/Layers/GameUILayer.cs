@@ -33,36 +33,19 @@ public class GameUILayer : MonoBehaviour
     public Text btn_forge_gold;
     public List<WeaponBar> list_weaponBar = new List<WeaponBar>();
 
-    [HideInInspector]
-    public int curBoCi = 0;
-    [HideInInspector]
-    public int curBoCiRestTime = 20;
-
-    [HideInInspector]
-    public int curGold = Consts.startHaveGold;
-    [HideInInspector]
-    public int curDiamond = Consts.startHaveDiamond;
-    [HideInInspector]
-    public int curSummonGold = Consts.startSummonGold;
-    [HideInInspector]
-    public int curForgeGold = Consts.startForgeGold;
-
     List<EnemyWaveData> waitAddEnemy = new List<EnemyWaveData>();
-
-    [HideInInspector]
-    public bool isCanOnInvokeBoCiSecond = true;
 
     private void Awake()
     {
         s_instance = this;
 
-        curGold = Consts.startHaveGold;
-        curDiamond = Consts.startHaveDiamond;
+        GameFightData.s_instance.curGold = Consts.startHaveGold;
+        GameFightData.s_instance.curDiamond = Consts.startHaveDiamond;
 
-        text_gold.text = curGold.ToString();
-        text_diamond.text = curDiamond.ToString();
-        btn_summon_gold.text = curSummonGold.ToString();
-        btn_forge_gold.text = curForgeGold.ToString();
+        text_gold.text = GameFightData.s_instance.curGold.ToString();
+        text_diamond.text = GameFightData.s_instance.curDiamond.ToString();
+        btn_summon_gold.text = GameFightData.s_instance.curSummonGold.ToString();
+        btn_forge_gold.text = GameFightData.s_instance.curForgeGold.ToString();
     }
 
     private void Start()
@@ -76,30 +59,30 @@ public class GameUILayer : MonoBehaviour
 
     void startBoCi()
     {
-        ++curBoCi;
+        ++GameFightData.s_instance.curBoCi;
 
         int maxWave = EnemyWaveEntity.getInstance().list[EnemyWaveEntity.getInstance().list.Count - 1].wave;
-        if (curBoCi > maxWave)
+        if (GameFightData.s_instance.curBoCi > maxWave)
         {
-            curBoCi = maxWave;
+            GameFightData.s_instance.curBoCi = maxWave;
             gameOver();
             return;
         }
 
         // ToastScript.show("WAVE：" + curBoCi);
 
-        EnemyWaveData enemyWaveData = EnemyWaveEntity.getInstance().getData(curBoCi);
+        EnemyWaveData enemyWaveData = EnemyWaveEntity.getInstance().getData(GameFightData.s_instance.curBoCi);
 
-        curBoCiRestTime = enemyWaveData.time;
-        text_boci.text = "WAVE：" + curBoCi + "/80";
+        GameFightData.s_instance.curBoCiRestTime = enemyWaveData.time;
+        text_boci.text = "WAVE：" + GameFightData.s_instance.curBoCi + "/80";
 
-        if (curBoCiRestTime == 60)
+        if (GameFightData.s_instance.curBoCiRestTime == 60)
         {
             text_time.text = "01:00";
         }
         else
         {
-            text_time.text = "00:" + curBoCiRestTime;
+            text_time.text = "00:" + GameFightData.s_instance.curBoCiRestTime;
         }
 
         waitAddEnemy.Clear();
@@ -117,21 +100,21 @@ public class GameUILayer : MonoBehaviour
 
         // bgm
         {
-            if (curBoCi % 10 == 0)
+            if (GameFightData.s_instance.curBoCi % 10 == 0)
             {
                 AudioScript.s_instance.playMusic("bgm_battle_boss", true);
             }
-            else if (curBoCi % 10 == 1)
+            else if (GameFightData.s_instance.curBoCi % 10 == 1)
             {
                 AudioScript.s_instance.playMusic("bgm_battle", true);
             }
         }
 
-        if (curBoCi == 11)
+        if (GameFightData.s_instance.curBoCi == 11)
         {
             ToastScript.show("<color=\"#698AFF\">Rare</color> Heroes Now Available!");
         }
-        else if (curBoCi == 21)
+        else if (GameFightData.s_instance.curBoCi == 21)
         {
             ToastScript.show("<color=\"#BD2DE7\">Epic</color> Heroes Now Available!");
         }
@@ -139,35 +122,35 @@ public class GameUILayer : MonoBehaviour
 
     void onInvokeBoCiSecond()
     {
-        if (!isCanOnInvokeBoCiSecond)
+        if (!GameFightData.s_instance.isCanOnInvokeBoCiSecond)
         {
             return;
         }
 
-        --curBoCiRestTime;
+        --GameFightData.s_instance.curBoCiRestTime;
 
-        if (curBoCiRestTime < 0)
+        if (GameFightData.s_instance.curBoCiRestTime < 0)
         {
-            curBoCiRestTime = 0;
+            GameFightData.s_instance.curBoCiRestTime = 0;
         }
 
-        if (curBoCiRestTime >= 10)
+        if (GameFightData.s_instance.curBoCiRestTime >= 10)
         {
-            text_time.text = "00:" + curBoCiRestTime;
+            text_time.text = "00:" + GameFightData.s_instance.curBoCiRestTime;
         }
         else
         {
-            text_time.text = "00:0" + curBoCiRestTime;
+            text_time.text = "00:0" + GameFightData.s_instance.curBoCiRestTime;
         }
 
         checkIsShowBossRedKuang();
 
-        if (curBoCiRestTime <= 0)
+        if (GameFightData.s_instance.curBoCiRestTime <= 0)
         {
             CancelInvoke("onInvokeBoCiSecond");
 
             // 如果是boss波次，并且没有击杀，则直接游戏结束
-            if (curBoCi % 10 == 0)
+            if (GameFightData.s_instance.curBoCi % 10 == 0)
             {
                 for(int i = 0; i < EnemyManager.s_instance.list_enemy.Count; i++)
                 {
@@ -181,14 +164,14 @@ public class GameUILayer : MonoBehaviour
 
             Invoke("startBoCi", 1);
 
-            if ((curBoCi + 1) % 10 == 0)
+            if ((GameFightData.s_instance.curBoCi + 1) % 10 == 0)
             {
                 LayerManager.ShowLayer(Consts.Layer.BossComingLayer);
             }
         }
 
         // boss波次,小于20秒时显示警告弹窗
-        if ((curBoCiRestTime == 20) && (curBoCi % 10 == 0))
+        if ((GameFightData.s_instance.curBoCiRestTime == 20) && (GameFightData.s_instance.curBoCi % 10 == 0))
         {
             LayerManager.ShowLayer(Consts.Layer.BossNoticeLayer);
         }
@@ -210,8 +193,8 @@ public class GameUILayer : MonoBehaviour
 
     public void forceToBoCi(int boci)
     {
-        curBoCiRestTime = 0;
-        curBoCi = boci - 1;
+        GameFightData.s_instance.curBoCiRestTime = 0;
+        GameFightData.s_instance.curBoCi = boci - 1;
     }
 
     public void refreshEnemyCount()
@@ -227,7 +210,7 @@ public class GameUILayer : MonoBehaviour
 
     public void checkIsShowBossRedKuang()
     {
-        if(curBoCi % 10 == 0 && curBoCiRestTime == 20)
+        if(GameFightData.s_instance.curBoCi % 10 == 0 && GameFightData.s_instance.curBoCiRestTime == 20)
         {
             bossRedKuangTrans.localScale = Vector3.one;
             return;
@@ -262,8 +245,8 @@ public class GameUILayer : MonoBehaviour
     Sequence tween_changeGoldText = null;
     public void changeGold(int value)
     {
-        curGold += value;
-        text_gold.text = curGold.ToString();
+        GameFightData.s_instance.curGold += value;
+        text_gold.text = GameFightData.s_instance.curGold.ToString();
 
         MoneyChangeTextPoint.s_instance.show(value, 1);
 
@@ -292,7 +275,7 @@ public class GameUILayer : MonoBehaviour
         }
 
         // 检查召唤金额是否足够
-        if (curGold >= curSummonGold)
+        if (GameFightData.s_instance.curGold >= GameFightData.s_instance.curSummonGold)
         {
             btn_summon_gold.color = Color.white;
         }
@@ -302,7 +285,7 @@ public class GameUILayer : MonoBehaviour
         }
 
         // 检查锻造金额是否足够
-        if (curGold >= curForgeGold)
+        if (GameFightData.s_instance.curGold >= GameFightData.s_instance.curForgeGold)
         {
             btn_forge_gold.color = Color.white;
         }
@@ -316,8 +299,8 @@ public class GameUILayer : MonoBehaviour
     Sequence tween_changeDiamondText = null;
     public void changeDiamond(int value)
     {
-        curDiamond += value;
-        text_diamond.text = curDiamond.ToString();
+        GameFightData.s_instance.curDiamond += value;
+        text_diamond.text = GameFightData.s_instance.curDiamond.ToString();
 
         MoneyChangeTextPoint.s_instance.show(value, 2);
 
@@ -390,7 +373,7 @@ public class GameUILayer : MonoBehaviour
     {
         AudioScript.s_instance.playSound_btn();
 
-        if (curGold < curSummonGold)
+        if (GameFightData.s_instance.curGold < GameFightData.s_instance.curSummonGold)
         {
             AudioScript.s_instance.playSound("summonNotHaveGold");
             ToastScript.show("Coins Not Enough!");
@@ -399,11 +382,11 @@ public class GameUILayer : MonoBehaviour
 
         if (GameLayer.s_instance.addHero())
         {
-            int costGold = curSummonGold;
+            int costGold = GameFightData.s_instance.curSummonGold;
 
             // 增加下次召唤金额
-            curSummonGold += Consts.summonAddGold;
-            btn_summon_gold.text = curSummonGold.ToString();
+            GameFightData.s_instance.curSummonGold += Consts.summonAddGold;
+            btn_summon_gold.text = GameFightData.s_instance.curSummonGold.ToString();
 
             changeGold(-costGold);
         }
@@ -414,7 +397,7 @@ public class GameUILayer : MonoBehaviour
     {
         AudioScript.s_instance.playSound_btn();
 
-        if (curGold < curForgeGold)
+        if (GameFightData.s_instance.curGold < GameFightData.s_instance.curForgeGold)
         {
             AudioScript.s_instance.playSound("summonNotHaveGold");
             ToastScript.show("Coins Not Enough!");
@@ -433,7 +416,7 @@ public class GameUILayer : MonoBehaviour
                     isForgeSuccess = true;
 
                     UIItemWeapon uIItemWeapon = Instantiate(item_weapon, weaponGridTrans.GetChild(i)).GetComponent<UIItemWeapon>();
-                    int weaponLevel = RandomUtil.SelectProbability(GameLayer.s_instance.list_weaponWeight) + 1;
+                    int weaponLevel = RandomUtil.SelectProbability(GameFightData.s_instance.list_weaponWeight) + 1;
                     uIItemWeapon.init(RandomUtil.getRandom(1,5), weaponLevel);
                     break;
                 }
@@ -442,11 +425,11 @@ public class GameUILayer : MonoBehaviour
 
         if (isForgeSuccess)
         {
-            int costGold = curForgeGold;
+            int costGold = GameFightData.s_instance.curForgeGold;
 
             // 增加下次锻造金额
-            curForgeGold += Consts.forgeAddGold;
-            btn_forge_gold.text = curForgeGold.ToString();
+            GameFightData.s_instance.curForgeGold += Consts.forgeAddGold;
+            btn_forge_gold.text = GameFightData.s_instance.curForgeGold.ToString();
 
             changeGold(-costGold);
         }
@@ -518,7 +501,7 @@ public class GameUILayer : MonoBehaviour
         }
 
         isCalledGameOver = true;
-        GameLayer.s_instance.isGameOver = true;
+        GameFightData.s_instance.isGameOver = true;
         CancelInvoke("startBoCi");
         CancelInvoke("onInvokeBoCiSecond");
         CancelInvoke("onInvokeAddEnemy");

@@ -27,7 +27,7 @@ public class BossRewardPanel : MonoBehaviour
     {
         Destroy(gameObject);
 
-        GameUILayer.s_instance.isCanOnInvokeBoCiSecond = true;
+        GameFightData.s_instance.isCanOnInvokeBoCiSecond = true;
         GameUILayer.s_instance.changeDiamond(killRewardData.diamond);
 
         // 如果场上没有敌人，直接开始下一波
