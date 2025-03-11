@@ -486,12 +486,10 @@ public class GameUILayer : MonoBehaviour
 
     public void onClickShop()
     {
-        //AudioScript.s_instance.playSound_btn();
+        AudioScript.s_instance.playSound_btn();
 
-        //setIsShowBell(false);
-        //WeaponShopPanel.s_instance.show();
-
-        LayerManager.ShowLayer(Consts.Layer.BossRewardPanel).GetComponent<BossRewardPanel>().init(EnemyWaveEntity.getInstance().getData(10), KillRewardEntity.getInstance().getData(10));
+        setIsShowBell(false);
+        WeaponShopPanel.s_instance.show();
     }
 
     bool isCalledGameOver = false;
