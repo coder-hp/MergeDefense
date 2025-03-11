@@ -133,24 +133,32 @@ public class KillEnemyRewardPanel : MonoBehaviour
 
         LayerManager.LayerCloseAni(transform.Find("bg"), () =>
         {
-            GameUILayer.s_instance.isCanOnInvokeBoCiSecond = true;
             GameUILayer.s_instance.changeDiamond(killRewardData.diamond);
-            if(killRewardData.heroStar != 0)
+            if (killRewardData.heroStar != 0)
             {
                 GameLayer.s_instance.addHeroByIdStar(heroId, heroStar);
             }
             else if (killRewardData.weaponLevel != 0)
             {
-                GameUILayer.s_instance.addWeapon(WeaponEntity.getInstance().getData(weaponType,weaponLevel));
+                GameUILayer.s_instance.addWeapon(WeaponEntity.getInstance().getData(weaponType, weaponLevel));
+            }
+
+            if (enemyWaveData.enemyType == 3)
+            {
+                LayerManager.ShowLayer(Consts.Layer.BossRewardPanel).GetComponent<BossRewardPanel>().init(enemyWaveData, killRewardData);
+            }
+            else
+            {
+                GameUILayer.s_instance.isCanOnInvokeBoCiSecond = true;
+                
+                // 如果场上没有敌人，直接开始下一波
+                //if(EnemyManager.s_instance.list_enemy.Count == 0)
+                {
+                    GameUILayer.s_instance.forceToBoCi(enemyWaveData.wave + 1);
+                }
             }
 
             Destroy(gameObject);
-
-            // 如果场上没有敌人，直接开始下一波
-            //if(EnemyManager.s_instance.list_enemy.Count == 0)
-            {
-                GameUILayer.s_instance.forceToBoCi(enemyWaveData.wave + 1);
-            }
         });
     }
 }

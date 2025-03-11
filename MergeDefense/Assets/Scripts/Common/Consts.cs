@@ -38,6 +38,7 @@ public class Consts
         KillEnemyRewardPanel,
         BossComingLayer,
         BossNoticeLayer,
+        BossRewardPanel,
     }
 
     public enum BuffType

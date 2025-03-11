@@ -13,6 +13,7 @@ public class KillRewardData
     public int weaponLevel;
     public string heroWeight;
     public string weaponWeight;
+    public string reward3_1;
 
     public List<int> list_heroWeight = new List<int>();
     public List<int> list_weaponWeight = new List<int>();
