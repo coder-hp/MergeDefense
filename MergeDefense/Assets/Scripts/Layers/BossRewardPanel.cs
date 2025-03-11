@@ -16,6 +16,7 @@ public class BossRewardPanel : MonoBehaviour
     public Transform btn_ok;
     public Transform btn_delete;
     public Text text_tip;
+    public Text text_time;
 
     EnemyWaveData enemyWaveData;
     KillRewardData killRewardData;
@@ -24,9 +25,27 @@ public class BossRewardPanel : MonoBehaviour
     int choiceDeleteHeroIndex;
     List<int> canChoiceDeleteHero = new List<int>();
 
+    int restTime = 15;
+
     private void Awake()
     {
         s_instance = this;
+
+        InvokeRepeating("onInvokeSecond",1,1);
+    }
+
+    void onInvokeSecond()
+    {
+        --restTime;
+        text_time.text = restTime + "s";
+
+
+        // 倒计时结束后，直接默认选择角色
+        if(restTime <= 0)
+        {
+            CancelInvoke("onInvokeSecond");
+            onClickReward(2);
+        }
     }
 
     public void init(EnemyWaveData _enemyWaveData, KillRewardData _killRewardData)
@@ -73,6 +92,9 @@ public class BossRewardPanel : MonoBehaviour
     public void onClickConfirm()
     {
         AudioScript.s_instance.playSound_btn();
+
+        CancelInvoke("onInvokeSecond");
+        text_time.transform.parent.localScale = Vector3.zero;
 
         switch (choicedRewardType)
         {
