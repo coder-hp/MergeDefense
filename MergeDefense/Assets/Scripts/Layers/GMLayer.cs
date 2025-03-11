@@ -155,7 +155,7 @@ public class GMLayer : MonoBehaviour
     {
         if (GameFightData.s_instance)
         {
-            GameFightData.s_instance.changeHeroHighStarRate(10);
+            GameFightData.s_instance.changeHeroHighStarRate(20);
         }
     }
 
@@ -163,7 +163,7 @@ public class GMLayer : MonoBehaviour
     {
         if (GameFightData.s_instance)
         {
-            GameFightData.s_instance.changeWeaponHighLevelRate(15);
+            GameFightData.s_instance.changeWeaponHighLevelRate(10);
         }
     }
 
