@@ -41,6 +41,16 @@ public class Consts
         BossRewardPanel,
     }
 
+    public enum WeaponType
+    {
+        Sword = 1,          // 刀剑
+        Arrow,              // 弓箭
+        Axe,                // 斧头
+        Knuckle,            // 拳套
+        Staff,              // 法杖
+        End
+    }
+
     public enum BuffType
     {
         Atk,                // 0攻击力
@@ -51,17 +61,7 @@ public class Consts
         SkillRate,          // 5技能概率
         Stun,               // 6眩晕
         AtkBaiFenBi,        // 7攻击力百分比
-        DamageBaiFenBi      // 8受到伤害增加百分比
-    }
-
-    public enum WeaponType
-    {
-        Sword = 1,          // 刀剑
-        Arrow,              // 弓箭
-        Axe,                // 斧头
-        Knuckle,            // 拳套
-        Staff,              // 法杖
-        End
+        YiShang,            // 8易伤，受到的伤害+20%，不能叠加
     }
 
     public class BuffData

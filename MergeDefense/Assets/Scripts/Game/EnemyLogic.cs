@@ -159,9 +159,10 @@ public class EnemyLogic : MonoBehaviour
                 {
                     if (list_buffDatas[i].time > 0)
                     {
-                        if (list_buffDatas[i].buffType == Consts.BuffType.DamageBaiFenBi)
+                        // 易伤：受到的伤害+20%
+                        if (list_buffDatas[i].buffType == Consts.BuffType.YiShang)
                         {
-                            damageXiShu += list_buffDatas[i].value;
+                            damageXiShu += 0.2f;
                         }
                     }
                 }
@@ -215,7 +216,10 @@ public class EnemyLogic : MonoBehaviour
             // 如果已存在该buff,则重置时间
             if (list_buffDatas[i].buffType == buffData.buffType && list_buffDatas[i].from == buffData.from)
             {
-                list_buffDatas[i].time = buffData.time;
+                if (list_buffDatas[i].time < buffData.time)
+                {
+                    list_buffDatas[i].time = buffData.time;
+                }
                 return;
             }
         }

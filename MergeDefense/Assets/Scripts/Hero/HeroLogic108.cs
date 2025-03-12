@@ -4,7 +4,7 @@ using UnityEngine;
 
 // 野猪人
 // 近战群体减益
-// 技能：攻击时，35%概率使敌人5s内承受伤害+20%
+// 技能：攻击时，35%概率使敌人获得[易伤]，持续5s
 public class HeroLogic108 : HeroBase
 {
     int baseSkillRate = 35;
@@ -27,7 +27,7 @@ public class HeroLogic108 : HeroBase
                 else if (RandomUtil.getRandom(1, 100) <= (baseSkillRate + heroLogicBase.getAddSkillRate()))
                 {
                     isTriggerSkill = true;
-                    enemyLogic.addBuff(new Consts.BuffData(Consts.BuffType.DamageBaiFenBi, 0.2f, 5, "108"));
+                    enemyLogic.addBuff(new Consts.BuffData(Consts.BuffType.YiShang, 0.2f, 5));
                 }
             }
         }
