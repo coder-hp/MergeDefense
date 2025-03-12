@@ -18,6 +18,9 @@ public class HeroData
     public int critRate;
     public float critDamage;
     public int goodWeapon;      // 0:没有擅长武器
+    public string summonWay;
+
+    public List<int[]> list_summonWay = new List<int[]>();
 }
 
 public class HeroEntity
@@ -39,6 +42,24 @@ public class HeroEntity
     public void init()
     {
         list = JsonUtils.loadJsonToList<HeroData>("hero");
+
+        for(int i = 0; i < list.Count; i++)
+        {
+            if (list[i].quality == 4)
+            {
+                string[] strArray1 = list[i].summonWay.Split(':');
+                for(int j = 0; j < strArray1.Length; j++)
+                {
+                    string[] strArray2 = strArray1[j].Split('_');
+                    int[] intArray = new int[strArray2.Length];
+                    for(int m = 0; m < strArray2.Length; m++)
+                    {
+                        intArray[m] = int.Parse(strArray2[m]);
+                    }
+                    list[i].list_summonWay.Add(intArray);
+                }
+            }
+        }
     }
 
     public HeroData getData(int id)

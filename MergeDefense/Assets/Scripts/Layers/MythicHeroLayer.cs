@@ -8,6 +8,8 @@ public class MythicHeroLayer : MonoBehaviour
     public GameObject prefab_item_hero;
     public GameObject btn_summon;
     public Transform list_content;
+    public Transform yaoqiu_hero;
+    public Transform yaoqiu_weapon;
     public Image img_smallIcon;
     public Image img_bigIcon;
     public Text txt_name;
@@ -62,6 +64,52 @@ public class MythicHeroLayer : MonoBehaviour
         txt_name.text = heroData.name;
         img_smallIcon.sprite = AtlasUtil.getAtlas_icon().GetSprite("hero_avatar_" + heroData.id);
         img_bigIcon.sprite = AtlasUtil.getAtlas_icon().GetSprite("head_" + heroData.id);
+
+        // 合成方式
+        {
+            for(int i = 0; i < heroData.list_summonWay.Count; i++)
+            {
+                int summonType = heroData.list_summonWay[i][0];
+
+                // 角色要求
+                if (summonType == 1)
+                {
+                    int id = heroData.list_summonWay[i][1];
+                    int star = heroData.list_summonWay[i][2];
+
+                    yaoqiu_hero.Find("icon").GetComponent<Image>().sprite = AtlasUtil.getAtlas_icon().GetSprite("head_" + id);
+
+                    // 星级
+                    {
+                        int showCount = star % 3;
+                        if (showCount == 0)
+                        {
+                            showCount = 3;
+                        }
+                        for (int j = 1; j <= 3; j++)
+                        {
+                            if (j <= showCount)
+                            {
+                                yaoqiu_hero.Find("stars").Find(j.ToString()).gameObject.SetActive(true);
+                            }
+                            else
+                            {
+                                yaoqiu_hero.Find("stars").Find(j.ToString()).gameObject.SetActive(false);
+                            }
+                        }
+                    }
+                }
+                // 武器要求
+                else if (summonType == 2)
+                {
+                    int weaponType = heroData.list_summonWay[i][1];
+                    int level = heroData.list_summonWay[i][2];
+
+                    yaoqiu_weapon.Find("icon").GetComponent<Image>().sprite = AtlasUtil.getAtlas_icon().GetSprite("weapon_" + weaponType);
+                    yaoqiu_weapon.Find("level").GetComponent<Text>().text = level.ToString();
+                }
+            }
+        }
     }
 
     public void onClickSummon()
