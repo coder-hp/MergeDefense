@@ -30,5 +30,12 @@ public class LaunchScript : MonoBehaviour
         // 设置帧率
         QualitySettings.vSyncCount = 0;
         Application.targetFrameRate = 60;
+
+        // 新玩家进来需要的处理
+        if(GameData.addOpenCount() == 1)
+        {
+            // 默认赠送一个神话角色
+            GameData.unlockHero(111);
+        }
     }
 }

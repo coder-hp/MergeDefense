@@ -39,6 +39,7 @@ public class Consts
         BossComingLayer,
         BossNoticeLayer,
         BossRewardPanel,
+        MythicHeroLayer,
     }
 
     public enum WeaponType

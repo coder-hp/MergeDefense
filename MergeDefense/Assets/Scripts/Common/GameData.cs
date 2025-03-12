@@ -57,7 +57,6 @@ public class GameData
         PlayerPrefs.SetInt("IsOpenSound", value);
     }
 
-
     public static int getOpenCount()
     {
         return PlayerPrefs.GetInt("OpenCount", 0);
@@ -109,5 +108,15 @@ public class GameData
         {
             PlayerPrefs.SetString("FirstOpenTime", CommonUtil.getCurYearMonthDay());
         }
+    }
+
+    public static bool isUnlockHero(int heroId)
+    {
+        return PlayerPrefs.GetInt("isUnlockHero" + heroId, 0) == 0 ? false : true;
+    }
+
+    public static void unlockHero(int heroId)
+    {
+        PlayerPrefs.SetInt("isUnlockHero" + heroId, 1);
     }
 }
