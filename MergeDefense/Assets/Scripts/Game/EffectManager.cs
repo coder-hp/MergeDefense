@@ -10,11 +10,13 @@ public class EffectManager
     public static void clear()
     {
         dic_saveObj.Clear();
+        dic_enemyDamage.Clear();
+
         list_enemyDieEffect.Clear();
         list_summonHeroEffect.Clear();
         list_summonHeroTrail.Clear();
         list_sellHeroEffect.Clear();
-        dic_enemyDamage.Clear();
+        list_weaponAutoMergeEffect.Clear();
     }
 
     public static void heroMerge(Vector3 pos)
@@ -164,5 +166,23 @@ public class EffectManager
         GameObject obj = GameObject.Instantiate(ObjectPool.getPrefab("Prefabs/Effects/" + effectName), GameLayer.s_instance.effectPoint);
         obj.transform.position = pos;
         dic_enemyDamage[effectName].Add(obj);
+    }
+
+    static List<GameObject> list_weaponAutoMergeEffect = new List<GameObject>();
+    public static void weaponAutoMerge(Vector3 pos)
+    {
+        for (int i = 0; i < list_weaponAutoMergeEffect.Count; i++)
+        {
+            if (!list_weaponAutoMergeEffect[i].activeInHierarchy)
+            {
+                list_weaponAutoMergeEffect[i].transform.position = pos;
+                list_weaponAutoMergeEffect[i].SetActive(true);
+                return;
+            }
+        }
+
+        GameObject obj = GameObject.Instantiate(ObjectPool.getPrefab("Prefabs/Effects/WeaponMerge"), GameUILayer.s_instance.effectPoint);
+        obj.transform.position = pos;
+        list_weaponAutoMergeEffect.Add(obj);
     }
 }

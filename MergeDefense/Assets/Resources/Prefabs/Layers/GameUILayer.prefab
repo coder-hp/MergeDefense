@@ -190,6 +190,7 @@ RectTransform:
   - {fileID: 190100468494353453}
   - {fileID: 1587600831097766353}
   - {fileID: 4425263426003187024}
+  - {fileID: 5766094436991974650}
   - {fileID: 6570850258471740439}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -225,6 +226,7 @@ MonoBehaviour:
   bellTrans: {fileID: 2084414326649064832}
   bossRedKuangTrans: {fileID: 4425263426003187024}
   weaponBarPointTrans: {fileID: 8950976053422255019}
+  effectPoint: {fileID: 5766094436991974650}
   text_weaponSellPrice: {fileID: 1063686933988036042}
   text_enemyCount: {fileID: 8279762320973953388}
   text_time: {fileID: 6593359631840922468}
@@ -1072,6 +1074,37 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
+--- !u!1 &1358230571163964811
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 5766094436991974650}
+  m_Layer: 0
+  m_Name: effectPoint
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &5766094436991974650
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1358230571163964811}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: -540, y: -960, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 928238422121788599}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1394699476985492276
 GameObject:
   m_ObjectHideFlags: 0
