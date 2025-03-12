@@ -18,7 +18,14 @@ public class WeaponBar : MonoBehaviour
             GameUILayer.s_instance.addWeapon(weaponData);
         }
 
-        weaponData = _weaponData;
+        if(_weaponData.type == weaponData.type && _weaponData.level == weaponData.level && weaponData.level < 10)
+        {
+            weaponData = WeaponEntity.getInstance().getData(weaponData.type, weaponData.level + 1);
+        }
+        else
+        {
+            weaponData = _weaponData;
+        }
         text_level.text = weaponData.level.ToString();
         img_icon.sprite = AtlasUtil.getAtlas_icon().GetSprite("weapon_" + weaponData.type);
 
