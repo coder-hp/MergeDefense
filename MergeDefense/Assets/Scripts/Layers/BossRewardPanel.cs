@@ -92,7 +92,7 @@ public class BossRewardPanel : MonoBehaviour
             }
         }
 
-        text_tip.color = Color.blue;
+        text_tip.color = new Color(0.3f,0.76f,1,1);
         switch (rewardType)
         {
             case 1:
