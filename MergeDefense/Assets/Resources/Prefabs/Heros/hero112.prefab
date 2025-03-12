@@ -56,7 +56,7 @@ ParticleSystem:
   startDelay:
     serializedVersion: 2
     minMaxState: 0
-    scalar: 0
+    scalar: 0.5
     minScalar: 0
     maxCurve:
       serializedVersion: 2
@@ -5002,7 +5002,7 @@ ParticleSystem:
   startDelay:
     serializedVersion: 2
     minMaxState: 0
-    scalar: 0
+    scalar: 0.5
     minScalar: 0
     maxCurve:
       serializedVersion: 2
@@ -9948,7 +9948,7 @@ ParticleSystem:
   startDelay:
     serializedVersion: 2
     minMaxState: 0
-    scalar: 0
+    scalar: 0.5
     minScalar: 0
     maxCurve:
       serializedVersion: 2
@@ -14987,7 +14987,7 @@ ParticleSystem:
   startDelay:
     serializedVersion: 2
     minMaxState: 0
-    scalar: 0
+    scalar: 0.5
     minScalar: 0
     maxCurve:
       serializedVersion: 2
@@ -19895,11 +19895,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2388387920780175433, guid: ec02db79422efd34e84b5ca5a3e48136, type: 3}
       propertyPath: scalingMode
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2388387920780175433, guid: ec02db79422efd34e84b5ca5a3e48136, type: 3}
       propertyPath: moveWithTransform
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2388387920780175433, guid: ec02db79422efd34e84b5ca5a3e48136, type: 3}
+      propertyPath: startDelay.scalar
+      value: 0.5
       objectReference: {fileID: 0}
     - target: {fileID: 2388387920780175433, guid: ec02db79422efd34e84b5ca5a3e48136, type: 3}
       propertyPath: ShapeModule.m_Scale.x
