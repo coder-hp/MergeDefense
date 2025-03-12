@@ -354,9 +354,11 @@ public class HeroLogicBase : MonoBehaviour
                         case 104:
                         case 106:
                         case 108:
+                        case 112:
                             {
                                 if(obj_attackEffect)
                                 {
+                                    obj_attackEffect.SetActive(false);
                                     obj_attackEffect.SetActive(true);
                                 }
                                 else
