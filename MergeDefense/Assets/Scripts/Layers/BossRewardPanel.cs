@@ -92,7 +92,8 @@ public class BossRewardPanel : MonoBehaviour
             }
         }
 
-        switch(rewardType)
+        text_tip.color = Color.blue;
+        switch (rewardType)
         {
             case 1:
                 {
