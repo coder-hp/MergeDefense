@@ -40,7 +40,7 @@ public class heroFlyWeapon107 : MonoBehaviour
                         bool isTriggerSkill = RandomUtil.getRandom(1, 100) <= (10 + heroLogicBase.getAddSkillRate()) ? true : false;
                         if (isTriggerSkill)
                         {
-                            enemyLogic.addBuff(new Consts.BuffData(Consts.BuffType.Stun, 0, 0.8f, "107"));
+                            enemyLogic.addBuff(new Consts.BuffData(Consts.BuffType.Stun, 0, 0.8f));
                         }
                     }
                 }
