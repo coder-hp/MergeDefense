@@ -589,11 +589,7 @@ MonoBehaviour:
   flyPoint: {fileID: 4149523117588117092}
   effectPoint: {fileID: 8027066404486135526}
   list_enemyMoveFourPos: []
-  addedEnemyCount: 0
   matrial_attackRange: {fileID: 0}
-  list_heroWeight: 
-  list_weaponWeight: 
-  isGameOver: 0
 --- !u!114 &-7090605276762049441
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -619,6 +615,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 81981f037ee52e34a99374dd3d010c01, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  list_canSummonHero: 6500000066000000670000006800000069000000
+  list_heroWeight: 64000000000000000000000000000000000000000000000000000000000000000000000000000000
+  list_weaponWeight: 64000000000000000000000000000000000000000000000000000000000000000000000000000000
+  isGameOver: 0
+  isCanOnInvokeBoCiSecond: 1
+  addedEnemyCount: 0
+  curBoCi: 0
+  curBoCiRestTime: 20
+  curGold: 100
+  curDiamond: 10
+  curSummonGold: 20
+  curForgeGold: 20
 --- !u!1 &3376967586139326472
 GameObject:
   m_ObjectHideFlags: 0
