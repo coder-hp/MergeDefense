@@ -30,7 +30,7 @@ public class GMLayer : MonoBehaviour
         {
             int id = HeroEntity.getInstance().list[i].id;
             Transform trans = Instantiate(prefab_addHero, addHeroPanel).transform;
-            trans.GetChild(0).GetComponent<Text>().text = HeroEntity.getInstance().list[i].name;
+            trans.GetChild(0).GetComponent<Text>().text = HeroEntity.getInstance().list[i].id + "-" + HeroEntity.getInstance().list[i].name;
             trans.GetComponent<Button>().onClick.AddListener(()=>
             {
                 GameLayer.s_instance.addHeroById(id);

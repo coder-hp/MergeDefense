@@ -52,6 +52,10 @@ public class AudioScript : MonoBehaviour
         }
 
         AudioClip audioClip = Resources.Load("Audios/Sound/" + name, typeof(AudioClip)) as AudioClip;
+        if(audioClip == null)
+        {
+            Debug.Log("音频缺失:" + name);
+        }
         dic_soundAudioClip[name] = audioClip;
         return audioClip;
     }
