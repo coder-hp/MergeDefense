@@ -33,7 +33,14 @@ public class GMLayer : MonoBehaviour
             trans.GetChild(0).GetComponent<Text>().text = HeroEntity.getInstance().list[i].id + "-" + HeroEntity.getInstance().list[i].name;
             trans.GetComponent<Button>().onClick.AddListener(()=>
             {
-                GameLayer.s_instance.addHeroById(id);
+                if(HeroEntity.getInstance().getData(id).quality == 4)
+                {
+                    GameLayer.s_instance.addHeroByIdStar(id,10);
+                }
+                else
+                {
+                    GameLayer.s_instance.addHeroById(id);
+                }
             });
         }
     }
