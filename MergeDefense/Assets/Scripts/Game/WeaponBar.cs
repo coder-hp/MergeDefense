@@ -13,17 +13,17 @@ public class WeaponBar : MonoBehaviour
 
     public void setData(WeaponData _weaponData)
     {
-        if(weaponData != null)
-        {
-            GameUILayer.s_instance.addWeapon(weaponData);
-        }
-
-        if(_weaponData != null && _weaponData.type == weaponData.type && _weaponData.level == weaponData.level && weaponData.level < 10)
+        if(weaponData != null && _weaponData.type == weaponData.type && _weaponData.level == weaponData.level && weaponData.level < 10)
         {
             weaponData = WeaponEntity.getInstance().getData(weaponData.type, weaponData.level + 1);
         }
         else
         {
+            if (weaponData != null)
+            {
+                GameUILayer.s_instance.addWeapon(weaponData);
+            }
+
             weaponData = _weaponData;
         }
         text_level.text = weaponData.level.ToString();
