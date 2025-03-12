@@ -166,7 +166,6 @@ public class EnemyLogic : MonoBehaviour
                         }
                     }
                 }
-
                 atk = Mathf.RoundToInt(atk * damageXiShu);
             }
 
