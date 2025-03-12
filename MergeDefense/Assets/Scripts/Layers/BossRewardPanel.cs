@@ -194,7 +194,7 @@ public class BossRewardPanel : MonoBehaviour
         {
             HeroData heroData = HeroEntity.getInstance().getData(canChoiceDeleteHero[i]);
             herosTrans.GetChild(i).Find("name_bg/name").GetComponent<Text>().text = heroData.name;
-            herosTrans.GetChild(i).Find("head").GetComponent<Image>().sprite = AtlasUtil.getAtlas_icon().GetSprite("head_" + canChoiceDeleteHero[i]);
+            herosTrans.GetChild(i).Find("head_mask/head").GetComponent<Image>().sprite = AtlasUtil.getAtlas_icon().GetSprite("head_" + canChoiceDeleteHero[i]);
             herosTrans.GetChild(i).GetComponent<Image>().sprite = AtlasUtil.getAtlas_game().GetSprite("kuang_hero_" + heroData.quality + "_2");
             herosTrans.GetChild(i).Find("kuang").GetComponent<Image>().sprite = AtlasUtil.getAtlas_game().GetSprite("kuang_hero_" + heroData.quality + "_1");
         }

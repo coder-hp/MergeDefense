@@ -102,7 +102,7 @@ public class KillEnemyRewardPanel : MonoBehaviour
 
             HeroData heroData = HeroEntity.getInstance().getData(heroId);
             reward_hero.Find("head_bg/name_bg/name").GetComponent<Text>().text = heroData.name;
-            reward_hero.Find("head_bg/head").GetComponent<Image>().sprite = AtlasUtil.getAtlas_icon().GetSprite("head_" + heroId);
+            reward_hero.Find("head_bg/head_mask/head").GetComponent<Image>().sprite = AtlasUtil.getAtlas_icon().GetSprite("head_" + heroId);
             reward_hero.Find("head_bg/kuang").GetComponent<Image>().sprite = AtlasUtil.getAtlas_game().GetSprite("kuang_hero_" + heroData.quality + "_1");
             reward_hero.Find("head_bg").GetComponent<Image>().sprite = AtlasUtil.getAtlas_game().GetSprite("kuang_hero_" + heroData.quality + "_2");
             reward_hero.Find("head_bg/shadow").GetComponent<Image>().color = Consts.list_heroQualityColor[heroData.quality];
