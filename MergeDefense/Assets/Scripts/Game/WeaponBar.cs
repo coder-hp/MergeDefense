@@ -18,7 +18,7 @@ public class WeaponBar : MonoBehaviour
             GameUILayer.s_instance.addWeapon(weaponData);
         }
 
-        if(_weaponData.type == weaponData.type && _weaponData.level == weaponData.level && weaponData.level < 10)
+        if(_weaponData != null && _weaponData.type == weaponData.type && _weaponData.level == weaponData.level && weaponData.level < 10)
         {
             weaponData = WeaponEntity.getInstance().getData(weaponData.type, weaponData.level + 1);
         }
