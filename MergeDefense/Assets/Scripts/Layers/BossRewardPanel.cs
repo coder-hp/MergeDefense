@@ -91,6 +91,33 @@ public class BossRewardPanel : MonoBehaviour
                 rewardItemsTrans.GetChild(i).Find("info/choiced").localScale = Vector3.zero;
             }
         }
+
+        switch(rewardType)
+        {
+            case 1:
+                {
+                    text_tip.text = "Obtain tons of gems";
+                    break;
+                }
+
+            case 2:
+                {
+                    text_tip.text = "Increase summoing odds";
+                    break;
+                }
+
+            case 3:
+                {
+                    text_tip.text = "Increase forging odds";
+                    break;
+                }
+
+            case 4:
+                {
+                    text_tip.text = "Dismiss an unwanted hero";
+                    break;
+                }
+        }
     }
 
     public void onClickConfirm()
