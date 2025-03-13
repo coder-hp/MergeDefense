@@ -26,12 +26,20 @@ public class WeaponBar : MonoBehaviour
 
             weaponData = _weaponData;
         }
-        text_level.text = weaponData.level.ToString();
-        img_icon.sprite = AtlasUtil.getAtlas_icon().GetSprite("weapon_" + weaponData.type);
 
-        transform.Find("bg").localScale = Vector3.one;
+        if (weaponData != null)
+        {
+            text_level.text = weaponData.level.ToString();
+            img_icon.sprite = AtlasUtil.getAtlas_icon().GetSprite("weapon_" + weaponData.type);
 
-        AudioScript.s_instance.playSound("equipWeapon");
+            transform.Find("bg").localScale = Vector3.one;
+
+            AudioScript.s_instance.playSound("equipWeapon");
+        }
+        else
+        {
+            transform.Find("bg").localScale = Vector3.zero;
+        }
     }
 
     public void onClick()

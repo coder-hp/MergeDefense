@@ -105,6 +105,18 @@ public class GameLayer : MonoBehaviour
         }
     }
 
+    public void replaceHero(HeroLogicBase heroLogicBase,int id,int star)
+    {
+        if(heroLogicBase)
+        {
+            Transform heroTrans = Instantiate(ObjectPool.getPrefab("Prefabs/Heros/hero" + id), heroLogicBase.transform.parent).transform;
+            heroTrans.GetComponent<HeroLogicBase>().curStar = star;
+            //EffectManager.summonHero(heroGrid.transform.GetChild(i).position);
+
+            DestroyImmediate(heroLogicBase.gameObject);
+        }
+    }
+
     private void OnDestroy()
     {
         EffectManager.clear();
