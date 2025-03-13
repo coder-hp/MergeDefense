@@ -54,8 +54,6 @@ public class BossRewardPanel : MonoBehaviour
         enemyWaveData = _enemyWaveData;
         killRewardData = _killRewardData;
 
-        AudioScript.s_instance.playSound("cardFanZhuan");
-
         string[] rewardType = killRewardData.reward3_1.Split('_');
         for(int i = 0; i < rewardType.Length; i++)
         {
@@ -64,6 +62,7 @@ public class BossRewardPanel : MonoBehaviour
 
             item.DOScaleX(0, 0.3f).SetEase(Ease.InQuad).SetDelay(0.4f).OnComplete(()=>
             {
+                AudioScript.s_instance.playSound("cardFanZhuan");
                 item.Find("info").localScale = Vector3.one;
                 item.Find("mask").localScale = Vector3.zero;
                 item.DOScaleX(1, 0.3f).SetEase(Ease.OutQuad);
