@@ -37,8 +37,6 @@ public class GameLayer : MonoBehaviour
             camera3D.orthographicSize = cameraSize;
             cameraEffect.orthographicSize = cameraSize;
         }
-
-        Time.timeScale = 1.5f;
     }
 
     void Start()
