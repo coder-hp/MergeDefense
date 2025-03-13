@@ -1,4 +1,4 @@
-﻿using UnityEngine;
+using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
 using System;
@@ -202,7 +202,6 @@ public class animcraftMenu : Editor
             EditorUtility.DisplayDialog("Can't find fbx", "This gameobject have no skinned mesh", "Okay");
             return null;
         }
-        return null;
     }
 
     //[MenuItem("Animcraft/Import Anim", false, 42)]
