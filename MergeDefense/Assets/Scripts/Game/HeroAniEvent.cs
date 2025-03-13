@@ -12,8 +12,8 @@ public class HeroAniEvent : MonoBehaviour
 
     private void Awake()
     {
-        heroLogicBase = transform.parent.GetComponent<HeroLogicBase>();
-        heroBase = transform.parent.GetComponent<HeroBase>();
+        heroLogicBase = transform.parent.parent.GetComponent<HeroLogicBase>();
+        heroBase = transform.parent.parent.GetComponent<HeroBase>();
     }
 
     public void onAttack()
@@ -34,10 +34,6 @@ public class HeroAniEvent : MonoBehaviour
         if(!heroLogicBase.checkAttack())
         {
             heroLogicBase.playAni(Consts.HeroAniNameIdle, 0.3f);
-            //if (transform.localEulerAngles.y != 180)
-            //{
-            //    heroLogicBase.transform.localRotation = Quaternion.Euler(0, 180, 0);
-            //}
         }
     }
 }

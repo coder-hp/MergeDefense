@@ -34,6 +34,8 @@ public class HeroLogicBase : MonoBehaviour
     public BoxCollider boxCollider;
     [HideInInspector]
     public Transform flyWeaponPoint;
+    [HideInInspector]
+    public Transform modelTrans;
 
     bool isDraging = false;
 
@@ -53,11 +55,13 @@ public class HeroLogicBase : MonoBehaviour
 
     GameObject obj_attackEffect = null;
 
+    Vector3 vec_atkRange = Vector3.one;
+
     public void Start()
     {
         curStandGrid = GameLayer.s_instance.heroGrid.transform.Find(transform.parent.name);
 
-        Transform modelTrans = transform.Find("model");
+        modelTrans = transform.Find("root/model");
         heroAniEvent = modelTrans.GetComponent<HeroAniEvent>();
         animator = modelTrans.GetComponent<Animator>();
         boxCollider = transform.GetComponent<BoxCollider>();
@@ -65,6 +69,8 @@ public class HeroLogicBase : MonoBehaviour
 
         heroData = HeroEntity.getInstance().getData(id);
         heroStarData = HeroStarEntity.getInstance().getData(curStar);
+
+        vec_atkRange = new Vector3(heroData.atkRange, heroData.atkRange, heroData.atkRange);
 
         transform.localScale = Vector3.zero;
         Invoke("summonWaitShow", 0.5f);
@@ -159,7 +165,7 @@ public class HeroLogicBase : MonoBehaviour
 
                         // 升星角色的合并动画
                         {
-                            Transform trans = heroLogicBase_to.transform.Find("model");
+                            Transform trans = heroLogicBase_to.modelTrans;
                             trans.DOLocalMoveY(0.3f, 0.1f).SetEase(Ease.OutCubic).OnComplete(() =>
                             {
                                 trans.DOLocalMoveY(0f, 0.1f).SetEase(Ease.InCubic);
@@ -243,7 +249,7 @@ public class HeroLogicBase : MonoBehaviour
                     GameLayer.s_instance.heroGridChoiced.transform.position = minDisGrid.position;
 
                     GameLayer.s_instance.attackRangeTrans.position = minDisGrid.position;
-                    GameLayer.s_instance.attackRangeTrans.localScale = new Vector3(heroData.atkRange, heroData.atkRange, heroData.atkRange);
+                    GameLayer.s_instance.attackRangeTrans.localScale = vec_atkRange;
                     GameLayer.s_instance.matrial_attackRange.SetFloat("_OutLineRange", 1.0f / heroData.atkRange);
 
                     HeroMoveLine.s_instance.setPos(curStandGrid.position, minDisGrid.position);
