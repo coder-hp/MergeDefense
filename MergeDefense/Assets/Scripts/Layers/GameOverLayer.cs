@@ -26,6 +26,14 @@ public class GameOverLayer : MonoBehaviour
 
         AudioScript.s_instance.playSound_btn();
 
+        for(int i = 0; i < LaunchScript.s_instance.canvas.transform.childCount; i++)
+        {
+            if(LaunchScript.s_instance.canvas.transform.GetChild(i) != transform)
+            {
+                Destroy(LaunchScript.s_instance.canvas.transform.GetChild(i).gameObject);
+            }
+        }
+
         LayerManager.LayerCloseAni(transform.Find("bg"), () =>
         {
             Destroy(GameLayer.s_instance.gameObject);

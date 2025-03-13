@@ -37,6 +37,8 @@ public class GameLayer : MonoBehaviour
             camera3D.orthographicSize = cameraSize;
             cameraEffect.orthographicSize = cameraSize;
         }
+
+        Time.timeScale = 1.5f;
     }
 
     void Start()
@@ -109,34 +111,34 @@ public class GameLayer : MonoBehaviour
     {
         EffectManager.clear();
 
-        if (GameUILayer.s_instance)
-        {
-            Destroy(GameUILayer.s_instance.gameObject);
-        }
+        //if (GameUILayer.s_instance)
+        //{
+        //    Destroy(GameUILayer.s_instance.gameObject);
+        //}
 
-        if(HeroInfoPanel.s_instance)
-        {
-            Destroy(HeroInfoPanel.s_instance.gameObject);
-        }
+        //if(HeroInfoPanel.s_instance)
+        //{
+        //    Destroy(HeroInfoPanel.s_instance.gameObject);
+        //}
 
-        if (WeaponInfoPanel.s_instance)
-        {
-            Destroy(WeaponInfoPanel.s_instance.gameObject);
-        }
+        //if (WeaponInfoPanel.s_instance)
+        //{
+        //    Destroy(WeaponInfoPanel.s_instance.gameObject);
+        //}
 
-        if (WeaponShopPanel.s_instance)
-        {
-            Destroy(WeaponShopPanel.s_instance.gameObject);
-        }
+        //if (WeaponShopPanel.s_instance)
+        //{
+        //    Destroy(WeaponShopPanel.s_instance.gameObject);
+        //}
 
-        if (KillEnemyRewardPanel.s_instance)
-        {
-            Destroy(KillEnemyRewardPanel.s_instance.gameObject);
-        }
+        //if (KillEnemyRewardPanel.s_instance)
+        //{
+        //    Destroy(KillEnemyRewardPanel.s_instance.gameObject);
+        //}
 
-        if (BossRewardPanel.s_instance)
-        {
-            Destroy(BossRewardPanel.s_instance.gameObject);
-        }
+        //if (BossRewardPanel.s_instance)
+        //{
+        //    Destroy(BossRewardPanel.s_instance.gameObject);
+        //}
     }
 }

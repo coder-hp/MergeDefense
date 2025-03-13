@@ -38,6 +38,9 @@ public class GameFightData : MonoBehaviour
     [HideInInspector]
     public int curForgeGold = Consts.startForgeGold;
 
+    [HideInInspector]
+    public float gameTimeScale = 1;
+
     int heroHighStarRate = 0;
     int weaponHighLevelRate = 0;
 

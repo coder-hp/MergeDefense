@@ -54,6 +54,8 @@ public class BossRewardPanel : MonoBehaviour
         enemyWaveData = _enemyWaveData;
         killRewardData = _killRewardData;
 
+        AudioScript.s_instance.playSound("cardFanZhuan");
+
         string[] rewardType = killRewardData.reward3_1.Split('_');
         for(int i = 0; i < rewardType.Length; i++)
         {
@@ -75,7 +77,7 @@ public class BossRewardPanel : MonoBehaviour
     // 4从召唤池中删除角色
     public void onClickReward(int rewardType)
     {
-        AudioScript.s_instance.playSound_btn();
+        AudioScript.s_instance.playSound("cardTap");
 
         btn_ok.localScale = Vector3.one;
         choicedRewardType = rewardType;
@@ -202,7 +204,7 @@ public class BossRewardPanel : MonoBehaviour
 
     public void onClickHero(int index)
     {
-        AudioScript.s_instance.playSound_btn();
+        AudioScript.s_instance.playSound("cardTap");
 
         btn_delete.localScale = Vector3.one;
         choiceDeleteHeroIndex = index;

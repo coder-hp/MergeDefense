@@ -32,6 +32,7 @@ public class GameUILayer : MonoBehaviour
     public Text text_diamond;
     public Text btn_summon_gold;
     public Text btn_forge_gold;
+    public Text text_timeScale;
     public List<WeaponBar> list_weaponBar = new List<WeaponBar>();
 
     List<EnemyWaveData> waitAddEnemy = new List<EnemyWaveData>();
@@ -490,6 +491,22 @@ public class GameUILayer : MonoBehaviour
 
         setIsShowBell(false);
         WeaponShopPanel.s_instance.show();
+    }
+
+    public void onClickTimeScale()
+    {
+        AudioScript.s_instance.playSound_btn();
+
+        if(GameFightData.s_instance.gameTimeScale == 1)
+        {
+            GameFightData.s_instance.gameTimeScale = 1.5f;
+        }
+        else
+        {
+            GameFightData.s_instance.gameTimeScale = 1;
+        }
+        text_timeScale.text = "x"+GameFightData.s_instance.gameTimeScale;
+        Time.timeScale = GameFightData.s_instance.gameTimeScale;
     }
 
     bool isCalledGameOver = false;
