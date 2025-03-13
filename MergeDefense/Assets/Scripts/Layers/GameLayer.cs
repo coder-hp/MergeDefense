@@ -105,7 +105,7 @@ public class GameLayer : MonoBehaviour
         }
     }
 
-    public void replaceHero(HeroLogicBase heroLogicBase,int id,int star)
+    public void addMythicHero(HeroLogicBase heroLogicBase,int id,int star)
     {
         if(heroLogicBase)
         {
@@ -114,6 +114,11 @@ public class GameLayer : MonoBehaviour
             //EffectManager.summonHero(heroGrid.transform.GetChild(i).position);
 
             DestroyImmediate(heroLogicBase.gameObject);
+
+            TimerUtil.getInstance().delayTime(1, () =>
+            {
+                LayerManager.ShowLayer(Consts.Layer.GetMythicHeroLayer).GetComponent<GetMythicHeroLayer>().init(id);
+            });
         }
     }
 

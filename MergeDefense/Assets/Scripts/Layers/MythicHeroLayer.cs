@@ -226,7 +226,7 @@ public class MythicHeroLayer : MonoBehaviour
                             }
                         }
 
-                        GameLayer.s_instance.replaceHero(heroLogicBase, curChoiceHero.id, 10);
+                        GameLayer.s_instance.addMythicHero(heroLogicBase, curChoiceHero.id, 10);
                         break;
                     }
                 }
@@ -268,13 +268,16 @@ public class MythicHeroLayer : MonoBehaviour
                                 if (GameUILayer.s_instance.weaponGridTrans.GetChild(j).childCount == 1)
                                 {
                                     UIItemWeapon uiItemWeapon_temp = GameUILayer.s_instance.weaponGridTrans.GetChild(j).GetChild(0).GetComponent<UIItemWeapon>();
-                                    if (uIItemWeapon == null)
+                                    if (uiItemWeapon_temp.weaponData.type == weaponType && uiItemWeapon_temp.weaponData.level >= level)
                                     {
-                                        uIItemWeapon = uiItemWeapon_temp;
-                                    }
-                                    else if (uIItemWeapon.weaponData.level > uiItemWeapon_temp.weaponData.level)
-                                    {
-                                        uIItemWeapon = uiItemWeapon_temp;
+                                        if (uIItemWeapon == null)
+                                        {
+                                            uIItemWeapon = uiItemWeapon_temp;
+                                        }
+                                        else if (uIItemWeapon.weaponData.level > uiItemWeapon_temp.weaponData.level)
+                                        {
+                                            uIItemWeapon = uiItemWeapon_temp;
+                                        }
                                     }
                                 }
                             }

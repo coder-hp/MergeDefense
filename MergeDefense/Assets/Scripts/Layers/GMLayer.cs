@@ -73,7 +73,7 @@ public class GMLayer : MonoBehaviour
             }
             else if (Input.GetKeyDown(KeyCode.M))
             {
-                //LayerManager.ShowLayer(Consts.Layer.MythicHeroLayer);
+                LayerManager.ShowLayer(Consts.Layer.GetMythicHeroLayer).GetComponent<GetMythicHeroLayer>().init(112);
             }
 
             if (isShowFPS && ++fpsIndex == 15)
