@@ -1,8 +1,9 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
-using static Consts;
 
 public class WeaponInfoPanel : MonoBehaviour
 {
@@ -12,6 +13,7 @@ public class WeaponInfoPanel : MonoBehaviour
     public Text txt_name;
     public Text txt_level;
     public Transform weaponBuffsTrans;
+    public Transform heroListTrans;
 
     void Awake()
     {
@@ -75,6 +77,39 @@ public class WeaponInfoPanel : MonoBehaviour
                             break;
                         }
                 }
+            }
+        }
+
+        // 可使用的角色
+        {
+            Dictionary<int, int> dic = new Dictionary<int, int>();
+            for (int j = 0; j < GameLayer.s_instance.heroPoint.childCount; j++)
+            {
+                if (GameLayer.s_instance.heroPoint.GetChild(j).childCount > 0)
+                {
+                    HeroLogicBase heroLogicBase = GameLayer.s_instance.heroPoint.GetChild(j).GetChild(0).GetComponent<HeroLogicBase>();
+                    if (heroLogicBase.heroData.goodWeapon == weaponData.type)
+                    {
+                        if(dic.ContainsKey(heroLogicBase.id))
+                        {
+                            ++dic[heroLogicBase.id];
+                        }
+                        else
+                        {
+                            dic[heroLogicBase.id] = 1;
+                        }
+                    }
+                }
+            }
+
+            int index = -1;
+            foreach (KeyValuePair<int, int> kvp in dic)
+            {
+                ++index;
+                Transform item = heroListTrans.GetChild(index);
+                item.gameObject.SetActive(true);
+                item.Find("icon").GetComponent<Image>().sprite = AtlasUtil.getAtlas_icon().GetSprite("hero_avatar_" + kvp.Key);
+                item.Find("count").GetComponent<Text>().text = "x" + kvp.Value;
             }
         }
     }
