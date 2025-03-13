@@ -365,8 +365,7 @@ public class GameUILayer : MonoBehaviour
     public void onClickMyth()
     {
         AudioScript.s_instance.playSound_btn();
-
-        ToastScript.show("暂未开放");
+        LayerManager.ShowLayer(Consts.Layer.MythicHeroLayer);
     }
 
     // 召唤

@@ -1,5 +1,7 @@
+using DG.Tweening;
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -7,6 +9,7 @@ public class MythicHeroLayer : MonoBehaviour
 {
     public GameObject prefab_item_hero;
     public GameObject btn_summon;
+    public ScrollRect scrollRect_hero;
     public Transform list_content;
     public Transform yaoqiu_hero;
     public Transform yaoqiu_weapon;
@@ -16,11 +19,16 @@ public class MythicHeroLayer : MonoBehaviour
 
     List<HeroData> list_mythicHero = new List<HeroData>();
 
+    HeroData curChoiceHero = null;
+
     void Start()
     {
-        LayerManager.LayerShowAni(transform.Find("bg"));
+        LayerManager.LayerShowAni(transform.Find("bg"), () =>
+        {
+            scrollRect_hero.enabled = true;
+        });
 
-        for(int i = 0; i < HeroEntity.getInstance().list.Count; i++)
+        for (int i = 0; i < HeroEntity.getInstance().list.Count; i++)
         {
             if (HeroEntity.getInstance().list[i].quality == 4 && GameData.isUnlockHero(HeroEntity.getInstance().list[i].id))
             {
@@ -28,20 +36,20 @@ public class MythicHeroLayer : MonoBehaviour
             }
         }
 
-        for(int i = 0; i < list_mythicHero.Count; i++)
+        for (int i = 0; i < list_mythicHero.Count; i++)
         {
             HeroData heroData = list_mythicHero[i];
             Transform item = Instantiate(prefab_item_hero, list_content).transform;
             item.name = heroData.id.ToString();
             item.Find("bg/head_mask/head").GetComponent<Image>().sprite = AtlasUtil.getAtlas_icon().GetSprite("head_" + heroData.id);
 
-            item.GetComponent<Button>().onClick.AddListener(()=>
+            item.GetComponent<Button>().onClick.AddListener(() =>
             {
                 onClickHero(heroData);
             });
         }
 
-        if(list_mythicHero.Count > 0)
+        if (list_mythicHero.Count > 0)
         {
             onClickHero(list_mythicHero[0]);
         }
@@ -49,7 +57,9 @@ public class MythicHeroLayer : MonoBehaviour
 
     void onClickHero(HeroData heroData)
     {
-        for(int i = 0; i < list_content.childCount; i++)
+        curChoiceHero = heroData;
+
+        for (int i = 0; i < list_content.childCount; i++)
         {
             if (list_content.GetChild(i).name.CompareTo(heroData.id.ToString()) == 0)
             {
@@ -67,7 +77,9 @@ public class MythicHeroLayer : MonoBehaviour
 
         // 合成方式
         {
-            for(int i = 0; i < heroData.list_summonWay.Count; i++)
+            bool tiaojian_hero = false;
+            bool tiaojian_weapon = false;
+            for (int i = 0; i < heroData.list_summonWay.Count; i++)
             {
                 int summonType = heroData.list_summonWay[i][0];
 
@@ -98,6 +110,20 @@ public class MythicHeroLayer : MonoBehaviour
                             }
                         }
                     }
+
+                    // 遍历已上场角色，检查条件是否满足
+                    for(int j = 0; j < GameLayer.s_instance.heroPoint.childCount; j++)
+                    {
+                        if(GameLayer.s_instance.heroPoint.GetChild(j).childCount > 0)
+                        {
+                            HeroLogicBase heroLogicBase = GameLayer.s_instance.heroPoint.GetChild(j).GetChild(0).GetComponent<HeroLogicBase>();
+                            if(heroLogicBase.id == id && heroLogicBase.curStar >= star)
+                            {
+                                tiaojian_hero = true;
+                                break;
+                            }
+                        }
+                    }
                 }
                 // 武器要求
                 else if (summonType == 2)
@@ -107,13 +133,72 @@ public class MythicHeroLayer : MonoBehaviour
 
                     yaoqiu_weapon.Find("icon").GetComponent<Image>().sprite = AtlasUtil.getAtlas_icon().GetSprite("weapon_" + weaponType);
                     yaoqiu_weapon.Find("level").GetComponent<Text>().text = level.ToString();
+
+                    // 遍历已有武器，检查条件是否满足
+                    {
+                        for (int j = 0; j < GameUILayer.s_instance.list_weaponBar.Count; j++)
+                        {
+                            if (GameUILayer.s_instance.list_weaponBar[j].weaponData != null && GameUILayer.s_instance.list_weaponBar[j].weaponData.type == weaponType && GameUILayer.s_instance.list_weaponBar[j].weaponData.level >= level)
+                            {
+                                tiaojian_weapon = true;
+                                break;
+                            }
+                        }
+
+                        if (!tiaojian_weapon)
+                        {
+                            for (int j = 0; j < GameUILayer.s_instance.weaponGridTrans.childCount; j++)
+                            {
+                                if (GameUILayer.s_instance.weaponGridTrans.GetChild(j).childCount == 1)
+                                {
+                                    UIItemWeapon uiItemWeapon = GameUILayer.s_instance.weaponGridTrans.GetChild(j).GetChild(0).GetComponent<UIItemWeapon>();
+                                    if (uiItemWeapon.weaponData.type == weaponType && uiItemWeapon.weaponData.level >= level)
+                                    {
+                                        tiaojian_weapon = true;
+                                        break;
+                                    }
+                                }
+                            }
+                        }
+                    }
                 }
+            }
+
+            if(tiaojian_hero)
+            {
+                yaoqiu_hero.Find("gou").localScale = Vector3.one;
+            }
+            else
+            {
+                yaoqiu_hero.Find("gou").localScale = Vector3.zero;
+            }
+
+            if (tiaojian_weapon)
+            {
+                yaoqiu_weapon.Find("gou").localScale = Vector3.one;
+            }
+            else
+            {
+                yaoqiu_weapon.Find("gou").localScale = Vector3.zero;
+            }
+
+            if(tiaojian_hero && tiaojian_weapon)
+            {
+                btn_summon.SetActive(true);
+            }
+            else
+            {
+                btn_summon.SetActive(false);
             }
         }
     }
 
     public void onClickSummon()
     {
+        if (curChoiceHero != null)
+        {
+            GameLayer.s_instance.addHeroByIdStar(curChoiceHero.id, 10);
+        }
     }
 
     bool isClosed = false;

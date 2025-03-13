@@ -25,12 +25,18 @@ class LayerManager
     }
 
     // 出生动画
-    public static void LayerShowAni(Transform aniTrans)
+    public static void LayerShowAni(Transform aniTrans, Action callback = null)
     {
         aniTrans.localScale = Vector3.zero;
         Sequence seq = DOTween.Sequence();
         seq.Append(aniTrans.DOScale(1.1f, 0.3f))
-            .Append(aniTrans.DOScale(1, 0.1f));
+            .Append(aniTrans.DOScale(1, 0.1f)).OnComplete(() =>
+            {
+                if (callback != null)
+                {
+                    callback();
+                }
+            });
         seq.Play();
     }
 

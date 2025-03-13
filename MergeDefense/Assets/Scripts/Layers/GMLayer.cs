@@ -14,6 +14,8 @@ public class GMLayer : MonoBehaviour
     public Transform addHeroPanel;
     public GameObject prefab_addHero;
     public InputField inputField_level;
+    public InputField inputField_hero;
+    public InputField inputField_weapon;
 
     bool isShowFPS = false;
 
@@ -71,7 +73,7 @@ public class GMLayer : MonoBehaviour
             }
             else if (Input.GetKeyDown(KeyCode.M))
             {
-                LayerManager.ShowLayer(Consts.Layer.MythicHeroLayer);
+                //LayerManager.ShowLayer(Consts.Layer.MythicHeroLayer);
             }
 
             if (isShowFPS && ++fpsIndex == 15)
@@ -115,13 +117,6 @@ public class GMLayer : MonoBehaviour
             GameUILayer.s_instance.changeDiamond(1000);
         }
         ToastScript.show("+1000");
-    }
-
-    public void onClickUnlockAll()
-    {
-        
-        ToastScript.show("解锁成功");
-        onClickClose();
     }
 
     public void onClickRefreshWeaponShop()
@@ -170,6 +165,38 @@ public class GMLayer : MonoBehaviour
         if (GameFightData.s_instance)
         {
             GameFightData.s_instance.changeWeaponHighLevelRate(10);
+        }
+    }
+
+    public void onClickUnlockAllHero()
+    {
+        for(int i = 0; i < HeroEntity.getInstance().list.Count; i++)
+        {
+            if (HeroEntity.getInstance().list[i].quality == 4)
+            {
+                GameData.unlockHero(HeroEntity.getInstance().list[i].id);
+            }
+        }
+        ToastScript.show("解锁成功");
+    }
+
+    public void onClickAddHero()
+    {
+        if(inputField_hero.text != "")
+        {
+            int id = int.Parse(inputField_hero.text.Split('_')[0]);
+            int star = int.Parse(inputField_hero.text.Split('_')[1]);
+            GameLayer.s_instance.addHeroByIdStar(id, star);
+        }
+    }
+
+    public void onClickAddWeapon()
+    {
+        if (inputField_weapon.text != "")
+        {
+            int type = int.Parse(inputField_weapon.text.Split('_')[0]);
+            int level = int.Parse(inputField_weapon.text.Split('_')[1]);
+            GameUILayer.s_instance.addWeapon(WeaponEntity.getInstance().getData(type, level));
         }
     }
 
