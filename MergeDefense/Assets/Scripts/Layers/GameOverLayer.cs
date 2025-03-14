@@ -13,6 +13,7 @@ public class GameOverLayer : MonoBehaviour
         Time.timeScale = 1;
         AudioScript.s_instance.playSound("gameOver");
         text_wave.text = GameFightData.s_instance.curBoCi.ToString();
+        text_damage.text = CommonUtil.intToStrKMB(GameFightData.s_instance.allDamage);
         LayerManager.LayerShowAni(transform.Find("bg"));
     }
 

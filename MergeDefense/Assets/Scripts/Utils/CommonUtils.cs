@@ -750,4 +750,24 @@ public class CommonUtil
             return num.ToString();
         }
     }
+
+    public static string intToStrKMB(long num)
+    {
+        if(num >= 1000000000)
+        {
+            return Math.Round((num / 1000000000f), 2) + "B";
+        }
+        else if (num >= 1000000)
+        {
+            return Math.Round((num / 1000000f), 2) + "M";
+        }
+        else if (num >= 1000)
+        {
+            return Math.Round((num / 1000f), 2) + "K";
+        }
+        else
+        {
+            return num.ToString();
+        }
+    }
 }

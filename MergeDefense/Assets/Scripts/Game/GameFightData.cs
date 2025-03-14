@@ -11,6 +11,8 @@ public class GameFightData : MonoBehaviour
         s_instance = this;
     }
 
+    public long allDamage = 0;
+
     //[HideInInspector]
     public List<int> list_canSummonHero = new List<int>() {101,102,103,104,105 };                    // 初始可以召唤的角色
     //[HideInInspector]
@@ -124,5 +126,10 @@ public class GameFightData : MonoBehaviour
     public int randomSummonHero()
     {
         return list_canSummonHero[RandomUtil.getRandom(0, list_canSummonHero.Count - 1)];
+    }
+
+    public void addAllDamage(int dmg)
+    {
+        allDamage += dmg;
     }
 }

@@ -184,6 +184,8 @@ public class EnemyLogic : MonoBehaviour
 
             DamageNumManager.s_instance.showDamageNum(atk,bloodPoint.position, isCrit);
 
+            GameFightData.s_instance.addAllDamage(atk);
+
             curHP -= atk;
             if (curHP <= 0)
             {
