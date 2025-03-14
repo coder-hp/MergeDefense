@@ -138,6 +138,7 @@ public class GameLayer : MonoBehaviour
 
                     if (heroLogicBase)
                     {
+                        AudioScript.s_instance.playSound("mythicSummon");
                         Transform heroTrans = Instantiate(ObjectPool.getPrefab("Prefabs/Heros/hero" + heroData.id), heroLogicBase.transform.parent).transform;
                         heroTrans.GetComponent<HeroLogicBase>().curStar = 10;
                         //EffectManager.summonHero(heroGrid.transform.GetChild(i).position);
