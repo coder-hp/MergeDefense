@@ -19,7 +19,7 @@ public class HeroLogic117 : HeroBase
         // 先判定技能2：攻击时，10%概率击杀血量不满的敌人（对精英和BOSS无效）
         if (enemyLogic.enemyWaveData.enemyType == 1 && enemyLogic.curHP < enemyLogic.fullHP && RandomUtil.getRandom(1, 100) <= (10 + heroLogicBase.getAddSkillRate()))
         {
-            enemyLogic.damage(enemyLogic.curHP, true);
+            enemyLogic.damage(enemyLogic.curHP, false);
         }
         else
         {
@@ -33,7 +33,7 @@ public class HeroLogic117 : HeroBase
             {
                 if (Vector3.Distance(heroLogicBase.curStandGrid.position, EnemyManager.s_instance.list_enemy[i].transform.position) <= heroLogicBase.heroData.atkRange)
                 {
-                    if (EnemyManager.s_instance.list_enemy[i].damage(atk * 10, true))
+                    if (EnemyManager.s_instance.list_enemy[i].damage(atk * 10, false))
                     {
                         --i;
                     }
