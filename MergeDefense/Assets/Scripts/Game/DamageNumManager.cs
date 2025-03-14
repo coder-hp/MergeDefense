@@ -59,5 +59,13 @@ public class DamageNumManager : MonoBehaviour
         {
             damageNumTrans.localScale = Vector3.zero;
         });
+
+        if(isCrit)
+        {
+            damageNumTrans.DOScale(1.5f, 0.2f).OnComplete(()=>
+            {
+                damageNumTrans.DOScale(1.2f, 0.1f);
+            });
+        }
     }
 }
