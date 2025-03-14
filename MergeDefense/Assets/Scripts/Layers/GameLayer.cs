@@ -117,11 +117,11 @@ public class GameLayer : MonoBehaviour
                     int heroId = heroData.list_summonWay[i][1];
                     int star = heroData.list_summonWay[i][2];
 
-                    for (int j = 0; j < GameLayer.s_instance.heroPoint.childCount; j++)
+                    for (int j = 0; j < heroPoint.childCount; j++)
                     {
-                        if (GameLayer.s_instance.heroPoint.GetChild(j).childCount > 0)
+                        if (heroPoint.GetChild(j).childCount > 0)
                         {
-                            HeroLogicBase heroLogicBase_temp = GameLayer.s_instance.heroPoint.GetChild(j).GetChild(0).GetComponent<HeroLogicBase>();
+                            HeroLogicBase heroLogicBase_temp = heroPoint.GetChild(j).GetChild(0).GetComponent<HeroLogicBase>();
                             if (heroLogicBase_temp.id == heroId && heroLogicBase_temp.curStar >= star)
                             {
                                 if (heroLogicBase == null)
@@ -139,7 +139,7 @@ public class GameLayer : MonoBehaviour
                     if (heroLogicBase)
                     {
                         Transform heroTrans = Instantiate(ObjectPool.getPrefab("Prefabs/Heros/hero" + heroData.id), heroLogicBase.transform.parent).transform;
-                        heroTrans.GetComponent<HeroLogicBase>().curStar = star;
+                        heroTrans.GetComponent<HeroLogicBase>().curStar = 10;
                         //EffectManager.summonHero(heroGrid.transform.GetChild(i).position);
 
                         DestroyImmediate(heroLogicBase.gameObject);
