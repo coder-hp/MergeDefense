@@ -12,6 +12,7 @@ public class GetMythicHeroLayer : MonoBehaviour
 
     public void init(int id)
     {
+        AudioScript.s_instance.playSound("mythicSummon");
         HeroData heroData = HeroEntity.getInstance().getData(id);
         img_icon.sprite = AtlasUtil.getAtlas_icon().GetSprite("head_" + id);
         txt_name.text = heroData.name;
