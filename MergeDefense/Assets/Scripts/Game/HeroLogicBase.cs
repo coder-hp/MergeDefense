@@ -81,7 +81,7 @@ public class HeroLogicBase : MonoBehaviour
         // 品质背景板
         {
             heroQualityTrans = Instantiate(ObjectPool.getPrefab("Prefabs/Games/heroQuality"), GameLayer.s_instance.heroQualityPoint).transform;
-            heroQualityTrans.position = curStandGrid.position + Consts.heroQualityOffset;
+            heroQualityTrans.position = transform.position + Consts.heroQualityOffset;
             heroQualityTrans.localScale = Vector3.zero;
             material_qualityBg = heroQualityTrans.GetChild(0).GetComponent<MeshRenderer>().material;
         }
@@ -277,67 +277,67 @@ public class HeroLogicBase : MonoBehaviour
                 {
                     Transform minDisGridHeroPoint = GameLayer.s_instance.heroPoint.Find(minDisGrid.name);
 
-                    float moveTime = Vector3.Distance(minDisGridHeroPoint.position,curStandGrid.position) * 0.2f;
-
                     // 目标格子没有角色
                     if (minDisGridHeroPoint.childCount == 0)
                     {
-                        isCanUpdate = false;
-                        playAni(Consts.HeroAniNameRun);
-
-                        float angle = -CommonUtil.twoPointAngle(curStandGrid.position, minDisGrid.position);
-                        transform.localRotation = Quaternion.Euler(0, angle, 0);
-                        heroUITrans.localScale = Vector3.zero;
-                        curStandGrid = minDisGrid;
-                        transform.SetParent(minDisGridHeroPoint);
-                        boxCollider.enabled = false;
-                        transform.DOLocalMove(Vector3.zero, moveTime).SetEase(Ease.Linear).OnComplete(()=>
-                        {
-                            playAni(Consts.HeroAniNameIdle);
-                            boxCollider.enabled = true;
-                            isCanUpdate = true;
-                            isAttacking = false;
-                            heroUITrans.localScale = Vector3.one;
-                            heroUITrans.localPosition = CommonUtil.WorldPosToUI(GameLayer.s_instance.camera3D, curStandGrid.position);
-                            checkMerge();
-                        });
-
-                        heroQualityTrans.DOMove(minDisGrid.position + Consts.heroQualityOffset, moveTime).SetEase(Ease.Linear);
+                        changeParent(minDisGridHeroPoint, minDisGrid);
                     }
                     // 已有角色，交换位置
                     else
                     {
                         Transform otherHero = minDisGridHeroPoint.GetChild(0);
                         HeroLogicBase heroLogicBase_other = otherHero.GetComponent<HeroLogicBase>();
-                        heroLogicBase_other.heroUITrans.localScale = Vector3.zero;
-                        heroLogicBase_other.curStandGrid = curStandGrid;
-                        otherHero.SetParent(transform.parent);
-                        heroLogicBase_other.boxCollider.enabled = false;
-                        otherHero.DOLocalMove(Vector3.zero, moveTime).SetEase(Ease.Linear).OnComplete(() =>
-                        {
-                            heroLogicBase_other.boxCollider.enabled = true;
-                            heroLogicBase_other.heroUITrans.localScale = Vector3.one;
-                            heroLogicBase_other.heroUITrans.localPosition = CommonUtil.WorldPosToUI(GameLayer.s_instance.camera3D, heroLogicBase_other.curStandGrid.position);
-                        });
-                        heroLogicBase_other.heroQualityTrans.DOMove(heroLogicBase_other.curStandGrid.position + Consts.heroQualityOffset, moveTime).SetEase(Ease.Linear);
-                        
-                        heroUITrans.localScale = Vector3.zero;
-                        curStandGrid = minDisGrid;
-                        transform.SetParent(minDisGridHeroPoint);
-                        boxCollider.enabled = false;
-                        transform.DOLocalMove(Vector3.zero, moveTime).SetEase(Ease.Linear).OnComplete(() =>
-                        {
-                            boxCollider.enabled = true;
-                            heroUITrans.localScale = Vector3.one;
-                            heroUITrans.localPosition = CommonUtil.WorldPosToUI(GameLayer.s_instance.camera3D, curStandGrid.position);
-                        });
-                        heroQualityTrans.DOMove(curStandGrid.position + Consts.heroQualityOffset, moveTime).SetEase(Ease.Linear);
+
+                        Transform otherHeroParent = otherHero.parent;
+                        Transform otherHeroCurStandGrid = heroLogicBase_other.curStandGrid;
+
+                        heroLogicBase_other.changeParent(transform.parent,curStandGrid);
+                        changeParent(otherHeroParent, otherHeroCurStandGrid);
                     }
                 }
             }
         }
 
         checkAttack();
+    }
+
+    Tween tween_heroMove = null;
+    Tween tween_QualityMove = null;
+    public void changeParent(Transform newParentTrans,Transform gridTrans)
+    {
+        float moveTime = Vector3.Distance(newParentTrans.position, curStandGrid.position) * 0.2f;
+
+        isCanUpdate = false;
+        playAni(Consts.HeroAniNameRun);
+
+        float angle = -CommonUtil.twoPointAngle(curStandGrid.position, gridTrans.position);
+        transform.localRotation = Quaternion.Euler(0, angle, 0);
+        heroUITrans.localScale = Vector3.zero;
+        curStandGrid = gridTrans;
+        transform.SetParent(newParentTrans);
+        boxCollider.enabled = false;
+
+        if (tween_heroMove != null)
+        {
+            tween_heroMove.Kill();
+        }
+        tween_heroMove = transform.DOLocalMove(Vector3.zero, moveTime).SetEase(Ease.Linear).OnComplete(() =>
+        {
+            playAni(Consts.HeroAniNameIdle);
+            boxCollider.enabled = true;
+            isCanUpdate = true;
+            isAttacking = false;
+            heroUITrans.localScale = Vector3.one;
+            heroUITrans.localPosition = CommonUtil.WorldPosToUI(GameLayer.s_instance.camera3D, curStandGrid.position);
+            checkMerge();
+        });
+
+        if(tween_QualityMove != null)
+        {
+            tween_QualityMove.Kill();
+        }
+        heroQualityTrans.position = transform.position + Consts.heroQualityOffset;
+        tween_QualityMove = heroQualityTrans.DOMove(gridTrans.position + Consts.heroQualityOffset, moveTime).SetEase(Ease.Linear);
     }
 
     public bool checkAttack()
