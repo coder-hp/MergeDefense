@@ -36,6 +36,8 @@ public class HeroLogicBase : MonoBehaviour
     public Transform flyWeaponPoint;
     [HideInInspector]
     public Transform modelTrans;
+    [HideInInspector]
+    public Transform rootTrans;
 
     bool isDraging = false;
 
@@ -61,6 +63,7 @@ public class HeroLogicBase : MonoBehaviour
     {
         curStandGrid = GameLayer.s_instance.heroGrid.transform.Find(transform.parent.name);
 
+        rootTrans = transform.Find("root");
         modelTrans = transform.Find("root/model");
         heroAniEvent = modelTrans.GetComponent<HeroAniEvent>();
         animator = modelTrans.GetComponent<Animator>();
@@ -165,7 +168,7 @@ public class HeroLogicBase : MonoBehaviour
 
                         // 升星角色的合并动画
                         {
-                            Transform trans = heroLogicBase_to.modelTrans;
+                            Transform trans = heroLogicBase_to.rootTrans;
                             trans.DOLocalMoveY(0.3f, 0.1f).SetEase(Ease.OutCubic).OnComplete(() =>
                             {
                                 trans.DOLocalMoveY(0f, 0.1f).SetEase(Ease.InCubic);
