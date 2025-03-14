@@ -121,4 +121,76 @@ public class GameLayer : MonoBehaviour
             });
         }
     }
+
+    int[] mythicHeroProgress = new int[2];
+    public int[] getMythicHeroProgress(HeroData heroData)
+    {
+        // 重置
+        for (int i = 0; i < mythicHeroProgress.Length; i++)
+        {
+            mythicHeroProgress[i] = 0;
+        }
+
+        for (int i = 0; i < heroData.list_summonWay.Count; i++)
+        {
+            int summonType = heroData.list_summonWay[i][0];
+
+            // 角色要求
+            if (summonType == 1)
+            {
+                int id = heroData.list_summonWay[i][1];
+                int star = heroData.list_summonWay[i][2];
+
+                // 遍历已上场角色，检查条件是否满足
+                for (int j = 0; j < heroPoint.childCount; j++)
+                {
+                    if (heroPoint.GetChild(j).childCount > 0)
+                    {
+                        HeroLogicBase heroLogicBase = heroPoint.GetChild(j).GetChild(0).GetComponent<HeroLogicBase>();
+                        if (heroLogicBase.id == id && heroLogicBase.curStar >= star)
+                        {
+                            mythicHeroProgress[i] = 1;
+                            break;
+                        }
+                    }
+                }
+            }
+            // 武器要求
+            else if (summonType == 2)
+            {
+                int weaponType = heroData.list_summonWay[i][1];
+                int level = heroData.list_summonWay[i][2];
+
+                // 遍历已有武器，检查条件是否满足
+                {
+                    for (int j = 0; j < GameUILayer.s_instance.list_weaponBar.Count; j++)
+                    {
+                        if (GameUILayer.s_instance.list_weaponBar[j].weaponData != null && GameUILayer.s_instance.list_weaponBar[j].weaponData.type == weaponType && GameUILayer.s_instance.list_weaponBar[j].weaponData.level >= level)
+                        {
+                            mythicHeroProgress[i] = 1;
+                            break;
+                        }
+                    }
+
+                    if (mythicHeroProgress[i] == 0)
+                    {
+                        for (int j = 0; j < GameUILayer.s_instance.weaponGridTrans.childCount; j++)
+                        {
+                            if (GameUILayer.s_instance.weaponGridTrans.GetChild(j).childCount == 1)
+                            {
+                                UIItemWeapon uiItemWeapon = GameUILayer.s_instance.weaponGridTrans.GetChild(j).GetChild(0).GetComponent<UIItemWeapon>();
+                                if (uiItemWeapon.weaponData.type == weaponType && uiItemWeapon.weaponData.level >= level)
+                                {
+                                    mythicHeroProgress[i] = 1;
+                                    break;
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+
+        return mythicHeroProgress;
+    }
 }

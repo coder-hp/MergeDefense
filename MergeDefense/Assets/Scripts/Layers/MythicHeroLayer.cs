@@ -18,6 +18,7 @@ public class MythicHeroLayer : MonoBehaviour
     public Text txt_name;
 
     List<HeroData> list_mythicHero = new List<HeroData>();
+    List<int[]> list_mythicHeroProgfress = new List<int[]>();
 
     HeroData curChoiceHero = null;
 
@@ -43,19 +44,38 @@ public class MythicHeroLayer : MonoBehaviour
             item.name = heroData.id.ToString();
             item.Find("bg/head_mask/head").GetComponent<Image>().sprite = AtlasUtil.getAtlas_icon().GetSprite("head_" + heroData.id);
 
+            // 召唤条件进度
+            int[] progress = GameLayer.s_instance.getMythicHeroProgress(heroData);
+            int[] progress_new = new int[progress.Length];
+            {
+                int okCount = 0;
+                for (int j = 0; j < progress.Length; j++)
+                {
+                    progress_new[j] = progress[j];
+                    if (progress_new[j] == 1)
+                    {
+                        ++okCount;
+                    }
+                }
+                list_mythicHeroProgfress.Add(progress_new);
+
+                item.Find("bg/progress_bg/progress").GetComponent<Image>().fillAmount = ((float)okCount / (float)heroData.list_summonWay.Count);
+                item.Find("bg/progress_bg/text").GetComponent<Text>().text = Mathf.RoundToInt(((float)okCount / (float)heroData.list_summonWay.Count) * 100) + "%";
+            }
+
             item.GetComponent<Button>().onClick.AddListener(() =>
             {
-                onClickHero(heroData);
+                onClickHero(heroData, progress_new);
             });
         }
 
         if (list_mythicHero.Count > 0)
         {
-            onClickHero(list_mythicHero[0]);
+            onClickHero(list_mythicHero[0], list_mythicHeroProgfress[0]);
         }
     }
 
-    void onClickHero(HeroData heroData)
+    void onClickHero(HeroData heroData,int[] progress)
     {
         curChoiceHero = heroData;
 
@@ -77,8 +97,8 @@ public class MythicHeroLayer : MonoBehaviour
 
         // 合成方式
         {
-            bool tiaojian_hero = false;
-            bool tiaojian_weapon = false;
+            bool tiaojian_hero = progress[0] == 1;
+            bool tiaojian_weapon = progress[1] == 1;
             for (int i = 0; i < heroData.list_summonWay.Count; i++)
             {
                 int summonType = heroData.list_summonWay[i][0];
@@ -110,20 +130,6 @@ public class MythicHeroLayer : MonoBehaviour
                             }
                         }
                     }
-
-                    // 遍历已上场角色，检查条件是否满足
-                    for(int j = 0; j < GameLayer.s_instance.heroPoint.childCount; j++)
-                    {
-                        if(GameLayer.s_instance.heroPoint.GetChild(j).childCount > 0)
-                        {
-                            HeroLogicBase heroLogicBase = GameLayer.s_instance.heroPoint.GetChild(j).GetChild(0).GetComponent<HeroLogicBase>();
-                            if(heroLogicBase.id == id && heroLogicBase.curStar >= star)
-                            {
-                                tiaojian_hero = true;
-                                break;
-                            }
-                        }
-                    }
                 }
                 // 武器要求
                 else if (summonType == 2)
@@ -133,34 +139,6 @@ public class MythicHeroLayer : MonoBehaviour
 
                     yaoqiu_weapon.Find("icon").GetComponent<Image>().sprite = AtlasUtil.getAtlas_icon().GetSprite("weapon_" + weaponType);
                     yaoqiu_weapon.Find("level").GetComponent<Text>().text = level.ToString();
-
-                    // 遍历已有武器，检查条件是否满足
-                    {
-                        for (int j = 0; j < GameUILayer.s_instance.list_weaponBar.Count; j++)
-                        {
-                            if (GameUILayer.s_instance.list_weaponBar[j].weaponData != null && GameUILayer.s_instance.list_weaponBar[j].weaponData.type == weaponType && GameUILayer.s_instance.list_weaponBar[j].weaponData.level >= level)
-                            {
-                                tiaojian_weapon = true;
-                                break;
-                            }
-                        }
-
-                        if (!tiaojian_weapon)
-                        {
-                            for (int j = 0; j < GameUILayer.s_instance.weaponGridTrans.childCount; j++)
-                            {
-                                if (GameUILayer.s_instance.weaponGridTrans.GetChild(j).childCount == 1)
-                                {
-                                    UIItemWeapon uiItemWeapon = GameUILayer.s_instance.weaponGridTrans.GetChild(j).GetChild(0).GetComponent<UIItemWeapon>();
-                                    if (uiItemWeapon.weaponData.type == weaponType && uiItemWeapon.weaponData.level >= level)
-                                    {
-                                        tiaojian_weapon = true;
-                                        break;
-                                    }
-                                }
-                            }
-                        }
-                    }
                 }
             }
 
