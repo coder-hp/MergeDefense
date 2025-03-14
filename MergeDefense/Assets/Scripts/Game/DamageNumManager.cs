@@ -27,7 +27,7 @@ public class DamageNumManager : MonoBehaviour
             {
                 damageNumTrans = list_damageNum[i];
                 damageNumTrans.localScale = Vector3.one;
-                list_damageNumText[i].text = num.ToString();
+                list_damageNumText[i].text = CommonUtil.intToStrK(num);
 
                 if (isCrit)
                 {
@@ -46,7 +46,7 @@ public class DamageNumManager : MonoBehaviour
             damageNumTrans = Instantiate(prefab_damageNum, transform).transform;
             list_damageNum.Add(damageNumTrans);
             list_damageNumText.Add(damageNumTrans.GetChild(0).GetComponent<Text>());
-            list_damageNumText[list_damageNumText.Count - 1].text = num.ToString();
+            list_damageNumText[list_damageNumText.Count - 1].text = CommonUtil.intToStrK(num);
 
             if (isCrit)
             {
