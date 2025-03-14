@@ -627,6 +627,7 @@ MonoBehaviour:
   curDiamond: 10
   curSummonGold: 20
   curForgeGold: 20
+  gameTimeScale: 1
 --- !u!1 &3376967586139326472
 GameObject:
   m_ObjectHideFlags: 0
@@ -1540,6 +1541,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8027066404486135526}
+  - component: {fileID: 3831294903023976603}
   m_Layer: 0
   m_Name: effectPoint
   m_TagString: Untagged
@@ -1562,6 +1564,18 @@ Transform:
   m_Children: []
   m_Father: {fileID: 4729789445500738202}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &3831294903023976603
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8229033503603820371}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5e6ab1619b9db734a97562b24c0a03d9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &8265745479018369982
 GameObject:
   m_ObjectHideFlags: 0

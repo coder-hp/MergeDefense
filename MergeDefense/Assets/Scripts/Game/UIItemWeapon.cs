@@ -63,7 +63,7 @@ public class UIItemWeapon : MonoBehaviour
                         uiItemWeapon_to.init(RandomUtil.getRandom(1,(int)(Consts.WeaponType.End - 1)), uiItemWeapon_to.weaponData.level + 1);
                         Destroy(gameObject);
 
-                        EffectManager.weaponAutoMerge(uiItemWeapon_to.transform.position);
+                        EffectManager.s_instance.weaponAutoMerge(uiItemWeapon_to.transform.position);
                     });
 
                     return;

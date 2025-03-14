@@ -164,7 +164,7 @@ public class HeroLogicBase : MonoBehaviour
                     transform.DOMove(heroLogicBase_to.transform.position, moveTime).SetEase(Ease.Linear).OnComplete(() =>
                     {
                         heroLogicBase_to.addStar();
-                        EffectManager.heroMerge(heroLogicBase_to.transform.position);
+                        EffectManager.s_instance.heroMerge(heroLogicBase_to.transform.position);
 
                         // 升星角色的合并动画
                         {

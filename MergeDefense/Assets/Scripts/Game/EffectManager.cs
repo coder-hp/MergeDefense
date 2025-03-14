@@ -3,23 +3,18 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class EffectManager
+public class EffectManager : MonoBehaviour
 {
-    static Dictionary<string, GameObject> dic_saveObj = new Dictionary<string, GameObject>();
+    public static EffectManager s_instance = null;
 
-    public static void clear()
+    Dictionary<string, GameObject> dic_saveObj = new Dictionary<string, GameObject>();
+
+    private void Awake()
     {
-        dic_saveObj.Clear();
-        dic_enemyDamage.Clear();
-
-        list_enemyDieEffect.Clear();
-        list_summonHeroEffect.Clear();
-        list_summonHeroTrail.Clear();
-        list_sellHeroEffect.Clear();
-        list_weaponAutoMergeEffect.Clear();
+        s_instance = this;
     }
 
-    public static void heroMerge(Vector3 pos)
+    public void heroMerge(Vector3 pos)
     {
         if (dic_saveObj.ContainsKey("HeroMerge"))
         {
@@ -35,8 +30,8 @@ public class EffectManager
         }
     }
 
-    static List<GameObject> list_enemyDieEffect = new List<GameObject>();
-    public static void enemyDie(Vector3 pos)
+    List<GameObject> list_enemyDieEffect = new List<GameObject>();
+    public void enemyDie(Vector3 pos)
     {
         for(int i = 0; i < list_enemyDieEffect.Count; i++)
         {
@@ -53,12 +48,12 @@ public class EffectManager
         list_enemyDieEffect.Add(obj);
     }
 
-    static List<GameObject> list_summonHeroEffect = new List<GameObject>();
-    static List<TrailRenderer> list_summonHeroTrail = new List<TrailRenderer>();
-    static Vector3 summonEffectStartPos;
-    static Vector3 summonEffectOffset1 = new Vector3(1, 2, 0);
-    static Vector3 summonEffectOffset2 = new Vector3(0.5f, 2f, 0);
-    public static void summonHero(Vector3 targetPos)
+    List<GameObject> list_summonHeroEffect = new List<GameObject>();
+    List<TrailRenderer> list_summonHeroTrail = new List<TrailRenderer>();
+    Vector3 summonEffectStartPos;
+    Vector3 summonEffectOffset1 = new Vector3(1, 2, 0);
+    Vector3 summonEffectOffset2 = new Vector3(0.5f, 2f, 0);
+    public void summonHero(Vector3 targetPos)
     {
         Transform trans = null;
         for (int i = 0; i < list_summonHeroEffect.Count; i++)
@@ -125,8 +120,8 @@ public class EffectManager
         //}
     }
 
-    static List<GameObject> list_sellHeroEffect = new List<GameObject>();
-    public static void sellHero(Vector3 pos)
+    List<GameObject> list_sellHeroEffect = new List<GameObject>();
+    public void sellHero(Vector3 pos)
     {
         for (int i = 0; i < list_sellHeroEffect.Count; i++)
         {
@@ -143,8 +138,8 @@ public class EffectManager
         list_sellHeroEffect.Add(obj);
     }
 
-    static Dictionary<string, List<GameObject>> dic_enemyDamage = new Dictionary<string, List<GameObject>>();
-    public static void enemyDamage(Vector3 pos,int heroId)
+    Dictionary<string, List<GameObject>> dic_enemyDamage = new Dictionary<string, List<GameObject>>();
+    public void enemyDamage(Vector3 pos,int heroId)
     {
         string effectName = "eff_hit_hero" + heroId;
 
@@ -168,8 +163,8 @@ public class EffectManager
         dic_enemyDamage[effectName].Add(obj);
     }
 
-    static List<GameObject> list_weaponAutoMergeEffect = new List<GameObject>();
-    public static void weaponAutoMerge(Vector3 pos)
+    List<GameObject> list_weaponAutoMergeEffect = new List<GameObject>();
+    public void weaponAutoMerge(Vector3 pos)
     {
         for (int i = 0; i < list_weaponAutoMergeEffect.Count; i++)
         {

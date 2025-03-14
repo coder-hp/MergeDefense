@@ -32,7 +32,7 @@ public class heroFlyWeapon102 : MonoBehaviour
                 {
                     bool isCrit = RandomUtil.getRandom(1, 100) <= heroLogicBase.getCritRate() ? true : false;
                     int atk = Mathf.RoundToInt(heroLogicBase.getAtk() * (isCrit ? heroLogicBase.getCritDamageXiShu() : 1));
-                    EffectManager.enemyDamage(enemyLogic.transform.position, heroLogicBase.id);
+                    EffectManager.s_instance.enemyDamage(enemyLogic.transform.position, heroLogicBase.id);
                     enemyLogic.damage(atk, isCrit);
                 }
                 Destroy(gameObject);

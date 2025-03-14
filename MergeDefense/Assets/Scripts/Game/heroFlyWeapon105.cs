@@ -34,7 +34,7 @@ public class heroFlyWeapon105 : MonoBehaviour
                     bool isCrit = RandomUtil.getRandom(1, 100) <= heroLogicBase.getCritRate() ? true : false;
                     int atk = Mathf.RoundToInt(heroLogicBase.getAtk() * (isCrit ? heroLogicBase.getCritDamageXiShu() : 1));
 
-                    EffectManager.enemyDamage(enemyLogic.transform.position, heroLogicBase.id);
+                    EffectManager.s_instance.enemyDamage(enemyLogic.transform.position, heroLogicBase.id);
 
                     // 如果没死，则判定技能：攻击附带20%减速效果，持续3s
                     if (!enemyLogic.damage(atk, isCrit))

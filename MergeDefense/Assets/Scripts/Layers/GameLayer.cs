@@ -68,7 +68,7 @@ public class GameLayer : MonoBehaviour
             {
                 Transform heroTrans = Instantiate(ObjectPool.getPrefab("Prefabs/Heros/hero" + GameFightData.s_instance.randomSummonHero()), heroPoint.GetChild(i)).transform;
                 heroTrans.GetComponent<HeroLogicBase>().curStar = RandomUtil.SelectProbability(GameFightData.s_instance.list_heroWeight) + 1;
-                EffectManager.summonHero(heroGrid.transform.GetChild(i).position);
+                EffectManager.s_instance.summonHero(heroGrid.transform.GetChild(i).position);
                 return true;
             }
         }
@@ -84,7 +84,7 @@ public class GameLayer : MonoBehaviour
             {
                 Transform heroTrans = Instantiate(ObjectPool.getPrefab("Prefabs/Heros/hero" + id), heroPoint.GetChild(i)).transform;
                 heroTrans.GetComponent<HeroLogicBase>().curStar = RandomUtil.SelectProbability(GameFightData.s_instance.list_heroWeight) + 1;
-                EffectManager.summonHero(heroGrid.transform.GetChild(i).position);
+                EffectManager.s_instance.summonHero(heroGrid.transform.GetChild(i).position);
 
                 return;
             }
@@ -99,7 +99,7 @@ public class GameLayer : MonoBehaviour
             {
                 Transform heroTrans = Instantiate(ObjectPool.getPrefab("Prefabs/Heros/hero" + id), heroPoint.GetChild(i)).transform;
                 heroTrans.GetComponent<HeroLogicBase>().curStar = star;
-                EffectManager.summonHero(heroGrid.transform.GetChild(i).position);
+                EffectManager.s_instance.summonHero(heroGrid.transform.GetChild(i).position);
                 return;
             }
         }
@@ -120,40 +120,5 @@ public class GameLayer : MonoBehaviour
                 LayerManager.ShowLayer(Consts.Layer.GetMythicHeroLayer).GetComponent<GetMythicHeroLayer>().init(id);
             });
         }
-    }
-
-    private void OnDestroy()
-    {
-        EffectManager.clear();
-
-        //if (GameUILayer.s_instance)
-        //{
-        //    Destroy(GameUILayer.s_instance.gameObject);
-        //}
-
-        //if(HeroInfoPanel.s_instance)
-        //{
-        //    Destroy(HeroInfoPanel.s_instance.gameObject);
-        //}
-
-        //if (WeaponInfoPanel.s_instance)
-        //{
-        //    Destroy(WeaponInfoPanel.s_instance.gameObject);
-        //}
-
-        //if (WeaponShopPanel.s_instance)
-        //{
-        //    Destroy(WeaponShopPanel.s_instance.gameObject);
-        //}
-
-        //if (KillEnemyRewardPanel.s_instance)
-        //{
-        //    Destroy(KillEnemyRewardPanel.s_instance.gameObject);
-        //}
-
-        //if (BossRewardPanel.s_instance)
-        //{
-        //    Destroy(BossRewardPanel.s_instance.gameObject);
-        //}
     }
 }
