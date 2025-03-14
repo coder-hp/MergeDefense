@@ -116,7 +116,18 @@ public class EnemyLogic : MonoBehaviour
                     moveSpeedXiShu += list_buffDatas[i].value;
                 }
             }
-            if(moveSpeedXiShu < 0)
+
+            // 全局敌人减速buff，只生效一个
+            for (int i = 0; i < GameFightData.s_instance.list_allEnemyBuff.Count; i++)
+            {
+                if (GameFightData.s_instance.list_allEnemyBuff[i].buffType == Consts.BuffType.MoveSpeed)
+                {
+                    moveSpeedXiShu += GameFightData.s_instance.list_allEnemyBuff[i].value;
+                    break;
+                }
+            }
+
+            if (moveSpeedXiShu < 0)
             {
                 moveSpeedXiShu = 0;
             }

@@ -19,6 +19,9 @@ public class GameFightData : MonoBehaviour
     public List<int> list_weaponWeight = new List<int>() { 100, 0, 0, 0, 0, 0, 0, 0, 0, 0 };         // 武器1-10级的锻造权重
 
     [HideInInspector]
+    public List<Consts.BuffData> list_allEnemyBuff = new List<Consts.BuffData>();                    // 对所有敌人生效的buff
+
+    [HideInInspector]
     public bool isGameOver = false;
     [HideInInspector]
     public bool isCanOnInvokeBoCiSecond = true;
