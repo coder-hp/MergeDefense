@@ -16,6 +16,7 @@ public class WeaponBar : MonoBehaviour
         if(weaponData != null && _weaponData.type == weaponData.type && _weaponData.level == weaponData.level && weaponData.level < 10)
         {
             weaponData = WeaponEntity.getInstance().getData(weaponData.type, weaponData.level + 1);
+            GameUILayer.s_instance.checkMythicHeroProgress();
         }
         else
         {

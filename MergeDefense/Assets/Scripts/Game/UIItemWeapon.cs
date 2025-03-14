@@ -72,6 +72,7 @@ public class UIItemWeapon : MonoBehaviour
         }
 
         isCanDrag = true;
+        GameUILayer.s_instance.checkMythicHeroProgress();
     }
 
     public void addLevel()

@@ -201,6 +201,7 @@ public class HeroLogicBase : MonoBehaviour
         }
 
         isCanUpdate = true;
+        GameUILayer.s_instance.checkMythicHeroProgress();
     }
 
     private void Update()

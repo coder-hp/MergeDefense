@@ -11,6 +11,7 @@ public class GameUILayer : MonoBehaviour
     public GameObject prefab_bloodBar;
     public GameObject prefab_bloodBar_big;
     public GameObject prefab_heroUI;
+    public GameObject item_mythicHero;
     public GameObject item_weapon;
     public Image img_enemyCountProgress;
     public Transform bloodPointTrans;
@@ -24,6 +25,9 @@ public class GameUILayer : MonoBehaviour
     public Transform bossRedKuangTrans;
     public Transform weaponBarPointTrans;
     public Transform effectPoint;
+    public Transform list_content_mythicHero;
+    public Transform btn_mythicRedPoint;
+    public Text text_mythicRedPointNum;
     public Text text_weaponSellPrice;
     public Text text_enemyCount;
     public Text text_time;
@@ -36,6 +40,8 @@ public class GameUILayer : MonoBehaviour
     public List<WeaponBar> list_weaponBar = new List<WeaponBar>();
 
     List<EnemyWaveData> waitAddEnemy = new List<EnemyWaveData>();
+    List<HeroData> list_mythicHero = new List<HeroData>();
+    List<GameObject> list_mythicHeroItem = new List<GameObject>();
 
     private void Awake()
     {
@@ -57,6 +63,29 @@ public class GameUILayer : MonoBehaviour
         LayerManager.ShowLayer(Consts.Layer.WeaponShopPanel);
 
         Invoke("startBoCi", 0.5f);
+
+        // 神话角色列表
+        {
+            for (int i = 0; i < HeroEntity.getInstance().list.Count; i++)
+            {
+                if (HeroEntity.getInstance().list[i].quality == 4 && GameData.isUnlockHero(HeroEntity.getInstance().list[i].id))
+                {
+                    HeroData heroData = HeroEntity.getInstance().list[i];
+                    list_mythicHero.Add(heroData);
+
+                    Transform item = Instantiate(item_mythicHero,list_content_mythicHero).transform;
+                    item.Find("icon").GetComponent<Image>().sprite = AtlasUtil.getAtlas_icon().GetSprite("hero_avatar_" + heroData.id);
+                    item.GetComponent<Button>().onClick.AddListener(()=>
+                    {
+                        AudioScript.s_instance.playSound_btn();
+                        GameLayer.s_instance.summonMythicHero(heroData);
+                    });
+
+                    item.gameObject.SetActive(false);
+                    list_mythicHeroItem.Add(item.gameObject);
+                }
+            }
+        }
     }
 
     void startBoCi()
@@ -197,6 +226,42 @@ public class GameUILayer : MonoBehaviour
     {
         GameFightData.s_instance.curBoCiRestTime = 0;
         GameFightData.s_instance.curBoCi = boci - 1;
+    }
+
+    public void checkMythicHeroProgress()
+    {
+        int canSummonCount = 0;
+        for(int i = 0; i < list_mythicHero.Count; i++)
+        {
+            int[] progress = GameLayer.s_instance.getMythicHeroProgress(list_mythicHero[i]);
+            int okCount = 0;
+            for (int j = 0; j < progress.Length; j++)
+            {
+                if (progress[j] == 1)
+                {
+                    ++okCount;
+                }
+            }
+            if (okCount >= list_mythicHero[i].list_summonWay.Count)
+            {
+                ++canSummonCount;
+                list_mythicHeroItem[i].SetActive(true);
+            }
+            else
+            {
+                list_mythicHeroItem[i].SetActive(false);
+            }
+        }
+
+        if(canSummonCount > 0)
+        {
+            btn_mythicRedPoint.localScale = Vector3.one;
+            text_mythicRedPointNum.text = canSummonCount.ToString();
+        }
+        else
+        {
+            btn_mythicRedPoint.localScale = Vector3.zero;
+        }
     }
 
     public void refreshEnemyCount()

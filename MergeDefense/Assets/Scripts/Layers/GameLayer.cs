@@ -105,21 +105,132 @@ public class GameLayer : MonoBehaviour
         }
     }
 
-    public void addMythicHero(HeroLogicBase heroLogicBase,int id,int star)
+    public void summonMythicHero(HeroData heroData)
     {
-        if(heroLogicBase)
+        // 角色替换
         {
-            Transform heroTrans = Instantiate(ObjectPool.getPrefab("Prefabs/Heros/hero" + id), heroLogicBase.transform.parent).transform;
-            heroTrans.GetComponent<HeroLogicBase>().curStar = star;
-            //EffectManager.summonHero(heroGrid.transform.GetChild(i).position);
-
-            DestroyImmediate(heroLogicBase.gameObject);
-
-            TimerUtil.getInstance().delayTime(1, () =>
+            HeroLogicBase heroLogicBase = null;
+            for (int i = 0; i < heroData.list_summonWay.Count; i++)
             {
-                LayerManager.ShowLayer(Consts.Layer.GetMythicHeroLayer).GetComponent<GetMythicHeroLayer>().init(id);
-            });
+                if (heroData.list_summonWay[i][0] == 1)
+                {
+                    int heroId = heroData.list_summonWay[i][1];
+                    int star = heroData.list_summonWay[i][2];
+
+                    for (int j = 0; j < GameLayer.s_instance.heroPoint.childCount; j++)
+                    {
+                        if (GameLayer.s_instance.heroPoint.GetChild(j).childCount > 0)
+                        {
+                            HeroLogicBase heroLogicBase_temp = GameLayer.s_instance.heroPoint.GetChild(j).GetChild(0).GetComponent<HeroLogicBase>();
+                            if (heroLogicBase_temp.id == heroId && heroLogicBase_temp.curStar >= star)
+                            {
+                                if (heroLogicBase == null)
+                                {
+                                    heroLogicBase = heroLogicBase_temp;
+                                }
+                                else if (heroLogicBase_temp.curStar < heroLogicBase.curStar)
+                                {
+                                    heroLogicBase = heroLogicBase_temp;
+                                }
+                            }
+                        }
+                    }
+
+                    if (heroLogicBase)
+                    {
+                        Transform heroTrans = Instantiate(ObjectPool.getPrefab("Prefabs/Heros/hero" + heroData.id), heroLogicBase.transform.parent).transform;
+                        heroTrans.GetComponent<HeroLogicBase>().curStar = star;
+                        //EffectManager.summonHero(heroGrid.transform.GetChild(i).position);
+
+                        DestroyImmediate(heroLogicBase.gameObject);
+
+                        TimerUtil.getInstance().delayTime(1, () =>
+                        {
+                            LayerManager.ShowLayer(Consts.Layer.GetMythicHeroLayer).GetComponent<GetMythicHeroLayer>().init(heroData.id);
+                        });
+                    }
+                    break;
+                }
+            }
         }
+
+        // 武器删除
+        {
+            WeaponBar weaponBar = null;
+            UIItemWeapon uIItemWeapon = null;
+            for (int i = 0; i < heroData.list_summonWay.Count; i++)
+            {
+                if (heroData.list_summonWay[i][0] == 2)
+                {
+                    int weaponType = heroData.list_summonWay[i][1];
+                    int level = heroData.list_summonWay[i][2];
+
+                    // 检索武器栏
+                    {
+                        for (int j = 0; j < GameUILayer.s_instance.list_weaponBar.Count; j++)
+                        {
+                            if (GameUILayer.s_instance.list_weaponBar[j].weaponData != null && GameUILayer.s_instance.list_weaponBar[j].weaponData.type == weaponType && GameUILayer.s_instance.list_weaponBar[j].weaponData.level >= level)
+                            {
+                                if (weaponBar == null)
+                                {
+                                    weaponBar = GameUILayer.s_instance.list_weaponBar[j];
+                                }
+                                else if (weaponBar.weaponData.level > GameUILayer.s_instance.list_weaponBar[j].weaponData.level)
+                                {
+                                    weaponBar = GameUILayer.s_instance.list_weaponBar[j];
+                                }
+                            }
+                        }
+                    }
+
+                    // 检索武器格子
+                    {
+                        for (int j = 0; j < GameUILayer.s_instance.weaponGridTrans.childCount; j++)
+                        {
+                            if (GameUILayer.s_instance.weaponGridTrans.GetChild(j).childCount == 1)
+                            {
+                                UIItemWeapon uiItemWeapon_temp = GameUILayer.s_instance.weaponGridTrans.GetChild(j).GetChild(0).GetComponent<UIItemWeapon>();
+                                if (uiItemWeapon_temp.weaponData.type == weaponType && uiItemWeapon_temp.weaponData.level >= level)
+                                {
+                                    if (uIItemWeapon == null)
+                                    {
+                                        uIItemWeapon = uiItemWeapon_temp;
+                                    }
+                                    else if (uIItemWeapon.weaponData.level > uiItemWeapon_temp.weaponData.level)
+                                    {
+                                        uIItemWeapon = uiItemWeapon_temp;
+                                    }
+                                }
+                            }
+                        }
+                    }
+
+                    break;
+                }
+            }
+
+            if (weaponBar != null && uIItemWeapon != null)
+            {
+                if (uIItemWeapon.weaponData.level <= weaponBar.weaponData.level)
+                {
+                    Destroy(uIItemWeapon.gameObject);
+                }
+                else
+                {
+                    weaponBar.setData(null);
+                }
+            }
+            else if (weaponBar != null)
+            {
+                weaponBar.setData(null);
+            }
+            else if (uIItemWeapon != null)
+            {
+                Destroy(uIItemWeapon.gameObject);
+            }
+        }
+
+        GameUILayer.s_instance.checkMythicHeroProgress();
     }
 
     int[] mythicHeroProgress = new int[2];
