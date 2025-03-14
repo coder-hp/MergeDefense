@@ -62,7 +62,7 @@ public class DamageNumManager : MonoBehaviour
 
         if(isCrit)
         {
-            damageNumTrans.DOScale(1.5f, 0.2f).OnComplete(()=>
+            damageNumTrans.DOScale(1.6f, 0.15f).OnComplete(()=>
             {
                 damageNumTrans.DOScale(1.2f, 0.1f);
             });
