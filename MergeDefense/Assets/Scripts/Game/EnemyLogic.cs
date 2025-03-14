@@ -10,8 +10,10 @@ public class EnemyLogic : MonoBehaviour
     int curTargetPosIndex = 1;
 
     float moveSpeed = 2;
-    int curHP;
-    int fullHP;
+    [HideInInspector]
+    public int curHP;
+    [HideInInspector]
+    public int fullHP;
 
     float defaultSpineSpeed = 1;
     bool isCanMove = true;
