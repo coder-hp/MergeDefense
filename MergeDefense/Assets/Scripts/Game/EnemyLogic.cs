@@ -4,6 +4,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using static Consts;
 
 public class EnemyLogic : MonoBehaviour
 {
@@ -18,6 +19,7 @@ public class EnemyLogic : MonoBehaviour
     float defaultSpineSpeed = 1;
     bool isCanMove = true;
 
+    Transform bodyTrans;
     Transform bloodPoint;
     Transform bloodBarTrans;
     Image bloodProgressImg;
@@ -32,12 +34,19 @@ public class EnemyLogic : MonoBehaviour
 
     List<Consts.BuffData> list_buffDatas = new List<Consts.BuffData>();
 
+    Vector3 bodyScaleRight;
+    Vector3 bodyScaleLeft;
+
     private void Awake()
     {
         EnemyManager.s_instance.addEnemy(this);
         transform.position = GameLayer.s_instance.list_enemyMoveFourPos[0];
 
+        bodyTrans = transform.Find("body");
         bloodPoint = transform.Find("bloodPoint");
+
+        bodyScaleRight = bodyTrans.localScale;
+        bodyScaleLeft = new Vector3(-bodyScaleRight.x, bodyScaleRight.y, bodyScaleRight.z);
 
         transform.localScale = Vector3.zero;
         transform.DOScale(1,0.5f);
@@ -142,11 +151,11 @@ public class EnemyLogic : MonoBehaviour
 
                 if (curTargetPosIndex == 3)
                 {
-                    transform.localScale = Consts.vec_flipX;
+                    bodyTrans.localScale = bodyScaleLeft;
                 }
                 else if (curTargetPosIndex == 1)
                 {
-                    transform.localScale = Vector3.one;
+                    bodyTrans.localScale = bodyScaleRight;
                 }
             }
 
@@ -248,6 +257,18 @@ public class EnemyLogic : MonoBehaviour
                     skeletonAnimation.timeScale = 0;
                     break;
                 }
+        }
+    }
+
+    public void removeBuff(Consts.BuffType buffType,string from)
+    {
+        for (int i = 0; i < list_buffDatas.Count; i++)
+        {
+            if (list_buffDatas[i].buffType == buffType && list_buffDatas[i].from == from)
+            {
+                list_buffDatas.RemoveAt(i);
+                --i;
+            }
         }
     }
 
