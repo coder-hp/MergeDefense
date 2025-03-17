@@ -603,19 +603,6 @@ public class HeroLogicBase : MonoBehaviour
             }
         }
 
-        // 有的角色会有多个攻击动画
-        if (aniName == Consts.HeroAniNameAttack)
-        {
-            switch (id)
-            {
-                case 117:
-                    {
-                        aniName = "attack" + RandomUtil.getRandom(1, 2);
-                        break;
-                    }
-            }
-        }
-
         if (crossFadeTime > 0)
         {
             animator.CrossFade(aniName, crossFadeTime);
