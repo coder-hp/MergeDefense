@@ -370,7 +370,7 @@ public class HeroLogicBase : MonoBehaviour
                                 {
                                     obj_attackEffect = GameObject.Instantiate(ObjectPool.getPrefab("Prefabs/Effects/eff_attack_hero" + id), transform);
                                 }
-                                //EffectManager.heroAttack(this);
+                                obj_attackEffect.transform.rotation = Quaternion.Euler(0,0, modelTrans.eulerAngles.y);
                                 break;
                             }
                     }
