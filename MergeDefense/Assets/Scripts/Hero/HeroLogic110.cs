@@ -10,7 +10,7 @@ public class HeroLogic110 : HeroBase
 {
     private void Start()
     {
-        //InvokeRepeating("onInvokeSkill",1,1);
+        InvokeRepeating("onInvokeSkill",3,3);
     }
 
     void onInvokeSkill()

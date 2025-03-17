@@ -38,7 +38,7 @@ public class heroFlyWeapon103 : MonoBehaviour
                     EffectManager.s_instance.enemyDamage(enemyLogic.transform.position, heroLogicBase.id);
 
                     // 技能：攻击时，20%概率对范围内的敌人造成攻击力250%的伤害
-                    if (RandomUtil.getRandom(1, 100) <= (200 + heroLogicBase.getAddSkillRate()))
+                    if (RandomUtil.getRandom(1, 100) <= (20 + heroLogicBase.getAddSkillRate()))
                     {
                         for (int i = 0; i < EnemyManager.s_instance.list_enemy.Count; i++)
                         {
