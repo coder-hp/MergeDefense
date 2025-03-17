@@ -58,6 +58,8 @@ MonoBehaviour:
   isCanUpdate: 0
   boxCollider: {fileID: 0}
   flyWeaponPoint: {fileID: 0}
+  modelTrans: {fileID: 0}
+  rootTrans: {fileID: 0}
   heroQualityTrans: {fileID: 0}
 --- !u!114 &1923510478939352363
 MonoBehaviour:
@@ -117,14 +119,14 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6103605608685515855}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: 0.2588191, y: 0, z: 0, w: 0.9659258}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 6649104170161346643}
   m_Father: {fileID: 1424779052366672914}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 30, y: 0, z: 0}
 --- !u!1001 &346667651044476200
 PrefabInstance:
   m_ObjectHideFlags: 0
