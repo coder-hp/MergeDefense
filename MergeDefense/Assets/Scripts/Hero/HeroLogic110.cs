@@ -10,7 +10,7 @@ public class HeroLogic110 : HeroBase
 {
     private void Start()
     {
-        InvokeRepeating("onInvokeSkill",1,1);
+        //InvokeRepeating("onInvokeSkill",1,1);
     }
 
     void onInvokeSkill()
@@ -35,25 +35,7 @@ public class HeroLogic110 : HeroBase
     public override void AttackLogic(EnemyLogic enemyLogic)
     {
         AudioScript.s_instance.playSound("110_attack");
-
-        bool isCrit = RandomUtil.getRandom(1, 100) <= heroLogicBase.getCritRate() ? true : false;
-        int atk = Mathf.RoundToInt(heroLogicBase.getAtk() * (isCrit ? heroLogicBase.getCritDamageXiShu() : 1));
-
-        enemyLogic.damage(atk, isCrit);
-
-        // 判定技能2：攻击时，18%概率对范围内的敌人造成攻击力500%的伤害
-        if (RandomUtil.getRandom(1, 100) <= (18 + heroLogicBase.getAddSkillRate()))
-        {
-            for (int i = 0; i < EnemyManager.s_instance.list_enemy.Count; i++)
-            {
-                if (Vector3.Distance(heroLogicBase.curStandGrid.position, EnemyManager.s_instance.list_enemy[i].transform.position) <= heroLogicBase.heroData.atkRange)
-                {
-                    if (EnemyManager.s_instance.list_enemy[i].damage(atk * 5, false))
-                    {
-                        --i;
-                    }
-                }
-            }
-        }
+        Transform arrow = Instantiate(ObjectPool.getPrefab("Prefabs/Games/heroFlyWeapon110"), GameLayer.s_instance.flyPoint).transform;
+        arrow.GetComponent<heroFlyWeapon110>().init(heroLogicBase, enemyLogic);
     }
 }
