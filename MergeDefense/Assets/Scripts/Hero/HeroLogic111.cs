@@ -13,6 +13,31 @@ public class HeroLogic111 : HeroBase
     {
         // 技能1：我方单位攻速增加20%
         GameFightData.s_instance.addGlobalHeroBuff(new Consts.BuffData(Consts.BuffType.AtkSpeed, 0.8f, 9999,"111"));
+
+        InvokeRepeating("onInvokeSkill", 2, 2);
+    }
+
+    // 技能2：每2s释放三支箭对范围内的敌人造成攻击力500%的伤害
+    void onInvokeSkill()
+    {
+        if (heroLogicBase.isCanUpdate)
+        {
+            int atk = heroLogicBase.getAtk() * 5;
+            int count = 0;
+            for (int i = 0; i < EnemyManager.s_instance.list_enemy.Count; i++)
+            {
+                if (Vector3.Distance(heroLogicBase.curStandGrid.position, EnemyManager.s_instance.list_enemy[i].transform.position) <= heroLogicBase.heroData.atkRange)
+                {
+                    Transform arrow = Instantiate(ObjectPool.getPrefab("Prefabs/Games/heroFlyWeapon111"), GameLayer.s_instance.flyPoint).transform;
+                    arrow.GetComponent<heroFlyWeapon111>().init(heroLogicBase, EnemyManager.s_instance.list_enemy[i], atk);
+
+                    if (++count >= 3)
+                    {
+                        return;
+                    }
+                }
+            }
+        }
     }
 
     public override void AttackLogic(EnemyLogic enemyLogic)
