@@ -316,7 +316,7 @@ public class HeroLogicBase : MonoBehaviour
         playAni(Consts.HeroAniNameRun);
 
         float angle = -CommonUtil.twoPointAngle(curStandGrid.position, gridTrans.position);
-        setAngle(new Vector3(0,angle + 180,0));
+        setAngle(new Vector3(0,angle,0));
         heroUITrans.localScale = Vector3.zero;
         curStandGrid = gridTrans;
         transform.SetParent(newParentTrans);
@@ -432,7 +432,7 @@ public class HeroLogicBase : MonoBehaviour
     void lookEnemy(EnemyLogic enemyLogic)
     {
         float angle = -CommonUtil.twoPointAngle(curStandGrid.position, enemyLogic.transform.position);
-        setAngle(new Vector3(0, angle + 180, 0));
+        setAngle(new Vector3(0, angle, 0));
     }
 
     public int getAtk()
