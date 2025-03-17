@@ -11,7 +11,7 @@ public class HeroLogic117 : HeroBase
 {
     private void Start()
     {
-        GameFightData.s_instance.list_allEnemyBuff.Add(new Consts.BuffData(Consts.BuffType.MoveSpeed,-0.1f,9999));
+        GameFightData.s_instance.addGlobalEnemyBuff(new Consts.BuffData(Consts.BuffType.MoveSpeed,-0.1f,9999,"117"));
     }
 
     public override void AttackLogic(EnemyLogic enemyLogic)
@@ -50,13 +50,6 @@ public class HeroLogic117 : HeroBase
     private void OnDestroy()
     {
         // 删除全局敌人减速buff
-        for (int i = 0; i < GameFightData.s_instance.list_allEnemyBuff.Count; i++)
-        {
-            if (GameFightData.s_instance.list_allEnemyBuff[i].buffType == Consts.BuffType.MoveSpeed)
-            {
-                GameFightData.s_instance.list_allEnemyBuff.RemoveAt(i);
-                return;
-            }
-        }
+        GameFightData.s_instance.removeGlobalEnemyBuff(Consts.BuffType.MoveSpeed, "117");
     }
 }
