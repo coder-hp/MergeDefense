@@ -346,7 +346,7 @@ public class HeroLogicBase : MonoBehaviour
             if(enemyLogic)
             {
                 heroAniEvent.enemyLogic = enemyLogic;
-                lookEnemy(enemyLogic);
+                float angleY = lookEnemy(enemyLogic);
                 isAttacking = true;
                 playAni(Consts.HeroAniNameAttack);
 
@@ -370,7 +370,7 @@ public class HeroLogicBase : MonoBehaviour
                                 {
                                     obj_attackEffect = GameObject.Instantiate(ObjectPool.getPrefab("Prefabs/Effects/eff_attack_hero" + id), transform);
                                 }
-                                obj_attackEffect.transform.rotation = Quaternion.Euler(0,0, modelTrans.eulerAngles.y);
+                                obj_attackEffect.transform.rotation = Quaternion.Euler(0,0, 360-angleY);
                                 break;
                             }
                     }
@@ -429,10 +429,11 @@ public class HeroLogicBase : MonoBehaviour
         
     }
 
-    void lookEnemy(EnemyLogic enemyLogic)
+    float lookEnemy(EnemyLogic enemyLogic)
     {
         float angle = -CommonUtil.twoPointAngle(curStandGrid.position, enemyLogic.transform.position);
         setAngle(new Vector3(0, angle, 0));
+        return angle;
     }
 
     public int getAtk()
