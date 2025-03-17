@@ -99,6 +99,11 @@ public class WeaponInfoPanel : MonoBehaviour
                 }
             }
 
+            for(int i = 0; i < heroListTrans.childCount; i++)
+            {
+                heroListTrans.GetChild(i).gameObject.SetActive(false);
+            }
+
             int index = -1;
             foreach (KeyValuePair<int, int> kvp in dic)
             {
