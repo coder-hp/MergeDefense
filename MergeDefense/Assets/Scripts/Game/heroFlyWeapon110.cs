@@ -42,7 +42,7 @@ public class heroFlyWeapon110 : MonoBehaviour
                     {
                         for (int i = 0; i < EnemyManager.s_instance.list_enemy.Count; i++)
                         {
-                            if (Vector3.Distance(heroLogicBase.curStandGrid.position, EnemyManager.s_instance.list_enemy[i].transform.position) <= heroLogicBase.heroData.atkRange)
+                            if (Vector3.Distance(transform.position, EnemyManager.s_instance.list_enemy[i].transform.position) <= heroLogicBase.heroData.atkRange * 0.5f)
                             {
                                 if (EnemyManager.s_instance.list_enemy[i].damage(atk * 5, false))
                                 {
