@@ -9,34 +9,58 @@ using UnityEngine;
 // 技能3：每10s召唤6个扭曲物质落于随机位置持续5s，对接触到的敌人造成600%的伤害，并附加20%的减速效果
 public class HeroLogic115 : HeroBase
 {
+    public int killEnemyAddAtk = 0;
+
     private void Start()
     {
-        //InvokeRepeating("onInvokeSkill",10,10);
+        InvokeRepeating("onInvokeSkill",10,10);
     }
 
     void onInvokeSkill()
     {
-        //// 技能1：每1s对范围内的敌人造成攻击力150% 的伤害
-        //if (heroLogicBase.isCanUpdate)
-        //{
-        //    int atk = heroLogicBase.getAtk();
-        //    for (int i = 0; i < EnemyManager.s_instance.list_enemy.Count; i++)
-        //    {
-        //        if (Vector3.Distance(heroLogicBase.curStandGrid.position, EnemyManager.s_instance.list_enemy[i].transform.position) <= heroLogicBase.heroData.atkRange)
-        //        {
-        //            if (EnemyManager.s_instance.list_enemy[i].damage(Mathf.RoundToInt(atk * 1.5f), false))
-        //            {
-        //                --i;
-        //            }
-        //        }
-        //    }
-        //}
+        // 技能3：每10s召唤6个扭曲物质落于随机位置持续5s，对接触到的敌人造成600 % 的伤害，并附加20 % 的减速效果
+        // if (heroLogicBase.isCanUpdate)
+        {
+            int atk = heroLogicBase.getAtk();
+
+            // 上边的路
+            {
+                Transform obj = Instantiate(ObjectPool.getPrefab("Prefabs/Games/HeroSkill115_3"), GameLayer.s_instance.flyPoint).transform;
+                obj.GetComponent<HeroSkill115_3>().init(atk);
+                float posX = RandomUtil.getRandom((int)(GameLayer.s_instance.list_enemyMoveFourPos[1].x * 60), (int)(GameLayer.s_instance.list_enemyMoveFourPos[2].x * 60)) / 100f;
+                obj.position = new Vector3(posX, GameLayer.s_instance.list_enemyMoveFourPos[1].y,0);
+            }
+
+            // 下边的路
+            {
+                Transform obj = Instantiate(ObjectPool.getPrefab("Prefabs/Games/HeroSkill115_3"), GameLayer.s_instance.flyPoint).transform;
+                obj.GetComponent<HeroSkill115_3>().init(atk);
+                float posX = RandomUtil.getRandom((int)(GameLayer.s_instance.list_enemyMoveFourPos[1].x * 60), (int)(GameLayer.s_instance.list_enemyMoveFourPos[2].x * 60)) / 100f;
+                obj.position = new Vector3(posX, GameLayer.s_instance.list_enemyMoveFourPos[0].y, 0);
+            }
+
+            // 左边的路
+            {
+                Transform obj = Instantiate(ObjectPool.getPrefab("Prefabs/Games/HeroSkill115_3"), GameLayer.s_instance.flyPoint).transform;
+                obj.GetComponent<HeroSkill115_3>().init(atk);
+                float posY = RandomUtil.getRandom((int)(GameLayer.s_instance.list_enemyMoveFourPos[0].y * 60), (int)(GameLayer.s_instance.list_enemyMoveFourPos[1].y * 60)) / 100f;
+                obj.position = new Vector3(GameLayer.s_instance.list_enemyMoveFourPos[0].x, posY, 0);
+            }
+
+            // 右边的路
+            {
+                Transform obj = Instantiate(ObjectPool.getPrefab("Prefabs/Games/HeroSkill115_3"), GameLayer.s_instance.flyPoint).transform;
+                obj.GetComponent<HeroSkill115_3>().init(atk);
+                float posY = RandomUtil.getRandom((int)(GameLayer.s_instance.list_enemyMoveFourPos[0].y * 60), (int)(GameLayer.s_instance.list_enemyMoveFourPos[1].y * 60)) / 100f;
+                obj.position = new Vector3(GameLayer.s_instance.list_enemyMoveFourPos[3].x, posY, 0);
+            }
+        }
     }
 
     public override void AttackLogic(EnemyLogic enemyLogic)
     {
         AudioScript.s_instance.playSound("115_attack");
         Transform arrow = Instantiate(ObjectPool.getPrefab("Prefabs/Games/heroFlyWeapon115"), GameLayer.s_instance.flyPoint).transform;
-        arrow.GetComponent<heroFlyWeapon115>().init(heroLogicBase, enemyLogic);
+        arrow.GetComponent<heroFlyWeapon115>().init(this,heroLogicBase, enemyLogic);
     }
 }

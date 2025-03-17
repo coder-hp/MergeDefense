@@ -15,17 +15,23 @@ public class HeroLogic110 : HeroBase
 
     void onInvokeSkill()
     {
-        // 技能1：每1s对范围内的敌人造成攻击力150% 的伤害
+        // 技能1：每3s对范围内的敌人造成攻击力100% 的伤害，最多5个敌人
         if (heroLogicBase.isCanUpdate)
         {
             int atk = heroLogicBase.getAtk();
+            int count = 0;
             for (int i = 0; i < EnemyManager.s_instance.list_enemy.Count; i++)
             {
                 if (Vector3.Distance(heroLogicBase.curStandGrid.position, EnemyManager.s_instance.list_enemy[i].transform.position) <= heroLogicBase.heroData.atkRange)
                 {
-                    if (EnemyManager.s_instance.list_enemy[i].damage(Mathf.RoundToInt(atk * 1.5f), false))
+                    if (EnemyManager.s_instance.list_enemy[i].damage(Mathf.RoundToInt(atk), false))
                     {
                         --i;
+                    }
+
+                    if(++count >= 5)
+                    {
+                        return;
                     }
                 }
             }
