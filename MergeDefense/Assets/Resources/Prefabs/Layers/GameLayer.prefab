@@ -369,6 +369,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1a674819a86774042bed165edd753567, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  list_hero: []
 --- !u!1 &2516526470642445742
 GameObject:
   m_ObjectHideFlags: 0
@@ -465,7 +466,6 @@ Transform:
   - {fileID: 2135443028451985268}
   - {fileID: 3334699292323018052}
   - {fileID: 1889172472041156528}
-  - {fileID: 7220120283883626461}
   - {fileID: 5383232983578252299}
   m_Father: {fileID: 4729789445500738202}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -598,7 +598,7 @@ MonoBehaviour:
   heroGrid: {fileID: 8265745479018369982}
   heroGridChoiced: {fileID: 2135443028451985268}
   attackRangeTrans: {fileID: 1889172472041156528}
-  heroQualityPoint: {fileID: 7220120283883626461}
+  heroQualityPoint: {fileID: 0}
   flyPoint: {fileID: 4149523117588117092}
   effectPoint: {fileID: 8027066404486135526}
   list_enemyMoveFourPos: []
@@ -756,37 +756,6 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!1 &3551732279377503336
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 7220120283883626461}
-  m_Layer: 0
-  m_Name: heroQualityPoint
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &7220120283883626461
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3551732279377503336}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 1737212649471613696}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &3588548864709945540
 GameObject:
   m_ObjectHideFlags: 0
