@@ -59,6 +59,11 @@ public class HeroLogicBase : MonoBehaviour
 
     Vector3 vec_atkRange = Vector3.one;
 
+    private void Awake()
+    {
+        HeroManager.s_instance.addHero(this);
+    }
+
     public void Start()
     {
         curStandGrid = GameLayer.s_instance.heroGrid.transform.Find(transform.parent.name);
@@ -129,11 +134,11 @@ public class HeroLogicBase : MonoBehaviour
         isCanUpdate = false;
 
         // 检测是否可以合并
-        for (int i = 0; i < GameLayer.s_instance.heroPoint.childCount; i++)
+        for (int i = 0; i < HeroManager.s_instance.list_hero.Count; i++)
         {
-            if (GameLayer.s_instance.heroPoint.GetChild(i).childCount == 1 && GameLayer.s_instance.heroPoint.GetChild(i) != transform.parent)
+            if (HeroManager.s_instance.list_hero[i] != this)
             {
-                HeroLogicBase heroLogicBase_to = GameLayer.s_instance.heroPoint.GetChild(i).GetChild(0).GetComponent<HeroLogicBase>();
+                HeroLogicBase heroLogicBase_to = HeroManager.s_instance.list_hero[i];
                 if ((heroLogicBase_to.isCanUpdate) && (heroLogicBase_to.curStar < heroLogicBase_to.heroData.maxStar) && (heroLogicBase_to.heroData.id == heroData.id) && (heroLogicBase_to.curStar == curStar))
                 {
                     AudioScript.s_instance.playSound("heroMerge");
@@ -791,7 +796,9 @@ public class HeroLogicBase : MonoBehaviour
 
     private void OnDestroy()
     {
-        if(heroUITrans)
+        HeroManager.s_instance.removeHero(this);
+
+        if (heroUITrans)
         {
             Destroy(heroUITrans.gameObject);
         }

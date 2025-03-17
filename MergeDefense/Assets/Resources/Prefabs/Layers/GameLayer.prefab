@@ -319,6 +319,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3334699292323018052}
+  - component: {fileID: 8051746461208862691}
   m_Layer: 0
   m_Name: HeroPoint
   m_TagString: Untagged
@@ -356,6 +357,18 @@ Transform:
   - {fileID: 5970022497127544728}
   m_Father: {fileID: 1737212649471613696}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &8051746461208862691
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2283279049974800621}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1a674819a86774042bed165edd753567, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &2516526470642445742
 GameObject:
   m_ObjectHideFlags: 0
@@ -615,6 +628,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 81981f037ee52e34a99374dd3d010c01, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  allDamage: 0
   list_canSummonHero: 6500000066000000670000006800000069000000
   list_heroWeight: 64000000000000000000000000000000000000000000000000000000000000000000000000000000
   list_weaponWeight: 64000000000000000000000000000000000000000000000000000000000000000000000000000000

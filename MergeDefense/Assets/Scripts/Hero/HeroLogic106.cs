@@ -18,16 +18,11 @@ public class HeroLogic106 : HeroBase
         // 技能判定
         if (RandomUtil.getRandom(1, 100) <= (baseSkillRate + heroLogicBase.getAddSkillRate()))
         {
-            //EffectManager.heroSkill(transform.position, heroLogicBase.id);
-            for (int i = 0; i < GameLayer.s_instance.heroPoint.childCount; i++)
+            for (int i = 0; i < HeroManager.s_instance.list_hero.Count; i++)
             {
-                if (GameLayer.s_instance.heroPoint.GetChild(i).childCount > 0)
+                if (Vector3.Distance(heroLogicBase.curStandGrid.position, HeroManager.s_instance.list_hero[i].curStandGrid.position) <= 1.6f)
                 {
-                    HeroLogicBase heroLogicBase = GameLayer.s_instance.heroPoint.GetChild(i).GetChild(0).GetComponent<HeroLogicBase>();
-                    if (Vector3.Distance(heroLogicBase.curStandGrid.position, heroLogicBase.curStandGrid.position) <= 1.6f)
-                    {
-                        heroLogicBase.addBuff(new Consts.BuffData(Consts.BuffType.AtkBaiFenBi, 0.2f, 5, "106"));
-                    }
+                    HeroManager.s_instance.list_hero[i].addBuff(new Consts.BuffData(Consts.BuffType.AtkBaiFenBi, 0.2f, 5, "106"));
                 }
             }
         }
