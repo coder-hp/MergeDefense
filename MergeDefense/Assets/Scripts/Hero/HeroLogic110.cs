@@ -1,0 +1,59 @@
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+
+// 女巫
+// 远程群攻
+// 技能1：每1s对范围内的敌人造成攻击力150%的伤害
+// 技能2：攻击时，18%概率对范围内的敌人造成攻击力500%的伤害
+public class HeroLogic110 : HeroBase
+{
+    private void Start()
+    {
+        InvokeRepeating("onInvokeSkill",1,1);
+    }
+
+    void onInvokeSkill()
+    {
+        // 技能1：每1s对范围内的敌人造成攻击力150% 的伤害
+        if (heroLogicBase.isCanUpdate)
+        {
+            int atk = heroLogicBase.getAtk();
+            for (int i = 0; i < EnemyManager.s_instance.list_enemy.Count; i++)
+            {
+                if (Vector3.Distance(heroLogicBase.curStandGrid.position, EnemyManager.s_instance.list_enemy[i].transform.position) <= heroLogicBase.heroData.atkRange)
+                {
+                    if (EnemyManager.s_instance.list_enemy[i].damage(Mathf.RoundToInt(atk * 1.5f), false))
+                    {
+                        --i;
+                    }
+                }
+            }
+        }
+    }
+
+    public override void AttackLogic(EnemyLogic enemyLogic)
+    {
+        AudioScript.s_instance.playSound("110_attack");
+
+        bool isCrit = RandomUtil.getRandom(1, 100) <= heroLogicBase.getCritRate() ? true : false;
+        int atk = Mathf.RoundToInt(heroLogicBase.getAtk() * (isCrit ? heroLogicBase.getCritDamageXiShu() : 1));
+
+        enemyLogic.damage(atk, isCrit);
+
+        // 判定技能2：攻击时，18%概率对范围内的敌人造成攻击力500%的伤害
+        if (RandomUtil.getRandom(1, 100) <= (18 + heroLogicBase.getAddSkillRate()))
+        {
+            for (int i = 0; i < EnemyManager.s_instance.list_enemy.Count; i++)
+            {
+                if (Vector3.Distance(heroLogicBase.curStandGrid.position, EnemyManager.s_instance.list_enemy[i].transform.position) <= heroLogicBase.heroData.atkRange)
+                {
+                    if (EnemyManager.s_instance.list_enemy[i].damage(atk * 5, false))
+                    {
+                        --i;
+                    }
+                }
+            }
+        }
+    }
+}
