@@ -85,8 +85,9 @@ public class HeroLogicBase : MonoBehaviour
 
         // 品质背景板
         {
-            heroQualityTrans = Instantiate(ObjectPool.getPrefab("Prefabs/Games/heroQuality"), GameLayer.s_instance.heroQualityPoint).transform;
+            heroQualityTrans = Instantiate(ObjectPool.getPrefab("Prefabs/Games/heroQuality"), transform).transform;
             heroQualityTrans.position = transform.position + Consts.heroQualityOffset;
+            heroQualityTrans.rotation = Quaternion.Euler(0,0,0);
             heroQualityTrans.localScale = Vector3.zero;
             material_qualityBg = heroQualityTrans.GetChild(0).GetComponent<MeshRenderer>().material;
         }
@@ -148,7 +149,6 @@ public class HeroLogicBase : MonoBehaviour
                     boxCollider.enabled = false;
                     transform.SetParent(transform);
                     Destroy(heroUITrans.gameObject);
-                    Destroy(heroQualityTrans.gameObject);
 
                     float moveTime = Vector3.Distance(transform.position, heroLogicBase_to.transform.position) / 10f;
                     if (moveTime > 0.3f)
@@ -308,7 +308,6 @@ public class HeroLogicBase : MonoBehaviour
     }
 
     Tween tween_heroMove = null;
-    Tween tween_QualityMove = null;
     public void changeParent(Transform newParentTrans,Transform gridTrans)
     {
         float moveTime = Vector3.Distance(newParentTrans.position, curStandGrid.position) * 0.2f;
@@ -317,7 +316,7 @@ public class HeroLogicBase : MonoBehaviour
         playAni(Consts.HeroAniNameRun);
 
         float angle = -CommonUtil.twoPointAngle(curStandGrid.position, gridTrans.position);
-        transform.localRotation = Quaternion.Euler(0, angle, 0);
+        setAngle(new Vector3(0,angle + 180,0));
         heroUITrans.localScale = Vector3.zero;
         curStandGrid = gridTrans;
         transform.SetParent(newParentTrans);
@@ -337,13 +336,6 @@ public class HeroLogicBase : MonoBehaviour
             heroUITrans.localPosition = CommonUtil.WorldPosToUI(GameLayer.s_instance.camera3D, curStandGrid.position);
             checkMerge();
         });
-
-        if(tween_QualityMove != null)
-        {
-            tween_QualityMove.Kill();
-        }
-        heroQualityTrans.position = transform.position + Consts.heroQualityOffset;
-        tween_QualityMove = heroQualityTrans.DOMove(gridTrans.position + Consts.heroQualityOffset, moveTime).SetEase(Ease.Linear);
     }
 
     public bool checkAttack()
@@ -437,20 +429,10 @@ public class HeroLogicBase : MonoBehaviour
         
     }
 
-    Tween tween_rotate = null;
     void lookEnemy(EnemyLogic enemyLogic)
     {
         float angle = -CommonUtil.twoPointAngle(curStandGrid.position, enemyLogic.transform.position);
-
-        //transform.localRotation = Quaternion.Euler(0, angle, 0);
-
-        if(tween_rotate != null)
-        {
-            tween_rotate.Kill();
-        }
-
-        tween_rotate = transform.DOLocalRotate(new Vector3(0, angle, 0), 0.2f, DG.Tweening.RotateMode.Fast);
-        //tween_rotate = transform.DOLocalRotateQuaternion(Quaternion.Euler(0, angle, 0),0.2f);
+        setAngle(new Vector3(0, angle + 180, 0));
     }
 
     public int getAtk()
@@ -611,11 +593,7 @@ public class HeroLogicBase : MonoBehaviour
 
         if (aniName == Consts.HeroAniNameIdle)
         {
-            if (tween_rotate != null)
-            {
-                tween_rotate.Kill();
-            }
-            tween_rotate = transform.DOLocalRotate(Consts.heroIdleAngle, 0.2f,DG.Tweening.RotateMode.Fast);
+            setAngle(Consts.heroIdleAngle);
         }
         else if (aniName == Consts.HeroAniNameRun)
         {
@@ -792,6 +770,17 @@ public class HeroLogicBase : MonoBehaviour
         }
     }
 
+    Tween tween_rotate = null;
+    public void setAngle(Vector3 angle)
+    {
+        if (tween_rotate != null)
+        {
+            tween_rotate.Kill();
+        }
+        //tween_rotate = transform.DOLocalRotate(angle, 0.2f, DG.Tweening.RotateMode.Fast);
+        tween_rotate = modelTrans.DOLocalRotate(angle, 0.2f, DG.Tweening.RotateMode.Fast);
+    }
+
     private void OnDestroy()
     {
         HeroManager.s_instance.removeHero(this);
@@ -799,11 +788,6 @@ public class HeroLogicBase : MonoBehaviour
         if (heroUITrans)
         {
             Destroy(heroUITrans.gameObject);
-        }
-
-        if(heroQualityTrans)
-        {
-            Destroy(heroQualityTrans.gameObject);
         }
 
         if(tween_emoji != null)

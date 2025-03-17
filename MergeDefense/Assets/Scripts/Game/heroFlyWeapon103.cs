@@ -8,7 +8,6 @@ public class heroFlyWeapon103 : MonoBehaviour
     EnemyLogic enemyLogic;
     Transform targetTrans;
     float moveSpeed = 10;
-    float damageRange = 1.9f;
 
     public void init(HeroLogicBase _heroLogicBase, EnemyLogic _enemyLogic)
     {
