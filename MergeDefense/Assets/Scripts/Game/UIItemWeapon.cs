@@ -103,12 +103,9 @@ public class UIItemWeapon : MonoBehaviour
         transform.SetParent(GameUILayer.s_instance.transform);
 
         // 显示所有角色的武器适配性emoji
-        for (int i = 0; i < GameLayer.s_instance.heroPoint.childCount; i++)
+        for (int i = 0; i < HeroManager.s_instance.list_hero.Count; i++)
         {
-            if(GameLayer.s_instance.heroPoint.GetChild(i).childCount > 0)
-            {
-                GameLayer.s_instance.heroPoint.GetChild(i).GetChild(0).GetComponent<HeroLogicBase>().showWeaponEmoji(weaponData);
-            }
+            HeroManager.s_instance.list_hero[i].showWeaponEmoji(weaponData);
         }
 
         GameUILayer.s_instance.setIsShowBtnWeaponSell(true, weaponData);
@@ -169,12 +166,9 @@ public class UIItemWeapon : MonoBehaviour
         WeaponInfoPanel.s_instance.close();
 
         // 关闭所有角色的武器适配性emoji
-        for (int i = 0; i < GameLayer.s_instance.heroPoint.childCount; i++)
+        for (int i = 0; i < HeroManager.s_instance.list_hero.Count; i++)
         {
-            if (GameLayer.s_instance.heroPoint.GetChild(i).childCount > 0)
-            {
-                GameLayer.s_instance.heroPoint.GetChild(i).GetChild(0).GetComponent<HeroLogicBase>().hideWeaponEmoji();
-            }
+            HeroManager.s_instance.list_hero[i].hideWeaponEmoji();
         }
 
         if (mergeTarget)

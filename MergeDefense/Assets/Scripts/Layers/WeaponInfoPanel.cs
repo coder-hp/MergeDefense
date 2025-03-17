@@ -83,21 +83,18 @@ public class WeaponInfoPanel : MonoBehaviour
         // 可使用的角色
         {
             Dictionary<int, int> dic = new Dictionary<int, int>();
-            for (int j = 0; j < GameLayer.s_instance.heroPoint.childCount; j++)
+            for (int j = 0; j < HeroManager.s_instance.list_hero.Count; j++)
             {
-                if (GameLayer.s_instance.heroPoint.GetChild(j).childCount > 0)
+                HeroLogicBase heroLogicBase = HeroManager.s_instance.list_hero[j];
+                if (heroLogicBase.heroData.goodWeapon == weaponData.type)
                 {
-                    HeroLogicBase heroLogicBase = GameLayer.s_instance.heroPoint.GetChild(j).GetChild(0).GetComponent<HeroLogicBase>();
-                    if (heroLogicBase.heroData.goodWeapon == weaponData.type)
+                    if (dic.ContainsKey(heroLogicBase.id))
                     {
-                        if(dic.ContainsKey(heroLogicBase.id))
-                        {
-                            ++dic[heroLogicBase.id];
-                        }
-                        else
-                        {
-                            dic[heroLogicBase.id] = 1;
-                        }
+                        ++dic[heroLogicBase.id];
+                    }
+                    else
+                    {
+                        dic[heroLogicBase.id] = 1;
                     }
                 }
             }
