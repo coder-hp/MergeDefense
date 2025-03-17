@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class heroFlyWeapon103 : MonoBehaviour
+public class heroFlyWeapon115 : MonoBehaviour
 {
     HeroLogicBase heroLogicBase;
     EnemyLogic enemyLogic;
@@ -24,7 +24,6 @@ public class heroFlyWeapon103 : MonoBehaviour
         {
             float angle = CommonUtil.twoPointAngle(transform.position, targetTrans.position);
             transform.rotation = Quaternion.Euler(0, 0, angle);
-            //transform.LookAt(targetTrans);
             transform.position = Vector3.MoveTowards(transform.position, targetTrans.position, moveSpeed * Time.deltaTime);
 
             if (Vector3.Distance(transform.position, targetTrans.position) <= 0.1f)
@@ -46,17 +45,21 @@ public class heroFlyWeapon103 : MonoBehaviour
                         }
                     }
 
-                    // 判定技能：攻击时，20%概率对范围内的敌人造成攻击力250%的伤害
-                    if (RandomUtil.getRandom(1, 100) <= (20 + heroLogicBase.getAddSkillRate()))
+                    // 判定技能2：攻击时，10%概率对范围内的敌人造成攻击力2000%的伤害，并禁锢3s
+                    if (RandomUtil.getRandom(1, 100) <= (10 + heroLogicBase.getAddSkillRate()))
                     {
                         int atk = heroLogicBase.getAtk();
                         for (int i = 0; i < EnemyManager.s_instance.list_enemy.Count; i++)
                         {
                             if (Vector3.Distance(transform.position, EnemyManager.s_instance.list_enemy[i].transform.position) <= Consts.megaSkillRange)
                             {
-                                if (EnemyManager.s_instance.list_enemy[i].damage(Mathf.RoundToInt(atk * 2.5f), false))
+                                if (EnemyManager.s_instance.list_enemy[i].damage(atk * 20, false))
                                 {
                                     --i;
+                                }
+                                else
+                                {
+                                    EnemyManager.s_instance.list_enemy[i].addBuff(new Consts.BuffData(Consts.BuffType.Stun,0,3,"115"));
                                 }
                             }
                         }

@@ -20,6 +20,9 @@ public class Consts
 
     public static int maxEnemyCount = 60;      // 最大存在怪物数量
 
+    // 103、110、115、116
+    public static float megaSkillRange = 1.9f; // 所有法师的技能范围
+
     public enum Layer
     {
         MainLayer,
