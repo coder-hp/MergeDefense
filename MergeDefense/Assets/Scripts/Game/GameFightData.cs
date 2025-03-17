@@ -1,3 +1,4 @@
+using Spine.Unity;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -21,7 +22,9 @@ public class GameFightData : MonoBehaviour
     public List<int> list_weaponWeight = new List<int>() { 100, 0, 0, 0, 0, 0, 0, 0, 0, 0 };         // 武器1-10级的锻造权重
 
     [HideInInspector]
-    public List<Consts.BuffData> list_allEnemyBuff = new List<Consts.BuffData>();                    // 对所有敌人生效的buff
+    public List<Consts.BuffData> list_globalHeroBuff = new List<Consts.BuffData>();                  // 对所有角色生效的buff
+    [HideInInspector]
+    public List<Consts.BuffData> list_globalEnemyBuff = new List<Consts.BuffData>();                 // 对所有敌人生效的buff
 
     [HideInInspector]
     public bool isGameOver = false;
@@ -131,5 +134,39 @@ public class GameFightData : MonoBehaviour
     public void addAllDamage(int dmg)
     {
         allDamage += dmg;
+    }
+
+    public void addGlobalHeroBuff(Consts.BuffData buffData)
+    {
+        list_globalHeroBuff.Add(buffData);
+    }
+
+    public void removeGlobalHeroBuff(Consts.BuffType buffType, string from)
+    {
+        for (int i = 0; i < list_globalHeroBuff.Count; i++)
+        {
+            if (list_globalHeroBuff[i].buffType == buffType && list_globalHeroBuff[i].from == from)
+            {
+                list_globalHeroBuff.RemoveAt(i);
+                break;
+            }
+        }
+    }
+
+    public void addGlobalEnemyBuff(Consts.BuffData buffData)
+    {
+        list_globalEnemyBuff.Add(buffData);
+    }
+
+    public void removeGlobalEnemyBuff(Consts.BuffType buffType, string from)
+    {
+        for (int i = 0; i < list_globalEnemyBuff.Count; i++)
+        {
+            if (list_globalEnemyBuff[i].buffType == buffType && list_globalEnemyBuff[i].from == from)
+            {
+                list_globalEnemyBuff.RemoveAt(i);
+                break;
+            }
+        }
     }
 }

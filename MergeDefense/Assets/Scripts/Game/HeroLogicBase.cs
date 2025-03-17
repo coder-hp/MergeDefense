@@ -487,6 +487,16 @@ public class HeroLogicBase : MonoBehaviour
             }
         }
 
+        // 全局加攻速，只生效一个
+        for (int i = 0; i < GameFightData.s_instance.list_globalHeroBuff.Count; i++)
+        {
+            if (GameFightData.s_instance.list_globalHeroBuff[i].buffType == Consts.BuffType.AtkSpeed)
+            {
+                atkSpeed += GameFightData.s_instance.list_globalHeroBuff[i].value;
+                break;
+            }
+        }
+
         return atkSpeed;
     }
 
