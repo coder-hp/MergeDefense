@@ -303,5 +303,10 @@ public class EnemyLogic : MonoBehaviour
         {
             tween_hitRedColor.Kill();
         }
+
+        if(GameFightData.s_instance.isAddEnemyEnd && EnemyManager.s_instance.list_enemy.Count == 0)
+        {
+            GameUILayer.s_instance.btn_spawn.localScale = Vector3.one;
+        }
     }
 }

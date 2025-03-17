@@ -30,6 +30,8 @@ public class GameFightData : MonoBehaviour
     public bool isGameOver = false;
     [HideInInspector]
     public bool isCanOnInvokeBoCiSecond = true;
+    [HideInInspector]
+    public bool isAddEnemyEnd = false;
 
     [HideInInspector]
     public int addedEnemyCount = 0;

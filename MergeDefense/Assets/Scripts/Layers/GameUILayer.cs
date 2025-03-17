@@ -27,6 +27,7 @@ public class GameUILayer : MonoBehaviour
     public Transform effectPoint;
     public Transform list_content_mythicHero;
     public Transform btn_mythicRedPoint;
+    public Transform btn_spawn;
     public Text text_mythicRedPointNum;
     public Text text_weaponSellPrice;
     public Text text_enemyCount;
@@ -90,7 +91,9 @@ public class GameUILayer : MonoBehaviour
 
     void startBoCi()
     {
+        GameFightData.s_instance.isAddEnemyEnd = false;
         ++GameFightData.s_instance.curBoCi;
+        btn_spawn.localScale = Vector3.zero;
 
         int maxWave = EnemyWaveEntity.getInstance().list[EnemyWaveEntity.getInstance().list.Count - 1].wave;
         if (GameFightData.s_instance.curBoCi > maxWave)
@@ -218,6 +221,7 @@ public class GameUILayer : MonoBehaviour
             if (waitAddEnemy.Count == 0)
             {
                 CancelInvoke("onInvokeAddEnemy");
+                GameFightData.s_instance.isAddEnemyEnd = true;
             }
         }
     }
@@ -572,6 +576,13 @@ public class GameUILayer : MonoBehaviour
         }
         text_timeScale.text = "x"+GameFightData.s_instance.gameTimeScale;
         Time.timeScale = GameFightData.s_instance.gameTimeScale;
+    }
+
+    public void onClickSpawn()
+    {
+        AudioScript.s_instance.playSound_btn();
+        forceToBoCi(GameFightData.s_instance.curBoCi + 1);
+        btn_spawn.localScale = Vector3.zero;
     }
 
     bool isCalledGameOver = false;

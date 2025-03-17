@@ -162,12 +162,6 @@ public class KillEnemyRewardPanel : MonoBehaviour
             else
             {
                 GameFightData.s_instance.isCanOnInvokeBoCiSecond = true;
-                
-                // 如果场上没有敌人，直接开始下一波
-                //if(EnemyManager.s_instance.list_enemy.Count == 0)
-                {
-                    GameUILayer.s_instance.forceToBoCi(enemyWaveData.wave + 1);
-                }
             }
 
             Destroy(gameObject);
