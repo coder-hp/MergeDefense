@@ -13,11 +13,19 @@ public class heroFlyWeapon118 : MonoBehaviour
     {
         heroLogicBase = _heroLogicBase;
         enemyLogic = _enemyLogic;
-        targetTrans = enemyLogic.transform;
+        if (enemyLogic)
+        {
+            targetTrans = enemyLogic.transform;
+        }
+        else
+        {
+            transform.rotation = Quaternion.Euler(0, 0, heroLogicBase.modelTrans.eulerAngles.y);
+        }
 
         transform.position = heroLogicBase.flyWeaponPoint.position;
     }
 
+    bool isReadyDestroy = false;
     void Update()
     {
         if (enemyLogic)
@@ -30,17 +38,63 @@ public class heroFlyWeapon118 : MonoBehaviour
             {
                 if (heroLogicBase)
                 {
-                    bool isCrit = RandomUtil.getRandom(1, 100) <= heroLogicBase.getCritRate() ? true : false;
-                    int atk = Mathf.RoundToInt(heroLogicBase.getAtk() * (isCrit ? heroLogicBase.getCritDamageXiShu() : 1));
-                    EffectManager.s_instance.enemyDamage(enemyLogic.transform.position, heroLogicBase.id);
-                    enemyLogic.damage(atk, isCrit);
+                    atkEnemy(enemyLogic);
                 }
                 Destroy(gameObject);
             }
         }
         else
         {
+            if (!isReadyDestroy)
+            {
+                Destroy(gameObject, 5);
+                transform.GetComponent<BoxCollider>().enabled = true;
+            }
+
+            transform.Translate(Vector3.up * moveSpeed * Time.deltaTime, Space.Self);
+        }
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.CompareTag("Enemy"))
+        {
+            EnemyLogic _enemyLogic = other.transform.GetComponent<EnemyLogic>();
+            atkEnemy(_enemyLogic);
             Destroy(gameObject);
+        }
+    }
+
+    void atkEnemy(EnemyLogic _enemyLogic)
+    {
+        bool isCrit = RandomUtil.getRandom(1, 100) <= heroLogicBase.getCritRate() ? true : false;
+        int atk = Mathf.RoundToInt(heroLogicBase.getAtk() * (isCrit ? heroLogicBase.getCritDamageXiShu() : 1));
+        EffectManager.s_instance.enemyDamage(_enemyLogic.transform.position, heroLogicBase.id);
+        _enemyLogic.damage(atk, isCrit);
+
+        // 技能3：攻击时，10%概率对范围内的敌人造成攻击力1500%的伤害，并追加其最大生命值10%的伤害
+        if (RandomUtil.getRandom(1, 100) <= (10 + heroLogicBase.getAddSkillRate()))
+        {
+            atk = heroLogicBase.getAtk() * 15;
+            for (int i = 0; i < EnemyManager.s_instance.list_enemy.Count; i++)
+            {
+                if (Vector3.Distance(transform.position, EnemyManager.s_instance.list_enemy[i].transform.position) <= Consts.megaSkillRange)
+                {
+                    EffectManager.s_instance.enemyDamage(EnemyManager.s_instance.list_enemy[i].transform.position, heroLogicBase.id);
+                    if (EnemyManager.s_instance.list_enemy[i].damage(atk, false))
+                    {
+                        --i;
+                    }
+                    else
+                    {
+                        // 追加伤害
+                        if (EnemyManager.s_instance.list_enemy[i].damage(Mathf.RoundToInt(EnemyManager.s_instance.list_enemy[i].fullHP * 0.1f), false))
+                        {
+                            --i;
+                        }
+                    }
+                }
+            }
         }
     }
 }

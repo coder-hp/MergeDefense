@@ -10,6 +10,8 @@ using UnityEngine;
 // 技能4：每攻击20次，喷射三个火球，每个火球对范围内的敌人造成攻击力2500%的伤害
 public class HeroLogic118 : HeroBase
 {
+    int atkCount = 0;
+
     private void Start()
     {
         // 技能1：成功召唤时，对所有敌人造成攻击力3000%的伤害
@@ -41,7 +43,33 @@ public class HeroLogic118 : HeroBase
     public override void AttackLogic(EnemyLogic enemyLogic)
     {
         AudioScript.s_instance.playSound("118_attack");
-        Transform arrow = Instantiate(ObjectPool.getPrefab("Prefabs/Games/heroFlyWeapon118"), GameLayer.s_instance.flyPoint).transform;
-        arrow.GetComponent<heroFlyWeapon118>().init(heroLogicBase, enemyLogic);
+
+        {
+            Transform arrow = Instantiate(ObjectPool.getPrefab("Prefabs/Games/heroFlyWeapon118"), GameLayer.s_instance.flyPoint).transform;
+            arrow.GetComponent<heroFlyWeapon118>().init(heroLogicBase, enemyLogic);
+        }
+
+        // 技能4：每攻击20次，喷射三个火球，每个火球对范围内的敌人造成攻击力2500%的伤害
+        if (++atkCount >= 20)
+        {
+            atkCount = 0;
+
+            int addedCount = 0;
+            for(int i = 0; i < EnemyManager.s_instance.list_enemy.Count; i++)
+            {
+                Transform ball = Instantiate(ObjectPool.getPrefab("Prefabs/Games/heroFlyWeapon118_fireBall"), GameLayer.s_instance.flyPoint).transform;
+                ball.GetComponent<heroFlyWeapon118_fireBall>().init(heroLogicBase, EnemyManager.s_instance.list_enemy[i]);
+                if(++addedCount >= 3)
+                {
+                    return;
+                }
+            }
+
+            while(addedCount < 3)
+            {
+                Transform ball = Instantiate(ObjectPool.getPrefab("Prefabs/Games/heroFlyWeapon118_fireBall"), GameLayer.s_instance.flyPoint).transform;
+                ball.GetComponent<heroFlyWeapon118_fireBall>().init(heroLogicBase, null);
+            }
+        }
     }
 }

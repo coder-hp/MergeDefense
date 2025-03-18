@@ -18,12 +18,9 @@ public class HeroAniEvent : MonoBehaviour
 
     public void onAttack()
     {
-        if (enemyLogic)
+        if (heroBase)
         {
-            if(heroBase)
-            {
-                heroBase.AttackLogic(enemyLogic);
-            }
+            heroBase.AttackLogic(enemyLogic);
         }
     }
 
