@@ -12,15 +12,22 @@ public class HeroLogic102 : HeroBase
     {
         AudioScript.s_instance.playSound("102_attack");
         Transform arrow = Instantiate(ObjectPool.getPrefab("Prefabs/Games/heroFlyWeapon102"), GameLayer.s_instance.flyPoint).transform;
-        arrow.GetComponent<heroFlyWeapon102>().init(heroLogicBase, enemyLogic);
+        arrow.GetComponent<HeroFlyWeaponBase>().init(heroLogicBase, enemyLogic);
 
         if(RandomUtil.getRandom(1,100) <= (baseSkillRate + heroLogicBase.getAddSkillRate()))
         {
             Transform arrow2 = Instantiate(ObjectPool.getPrefab("Prefabs/Games/heroFlyWeapon102"), GameLayer.s_instance.flyPoint).transform;
-            arrow2.GetComponent<heroFlyWeapon102>().init(heroLogicBase, enemyLogic);
+            arrow2.GetComponent<HeroFlyWeaponBase>().init(heroLogicBase, enemyLogic);
 
             // 把第一支箭往前挪一挪
-            arrow.position = Vector3.MoveTowards(arrow.position, enemyLogic.transform.position, 1);
+            if (enemyLogic)
+            {
+                arrow.position = Vector3.MoveTowards(arrow.position, enemyLogic.transform.position, 1);
+            }
+            else
+            {
+                arrow.Translate(Vector3.up, Space.Self);
+            }
         }
     }
 }

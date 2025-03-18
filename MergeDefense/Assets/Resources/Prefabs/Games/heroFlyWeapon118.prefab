@@ -48,6 +48,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: afbc86007e5a2814a854ab25f6310d68, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  heroLogicBase: {fileID: 0}
+  fixedAtk: 0
 --- !u!54 &-21771534958603014
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -94,7 +96,7 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 0
   serializedVersion: 3
-  m_Size: {x: 0.1, y: 0.3, z: 0.1}
+  m_Size: {x: 0.1, y: 0.2, z: 0.1}
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &6702083237672533243
 GameObject:

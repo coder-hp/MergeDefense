@@ -4,14 +4,14 @@ using UnityEngine;
 
 public class HeroFlyWeaponBase : MonoBehaviour
 {
+    [HideInInspector]
     public HeroLogicBase heroLogicBase;
+    [HideInInspector]
+    public int fixedAtk = 0;
 
     EnemyLogic enemyLogic;
     Transform targetTrans;
     float moveSpeed = 10;
-
-    [HideInInspector]
-    public int fixedAtk = 0;
 
     public void init(HeroLogicBase _heroLogicBase, EnemyLogic _enemyLogic, int _fixedAtk = 0)
     {
@@ -54,7 +54,7 @@ public class HeroFlyWeaponBase : MonoBehaviour
         {
             if (!isReadyDestroy)
             {
-                Destroy(gameObject, 5);
+                Destroy(gameObject, 3);
                 transform.GetComponent<BoxCollider>().enabled = true;
             }
 
