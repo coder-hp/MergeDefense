@@ -549,7 +549,22 @@ public class HeroLogicBase : MonoBehaviour
                 {
                     if (GameUILayer.s_instance.list_weaponBar[i].weaponData.buff3Type == Consts.BuffType.CritDamage)
                     {
-                        critDamage += Mathf.RoundToInt(GameUILayer.s_instance.list_weaponBar[i].weaponData.buff3Value);
+                        critDamage += GameUILayer.s_instance.list_weaponBar[i].weaponData.buff3Value;
+                    }
+                }
+            }
+        }
+
+        // 角色114技能3：自身暴伤增加50%，装备的剑类武器每一级额外提升5%
+        if(id == 114)
+        {
+            for (int i = 0; i < GameUILayer.s_instance.list_weaponBar.Count; i++)
+            {
+                if (GameUILayer.s_instance.list_weaponBar[i].weaponData != null)
+                {
+                    if (GameUILayer.s_instance.list_weaponBar[i].weaponData.type == (int)Consts.WeaponType.Sword)
+                    {
+                        critDamage += 0.05f;
                     }
                 }
             }

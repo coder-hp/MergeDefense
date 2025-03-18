@@ -31,6 +31,7 @@ public class HeroInfoPanel : MonoBehaviour
     public Transform tab_skillTrans;
     public Transform btn_sellHeroTrans;
     public Text text_sellHeroPrice;
+    public Text text_critDamage;
 
     [HideInInspector]
     public bool isCanClose = true;      // 为了连续点击角色时，角色信息面板不用关闭再显示
@@ -64,6 +65,7 @@ public class HeroInfoPanel : MonoBehaviour
         text_atk.text = heroLogicBase.getAtk().ToString();
         text_atk_speed.text = heroLogicBase.getAtkSpeed().ToString();
         text_crit_rate.text = heroLogicBase.getCritRate() + "%";
+        text_critDamage.text = "爆伤:" + heroLogicBase.getCritDamageXiShu();
         img_head.sprite = AtlasUtil.getAtlas_icon().GetSprite("head_" + heroLogicBase.id);
         img_head_kuang.sprite = AtlasUtil.getAtlas_game().GetSprite("kuang_hero_" + heroLogicBase.heroData.quality + "_1");
         img_head_bg.sprite = AtlasUtil.getAtlas_game().GetSprite("kuang_hero_" + heroLogicBase.heroData.quality + "_2");
