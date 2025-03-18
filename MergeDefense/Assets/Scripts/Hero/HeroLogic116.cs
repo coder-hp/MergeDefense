@@ -64,8 +64,8 @@ public class HeroLogic116 : HeroBase
     private void OnDestroy()
     {
         // 删除全局buff
-        GameFightData.s_instance.removeGlobalHeroBuff(Consts.BuffType.AtkBaiFenBi, "114");
-        GameFightData.s_instance.removeGlobalHeroBuff(Consts.BuffType.AtkSpeed, "114");
-        GameFightData.s_instance.removeGlobalHeroBuff(Consts.BuffType.CritDamage, "114");
+        GameFightData.s_instance.removeGlobalHeroBuff(Consts.BuffType.AtkBaiFenBi, "116");
+        GameFightData.s_instance.removeGlobalHeroBuff(Consts.BuffType.AtkSpeed, "116");
+        GameFightData.s_instance.removeGlobalHeroBuff(Consts.BuffType.CritDamage, "116");
     }
 }
