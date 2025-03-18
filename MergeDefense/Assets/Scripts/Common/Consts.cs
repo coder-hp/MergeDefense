@@ -44,6 +44,7 @@ public class Consts
         BossRewardPanel,
         MythicHeroLayer,
         GetMythicHeroLayer,
+        ClawLayer,
     }
 
     public enum WeaponType
