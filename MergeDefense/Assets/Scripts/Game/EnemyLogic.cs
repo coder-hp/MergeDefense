@@ -8,7 +8,8 @@ using static Consts;
 
 public class EnemyLogic : MonoBehaviour
 {
-    int curTargetPosIndex = 1;
+    [HideInInspector]
+    public int curTargetPosIndex = 1;
 
     float moveSpeed = 2;
     [HideInInspector]
