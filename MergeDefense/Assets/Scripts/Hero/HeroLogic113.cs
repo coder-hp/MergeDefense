@@ -39,6 +39,11 @@ public class HeroLogic113 : HeroBase
         }
         else
         {
+            if (!enemyLogic)
+            {
+                return;
+            }
+
             int atk = Mathf.RoundToInt(heroLogicBase.getAtk() * (isCrit ? heroLogicBase.getCritDamageXiShu() : 1));
             if (enemyLogic.damage(atk, isCrit))
             {

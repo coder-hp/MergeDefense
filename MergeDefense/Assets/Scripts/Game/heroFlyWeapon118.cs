@@ -2,70 +2,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class heroFlyWeapon118 : MonoBehaviour
+public class heroFlyWeapon118 : HeroFlyWeaponBase
 {
-    HeroLogicBase heroLogicBase;
-    EnemyLogic enemyLogic;
-    Transform targetTrans;
-    float moveSpeed = 10;
-
-    public void init(HeroLogicBase _heroLogicBase, EnemyLogic _enemyLogic)
-    {
-        heroLogicBase = _heroLogicBase;
-        enemyLogic = _enemyLogic;
-        if (enemyLogic)
-        {
-            targetTrans = enemyLogic.transform;
-        }
-        else
-        {
-            transform.rotation = Quaternion.Euler(0, 0, heroLogicBase.modelTrans.eulerAngles.y);
-        }
-
-        transform.position = heroLogicBase.flyWeaponPoint.position;
-    }
-
-    bool isReadyDestroy = false;
-    void Update()
-    {
-        if (enemyLogic)
-        {
-            float angle = CommonUtil.twoPointAngle(transform.position, targetTrans.position);
-            transform.rotation = Quaternion.Euler(0, 0, angle);
-            transform.position = Vector3.MoveTowards(transform.position, targetTrans.position, moveSpeed * Time.deltaTime);
-
-            if (Vector3.Distance(transform.position, targetTrans.position) <= 0.1f)
-            {
-                if (heroLogicBase)
-                {
-                    atkEnemy(enemyLogic);
-                }
-                Destroy(gameObject);
-            }
-        }
-        else
-        {
-            if (!isReadyDestroy)
-            {
-                Destroy(gameObject, 5);
-                transform.GetComponent<BoxCollider>().enabled = true;
-            }
-
-            transform.Translate(Vector3.up * moveSpeed * Time.deltaTime, Space.Self);
-        }
-    }
-
-    private void OnTriggerEnter(Collider other)
-    {
-        if (other.CompareTag("Enemy"))
-        {
-            EnemyLogic _enemyLogic = other.transform.GetComponent<EnemyLogic>();
-            atkEnemy(_enemyLogic);
-            Destroy(gameObject);
-        }
-    }
-
-    void atkEnemy(EnemyLogic _enemyLogic)
+    public override void atkEnemy(EnemyLogic _enemyLogic)
     {
         bool isCrit = RandomUtil.getRandom(1, 100) <= heroLogicBase.getCritRate() ? true : false;
         int atk = Mathf.RoundToInt(heroLogicBase.getAtk() * (isCrit ? heroLogicBase.getCritDamageXiShu() : 1));

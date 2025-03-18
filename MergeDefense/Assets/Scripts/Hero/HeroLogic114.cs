@@ -20,6 +20,12 @@ public class HeroLogic114 : HeroBase
     public override void AttackLogic(EnemyLogic enemyLogic)
     {
         AudioScript.s_instance.playSound("114_attack");
+
+        if (!enemyLogic)
+        {
+            return;
+        }
+
         bool isCrit = RandomUtil.getRandom(1, 100) <= heroLogicBase.getCritRate() ? true : false;
         int atk = Mathf.RoundToInt(heroLogicBase.getAtk() * (isCrit ? heroLogicBase.getCritDamageXiShu() : 1));
         enemyLogic.damage(atk, isCrit);

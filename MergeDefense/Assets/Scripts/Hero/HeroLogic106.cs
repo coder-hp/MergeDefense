@@ -11,9 +11,6 @@ public class HeroLogic106 : HeroBase
     public override void AttackLogic(EnemyLogic enemyLogic)
     {
         AudioScript.s_instance.playSound("106_attack");
-        bool isCrit = RandomUtil.getRandom(1, 100) <= heroLogicBase.getCritRate() ? true : false;
-        int atk = Mathf.RoundToInt(heroLogicBase.getAtk() * (isCrit ? heroLogicBase.getCritDamageXiShu() : 1));
-        enemyLogic.damage(atk, isCrit);
 
         // 技能判定
         if (RandomUtil.getRandom(1, 100) <= (baseSkillRate + heroLogicBase.getAddSkillRate()))
@@ -26,5 +23,14 @@ public class HeroLogic106 : HeroBase
                 }
             }
         }
+
+        if (!enemyLogic)
+        {
+            return;
+        }
+
+        bool isCrit = RandomUtil.getRandom(1, 100) <= heroLogicBase.getCritRate() ? true : false;
+        int atk = Mathf.RoundToInt(heroLogicBase.getAtk() * (isCrit ? heroLogicBase.getCritDamageXiShu() : 1));
+        enemyLogic.damage(atk, isCrit);
     }
 }

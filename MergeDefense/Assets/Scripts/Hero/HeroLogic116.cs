@@ -58,7 +58,7 @@ public class HeroLogic116 : HeroBase
 
         AudioScript.s_instance.playSound("116_attack");
         Transform arrow = Instantiate(ObjectPool.getPrefab("Prefabs/Games/heroFlyWeapon116"), GameLayer.s_instance.flyPoint).transform;
-        arrow.GetComponent<heroFlyWeapon116>().init(heroLogicBase, enemyLogic);
+        arrow.GetComponent<HeroFlyWeaponBase>().init(heroLogicBase, enemyLogic);
     }
 
     private void OnDestroy()

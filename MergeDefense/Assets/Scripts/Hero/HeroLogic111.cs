@@ -29,7 +29,7 @@ public class HeroLogic111 : HeroBase
                 if (Vector3.Distance(heroLogicBase.curStandGrid.position, EnemyManager.s_instance.list_enemy[i].transform.position) <= heroLogicBase.heroData.atkRange)
                 {
                     Transform arrow = Instantiate(ObjectPool.getPrefab("Prefabs/Games/heroFlyWeapon111"), GameLayer.s_instance.flyPoint).transform;
-                    arrow.GetComponent<heroFlyWeapon111>().init(heroLogicBase, EnemyManager.s_instance.list_enemy[i], atk);
+                    arrow.GetComponent<HeroFlyWeaponBase>().init(heroLogicBase, EnemyManager.s_instance.list_enemy[i], atk);
 
                     if (++count >= 3)
                     {
@@ -44,7 +44,7 @@ public class HeroLogic111 : HeroBase
     {
         AudioScript.s_instance.playSound("111_attack");
         Transform arrow = Instantiate(ObjectPool.getPrefab("Prefabs/Games/heroFlyWeapon111"), GameLayer.s_instance.flyPoint).transform;
-        arrow.GetComponent<heroFlyWeapon111>().init(heroLogicBase, enemyLogic);
+        arrow.GetComponent<HeroFlyWeaponBase>().init(heroLogicBase, enemyLogic);
     }
 
     private void OnDestroy()

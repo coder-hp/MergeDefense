@@ -21,18 +21,8 @@ public class HeroLogic117 : HeroBase
         bool isCrit = RandomUtil.getRandom(1, 100) <= heroLogicBase.getCritRate() ? true : false;
         int atk = Mathf.RoundToInt(heroLogicBase.getAtk() * (isCrit ? heroLogicBase.getCritDamageXiShu() : 1));
 
-        // 先判定技能2：攻击时，10%概率击杀血量不满的敌人（对精英和BOSS无效）
-        if (enemyLogic.enemyWaveData.enemyType == 1 && enemyLogic.curHP < enemyLogic.fullHP && RandomUtil.getRandom(1, 100) <= (10 + heroLogicBase.getAddSkillRate()))
-        {
-            enemyLogic.damage(enemyLogic.curHP, false);
-        }
-        else
-        {
-            enemyLogic.damage(atk, isCrit);
-        }
-
         // 判定技能3：攻击时，15%概率对范围内的敌人造成攻击力1000%的伤害
-        if(RandomUtil.getRandom(1, 100) <= (15 + heroLogicBase.getAddSkillRate()))
+        if (RandomUtil.getRandom(1, 100) <= (15 + heroLogicBase.getAddSkillRate()))
         {
             for (int i = 0; i < EnemyManager.s_instance.list_enemy.Count; i++)
             {
@@ -44,6 +34,21 @@ public class HeroLogic117 : HeroBase
                     }
                 }
             }
+        }
+
+        if (!enemyLogic)
+        {
+            return;
+        }
+
+        // 先判定技能2：攻击时，10%概率击杀血量不满的敌人（对精英和BOSS无效）
+        if (enemyLogic.enemyWaveData.enemyType == 1 && enemyLogic.curHP < enemyLogic.fullHP && RandomUtil.getRandom(1, 100) <= (10 + heroLogicBase.getAddSkillRate()))
+        {
+            enemyLogic.damage(enemyLogic.curHP, false);
+        }
+        else
+        {
+            enemyLogic.damage(atk, isCrit);
         }
     }
 

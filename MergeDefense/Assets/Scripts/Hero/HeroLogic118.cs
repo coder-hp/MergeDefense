@@ -46,7 +46,7 @@ public class HeroLogic118 : HeroBase
 
         {
             Transform arrow = Instantiate(ObjectPool.getPrefab("Prefabs/Games/heroFlyWeapon118"), GameLayer.s_instance.flyPoint).transform;
-            arrow.GetComponent<heroFlyWeapon118>().init(heroLogicBase, enemyLogic);
+            arrow.GetComponent<HeroFlyWeaponBase>().init(heroLogicBase, enemyLogic);
         }
 
         // 技能4：每攻击20次，喷射三个火球，每个火球对范围内的敌人造成攻击力2500%的伤害
@@ -58,7 +58,7 @@ public class HeroLogic118 : HeroBase
             for(int i = 0; i < EnemyManager.s_instance.list_enemy.Count; i++)
             {
                 Transform ball = Instantiate(ObjectPool.getPrefab("Prefabs/Games/heroFlyWeapon118_fireBall"), GameLayer.s_instance.flyPoint).transform;
-                ball.GetComponent<heroFlyWeapon118_fireBall>().init(heroLogicBase, EnemyManager.s_instance.list_enemy[i]);
+                ball.GetComponent<HeroFlyWeaponBase>().init(heroLogicBase, EnemyManager.s_instance.list_enemy[i]);
                 if(++addedCount >= 3)
                 {
                     return;
@@ -68,7 +68,7 @@ public class HeroLogic118 : HeroBase
             while(addedCount < 3)
             {
                 Transform ball = Instantiate(ObjectPool.getPrefab("Prefabs/Games/heroFlyWeapon118_fireBall"), GameLayer.s_instance.flyPoint).transform;
-                ball.GetComponent<heroFlyWeapon118_fireBall>().init(heroLogicBase, null);
+                ball.GetComponent<HeroFlyWeaponBase>().init(heroLogicBase, null);
             }
         }
     }

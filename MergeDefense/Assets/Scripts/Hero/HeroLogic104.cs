@@ -11,6 +11,12 @@ public class HeroLogic104 : HeroBase
     public override void AttackLogic(EnemyLogic enemyLogic)
     {
         AudioScript.s_instance.playSound("104_attack");
+
+        if (!enemyLogic)
+        {
+            return;
+        }
+
         bool isCrit = false;
         if (++atkCount == 3)
         {

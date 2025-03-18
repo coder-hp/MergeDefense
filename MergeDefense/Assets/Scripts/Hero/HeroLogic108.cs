@@ -12,7 +12,11 @@ public class HeroLogic108 : HeroBase
     {
         AudioScript.s_instance.playSound("108_attack");
 
-        bool isTriggerSkill = false;
+        if (!enemyLogic)
+        {
+            return;
+        }
+
         for (int i = 0; i < EnemyManager.s_instance.list_enemy.Count; i++)
         {
             if (Vector3.Distance(heroLogicBase.curStandGrid.position, EnemyManager.s_instance.list_enemy[i].transform.position) <= heroLogicBase.heroData.atkRange)
@@ -26,15 +30,9 @@ public class HeroLogic108 : HeroBase
                 // 如果没死，则判定技能
                 else if (RandomUtil.getRandom(1, 100) <= (baseSkillRate + heroLogicBase.getAddSkillRate()))
                 {
-                    isTriggerSkill = true;
                     enemyLogic.addBuff(new Consts.BuffData(Consts.BuffType.YiShang, 0.2f, 5,"", false, false));
                 }
             }
-        }
-
-        if(isTriggerSkill)
-        {
-            //EffectManager.heroSkill(transform.position, heroLogicBase.id);
         }
     }
 }

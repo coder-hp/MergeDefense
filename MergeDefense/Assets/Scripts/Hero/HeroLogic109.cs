@@ -10,12 +10,10 @@ public class HeroLogic109 : HeroBase
 {
     public override void AttackLogic(EnemyLogic enemyLogic)
     {
-        // AudioScript.s_instance.playSound("109_attack");
+        AudioScript.s_instance.playSound("109_attack");
 
         bool isCrit = RandomUtil.getRandom(1, 100) <= heroLogicBase.getCritRate() ? true : false;
         int atk = Mathf.RoundToInt(heroLogicBase.getAtk() * (isCrit ? heroLogicBase.getCritDamageXiShu() : 1));
-
-        enemyLogic.damage(atk, isCrit);
 
         // 判定技能2：攻击时，10%的概率获得1宝石
         if (RandomUtil.getRandom(1, 100) <= (10 + heroLogicBase.getAddSkillRate()))
@@ -38,5 +36,12 @@ public class HeroLogic109 : HeroBase
                 }
             }
         }
+
+        if (!enemyLogic)
+        {
+            return;
+        }
+
+        enemyLogic.damage(atk, isCrit);
     }
 }
