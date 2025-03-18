@@ -113,6 +113,37 @@ public class GameUILayer : MonoBehaviour
         EnemyWaveData enemyWaveData = EnemyWaveEntity.getInstance().getData(GameFightData.s_instance.curBoCi);
 
         GameFightData.s_instance.curBoCiRestTime = enemyWaveData.time;
+
+        for (int i = 0; i < HeroManager.s_instance.list_hero.Count; i++)
+        {
+            // 角色119技能2：每波WAVE时长增加3s
+            if (HeroManager.s_instance.list_hero[i].id == 119)
+            {
+                GameFightData.s_instance.curBoCiRestTime += 3;
+
+                // 角色119技能1：每波WAVE开始时5%的概率消灭一半敌人
+                if(RandomUtil.getRandom(1,100) <= (5 + HeroManager.s_instance.list_hero[i].getAddSkillRate()))
+                {
+                    if (EnemyManager.s_instance.list_enemy.Count > 1)
+                    {
+                        for (int j = 0; j < EnemyManager.s_instance.list_enemy.Count; j++)
+                        {
+                            if (EnemyManager.s_instance.list_enemy[j].enemyWaveData.enemyType == 1)
+                            {
+                                if (EnemyManager.s_instance.list_enemy[j].damage(EnemyManager.s_instance.list_enemy[j].curHP, false))
+                                {
+                                    // 消灭一半,所以得间隔一个，不用--i了
+                                    // --i;
+                                }
+                            }
+                        }
+                    }
+                }
+
+                break;
+            }
+        }
+
         text_boci.text = "WAVE：" + GameFightData.s_instance.curBoCi + "/80";
 
         if (GameFightData.s_instance.curBoCiRestTime == 60)

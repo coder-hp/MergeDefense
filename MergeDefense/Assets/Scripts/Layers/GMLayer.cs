@@ -200,6 +200,14 @@ public class GMLayer : MonoBehaviour
         }
     }
 
+    public void onClickAddSkillRate()
+    {
+        if (GameFightData.s_instance)
+        {
+            GameFightData.s_instance.addGlobalHeroBuff(new Consts.BuffData(Consts.BuffType.SkillRate, 100, 999, "GM", true, false));
+        }
+    }
+
     public void onClickClose()
     {
         bg.SetActive(false);

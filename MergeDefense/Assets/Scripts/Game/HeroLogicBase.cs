@@ -620,6 +620,15 @@ public class HeroLogicBase : MonoBehaviour
             }
         }
 
+        // 全局buff加成
+        for (int i = 0; i < GameFightData.s_instance.list_globalHeroBuff.Count; i++)
+        {
+            if (GameFightData.s_instance.list_globalHeroBuff[i].buffType == Consts.BuffType.SkillRate)
+            {
+                skillRate += Mathf.RoundToInt(GameFightData.s_instance.list_globalHeroBuff[i].value);
+            }
+        }
+
         return skillRate;
     }
 
