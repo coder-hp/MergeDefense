@@ -2,12 +2,12 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-// 兽族酋长
+// 亚瑟王
 // 近战单体攻击
-// 技能1：杀死一名敌人后获得5%攻速，持续5s。可叠加5层
-// 技能2：第5次攻击变为必定暴击的范围伤害
-// 技能3：每一波结束后30%概率获得5枚金币
-public class HeroLogic113 : HeroBase
+// 技能1：我方单位攻击增加10%，暴击率增加5%
+// 技能2：攻击时，15%概率生成一道剑气，对剑气上的敌人造成攻击力1500%的伤害，并附加30%的减速效果，持续5s
+// 技能3：自身暴伤增加50%，装备的剑类武器每一级额外提升5%
+public class HeroLogic114 : HeroBase
 {
     int atkCount = 0;
     public override void AttackLogic(EnemyLogic enemyLogic)

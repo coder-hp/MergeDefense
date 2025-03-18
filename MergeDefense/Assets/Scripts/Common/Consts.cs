@@ -75,9 +75,11 @@ public class Consts
         public float value;
         public float time;
         public string from;
-
         public bool isForever = false;
         public bool isCanRepeatFrom = false;
+
+        // 全局buff使用
+        public int addedCount = 1;
 
         public BuffData(BuffType _buffType, float _value, float _time,string _from , bool _isForever, bool _isCanRepeatFrom)
         {

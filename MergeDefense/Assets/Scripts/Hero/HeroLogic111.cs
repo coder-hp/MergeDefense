@@ -12,7 +12,7 @@ public class HeroLogic111 : HeroBase
     private void Start()
     {
         // 技能1：我方单位攻速增加20%
-        GameFightData.s_instance.addGlobalHeroBuff(new Consts.BuffData(Consts.BuffType.AtkSpeed, 0.2f, 9999,"111", false, false));
+        GameFightData.s_instance.addGlobalHeroBuff(new Consts.BuffData(Consts.BuffType.AtkSpeed, 0.2f, 9999,"111", true, true));
 
         InvokeRepeating("onInvokeSkill", 2, 2);
     }
