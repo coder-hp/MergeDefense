@@ -645,6 +645,18 @@ public class HeroLogicBase : MonoBehaviour
         }
     }
 
+    public void removeBuff(Consts.BuffType buffType, string from)
+    {
+        for (int i = 0; i < list_buffDatas.Count; i++)
+        {
+            if (list_buffDatas[i].buffType == buffType && list_buffDatas[i].from == from)
+            {
+                list_buffDatas.RemoveAt(i);
+                --i;
+            }
+        }
+    }
+
     public void addStar()
     {
         ++curStar;
