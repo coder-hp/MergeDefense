@@ -9,8 +9,6 @@ using UnityEngine;
 // 技能3：每10s召唤6个扭曲物质落于随机位置持续5s，对接触到的敌人造成600%的伤害，并附加20%的减速效果
 public class HeroLogic115 : HeroBase
 {
-    public int killEnemyAddAtk = 0;
-
     private void Start()
     {
         InvokeRepeating("onInvokeSkill",10,10);

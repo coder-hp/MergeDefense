@@ -33,7 +33,7 @@ public class HeroSkill115_3 : MonoBehaviour
                 if(!enemyLogic.damage(atk,false))
                 {
                     list_enemy.Add(enemyLogic);
-                    enemyLogic.addBuff(new Consts.BuffData(Consts.BuffType.MoveSpeed,-0.2f,5,"115_3"));
+                    enemyLogic.addBuff(new Consts.BuffData(Consts.BuffType.MoveSpeed,-0.2f,5,"115_3",false,false));
                 }
             }
         }

@@ -76,12 +76,17 @@ public class Consts
         public float time;
         public string from;
 
-        public BuffData(BuffType _buffType, float _value, float _time,string _from =  "")
+        public bool isForever = false;
+        public bool isCanRepeatFrom = false;
+
+        public BuffData(BuffType _buffType, float _value, float _time,string _from , bool _isForever, bool _isCanRepeatFrom)
         {
             buffType = _buffType;
             value = _value;
             time = _time;
             from = _from;
+            isForever = _isForever;
+            isCanRepeatFrom = _isCanRepeatFrom;
         }
     }
 

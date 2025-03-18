@@ -39,7 +39,7 @@ public class heroFlyWeapon105 : MonoBehaviour
                     // 如果没死，则判定技能：攻击附带20%减速效果，持续3s
                     if (!enemyLogic.damage(atk, isCrit))
                     {
-                        enemyLogic.addBuff(new Consts.BuffData(Consts.BuffType.MoveSpeed, -0.2f, 3, "105"));
+                        enemyLogic.addBuff(new Consts.BuffData(Consts.BuffType.MoveSpeed, -0.2f, 3, "105", false, false));
                     }
                 }
             }

@@ -22,7 +22,7 @@ public class HeroLogic106 : HeroBase
             {
                 if (Vector3.Distance(heroLogicBase.curStandGrid.position, HeroManager.s_instance.list_hero[i].curStandGrid.position) <= 1.6f)
                 {
-                    HeroManager.s_instance.list_hero[i].addBuff(new Consts.BuffData(Consts.BuffType.AtkBaiFenBi, 0.2f, 5, "106"));
+                    HeroManager.s_instance.list_hero[i].addBuff(new Consts.BuffData(Consts.BuffType.AtkBaiFenBi, 0.2f, 5, "106", false, false));
                 }
             }
         }

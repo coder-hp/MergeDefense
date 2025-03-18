@@ -94,7 +94,7 @@ public class EnemyLogic : MonoBehaviour
         // buff倒计时
         for (int i = 0; i < list_buffDatas.Count; i++)
         {
-            if(list_buffDatas[i].time > 0)
+            if(!list_buffDatas[i].isForever && list_buffDatas[i].time > 0)
             {
                 list_buffDatas[i].time -= Time.deltaTime;
                 if(list_buffDatas[i].time <= 0)
@@ -234,20 +234,26 @@ public class EnemyLogic : MonoBehaviour
 
     public void addBuff(Consts.BuffData buffData)
     {
-        for (int i = 0; i < list_buffDatas.Count; i++)
+        if (buffData.isCanRepeatFrom)
         {
-            // 如果已存在该buff,则重置时间
-            if (list_buffDatas[i].buffType == buffData.buffType && list_buffDatas[i].from == buffData.from)
-            {
-                if (list_buffDatas[i].time < buffData.time)
-                {
-                    list_buffDatas[i].time = buffData.time;
-                }
-                return;
-            }
+            list_buffDatas.Add(buffData);
         }
-
-        list_buffDatas.Add(buffData);
+        else
+        {
+            for (int i = 0; i < list_buffDatas.Count; i++)
+            {
+                // 如果已存在该buff,则重置时间
+                if (list_buffDatas[i].buffType == buffData.buffType && list_buffDatas[i].from == buffData.from)
+                {
+                    if (list_buffDatas[i].time < buffData.time)
+                    {
+                        list_buffDatas[i].time = buffData.time;
+                    }
+                    return;
+                }
+            }
+            list_buffDatas.Add(buffData);
+        }
 
         switch(buffData.buffType)
         {

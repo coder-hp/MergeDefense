@@ -16,7 +16,6 @@ public class HeroLogic112 : HeroBase
         InvokeRepeating("onInvokeCheckAtkRangeEnemy",0.2f,0.2f);
     }
 
-    Consts.BuffData buff_YiShang = new Consts.BuffData(Consts.BuffType.YiShang,0,0.2f);
     void onInvokeCheckAtkRangeEnemy()
     {
         if(heroLogicBase.isCanUpdate)
@@ -26,7 +25,7 @@ public class HeroLogic112 : HeroBase
             {
                 if (Vector3.Distance(heroLogicBase.curStandGrid.position, EnemyManager.s_instance.list_enemy[i].transform.position) <= heroLogicBase.heroData.atkRange)
                 {
-                    EnemyManager.s_instance.list_enemy[i].addBuff(new Consts.BuffData(Consts.BuffType.YiShang, 0, 0.2f));
+                    EnemyManager.s_instance.list_enemy[i].addBuff(new Consts.BuffData(Consts.BuffType.YiShang, 0, 0.2f,"", false, false));
                 }
             }
         }
@@ -65,7 +64,7 @@ public class HeroLogic112 : HeroBase
                     // 判定技能3：攻击时，15%概率造成2s[眩晕]
                     if (RandomUtil.getRandom(1, 100) <= (15 + heroLogicBase.getAddSkillRate()))
                     {
-                        EnemyManager.s_instance.list_enemy[i].addBuff(new Consts.BuffData(Consts.BuffType.Stun,0,2));
+                        EnemyManager.s_instance.list_enemy[i].addBuff(new Consts.BuffData(Consts.BuffType.Stun,0,2,"", false, false));
                     }
                 }
             }

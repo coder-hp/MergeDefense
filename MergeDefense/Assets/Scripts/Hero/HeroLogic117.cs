@@ -11,7 +11,7 @@ public class HeroLogic117 : HeroBase
 {
     private void Start()
     {
-        GameFightData.s_instance.addGlobalEnemyBuff(new Consts.BuffData(Consts.BuffType.MoveSpeed,-0.1f,9999,"117"));
+        GameFightData.s_instance.addGlobalEnemyBuff(new Consts.BuffData(Consts.BuffType.MoveSpeed,-0.1f,9999,"117", false, false));
     }
 
     public override void AttackLogic(EnemyLogic enemyLogic)

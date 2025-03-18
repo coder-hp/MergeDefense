@@ -52,8 +52,8 @@ public class HeroLogicBase : MonoBehaviour
 
     [HideInInspector]
     public HeroStarData heroStarData;
-
-    List<Consts.BuffData> list_buffDatas = new List<Consts.BuffData>();
+    [HideInInspector]
+    public List<Consts.BuffData> list_buffDatas = new List<Consts.BuffData>();
 
     GameObject obj_attackEffect = null;
 
@@ -224,7 +224,7 @@ public class HeroLogicBase : MonoBehaviour
         // buff倒计时
         for (int i = 0; i < list_buffDatas.Count; i++)
         {
-            if (list_buffDatas[i].time > 0)
+            if (!list_buffDatas[i].isForever && list_buffDatas[i].time > 0)
             {
                 list_buffDatas[i].time -= Time.deltaTime;
                 if (list_buffDatas[i].time <= 0)
@@ -462,6 +462,10 @@ public class HeroLogicBase : MonoBehaviour
             {
                 atkXiShu += list_buffDatas[i].value;
             }
+            else if (list_buffDatas[i].buffType == Consts.BuffType.Atk)
+            {
+                atk += (int)list_buffDatas[i].value;
+            }
         }
 
         return Mathf.RoundToInt(atk * atkXiShu);
@@ -487,7 +491,16 @@ public class HeroLogicBase : MonoBehaviour
             }
         }
 
-        // 全局加攻速，只生效一个
+        // 普通buff攻速
+        for (int i = 0; i < list_buffDatas.Count; i++)
+        {
+            if (list_buffDatas[i].buffType == Consts.BuffType.AtkSpeed)
+            {
+                atkSpeed += list_buffDatas[i].value;
+            }
+        }
+
+        // 全局buff加攻速，只生效一个
         for (int i = 0; i < GameFightData.s_instance.list_globalHeroBuff.Count; i++)
         {
             if (GameFightData.s_instance.list_globalHeroBuff[i].buffType == Consts.BuffType.AtkSpeed)
@@ -571,17 +584,24 @@ public class HeroLogicBase : MonoBehaviour
 
     public void addBuff(Consts.BuffData buffData)
     {
-        for (int i = 0; i < list_buffDatas.Count; i++)
+        if (buffData.isCanRepeatFrom)
         {
-            // 如果已存在该buff,则重置时间
-            if (list_buffDatas[i].buffType == buffData.buffType && list_buffDatas[i].from == buffData.from)
-            {
-                list_buffDatas[i].time = buffData.time;
-                return;
-            }
+            list_buffDatas.Add(buffData);
         }
+        else
+        {
+            for (int i = 0; i < list_buffDatas.Count; i++)
+            {
+                // 如果已存在该buff,则重置时间
+                if (list_buffDatas[i].buffType == buffData.buffType && list_buffDatas[i].from == buffData.from)
+                {
+                    list_buffDatas[i].time = buffData.time;
+                    return;
+                }
+            }
 
-        list_buffDatas.Add(buffData);
+            list_buffDatas.Add(buffData);
+        }
     }
 
     public void addStar()
