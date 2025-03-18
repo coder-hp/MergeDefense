@@ -30,7 +30,7 @@ public class HeroAniEvent : MonoBehaviour
 
         if(!heroLogicBase.checkAttack())
         {
-            heroLogicBase.playAni(Consts.HeroAniNameIdle, 0.3f);
+            heroLogicBase.playAni(Consts.HeroAniNameIdle, 0.1f);
         }
     }
 }

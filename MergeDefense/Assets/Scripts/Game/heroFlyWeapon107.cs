@@ -2,54 +2,23 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class heroFlyWeapon107 : MonoBehaviour
+public class heroFlyWeapon107 : HeroFlyWeaponBase
 {
-    HeroLogicBase heroLogicBase;
-    EnemyLogic enemyLogic;
-    Transform targetTrans;
-    float moveSpeed = 10;
-
-    public void init(HeroLogicBase _heroLogicBase, EnemyLogic _enemyLogic)
+    public override void atkEnemy(EnemyLogic _enemyLogic)
     {
-        heroLogicBase = _heroLogicBase;
-        enemyLogic = _enemyLogic;
-        targetTrans = enemyLogic.transform;
-        transform.position = heroLogicBase.flyWeaponPoint.position;
-    }
+        bool isCrit = RandomUtil.getRandom(1, 100) <= heroLogicBase.getCritRate() ? true : false;
+        int atk = Mathf.RoundToInt(heroLogicBase.getAtk() * (isCrit ? heroLogicBase.getCritDamageXiShu() : 1));
 
-    void Update()
-    {
-        if (enemyLogic)
+        EffectManager.s_instance.enemyDamage(_enemyLogic.transform.position, heroLogicBase.id);
+
+        if (!_enemyLogic.damage(atk, isCrit))
         {
-            float angle = CommonUtil.twoPointAngle(transform.position, targetTrans.position);
-            transform.rotation = Quaternion.Euler(0, 0, angle);
-            transform.position = Vector3.MoveTowards(transform.position, targetTrans.position, moveSpeed * Time.deltaTime);
-
-            if (Vector3.Distance(transform.position, targetTrans.position) <= 0.1f)
+            // 如果没死，则判定技能:攻击时，10%概率造成0.8s[眩晕]
+            bool isTriggerSkill = RandomUtil.getRandom(1, 100) <= (10 + heroLogicBase.getAddSkillRate()) ? true : false;
+            if (isTriggerSkill)
             {
-                if (heroLogicBase)
-                {
-                    bool isCrit = RandomUtil.getRandom(1, 100) <= heroLogicBase.getCritRate() ? true : false;
-                    int atk = Mathf.RoundToInt(heroLogicBase.getAtk() * (isCrit ? heroLogicBase.getCritDamageXiShu() : 1));
-
-                    EffectManager.s_instance.enemyDamage(enemyLogic.transform.position, heroLogicBase.id);
-
-                    if (!enemyLogic.damage(atk, isCrit))
-                    {
-                        // 如果没死，则判定技能:攻击时，10%概率造成0.8s[眩晕]
-                        bool isTriggerSkill = RandomUtil.getRandom(1, 100) <= (10 + heroLogicBase.getAddSkillRate()) ? true : false;
-                        if (isTriggerSkill)
-                        {
-                            enemyLogic.addBuff(new Consts.BuffData(Consts.BuffType.Stun, 0, 0.8f,"", false, false));
-                        }
-                    }
-                }
-                Destroy(gameObject);
+                _enemyLogic.addBuff(new Consts.BuffData(Consts.BuffType.Stun, 0, 0.8f, "", false, false));
             }
-        }
-        else
-        {
-            Destroy(gameObject);
         }
     }
 }
