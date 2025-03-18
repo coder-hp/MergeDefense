@@ -564,7 +564,7 @@ public class HeroLogicBase : MonoBehaviour
                 {
                     if (GameUILayer.s_instance.list_weaponBar[i].weaponData.type == (int)Consts.WeaponType.Sword)
                     {
-                        critDamage += 0.05f;
+                        critDamage += 0.05f * GameUILayer.s_instance.list_weaponBar[i].weaponData.level;
                     }
                 }
             }

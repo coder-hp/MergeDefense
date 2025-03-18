@@ -1174,7 +1174,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1424779052366672914}
   - component: {fileID: 7384110952235753725}
-  - component: {fileID: 1994101992287777677}
+  - component: {fileID: 5682151515476048057}
   - component: {fileID: 5333269904741635981}
   m_Layer: 0
   m_Name: hero116
@@ -1197,6 +1197,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 11815074162431161}
+  - {fileID: 2173770860058182099}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &7384110952235753725
@@ -1225,7 +1226,7 @@ MonoBehaviour:
   modelTrans: {fileID: 0}
   rootTrans: {fileID: 0}
   heroQualityTrans: {fileID: 0}
---- !u!114 &1994101992287777677
+--- !u!114 &5682151515476048057
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -1234,7 +1235,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 4301457524428072430}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f221e3c0a08306b45b58bb3a3e424fb9, type: 3}
+  m_Script: {fileID: 11500000, guid: 7aa6267bf77dba54fbd98f70c661f146, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   heroLogicBase: {fileID: 0}
@@ -1291,6 +1292,37 @@ Transform:
   - {fileID: 4837787601232571179}
   m_Father: {fileID: 6812254836501656625}
   m_LocalEulerAnglesHint: {x: 2.553573, y: -96.91836, z: -160.17175}
+--- !u!1 &4770646520326796963
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2173770860058182099}
+  m_Layer: 0
+  m_Name: flyWeaponPoint
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &2173770860058182099
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4770646520326796963}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0.797, z: 0.424}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1424779052366672914}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &4838891615532693931
 GameObject:
   m_ObjectHideFlags: 0

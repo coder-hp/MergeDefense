@@ -84,6 +84,11 @@ public class GameUILayer : MonoBehaviour
 
                     item.gameObject.SetActive(false);
                     list_mythicHeroItem.Add(item.gameObject);
+
+                    Transform textTrans = item.Find("Text");
+                    Sequence seq = DOTween.Sequence();
+                    seq.Append(textTrans.DOScale(1.2f,0.4f))
+                            .Append(textTrans.DOScale(1f, 0.4f)).SetLoops(-1);
                 }
             }
         }
