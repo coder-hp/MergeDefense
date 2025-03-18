@@ -17,7 +17,7 @@ public class GameFightData : MonoBehaviour
     //[HideInInspector]
     public List<int> list_canSummonHero = new List<int>() {101,102,103,104,105 };                    // 初始可以召唤的角色
     //[HideInInspector]
-    public List<int> list_heroWeight = new List<int>() { 100, 0, 0, 0, 0, 0, 0, 0, 00, 0 };          // 角色1-10星的召唤权重
+    public List<int> list_heroWeight = new List<int>() { 100, 0, 0, 0, 0, 0, 0, 0, 0, 0 };           // 角色1-10星的召唤权重
     //[HideInInspector]
     public List<int> list_weaponWeight = new List<int>() { 100, 0, 0, 0, 0, 0, 0, 0, 0, 0 };         // 武器1-10级的锻造权重
 
@@ -78,7 +78,26 @@ public class GameFightData : MonoBehaviour
             }
         }
 
-        if(restRate > 0)
+        // 第10级橙色1星不能有概率
+        if (list_heroWeight[list_heroWeight.Count - 1] > 0)
+        {
+            list_heroWeight[0] = 0;
+            list_heroWeight[1] = 0;
+            list_heroWeight[2] = 0;
+            list_heroWeight[3] = 0;
+            list_heroWeight[4] = 0;
+            list_heroWeight[5] = 0;
+            list_heroWeight[6] = 0;
+            list_heroWeight[7] = 0;
+            list_heroWeight[8] = 100;
+            list_heroWeight[9] = 0;
+
+            restRate = 0;
+
+            Debug.Log("角色召唤概率已达上限");
+        }
+
+        if (restRate > 0)
         {
             changeHeroHighStarRate(restRate);
         }
