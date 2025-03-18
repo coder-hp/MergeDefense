@@ -56,9 +56,12 @@ public class GameFightData : MonoBehaviour
     int heroHighStarRate = 0;
     int weaponHighLevelRate = 0;
 
-    public void changeHeroHighStarRate(int rate)
+    public void changeHeroHighStarRate(int rate,bool isRepeatCall = false)
     {
-        heroHighStarRate += rate;
+        if(!isRepeatCall)
+        {
+            heroHighStarRate += rate;
+        }
 
         // 溢出的概率
         int restRate = 0;
@@ -99,7 +102,7 @@ public class GameFightData : MonoBehaviour
 
         if (restRate > 0)
         {
-            changeHeroHighStarRate(restRate);
+            changeHeroHighStarRate(restRate, true);
         }
     }
 
