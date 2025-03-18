@@ -205,6 +205,7 @@ public class GMLayer : MonoBehaviour
         if (GameFightData.s_instance)
         {
             GameFightData.s_instance.addGlobalHeroBuff(new Consts.BuffData(Consts.BuffType.SkillRate, 100, 999, "GM", true, false));
+            ToastScript.show("技能概率+100");
         }
     }
 
