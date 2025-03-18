@@ -468,6 +468,15 @@ public class HeroLogicBase : MonoBehaviour
             }
         }
 
+        // 全局buff加成
+        for (int i = 0; i < GameFightData.s_instance.list_globalHeroBuff.Count; i++)
+        {
+            if (GameFightData.s_instance.list_globalHeroBuff[i].buffType == Consts.BuffType.AtkBaiFenBi)
+            {
+                atkXiShu += GameFightData.s_instance.list_globalHeroBuff[i].value;
+            }
+        }
+
         return Mathf.RoundToInt(atk * atkXiShu);
     }
 
@@ -532,6 +541,15 @@ public class HeroLogicBase : MonoBehaviour
             }
         }
 
+        // 普通buff加成
+        for (int i = 0; i < list_buffDatas.Count; i++)
+        {
+            if (list_buffDatas[i].buffType == Consts.BuffType.CritRate)
+            {
+                critRate += Mathf.RoundToInt(list_buffDatas[i].value);
+            }
+        }
+
         return critRate;
     }
 
@@ -555,8 +573,17 @@ public class HeroLogicBase : MonoBehaviour
             }
         }
 
+        // 全局buff加爆伤
+        for (int i = 0; i < GameFightData.s_instance.list_globalHeroBuff.Count; i++)
+        {
+            if (GameFightData.s_instance.list_globalHeroBuff[i].buffType == Consts.BuffType.CritDamage)
+            {
+                critDamage += GameFightData.s_instance.list_globalHeroBuff[i].value;
+            }
+        }
+
         // 角色114技能3：自身暴伤增加50%，装备的剑类武器每一级额外提升5%
-        if(id == 114)
+        if (id == 114)
         {
             for (int i = 0; i < GameUILayer.s_instance.list_weaponBar.Count; i++)
             {

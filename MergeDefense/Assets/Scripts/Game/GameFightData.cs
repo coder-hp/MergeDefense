@@ -32,6 +32,8 @@ public class GameFightData : MonoBehaviour
     public bool isCanOnInvokeBoCiSecond = true;
     [HideInInspector]
     public bool isAddEnemyEnd = false;
+    [HideInInspector]
+    public bool isUsedHeroSkill_116_2 = false;
 
     [HideInInspector]
     public int addedEnemyCount = 0;
