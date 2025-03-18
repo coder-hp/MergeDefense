@@ -27,7 +27,7 @@ public class HeroLogic108 : HeroBase
                 else if (RandomUtil.getRandom(1, 100) <= (baseSkillRate + heroLogicBase.getAddSkillRate()))
                 {
                     isTriggerSkill = true;
-                    enemyLogic.addBuff(new Consts.BuffData(Consts.BuffType.YiShang, 0.2f, 5));
+                    enemyLogic.addBuff(new Consts.BuffData(Consts.BuffType.YiShang, 0.2f, 5,"", false, false));
                 }
             }
         }

@@ -22,9 +22,9 @@ public class GameFightData : MonoBehaviour
     public List<int> list_weaponWeight = new List<int>() { 100, 0, 0, 0, 0, 0, 0, 0, 0, 0 };         // 武器1-10级的锻造权重
 
     [HideInInspector]
-    public List<Consts.BuffData> list_globalHeroBuff = new List<Consts.BuffData>();                  // 对所有角色生效的buff
+    public List<Consts.BuffData> list_globalHeroBuff = new List<Consts.BuffData>();                  // 对所有角色生效的buff,from不可重复
     [HideInInspector]
-    public List<Consts.BuffData> list_globalEnemyBuff = new List<Consts.BuffData>();                 // 对所有敌人生效的buff
+    public List<Consts.BuffData> list_globalEnemyBuff = new List<Consts.BuffData>();                 // 对所有敌人生效的buff,from不可重复
 
     [HideInInspector]
     public bool isGameOver = false;
@@ -140,6 +140,15 @@ public class GameFightData : MonoBehaviour
 
     public void addGlobalHeroBuff(Consts.BuffData buffData)
     {
+        for(int i = 0; i < list_globalHeroBuff.Count; i++)
+        {
+            if (list_globalHeroBuff[i].buffType == buffData.buffType && list_globalHeroBuff[i].from == buffData.from)
+            {
+                ++list_globalHeroBuff[i].addedCount;
+                return;
+            }
+        }
+
         list_globalHeroBuff.Add(buffData);
     }
 
@@ -149,7 +158,11 @@ public class GameFightData : MonoBehaviour
         {
             if (list_globalHeroBuff[i].buffType == buffType && list_globalHeroBuff[i].from == from)
             {
-                list_globalHeroBuff.RemoveAt(i);
+                --list_globalHeroBuff[i].addedCount;
+                if (list_globalHeroBuff[i].addedCount <= 0)
+                {
+                    list_globalHeroBuff.RemoveAt(i);
+                }
                 break;
             }
         }
@@ -157,6 +170,15 @@ public class GameFightData : MonoBehaviour
 
     public void addGlobalEnemyBuff(Consts.BuffData buffData)
     {
+        for (int i = 0; i < list_globalEnemyBuff.Count; i++)
+        {
+            if (list_globalEnemyBuff[i].buffType == buffData.buffType && list_globalEnemyBuff[i].from == buffData.from)
+            {
+                ++list_globalEnemyBuff[i].addedCount;
+                return;
+            }
+        }
+
         list_globalEnemyBuff.Add(buffData);
     }
 
@@ -166,7 +188,11 @@ public class GameFightData : MonoBehaviour
         {
             if (list_globalEnemyBuff[i].buffType == buffType && list_globalEnemyBuff[i].from == from)
             {
-                list_globalEnemyBuff.RemoveAt(i);
+                --list_globalEnemyBuff[i].addedCount;
+                if (list_globalEnemyBuff[i].addedCount <= 0)
+                {
+                    list_globalEnemyBuff.RemoveAt(i);
+                }
                 break;
             }
         }

@@ -202,6 +202,18 @@ public class GameUILayer : MonoBehaviour
             {
                 LayerManager.ShowLayer(Consts.Layer.BossComingLayer);
             }
+
+            // 判断场上是否有角色113，技能3：每一波结束后30%概率获得5枚金币
+            for(int i = 0; i < HeroManager.s_instance.list_hero.Count; i++)
+            {
+                if (HeroManager.s_instance.list_hero[i].id == 113)
+                {
+                    if (RandomUtil.getRandom(1,100) <= (30 + HeroManager.s_instance.list_hero[i].getAddSkillRate()))
+                    {
+                        changeDiamond(5);
+                    }
+                }
+            }
         }
 
         // boss波次,小于20秒时显示警告弹窗
