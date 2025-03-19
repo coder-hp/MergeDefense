@@ -19,14 +19,14 @@ public class heroFlyWeapon111 : HeroFlyWeaponBase
             EffectManager.s_instance.enemyDamage(_enemyLogic.transform.position, heroLogicBase.id);
             _enemyLogic.damage(atk, isCrit);
 
-            // 判定技能3：攻击时，15%概率对范围内的敌人造成攻击力1000%的伤害
+            // 判定技能3：攻击时，15%概率对范围内的敌人造成攻击力800%的伤害
             if (RandomUtil.getRandom(1, 100) <= (15 + heroLogicBase.getAddSkillRate()))
             {
                 for (int i = 0; i < EnemyManager.s_instance.list_enemy.Count; i++)
                 {
                     if (Vector3.Distance(transform.position, EnemyManager.s_instance.list_enemy[i].transform.position) <= Consts.megaSkillRange)
                     {
-                        if (EnemyManager.s_instance.list_enemy[i].damage(atk * 10, false))
+                        if (EnemyManager.s_instance.list_enemy[i].damage(atk * 8, false))
                         {
                             --i;
                         }

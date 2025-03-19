@@ -5,8 +5,8 @@ using UnityEngine;
 // 精灵王
 // 远程单体
 // 技能1：我方单位攻速增加20%
-// 技能2：每2s释放三支箭对范围内的敌人造成攻击力500%的伤害
-// 技能3：攻击时，15%概率对范围内的敌人造成攻击力1000%的伤害
+// 技能2：每3s释放三支箭对范围内的敌人造成攻击力300%的伤害
+// 技能3：攻击时，15%概率对范围内的敌人造成攻击力800%的伤害
 public class HeroLogic111 : HeroBase
 {
     private void Start()
@@ -14,15 +14,15 @@ public class HeroLogic111 : HeroBase
         // 技能1：我方单位攻速增加20%
         GameFightData.s_instance.addGlobalHeroBuff(new Consts.BuffData(Consts.BuffType.AtkSpeed, 0.2f, 9999,"111", true, true));
 
-        InvokeRepeating("onInvokeSkill", 2, 2);
+        InvokeRepeating("onInvokeSkill", 3, 3);
     }
 
-    // 技能2：每2s释放三支箭对范围内的敌人造成攻击力500%的伤害
+    // 技能2：每2s释放三支箭对范围内的敌人造成攻击力300%的伤害
     void onInvokeSkill()
     {
         if (heroLogicBase.isCanUpdate)
         {
-            int atk = heroLogicBase.getAtk() * 5;
+            int atk = heroLogicBase.getAtk() * 3;
             int count = 0;
             for (int i = 0; i < EnemyManager.s_instance.list_enemy.Count; i++)
             {
