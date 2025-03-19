@@ -751,7 +751,7 @@ public class CommonUtil
         }
     }
 
-    public static string intToStrKMB(long num)
+    public static string numToStrKMB(long num)
     {
         if(num >= 1000000000)
         {

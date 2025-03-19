@@ -119,4 +119,24 @@ public class GameData
     {
         PlayerPrefs.SetInt("isUnlockHero" + heroId, 1);
     }
+
+    public static string getUID()
+    {
+        return SystemInfo.deviceUniqueIdentifier;
+    }
+
+    public static string getName()
+    {
+        return SystemInfo.deviceUniqueIdentifier.Substring(0,8);
+    }
+
+    public static string getMaxWaveDamage()
+    {
+        return PlayerPrefs.GetString("MaxWaveDamage", "0_0");
+    }
+
+    public static void setMaxWaveDamage(int wave,long damage)
+    {
+        PlayerPrefs.SetString("MaxWaveDamage", wave + "_" + damage);
+    }
 }

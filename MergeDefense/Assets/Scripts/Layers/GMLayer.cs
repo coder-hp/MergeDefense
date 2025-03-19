@@ -1,3 +1,4 @@
+using Newtonsoft.Json;
 using System.Collections;
 using System.Collections.Generic;
 using System.IO;
@@ -16,6 +17,7 @@ public class GMLayer : MonoBehaviour
     public InputField inputField_level;
     public InputField inputField_hero;
     public InputField inputField_weapon;
+    public InputField inputField_rank;
 
     bool isShowFPS = false;
 
@@ -198,6 +200,42 @@ public class GMLayer : MonoBehaviour
             int type = int.Parse(inputField_weapon.text.Split('_')[0]);
             int level = int.Parse(inputField_weapon.text.Split('_')[1]);
             GameUILayer.s_instance.addWeapon(WeaponEntity.getInstance().getData(type, level));
+        }
+    }
+
+    public void onClickRank()
+    {
+        if (inputField_rank.text != "")
+        {
+            int wave = int.Parse(inputField_rank.text.Split('_')[0]);
+            int damage = int.Parse(inputField_rank.text.Split('_')[1]);
+
+            ReqDataSubmitRankData reqData = new ReqDataSubmitRankData();
+            reqData.rankType = RankType.GlobalRank.ToString();
+            reqData.uid = GameData.getUID();
+            reqData.name = GameData.getName();
+            reqData.score = wave;
+            reqData.score2 = damage;
+            string reqDataStr = JsonConvert.SerializeObject(reqData);
+            HttpUtil.s_instance.reqPost(Consts.getServerUrl() + ServerInterface.submitRankData.ToString(), reqDataStr, (result, data) =>
+            {
+                if (result)
+                {
+                    BackDataSubmitRankData backData = JsonConvert.DeserializeObject<BackDataSubmitRankData>(data);
+                    if (backData.serverCode == ServerCode.OK)
+                    {
+                        Debug.Log("排行数据提交成功");
+                    }
+                    else
+                    {
+                        Debug.Log("排行数据提交失败1：" + backData.desc);
+                    }
+                }
+                else
+                {
+                    Debug.Log("排行数据提交失败2：" + data);
+                }
+            });
         }
     }
 
