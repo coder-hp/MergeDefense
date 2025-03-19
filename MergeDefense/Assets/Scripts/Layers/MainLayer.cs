@@ -17,4 +17,10 @@ public class MainLayer : MonoBehaviour
         AudioScript.s_instance.playSound_btn();
         LayerManager.ShowLayer(Consts.Layer.ClawLayer);
     }
+
+    public void onClickRank()
+    {
+        AudioScript.s_instance.playSound_btn();
+        LayerManager.ShowLayer(Consts.Layer.RankLayer);
+    }
 }

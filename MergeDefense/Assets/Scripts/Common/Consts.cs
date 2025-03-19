@@ -45,6 +45,7 @@ public class Consts
         MythicHeroLayer,
         GetMythicHeroLayer,
         ClawLayer,
+        RankLayer,
     }
 
     public enum WeaponType
@@ -118,4 +119,14 @@ public class Consts
 
     public static Color color_weaponCantEquip = new Color(1,0,0, 0.5f);
     public static Color color_critText = new Color(1, 0.45f, 0.2f, 1);
+
+    public static string getServerUrl()
+    {
+        if(GMLayer.s_instance.isDebug)
+        {
+            return "http://127.0.0.1:8001/";
+        }
+
+        return "http://127.0.0.1:8001/";
+    }
 }
