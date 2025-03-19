@@ -7,7 +7,7 @@ Shader "Kein/Scene/bg_2"
     }
     SubShader
     {
-        Tags {"Queue" = "Background+1"}
+        Tags {"Queue" = "Background+3"}
         //Tags { "RenderType"="Opaque" }
         LOD 100
         Pass
