@@ -129,7 +129,7 @@ public class ExcelToJson : MonoBehaviour
             }
 
             string jsonData = ja.ToString();
-            jsonData = jsonData.Replace("&", ",");
+            jsonData = jsonData.Replace("^", ",");
             //jsonData = jsonData.Replace("\x20", "");        // 去掉空格
             jsonData = jsonData.Replace("\x0d", "");        // 去掉回车
             jsonData = jsonData.Replace("\x0a", "");        // 去掉换行
