@@ -255,7 +255,20 @@ public class GameUILayer : MonoBehaviour
         // boss波次,小于20秒时显示警告弹窗
         if ((GameFightData.s_instance.curBoCiRestTime == 20) && (GameFightData.s_instance.curBoCi % 10 == 0))
         {
-            LayerManager.ShowLayer(Consts.Layer.BossNoticeLayer);
+            bool haveBoss = false;
+            for(int i = 0; i < EnemyManager.s_instance.list_enemy.Count; i++)
+            {
+                if (EnemyManager.s_instance.list_enemy[i].enemyWaveData.enemyType == 3)
+                {
+                    haveBoss = true;
+                    break;
+                }
+            }
+
+            if (haveBoss)
+            {
+                LayerManager.ShowLayer(Consts.Layer.BossNoticeLayer);
+            }
         }
     }
 
