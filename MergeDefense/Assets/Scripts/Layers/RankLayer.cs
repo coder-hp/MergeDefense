@@ -39,7 +39,7 @@ public class RankLayer : MonoBehaviour
 
     void getRankSuccess(List<RankListData> list)
     {
-        Debug.Log("拉去排行榜成功：数据条数：" + list.Count);
+        Debug.Log("拉取排行榜成功：数据条数：" + list.Count);
 
         list_rank = list;
 

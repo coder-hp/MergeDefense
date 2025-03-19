@@ -21,7 +21,7 @@ public class HttpUtil : MonoBehaviour
 
     public void reqPost(string url, string data, Action<bool, string> callback = null)
     {
-        Debug.Log(url);
+        // Debug.Log(url);
         StartCoroutine(PostRequest(url, data, callback));
     }
 
