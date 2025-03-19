@@ -4,14 +4,14 @@ using UnityEngine;
 
 // 收割者
 // 近战单体
-// 技能1：全体敌人减速10%
-// 技能2：攻击时，10%概率击杀血量不满的敌人（对精英和BOSS无效）
-// 技能3：攻击时，15%概率对范围内的敌人造成攻击力1000%的伤害
+// 技能1：全体敌人减速5%
+// 技能2：攻击时，5%概率击杀血量不满的敌人（对精英和BOSS无效）
+// 技能3：攻击时，10%概率对范围内的敌人造成攻击力700%的伤害
 public class HeroLogic117 : HeroBase
 {
     private void Start()
     {
-        GameFightData.s_instance.addGlobalEnemyBuff(new Consts.BuffData(Consts.BuffType.MoveSpeed,-0.1f,9999,"117", true, true));
+        GameFightData.s_instance.addGlobalEnemyBuff(new Consts.BuffData(Consts.BuffType.MoveSpeed,-0.05f,9999,"117", true, true));
     }
 
     public override void AttackLogic(EnemyLogic enemyLogic)
@@ -21,14 +21,14 @@ public class HeroLogic117 : HeroBase
         bool isCrit = RandomUtil.getRandom(1, 100) <= heroLogicBase.getCritRate() ? true : false;
         int atk = Mathf.RoundToInt(heroLogicBase.getAtk() * (isCrit ? heroLogicBase.getCritDamageXiShu() : 1));
 
-        // 判定技能3：攻击时，15%概率对范围内的敌人造成攻击力1000%的伤害
-        if (RandomUtil.getRandom(1, 100) <= (15 + heroLogicBase.getAddSkillRate()))
+        // 判定技能3：攻击时，12%概率对范围内的敌人造成攻击力700%的伤害
+        if (RandomUtil.getRandom(1, 100) <= (10  + heroLogicBase.getAddSkillRate()))
         {
             for (int i = 0; i < EnemyManager.s_instance.list_enemy.Count; i++)
             {
                 if (Vector3.Distance(heroLogicBase.curStandGrid.position, EnemyManager.s_instance.list_enemy[i].transform.position) <= heroLogicBase.heroData.atkRange)
                 {
-                    if (EnemyManager.s_instance.list_enemy[i].damage(atk * 10, false))
+                    if (EnemyManager.s_instance.list_enemy[i].damage(atk * 7, false))
                     {
                         --i;
                     }
@@ -42,7 +42,7 @@ public class HeroLogic117 : HeroBase
         }
 
         // 先判定技能2：攻击时，10%概率击杀血量不满的敌人（对精英和BOSS无效）
-        if (enemyLogic.enemyWaveData.enemyType == 1 && enemyLogic.curHP < enemyLogic.fullHP && RandomUtil.getRandom(1, 100) <= (10 + heroLogicBase.getAddSkillRate()))
+        if (enemyLogic.enemyWaveData.enemyType == 1 && enemyLogic.curHP < enemyLogic.fullHP && RandomUtil.getRandom(1, 100) <= (5 + heroLogicBase.getAddSkillRate()))
         {
             enemyLogic.damage(enemyLogic.curHP, false);
         }
