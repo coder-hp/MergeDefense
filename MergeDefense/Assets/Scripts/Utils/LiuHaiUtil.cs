@@ -1,13 +1,13 @@
 using UnityEngine;
 
-// Áõº£ÆÁÊÊÅä
+// åˆ˜æµ·å±é€‚é…
 public class LiuHaiUtil : MonoBehaviour
 {
     void Awake()
     {
         Rect safeAreaRect = Screen.safeArea;
         float height = Screen.height;
-        float liuhaiHeight = (height - safeAreaRect.height) * (1560f / height);
+        float liuhaiHeight = (height - safeAreaRect.height) * (1920f / height);
         float chazhi = liuhaiHeight;
         if (chazhi > 0)
         {
