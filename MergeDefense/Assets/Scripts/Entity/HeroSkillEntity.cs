@@ -30,6 +30,47 @@ public class HeroSkillEntity
     public void init()
     {
         list = JsonUtils.loadJsonToList<HeroSkillData>("heroSkill");
+
+        for (int i = 0; i < list.Count; i++)
+        {
+            list[i].desc = HighlightNumbersInString(list[i].desc, "FFAB41");
+        }
+    }
+
+    // 高亮字符串中的数字和%
+    string HighlightNumbersInString(string input, string colorHex)
+    {
+        // 遍历字符串，找到数字和%并添加<color>标签
+        System.Text.StringBuilder result = new System.Text.StringBuilder();
+        int i = 0;
+        while (i < input.Length)
+        {
+            if (char.IsDigit(input[i]) || input[i] == '%')
+            {
+                // 找到数字或%的开头
+                int start = i;
+
+                // 继续查找连续的数字或%
+                while (i < input.Length && (char.IsDigit(input[i]) || input[i] == '%'))
+                {
+                    i++;
+                }
+
+                // 提取数字或%部分
+                string number = input.Substring(start, i - start);
+
+                // 添加<color>标签
+                result.Append($"<color=#{colorHex}>{number}</color>");
+            }
+            else
+            {
+                // 非数字或%部分直接添加到结果
+                result.Append(input[i]);
+                i++;
+            }
+        }
+
+        return result.ToString();
     }
 
     public HeroSkillData getData(int id)
