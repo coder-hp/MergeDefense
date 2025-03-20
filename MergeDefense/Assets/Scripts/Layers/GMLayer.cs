@@ -18,6 +18,7 @@ public class GMLayer : MonoBehaviour
     public InputField inputField_hero;
     public InputField inputField_weapon;
     public InputField inputField_rank;
+    public InputField inputField_HeroExp;
 
     bool isShowFPS = false;
 
@@ -245,6 +246,16 @@ public class GMLayer : MonoBehaviour
         {
             GameFightData.s_instance.addGlobalHeroBuff(new Consts.BuffData(Consts.BuffType.SkillRate, 100, 999, "GM", true, false));
             ToastScript.show("技能概率+100");
+        }
+    }
+
+    public void onClickAddHeroExp()
+    {
+        if (inputField_HeroExp.text != "")
+        {
+            int id = int.Parse(inputField_HeroExp.text.Split('_')[0]);
+            int exp = int.Parse(inputField_HeroExp.text.Split('_')[1]);
+            GameData.changeHeroExp(id, exp);
         }
     }
 

@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using static UnityEditor.Progress;
 
 public class HeroLayer : MonoBehaviour
 {
@@ -18,57 +19,84 @@ public class HeroLayer : MonoBehaviour
         {
             HeroData heroData = HeroEntity.getInstance().list[i];
             Transform item = Instantiate(item_hero, list_content).transform;
-            item.name = heroData.quality.ToString();
-            item.Find("icon_mask/icon").GetComponent<Image>().sprite = AtlasUtil.getAtlas_icon().GetSprite("head_" + heroData.id);
-            item.Find("name_bg/name").GetComponent<Text>().text = heroData.name;
-            item.Find("qualityCard").GetComponent<Image>().sprite = AtlasUtil.getAtlas_game().GetSprite("kuang_hero_" + heroData.quality + "_2");
-            item.Find("qualityKuang").GetComponent<Image>().sprite = AtlasUtil.getAtlas_game().GetSprite("kuang_hero_" + heroData.quality + "_1");
-            item.Find("shadow").GetComponent<Image>().color = Consts.list_heroQualityColor[heroData.quality];
+            setItemData(item, heroData);
 
-            if(GameData.isUnlockHero(heroData.id))
+            item.GetComponent<Button>().onClick.AddListener(()=>
             {
-                int curLevel = GameData.getHeroLevel(heroData.id);
-                int curHeroExp = GameData.getHeroExp(heroData.id);
-                HeroLevelData nextHeroLevelData = HeroLevelEntity.getInstance().getData(heroData.id,curLevel + 1);
-                item.Find("level_bg").GetComponent<Image>().sprite = AtlasUtil.getAtlas_hero().GetSprite("kuang_hero_" + heroData.quality + "_3");
-                item.Find("level_bg/level").GetComponent<Text>().text = "Lv." + curLevel;
+                Debug.Log(heroData.id);
+            });
+        }
+    }
 
-                if(nextHeroLevelData != null)
+    private void OnEnable()
+    {
+        if(list_content.childCount == HeroEntity.getInstance().list.Count)
+        {
+            for (int i = 0; i < HeroEntity.getInstance().list.Count; i++)
+            {
+                HeroData heroData = HeroEntity.getInstance().list[i];
+                Transform item = list_content.GetChild(i);
+                setItemData(item, heroData);
+            }
+        }
+    }
+
+    void setItemData(Transform item, HeroData heroData)
+    {
+        item.name = heroData.id.ToString();
+        item.Find("icon_mask/icon").GetComponent<Image>().sprite = AtlasUtil.getAtlas_icon().GetSprite("head_" + heroData.id);
+        item.Find("name_bg/name").GetComponent<Text>().text = heroData.name;
+        item.Find("qualityCard").GetComponent<Image>().sprite = AtlasUtil.getAtlas_game().GetSprite("kuang_hero_" + heroData.quality + "_2");
+        item.Find("qualityKuang").GetComponent<Image>().sprite = AtlasUtil.getAtlas_game().GetSprite("kuang_hero_" + heroData.quality + "_1");
+        item.Find("shadow").GetComponent<Image>().color = Consts.list_heroQualityColor[heroData.quality];
+
+        if (GameData.isUnlockHero(heroData.id))
+        {
+            int curLevel = GameData.getHeroLevel(heroData.id);
+            int curHeroExp = GameData.getHeroExp(heroData.id);
+            HeroLevelData nextHeroLevelData = HeroLevelEntity.getInstance().getData(heroData.id, curLevel + 1);
+            item.Find("level_bg").GetComponent<Image>().sprite = AtlasUtil.getAtlas_hero().GetSprite("kuang_hero_" + heroData.quality + "_3");
+            item.Find("level_bg/level").GetComponent<Text>().text = "Lv." + curLevel;
+            item.Find("level_bg").localScale = Vector3.one;
+            item.Find("exp_bg").localScale = Vector3.one;
+            item.Find("lock").gameObject.SetActive(false);
+            item.Find("price").gameObject.SetActive(false);
+
+            if (nextHeroLevelData != null)
+            {
+                item.Find("exp_bg/progress").GetComponent<Image>().fillAmount = (float)curHeroExp / (float)nextHeroLevelData.exp;
+                item.Find("exp_bg/Text").GetComponent<Text>().text = curHeroExp + "/" + nextHeroLevelData.exp;
+
+                if (curHeroExp >= nextHeroLevelData.exp)
                 {
-                    item.Find("exp_bg/progress").GetComponent<Image>().fillAmount = (float)curHeroExp / (float)nextHeroLevelData.exp;
-                    item.Find("exp_bg/Text").GetComponent<Text>().text = curHeroExp + "/" + nextHeroLevelData.exp;
-
-                    if(curHeroExp >= nextHeroLevelData.exp)
-                    {
-                        item.Find("exp_bg/jiantou").localScale = Vector3.one;
-                    }
-                    else
-                    {
-                        item.Find("exp_bg/jiantou").localScale = Vector3.zero;
-                    }
+                    item.Find("exp_bg/jiantou").localScale = Vector3.one;
                 }
                 else
                 {
-                    item.Find("exp_bg").localScale = Vector3.zero;
-                    item.Find("maxLevel").localScale = Vector3.one;
+                    item.Find("exp_bg/jiantou").localScale = Vector3.zero;
                 }
             }
             else
             {
-                item.Find("level_bg").localScale = Vector3.zero;
                 item.Find("exp_bg").localScale = Vector3.zero;
-                item.Find("lock").gameObject.SetActive(true);
+                item.Find("maxLevel").localScale = Vector3.one;
+            }
+        }
+        else
+        {
+            item.Find("level_bg").localScale = Vector3.zero;
+            item.Find("exp_bg").localScale = Vector3.zero;
+            item.Find("lock").gameObject.SetActive(true);
 
-                // 签到送的角色
-                if(heroData.id == 118 || heroData.id == 119)
-                {
-                    item.Find("lock/unlockType").GetComponent<Text>().text = "7-Day Login";
-                }
-                else
-                {
-                    item.Find("price").gameObject.SetActive(true);
-                    item.Find("price").GetComponent<Text>().text = heroData.price.ToString();
-                }
+            // 签到送的角色
+            if (heroData.id == 118 || heroData.id == 119)
+            {
+                item.Find("lock/unlockType").GetComponent<Text>().text = "7-Day Login";
+            }
+            else
+            {
+                item.Find("price").gameObject.SetActive(true);
+                item.Find("price").GetComponent<Text>().text = heroData.price.ToString();
             }
         }
     }
@@ -103,7 +131,7 @@ public class HeroLayer : MonoBehaviour
 
         for (int i = 0; i < list_content.childCount; i++)
         {
-            if (list_content.GetChild(i).name != "4")
+            if (HeroEntity.getInstance().getData(int.Parse(list_content.GetChild(i).name)).quality <= 3)
             {
                 list_content.GetChild(i).gameObject.SetActive(false);
             }
