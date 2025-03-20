@@ -5,7 +5,7 @@ using UnityEngine;
 // 金骨
 // 近战单体
 // 技能1：攻击时，15%概率对范围内的敌人造成攻击力270%的伤害
-// 技能2：攻击时，10%的概率获得1宝石
+// 技能2：攻击时，3%的概率获得1宝石
 public class HeroLogic109 : HeroBase
 {
     public override void AttackLogic(EnemyLogic enemyLogic)
@@ -15,8 +15,8 @@ public class HeroLogic109 : HeroBase
         bool isCrit = RandomUtil.getRandom(1, 100) <= heroLogicBase.getCritRate() ? true : false;
         int atk = Mathf.RoundToInt(heroLogicBase.getAtk() * (isCrit ? heroLogicBase.getCritDamageXiShu() : 1));
 
-        // 判定技能2：攻击时，10%的概率获得1宝石
-        if (RandomUtil.getRandom(1, 100) <= (10 + heroLogicBase.getAddSkillRate()))
+        // 判定技能2：攻击时，3%的概率获得1宝石
+        if (RandomUtil.getRandom(1, 100) <= (3 + heroLogicBase.getAddSkillRate()))
         {
             GameUILayer.s_instance.changeDiamond(1);
         }
