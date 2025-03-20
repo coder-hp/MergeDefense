@@ -46,6 +46,8 @@ public class Consts
         GetMythicHeroLayer,
         ClawLayer,
         RankLayer,
+        HeroLayer,
+        BattleLayer,
     }
 
     public enum WeaponType

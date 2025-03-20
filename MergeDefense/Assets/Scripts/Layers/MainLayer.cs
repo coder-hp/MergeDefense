@@ -1,26 +1,80 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class MainLayer : MonoBehaviour
 {
-    public void onClickStartGame()
-    {
-        Destroy(gameObject);
+    public static MainLayer s_instance = null;
 
-        AudioScript.s_instance.playSound_btn();
-        LayerManager.ShowLayer(Consts.Layer.GameLayer);
+    public Transform childLayerPoint;
+    public Transform bottomPoint;
+
+    private void Awake()
+    {
+        s_instance = this;
     }
 
-    public void onClickClaw()
+    public void onClickBottomTab(int index)
     {
         AudioScript.s_instance.playSound_btn();
-        LayerManager.ShowLayer(Consts.Layer.ClawLayer);
-    }
 
-    public void onClickRank()
-    {
-        AudioScript.s_instance.playSound_btn();
-        LayerManager.ShowLayer(Consts.Layer.RankLayer);
+        //switch(index)
+        //{
+        //    // 角色养成
+        //    case 0:
+        //        {
+        //            LayerManager.ShowLayer(Consts.Layer.HeroLayer);
+        //            break;
+        //        }
+
+        //    // 战斗
+        //    case 1:
+        //        {
+        //            LayerManager.ShowLayer(Consts.Layer.BattleLayer);
+        //            break;
+        //        }
+
+        //    // 抓娃娃机
+        //    case 2:
+        //        {
+        //            LayerManager.ShowLayer(Consts.Layer.ClawLayer);
+        //            break;
+        //        }
+        //}
+
+        for(int i = 0; i < childLayerPoint.childCount; i++)
+        {
+            if(i == index)
+            {
+                childLayerPoint.GetChild(i).gameObject.SetActive(true);
+            }
+            else
+            {
+                childLayerPoint.GetChild(i).gameObject.SetActive(false);
+            }
+        }
+
+        for (int i = 0; i < bottomPoint.childCount; i++)
+        {
+            if (i == index)
+            {
+                bottomPoint.GetChild(i).GetComponent<Image>().sprite = AtlasUtil.getAtlas_main().GetSprite("button_nav_2");
+
+                Vector2 size = bottomPoint.GetChild(i).GetComponent<RectTransform>().sizeDelta;
+                bottomPoint.GetChild(i).GetComponent<RectTransform>().sizeDelta = new Vector2(size.x,168);
+                bottomPoint.GetChild(i).Find("Text").localScale = Vector3.one;
+                bottomPoint.GetChild(i).Find("Image").localPosition = new Vector3(0,16,0);
+            }
+            else
+            {
+                bottomPoint.GetChild(i).GetComponent<Image>().sprite = AtlasUtil.getAtlas_main().GetSprite("button_nav_1");
+
+                Vector2 size = bottomPoint.GetChild(i).GetComponent<RectTransform>().sizeDelta;
+                bottomPoint.GetChild(i).GetComponent<RectTransform>().sizeDelta = new Vector2(size.x, 152);
+                bottomPoint.GetChild(i).Find("Text").localScale = Vector3.zero;
+                bottomPoint.GetChild(i).Find("Image").localPosition = Vector3.zero;
+            }
+        }
     }
 }
