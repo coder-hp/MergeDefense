@@ -37,14 +37,11 @@ public class LaunchScript : MonoBehaviour
             // 解锁所有白蓝紫角色
             for(int i = 0; i < HeroEntity.getInstance().list.Count; i++)
             {
-                if (HeroEntity.getInstance().list[i].quality <= 3)
+                if (HeroEntity.getInstance().list[i].price == 0)
                 {
                     GameData.unlockHero(HeroEntity.getInstance().list[i].id);
                 }
             }
-
-            // 默认赠送一个神话角色
-            GameData.unlockHero(111);
         }
     }
 }

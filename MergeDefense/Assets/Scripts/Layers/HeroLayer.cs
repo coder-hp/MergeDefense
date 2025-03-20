@@ -29,13 +29,24 @@ public class HeroLayer : MonoBehaviour
             {
                 item.Find("level_bg").GetComponent<Image>().sprite = AtlasUtil.getAtlas_hero().GetSprite("kuang_hero_" + heroData.quality + "_3");
                 item.Find("level_bg/level").GetComponent<Text>().text = "Lv." + GameData.getHeroLevel(heroData.id);
-                item.Find("suipian_bg/Text").GetComponent<Text>().text = GameData.getHeroExp(heroData.id) + "/50";
+                item.Find("exp_bg/Text").GetComponent<Text>().text = GameData.getHeroExp(heroData.id) + "/50";
             }
             else
             {
                 item.Find("level_bg").localScale = Vector3.zero;
-                item.Find("suipian_bg").localScale = Vector3.zero;
+                item.Find("exp_bg").localScale = Vector3.zero;
                 item.Find("lock").gameObject.SetActive(true);
+
+                // 签到送的角色
+                if(heroData.id == 118 || heroData.id == 119)
+                {
+                    item.Find("lock/unlockType").GetComponent<Text>().text = "7-Day Login";
+                }
+                else
+                {
+                    item.Find("price").gameObject.SetActive(true);
+                    item.Find("price").GetComponent<Text>().text = heroData.price.ToString();
+                }
             }
         }
     }

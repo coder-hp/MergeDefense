@@ -9,6 +9,7 @@ public class HeroData
     public int id;
     public string name;
     public int quality;
+    public int price;
     public string career;
     public string skills;
     public int maxStar;
