@@ -52,10 +52,4 @@ public class ClawLayer : MonoBehaviour
             });
         });
     }
-
-    public void onClickClose()
-    {
-        AudioScript.s_instance.playSound_btn();
-        Destroy(gameObject);
-    }
 }
