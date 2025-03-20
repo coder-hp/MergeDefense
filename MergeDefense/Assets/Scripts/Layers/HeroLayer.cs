@@ -27,9 +27,31 @@ public class HeroLayer : MonoBehaviour
 
             if(GameData.isUnlockHero(heroData.id))
             {
+                int curLevel = GameData.getHeroLevel(heroData.id);
+                int curHeroExp = GameData.getHeroExp(heroData.id);
+                HeroLevelData nextHeroLevelData = HeroLevelEntity.getInstance().getData(heroData.id,curLevel + 1);
                 item.Find("level_bg").GetComponent<Image>().sprite = AtlasUtil.getAtlas_hero().GetSprite("kuang_hero_" + heroData.quality + "_3");
-                item.Find("level_bg/level").GetComponent<Text>().text = "Lv." + GameData.getHeroLevel(heroData.id);
-                item.Find("exp_bg/Text").GetComponent<Text>().text = GameData.getHeroExp(heroData.id) + "/50";
+                item.Find("level_bg/level").GetComponent<Text>().text = "Lv." + curLevel;
+
+                if(nextHeroLevelData != null)
+                {
+                    item.Find("exp_bg/progress").GetComponent<Image>().fillAmount = (float)curHeroExp / (float)nextHeroLevelData.exp;
+                    item.Find("exp_bg/Text").GetComponent<Text>().text = curHeroExp + "/" + nextHeroLevelData.exp;
+
+                    if(curHeroExp >= nextHeroLevelData.exp)
+                    {
+                        item.Find("exp_bg/jiantou").localScale = Vector3.one;
+                    }
+                    else
+                    {
+                        item.Find("exp_bg/jiantou").localScale = Vector3.zero;
+                    }
+                }
+                else
+                {
+                    item.Find("exp_bg").localScale = Vector3.zero;
+                    item.Find("maxLevel").localScale = Vector3.one;
+                }
             }
             else
             {
