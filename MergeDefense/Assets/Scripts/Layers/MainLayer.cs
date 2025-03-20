@@ -59,21 +59,19 @@ public class MainLayer : MonoBehaviour
         {
             if (i == index)
             {
-                bottomPoint.GetChild(i).GetComponent<Image>().sprite = AtlasUtil.getAtlas_main().GetSprite("button_nav_2");
-
-                Vector2 size = bottomPoint.GetChild(i).GetComponent<RectTransform>().sizeDelta;
-                bottomPoint.GetChild(i).GetComponent<RectTransform>().sizeDelta = new Vector2(size.x,168);
+                bottomPoint.GetChild(i).localScale = new Vector3(1.1f, 1.1f, 1.1f);
                 bottomPoint.GetChild(i).Find("Text").localScale = Vector3.one;
                 bottomPoint.GetChild(i).Find("Image").localPosition = new Vector3(0,16,0);
+                bottomPoint.GetChild(i).Find("Image").localScale = new Vector3(0.8f, 0.8f, 0.8f);
+                bottomPoint.GetChild(i).GetComponent<Image>().sprite = AtlasUtil.getAtlas_main().GetSprite("button_nav_2");
             }
             else
             {
-                bottomPoint.GetChild(i).GetComponent<Image>().sprite = AtlasUtil.getAtlas_main().GetSprite("button_nav_1");
-
-                Vector2 size = bottomPoint.GetChild(i).GetComponent<RectTransform>().sizeDelta;
-                bottomPoint.GetChild(i).GetComponent<RectTransform>().sizeDelta = new Vector2(size.x, 152);
+                bottomPoint.GetChild(i).localScale = Vector3.one;
                 bottomPoint.GetChild(i).Find("Text").localScale = Vector3.zero;
                 bottomPoint.GetChild(i).Find("Image").localPosition = Vector3.zero;
+                bottomPoint.GetChild(i).Find("Image").localScale = Vector3.one;
+                bottomPoint.GetChild(i).GetComponent<Image>().sprite = AtlasUtil.getAtlas_main().GetSprite("button_nav_1");
             }
         }
     }

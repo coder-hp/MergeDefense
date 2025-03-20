@@ -521,6 +521,11 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!224 &461469007 stripped
+RectTransform:
+  m_CorrespondingSourceObject: {fileID: 8055081187282910600, guid: ebf739439808ff7429e9e2034e65bc76, type: 3}
+  m_PrefabInstance: {fileID: 4793584894372676324}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &704208062
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -2751,6 +2756,10 @@ PrefabInstance:
       value: onClickBottomTab
       objectReference: {fileID: 0}
     - target: {fileID: 1458717580958583694, guid: ebf739439808ff7429e9e2034e65bc76, type: 3}
+      propertyPath: bottomPoint
+      value: 
+      objectReference: {fileID: 461469007}
+    - target: {fileID: 1458717580958583694, guid: ebf739439808ff7429e9e2034e65bc76, type: 3}
       propertyPath: childLayerPoint
       value: 
       objectReference: {fileID: 1787837906}
@@ -2811,6 +2820,26 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3723641837634238280, guid: ebf739439808ff7429e9e2034e65bc76, type: 3}
+      propertyPath: m_SizeDelta.y
+      value: 152
+      objectReference: {fileID: 0}
+    - target: {fileID: 3723641837634238280, guid: ebf739439808ff7429e9e2034e65bc76, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 1.1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3723641837634238280, guid: ebf739439808ff7429e9e2034e65bc76, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 1.1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3723641837634238280, guid: ebf739439808ff7429e9e2034e65bc76, type: 3}
+      propertyPath: m_LocalScale.z
+      value: 1.1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3723641837634238280, guid: ebf739439808ff7429e9e2034e65bc76, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3723641837634238280, guid: ebf739439808ff7429e9e2034e65bc76, type: 3}
       propertyPath: m_AnchoredPosition.x
       value: 0
       objectReference: {fileID: 0}
@@ -2833,6 +2862,18 @@ PrefabInstance:
     - target: {fileID: 5275662893927211951, guid: ebf739439808ff7429e9e2034e65bc76, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_IntArgument
       value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 6849216836714668960, guid: ebf739439808ff7429e9e2034e65bc76, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 16
+      objectReference: {fileID: 0}
+    - target: {fileID: 9028785805225844538, guid: ebf739439808ff7429e9e2034e65bc76, type: 3}
+      propertyPath: m_ChildScaleWidth
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 9028785805225844538, guid: ebf739439808ff7429e9e2034e65bc76, type: 3}
+      propertyPath: m_ChildScaleHeight
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 9161796074573826491, guid: ebf739439808ff7429e9e2034e65bc76, type: 3}
       propertyPath: m_AnchorMax.y
