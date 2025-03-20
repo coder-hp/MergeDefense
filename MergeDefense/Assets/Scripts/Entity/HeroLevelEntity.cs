@@ -8,7 +8,9 @@ public class HeroLevelData
 {
     public int id;
     public int level;
+    public float atk;
     public int exp;
+    public int gold;
 }
 
 public class HeroLevelEntity

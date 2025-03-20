@@ -11,6 +11,7 @@ using UnityEngine.UI;
 public class HeroLogicBase : MonoBehaviour
 {
     public int id;
+    public int heroLevelAddAtk = 0;
 
     [HideInInspector]
     public int curStar = 1;
@@ -78,6 +79,7 @@ public class HeroLogicBase : MonoBehaviour
         heroData = HeroEntity.getInstance().getData(id);
         heroStarData = HeroStarEntity.getInstance().getData(curStar);
 
+        heroLevelAddAtk = Mathf.RoundToInt(HeroLevelEntity.getInstance().getData(id,GameData.getHeroLevel(id)).atk * heroData.atk);
         vec_atkRange = new Vector3(heroData.atkRange, heroData.atkRange, heroData.atkRange);
 
         transform.localScale = Vector3.zero;
@@ -438,7 +440,7 @@ public class HeroLogicBase : MonoBehaviour
 
     public int getAtk()
     {
-        int atk = heroData.atk;
+        int atk = heroData.atk + heroLevelAddAtk;
         float atkXiShu = heroStarData.baseAtkXiShu;
 
         // 武器加成
