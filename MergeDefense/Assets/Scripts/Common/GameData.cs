@@ -1,6 +1,3 @@
-using Newtonsoft.Json;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class GameData
@@ -10,9 +7,9 @@ public class GameData
         return PlayerPrefs.GetInt("gold", 0);
     }
 
-    public static void changeMyGold(int value,string reason)
+    public static void changeMyGold(int value, string reason)
     {
-        if(value == 0)
+        if (value == 0)
         {
             return;
         }
@@ -127,7 +124,7 @@ public class GameData
 
     public static string getName()
     {
-        return SystemInfo.deviceUniqueIdentifier.Substring(0,8);
+        return SystemInfo.deviceUniqueIdentifier.Substring(0, 8);
     }
 
     public static string getMaxWaveDamage()
@@ -135,8 +132,33 @@ public class GameData
         return PlayerPrefs.GetString("MaxWaveDamage", "0_0");
     }
 
-    public static void setMaxWaveDamage(int wave,long damage)
+    public static void setMaxWaveDamage(int wave, long damage)
     {
         PlayerPrefs.SetString("MaxWaveDamage", wave + "_" + damage);
+    }
+
+    public static int getHeroLevel(int id)
+    {
+        return PlayerPrefs.GetInt("HeroLevel" + id, 1);
+    }
+
+    public static void setHeroLevel(int id, int level)
+    {
+        PlayerPrefs.SetInt("HeroLevel" + id, level);
+    }
+
+    public static int getHeroExp(int id)
+    {
+        return PlayerPrefs.GetInt("HeroExp" + id, 0);
+    }
+
+    public static void changeHeroExp(int id, int exp)
+    {
+        int value = getHeroExp(id) + exp;
+        if (value < 0)
+        {
+            value = 0;
+        }
+        PlayerPrefs.SetInt("HeroExp" + id, value);
     }
 }

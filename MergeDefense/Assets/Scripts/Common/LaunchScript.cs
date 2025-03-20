@@ -34,6 +34,15 @@ public class LaunchScript : MonoBehaviour
         // 新玩家进来需要的处理
         if(GameData.addOpenCount() == 1)
         {
+            // 解锁所有白蓝紫角色
+            for(int i = 0; i < HeroEntity.getInstance().list.Count; i++)
+            {
+                if (HeroEntity.getInstance().list[i].quality <= 3)
+                {
+                    GameData.unlockHero(HeroEntity.getInstance().list[i].id);
+                }
+            }
+
             // 默认赠送一个神话角色
             GameData.unlockHero(111);
         }

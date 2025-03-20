@@ -23,8 +23,20 @@ public class HeroLayer : MonoBehaviour
             item.Find("name_bg/name").GetComponent<Text>().text = heroData.name;
             item.Find("qualityCard").GetComponent<Image>().sprite = AtlasUtil.getAtlas_game().GetSprite("kuang_hero_" + heroData.quality + "_2");
             item.Find("qualityKuang").GetComponent<Image>().sprite = AtlasUtil.getAtlas_game().GetSprite("kuang_hero_" + heroData.quality + "_1");
-            item.Find("level_bg").GetComponent<Image>().sprite = AtlasUtil.getAtlas_hero().GetSprite("kuang_hero_" + heroData.quality + "_3");
             item.Find("shadow").GetComponent<Image>().color = Consts.list_heroQualityColor[heroData.quality];
+
+            if(GameData.isUnlockHero(heroData.id))
+            {
+                item.Find("level_bg").GetComponent<Image>().sprite = AtlasUtil.getAtlas_hero().GetSprite("kuang_hero_" + heroData.quality + "_3");
+                item.Find("level_bg/level").GetComponent<Text>().text = "Lv." + GameData.getHeroLevel(heroData.id);
+                item.Find("suipian_bg/Text").GetComponent<Text>().text = GameData.getHeroExp(heroData.id) + "/50";
+            }
+            else
+            {
+                item.Find("level_bg").localScale = Vector3.zero;
+                item.Find("suipian_bg").localScale = Vector3.zero;
+                item.Find("lock").gameObject.SetActive(true);
+            }
         }
     }
 
