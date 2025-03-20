@@ -8,6 +8,7 @@ public class AtlasUtil
     static SpriteAtlas atlas_main = null;
     static SpriteAtlas atlas_game = null;
     static SpriteAtlas atlas_icon = null;
+    static SpriteAtlas atlas_hero = null;
 
     public static SpriteAtlas getAtlas_main()
     {
@@ -34,5 +35,14 @@ public class AtlasUtil
             atlas_icon = Resources.Load("Atlas/icon", typeof(SpriteAtlas)) as SpriteAtlas;
         }
         return atlas_icon;
+    }
+
+    public static SpriteAtlas getAtlas_hero()
+    {
+        if (atlas_hero == null)
+        {
+            atlas_hero = Resources.Load("Atlas/hero", typeof(SpriteAtlas)) as SpriteAtlas;
+        }
+        return atlas_hero;
     }
 }
