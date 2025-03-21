@@ -24,6 +24,23 @@ public class GameData
         //}
     }
 
+    public static int getMyDiamond()
+    {
+        return PlayerPrefs.GetInt("Diamond", 0);
+    }
+
+    public static void changeMyDiamond(int value)
+    {
+        if (value == 0)
+        {
+            return;
+        }
+
+        int curCount = getMyDiamond() + value;
+        curCount = curCount < 0 ? 0 : curCount;
+        PlayerPrefs.SetInt("Diamond", curCount);
+    }
+
     public static int getIsOpenVibrate()
     {
         return PlayerPrefs.GetInt("IsOpenVibrate", 1);

@@ -17,9 +17,13 @@ public class HeroUpgradeLayer : MonoBehaviour
     public Image img_weapon_icon;
     public Transform skillTrans;
     public Transform tabsPoint;
+    public Transform btn_upgrade;
+    public Transform btn_buy;
+    public Transform btn_loginGet;
 
     HeroSkillData[] skillsArray;
     HeroData heroData;
+    bool isFullLevel = false;
 
     public void init(HeroData _heroData)
     {
@@ -64,6 +68,7 @@ public class HeroUpgradeLayer : MonoBehaviour
 
             if (nextHeroLevelData != null)
             {
+                isFullLevel = false;
                 transform.Find("exp_bg/progress").GetComponent<Image>().fillAmount = (float)curHeroExp / (float)nextHeroLevelData.exp;
                 transform.Find("exp_bg/Text").GetComponent<Text>().text = curHeroExp + "/" + nextHeroLevelData.exp;
 
@@ -78,6 +83,7 @@ public class HeroUpgradeLayer : MonoBehaviour
             }
             else
             {
+                isFullLevel = true;
                 transform.Find("exp_bg").localScale = Vector3.zero;
                 transform.Find("maxLevel").localScale = Vector3.one;
             }
@@ -100,9 +106,39 @@ public class HeroUpgradeLayer : MonoBehaviour
                     skillTrans.Find(i.ToString()).gameObject.SetActive(false);
                 }
             }
+            onClickSkillIcon(0);
         }
 
-        onClickSkillIcon(0);
+        if(GameData.isUnlockHero(heroData.id))
+        {
+            btn_buy.localScale = Vector3.zero;
+            btn_loginGet.localScale = Vector3.zero;
+
+            if (isFullLevel)
+            {
+                btn_upgrade.localScale = Vector3.zero;
+            }
+            else
+            {
+                btn_upgrade.localScale = Vector3.one;
+            }
+        }
+        else
+        {
+            // 签到送的角色
+            if (heroData.id == 118 || heroData.id == 119)
+            {
+                btn_upgrade.localScale = Vector3.zero;
+                btn_loginGet.localScale = Vector3.one;
+                btn_buy.localScale = Vector3.zero;
+            }
+            else
+            {
+                btn_upgrade.localScale = Vector3.zero;
+                btn_loginGet.localScale = Vector3.zero;
+                btn_buy.localScale = Vector3.one;
+            }
+        }
     }
 
     public void onClickSkillIcon(int index)
@@ -123,9 +159,79 @@ public class HeroUpgradeLayer : MonoBehaviour
         }
     }
 
+    public void onClickLeft()
+    {
+        AudioScript.s_instance.playSound_btn();
+
+        for(int i = 0; i < HeroEntity.getInstance().list.Count; i++)
+        {
+            if (HeroEntity.getInstance().list[i].id == heroData.id)
+            {
+                if(i > 0)
+                {
+                    init(HeroEntity.getInstance().list[i - 1]);
+                }
+                else if (i == 0)
+                {
+                    init(HeroEntity.getInstance().list[HeroEntity.getInstance().list.Count - 1]);
+                }
+                return;
+            }
+        }
+    }
+
+    public void onClickRight()
+    {
+        AudioScript.s_instance.playSound_btn();
+
+        for (int i = 0; i < HeroEntity.getInstance().list.Count; i++)
+        {
+            if (HeroEntity.getInstance().list[i].id == heroData.id)
+            {
+                if (i ==  (HeroEntity.getInstance().list.Count - 1))
+                {
+                    init(HeroEntity.getInstance().list[0]);
+                }
+                else
+                {
+                    init(HeroEntity.getInstance().list[i + 1]);
+                }
+                return;
+            }
+        }
+    }
+
     public void onClickUpgrade()
     {
         AudioScript.s_instance.playSound_btn();
+    }
+
+    public void onClickLoginGet()
+    {
+        AudioScript.s_instance.playSound_btn();
+
+        ToastScript.show("暂未开放");
+    }
+
+    public void onClickBuy()
+    {
+        AudioScript.s_instance.playSound_btn();
+
+        if(GameData.getMyDiamond() >= heroData.price)
+        {
+            GameData.changeMyDiamond(-heroData.price);
+            GameData.unlockHero(heroData.id);
+
+            btn_upgrade.localScale = Vector3.one;
+            btn_loginGet.localScale = Vector3.zero;
+            btn_buy.localScale = Vector3.zero;
+
+            ToastScript.show("Get New Hero!");
+        }
+        else
+        {
+            ToastScript.show("Gem Not Enough!");
+        }
     }
 
     public void onClickClose()
