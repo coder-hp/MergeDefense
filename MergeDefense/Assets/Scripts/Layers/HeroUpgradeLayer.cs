@@ -27,6 +27,7 @@ public class HeroUpgradeLayer : MonoBehaviour
     public Transform mythicHeroMergeWay;
     public Transform yaoqiu_hero;
     public Transform yaoqiu_weapon;
+    public GameObject effect_upgrade;
 
     HeroSkillData[] skillsArray;
     HeroData heroData;
@@ -325,6 +326,9 @@ public class HeroUpgradeLayer : MonoBehaviour
                 GameData.changeHeroExp(heroData.id, -upgradeNeedExp);
                 GameData.setHeroLevel(heroData.id, GameData.getHeroLevel(heroData.id) + 1);
                 init(heroData,true);
+                effect_upgrade.SetActive(false);
+                effect_upgrade.SetActive(true);
+                AudioScript.s_instance.playSound("heroUpgrade");
             }
         }
         else
