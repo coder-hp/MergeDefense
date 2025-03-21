@@ -106,8 +106,8 @@ public class GMLayer : MonoBehaviour
 
     public void onClickAddMyGold()
     {
-        GameData.changeMyGold(1000,"");
-        ToastScript.show("+1000");
+        GameData.changeMyGold(10000,"");
+        ToastScript.show("+10000");
     }
 
     public void onClickAddMyDiamond()

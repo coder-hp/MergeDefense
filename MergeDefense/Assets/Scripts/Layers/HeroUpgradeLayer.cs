@@ -79,6 +79,8 @@ public class HeroUpgradeLayer : MonoBehaviour
             if (nextHeroLevelData != null)
             {
                 isFullLevel = false;
+                transform.Find("exp_bg").localScale = Vector3.one;
+                transform.Find("maxLevel").localScale = Vector3.zero;
                 transform.Find("exp_bg/progress").GetComponent<Image>().fillAmount = (float)curHeroExp / (float)nextHeroLevelData.exp;
                 transform.Find("exp_bg/Text").GetComponent<Text>().text = curHeroExp + "/" + nextHeroLevelData.exp;
 
