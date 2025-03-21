@@ -9,7 +9,7 @@ public class RedisUtil
 {
     //static string url = "127.0.0.1:6379,password=582254172";
     static string url = "";
-    static ConnectionMultiplexer redisInstance = null;
+    public static ConnectionMultiplexer redisInstance = null;
     static IDatabase database = null;
 
     public static void Connect()

@@ -42,6 +42,7 @@ class Program
             LogUtil.Log("6:Show " + rankName + " Data", false);
             LogUtil.Log("7:Delete " + rankName + " Data", false);
             LogUtil.Log("8:Insert " + rankName + " Data", false);
+            LogUtil.Log("9:Check Redis Connect State", false);
             LogUtil.Log("------------------------------------", false);
 
             Console.Write("Wait Input:");
@@ -93,7 +94,7 @@ class Program
                 List<RankListData> list = RankListManager.dic_list[rankName];
                 for (int i = 0; i < list.Count; i++)
                 {
-                    LogUtil.Log("***" + list[i].uid + "  " + list[i].score);
+                    LogUtil.Log("***" + list[i].uid + "  " + list[i].score + "  " + list[i].score2);
                 }
                 LogUtil.Log("***数据条数：" + list.Count);
             }
@@ -117,6 +118,18 @@ class Program
                     RankListManager.submitData(data);
                 }
                 LogUtil.Log(rankName + " data is inserted");
+            }
+            // 检查redis连接状态
+            else if (inputData == "9")
+            {
+                if(RedisUtil.redisInstance == null || !RedisUtil.redisInstance.IsConnected)
+                {
+                    LogUtil.Log("Redis Not Connect");
+                }
+                else
+                {
+                    LogUtil.Log("Redis Connected");
+                }
             }
         }
     }

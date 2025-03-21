@@ -124,7 +124,9 @@ public class Consts
 
     public static string getServerUrl()
     {
-        if(GMLayer.s_instance.isDebug)
+        //return "http://127.0.0.1:8001/";
+
+        if (GMLayer.s_instance.isDebug)
         {
             return "http://10.26.53.6:8001/";
         }

@@ -47,16 +47,34 @@ public class RankListManager
         {
             if (dic_list[rankTypeStr][i].uid == reqDataObj.uid)
             {
-                if(dic_list[rankTypeStr][i].score >= reqDataObj.score && dic_list[rankTypeStr][i].score2 >= reqDataObj.score2)
+                if(reqDataObj.score > dic_list[rankTypeStr][i].score)
                 {
                     RankListData rankListData = new RankListData();
                     rankListData.uid = reqDataObj.uid;
                     rankListData.name = reqDataObj.name;
                     rankListData.score = reqDataObj.score;
                     rankListData.score2 = reqDataObj.score2;
+                    dic_list[rankTypeStr][i] = rankListData;
                     changeRedisRankData(rankTypeStr, rankListData);
                     return;
                 }
+                else if (reqDataObj.score == dic_list[rankTypeStr][i].score)
+                {
+                    if (reqDataObj.score2 > dic_list[rankTypeStr][i].score2)
+                    {
+                        RankListData rankListData = new RankListData();
+                        rankListData.uid = reqDataObj.uid;
+                        rankListData.name = reqDataObj.name;
+                        rankListData.score = reqDataObj.score;
+                        rankListData.score2 = reqDataObj.score2;
+                        dic_list[rankTypeStr][i] = rankListData;
+                        changeRedisRankData(rankTypeStr, rankListData);
+                        return;
+                    }
+                }
+
+                // 分数没增加，不予处理
+                return;
             }
         }
 

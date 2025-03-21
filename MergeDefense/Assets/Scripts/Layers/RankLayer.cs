@@ -44,32 +44,33 @@ public class RankLayer : MonoBehaviour
         list_rank = list;
 
         // 先排序
-        for (int i = 0; i < list_rank.Count - 1; i++)
-        {
-            for (int j = 0; j < list_rank.Count - i - 1; j++)
-            {
-                if (list_rank[j].score < list_rank[j + 1].score)
-                {
-                    // 交换它们的位置
-                    RankListData temp = list_rank[j];
-                    list_rank[j] = list_rank[j + 1];
-                    list_rank[j + 1] = temp;
-                }
-                else if (list_rank[j].score == list_rank[j + 1].score)
-                {
-                    if (list_rank[j].score2 < list_rank[j + 1].score2)
-                    {
-                        // 交换它们的位置
-                        RankListData temp = list_rank[j];
-                        list_rank[j] = list_rank[j + 1];
-                        list_rank[j + 1] = temp;
-                    }
-                }
-            }
-        }
+        //for (int i = 0; i < list_rank.Count - 1; i++)
+        //{
+        //    for (int j = 0; j < list_rank.Count - i - 1; j++)
+        //    {
+        //        if (list_rank[j].score < list_rank[j + 1].score)
+        //        {
+        //            // 交换它们的位置
+        //            RankListData temp = list_rank[j];
+        //            list_rank[j] = list_rank[j + 1];
+        //            list_rank[j + 1] = temp;
+        //        }
+        //        else if (list_rank[j].score == list_rank[j + 1].score)
+        //        {
+        //            if (list_rank[j].score2 < list_rank[j + 1].score2)
+        //            {
+        //                // 交换它们的位置
+        //                RankListData temp = list_rank[j];
+        //                list_rank[j] = list_rank[j + 1];
+        //                list_rank[j + 1] = temp;
+        //            }
+        //        }
+        //    }
+        //}
 
         for (int i = 0; i < list.Count; i++)
         {
+            Debug.Log(list[i].uid + "  " + list[i].score2);
             Transform itemTrans = Instantiate(item_rank, list_content).transform;
             itemTrans.Find("rank").GetComponent<Text>().text = (i + 1).ToString();
             itemTrans.Find("name").GetComponent<Text>().text = list[i].name;
