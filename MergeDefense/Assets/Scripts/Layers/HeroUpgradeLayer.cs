@@ -19,6 +19,9 @@ public class HeroUpgradeLayer : MonoBehaviour
     public Transform btn_upgrade;
     public Transform btn_buy;
     public Transform btn_loginGet;
+    public Transform mythicHeroMergeWay;
+    public Transform yaoqiu_hero;
+    public Transform yaoqiu_weapon;
 
     HeroSkillData[] skillsArray;
     HeroData heroData;
@@ -163,6 +166,62 @@ public class HeroUpgradeLayer : MonoBehaviour
                 btn_buy.localScale = Vector3.one;
                 btn_buy.Find("price").GetComponent<Text>().text = heroData.price.ToString();
             }
+        }
+
+        // 神话角色合成方式
+        if(heroData.quality == 4)
+        {
+            mythicHeroMergeWay.localScale = Vector3.one;
+
+            // 合成方式
+            {
+                for (int i = 0; i < heroData.list_summonWay.Count; i++)
+                {
+                    int summonType = heroData.list_summonWay[i][0];
+
+                    // 角色要求
+                    if (summonType == 1)
+                    {
+                        int id = heroData.list_summonWay[i][1];
+                        int star = heroData.list_summonWay[i][2];
+
+                        yaoqiu_hero.Find("icon").GetComponent<Image>().sprite = AtlasUtil.getAtlas_icon().GetSprite("head_" + id);
+
+                        // 星级
+                        {
+                            int showCount = star % 3;
+                            if (showCount == 0)
+                            {
+                                showCount = 3;
+                            }
+                            for (int j = 1; j <= 3; j++)
+                            {
+                                if (j <= showCount)
+                                {
+                                    yaoqiu_hero.Find("stars").Find(j.ToString()).gameObject.SetActive(true);
+                                }
+                                else
+                                {
+                                    yaoqiu_hero.Find("stars").Find(j.ToString()).gameObject.SetActive(false);
+                                }
+                            }
+                        }
+                    }
+                    // 武器要求
+                    else if (summonType == 2)
+                    {
+                        int weaponType = heroData.list_summonWay[i][1];
+                        int level = heroData.list_summonWay[i][2];
+
+                        yaoqiu_weapon.Find("icon").GetComponent<Image>().sprite = AtlasUtil.getAtlas_icon().GetSprite("weapon_" + weaponType);
+                        yaoqiu_weapon.Find("level").GetComponent<Text>().text = level.ToString();
+                    }
+                }
+            }
+        }
+        else
+        {
+            mythicHeroMergeWay.localScale = Vector3.zero;
         }
     }
 
