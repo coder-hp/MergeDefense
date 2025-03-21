@@ -22,6 +22,10 @@ public class GameData
         {
             MainLayer.s_instance.refreshUI();
         }
+        if(HeroUpgradeLayer.s_instance)
+        {
+            HeroUpgradeLayer.s_instance.refreshUI();
+        }
     }
 
     public static int getMyDiamond()
@@ -43,6 +47,36 @@ public class GameData
         if (MainLayer.s_instance)
         {
             MainLayer.s_instance.refreshUI();
+        }
+        if (HeroUpgradeLayer.s_instance)
+        {
+            HeroUpgradeLayer.s_instance.refreshUI();
+        }
+    }
+
+    public static int getMyTiLi()
+    {
+        return PlayerPrefs.GetInt("TiLi", 99);
+    }
+
+    public static void changeMyTiLi(int value)
+    {
+        if (value == 0)
+        {
+            return;
+        }
+
+        int curCount = getMyTiLi() + value;
+        curCount = curCount < 0 ? 0 : curCount;
+        PlayerPrefs.SetInt("TiLi", curCount);
+
+        if (MainLayer.s_instance)
+        {
+            MainLayer.s_instance.refreshUI();
+        }
+        if (HeroUpgradeLayer.s_instance)
+        {
+            HeroUpgradeLayer.s_instance.refreshUI();
         }
     }
 

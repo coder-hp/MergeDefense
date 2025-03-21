@@ -21,6 +21,7 @@ public class MainLayer : MonoBehaviour
 
     public void refreshUI()
     {
+        text_tili.text = GameData.getMyTiLi().ToString();
         text_gold.text = CommonUtil.numToStrKMB(GameData.getMyGold());
         text_diamond.text = CommonUtil.numToStrKMB(GameData.getMyDiamond());
     }

@@ -5,6 +5,11 @@ using UnityEngine.UI;
 
 public class HeroUpgradeLayer : MonoBehaviour
 {
+    public static HeroUpgradeLayer s_instance = null;
+
+    public Text text_tili;
+    public Text text_gold;
+    public Text text_diamond;
     public Text text_name;
     public Text text_level;
     public Text text_skillDesc;
@@ -32,7 +37,16 @@ public class HeroUpgradeLayer : MonoBehaviour
 
     private void Awake()
     {
+        s_instance = this;
         HeroLayer.s_instance.gameObject.SetActive(false);
+        refreshUI();
+    }
+
+    public void refreshUI()
+    {
+        text_tili.text = GameData.getMyTiLi().ToString();
+        text_gold.text = CommonUtil.numToStrKMB(GameData.getMyGold());
+        text_diamond.text = CommonUtil.numToStrKMB(GameData.getMyDiamond());
     }
 
     public void init(HeroData _heroData,bool isUpgrade = false)
