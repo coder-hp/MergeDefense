@@ -35,11 +35,10 @@ public class HeroUpgradeLayer : MonoBehaviour
         heroData = _heroData;
 
         text_name.text = heroData.name;
-        if (!isUpgrade)
-        {
-            text_level.text = "Lv." + GameData.getHeroLevel(heroData.id);
-        }
-        text_atk.text = heroData.atk.ToString();
+        text_level.text = "Lv." + GameData.getHeroLevel(heroData.id);
+
+        int heroLevelAddAtk = Mathf.RoundToInt(HeroLevelEntity.getInstance().getData(heroData.id, GameData.getHeroLevel(heroData.id)).atk * heroData.atk);
+        text_atk.text = (heroData.atk + heroLevelAddAtk).ToString();
         text_atk_speed.text = heroData.atkSpeed.ToString();
         text_crit_rate.text = heroData.critRate + "%";
         text_crit_damage.text = Mathf.RoundToInt(heroData.critDamage * 100) + "%";
