@@ -8,11 +8,14 @@ public class RankLayer : MonoBehaviour
 {
     public GameObject item_rank;
     public Transform list_content;
+    public Transform item_myRank;
 
     List<RankListData> list_rank = new List<RankListData>();
+    string my_uid;
 
     void Start()
     {
+        my_uid = GameData.getUID();
         ReqDataGetRank reqData = new ReqDataGetRank();
         reqData.rankType = RankType.GlobalRank.ToString();
         string reqDataStr = JsonConvert.SerializeObject(reqData);
@@ -71,10 +74,30 @@ public class RankLayer : MonoBehaviour
         for (int i = 0; i < list.Count; i++)
         {
             Transform itemTrans = Instantiate(item_rank, list_content).transform;
-            itemTrans.Find("rank").GetComponent<Text>().text = (i + 1).ToString();
-            itemTrans.Find("name").GetComponent<Text>().text = list[i].name;
-            itemTrans.Find("wave").GetComponent<Text>().text = list[i].score.ToString();
-            itemTrans.Find("damage").GetComponent<Text>().text = CommonUtil.numToStrKMB(list[i].score2);
+            setItemData(itemTrans, list[i],i + 1);
+
+            if (list[i].uid == my_uid)
+            {
+                setItemData(item_myRank, list[i], i + 1);
+            }
+        }
+    }
+
+    void setItemData(Transform itemTrans,RankListData rankListData, int rank)
+    {
+        itemTrans.Find("rank").GetComponent<Text>().text = rank.ToString();
+        itemTrans.Find("name").GetComponent<Text>().text = rankListData.name;
+        itemTrans.Find("wave").GetComponent<Text>().text = rankListData.score.ToString();
+        itemTrans.Find("damage").GetComponent<Text>().text = CommonUtil.numToStrKMB(rankListData.score2);
+
+        if(rank  <= 3)
+        {
+            itemTrans.Find("rank1-3").localScale = Vector3.one;
+            itemTrans.Find("rank1-3").GetComponent<Image>().sprite = AtlasUtil.getAtlas_main().GetSprite("list_" + rank);
+        }
+        else
+        {
+            itemTrans.Find("rank1-3").localScale = Vector3.zero;
         }
     }
 
