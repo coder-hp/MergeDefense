@@ -225,5 +225,7 @@ public class BossRewardPanel : MonoBehaviour
 
         GameFightData.s_instance.isCanOnInvokeBoCiSecond = true;
         GameUILayer.s_instance.changeDiamond(killRewardData.diamond);
+
+        AudioScript.s_instance.playSound("removeHero");
     }
 }
