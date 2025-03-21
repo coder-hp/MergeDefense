@@ -30,6 +30,11 @@ public class HeroUpgradeLayer : MonoBehaviour
     int upgradeNeedExp = 0;
     int upgradeNeedGold = 0;
 
+    private void Awake()
+    {
+        HeroLayer.s_instance.gameObject.SetActive(false);
+    }
+
     public void init(HeroData _heroData,bool isUpgrade = false)
     {
         heroData = _heroData;
@@ -138,6 +143,14 @@ public class HeroUpgradeLayer : MonoBehaviour
                 btn_upgrade.localScale = Vector3.one;
                 upgradeNeedGold = HeroLevelEntity.getInstance().getData(heroData.id, GameData.getHeroLevel(heroData.id) + 1).gold;
                 btn_upgrade.Find("price").GetComponent<Text>().text = upgradeNeedGold.ToString();
+                if(GameData.getMyGold() >= upgradeNeedGold)
+                {
+                    btn_upgrade.Find("price").GetComponent<Text>().color = Color.white;
+                }
+                else
+                {
+                    btn_upgrade.Find("price").GetComponent<Text>().color = CommonUtil.stringToColor("#ff4b4b");
+                }
 
                 if (isCanUpgrade)
                 {
@@ -337,7 +350,7 @@ public class HeroUpgradeLayer : MonoBehaviour
     public void onClickClose()
     {
         AudioScript.s_instance.playSound_btn();
-
+        HeroLayer.s_instance.gameObject.SetActive(true);
         Destroy(gameObject);
     }
 }

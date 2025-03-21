@@ -5,12 +5,19 @@ using UnityEngine.UI;
 
 public class HeroLayer : MonoBehaviour
 {
+    public static HeroLayer s_instance = null;
+
     public GameObject item_hero;
     public Transform list_content;
     public Transform btn_allHero;
     public Transform btn_mythicHero;
     public Text btn_allHeroText;
     public Text btn_mythicHeroText;
+
+    private void Awake()
+    {
+        s_instance = this;
+    }
 
     void Start()
     {
