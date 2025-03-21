@@ -24,13 +24,19 @@ public class HeroUpgradeLayer : MonoBehaviour
     HeroSkillData[] skillsArray;
     HeroData heroData;
     bool isFullLevel = false;
+    bool isCanUpgrade = false;
+    int upgradeNeedExp = 0;
+    int upgradeNeedGold = 0;
 
-    public void init(HeroData _heroData)
+    public void init(HeroData _heroData,bool isUpgrade = false)
     {
         heroData = _heroData;
 
         text_name.text = heroData.name;
-        text_level.text = "Lv."+GameData.getHeroLevel(heroData.id);
+        if (!isUpgrade)
+        {
+            text_level.text = "Lv." + GameData.getHeroLevel(heroData.id);
+        }
         text_atk.text = heroData.atk.ToString();
         text_atk_speed.text = heroData.atkSpeed.ToString();
         text_crit_rate.text = heroData.critRate + "%";
@@ -39,12 +45,14 @@ public class HeroUpgradeLayer : MonoBehaviour
         img_weapon_icon.sprite = AtlasUtil.getAtlas_icon().GetSprite("weapon_" + heroData.goodWeapon);
 
         // 品质标签
+        if(!isUpgrade)
         {
             tabsPoint.Find("quality").GetComponent<Image>().sprite = AtlasUtil.getAtlas_hero().GetSprite("biaoqian_quality_" + heroData.quality);
             tabsPoint.Find("quality/Text").GetComponent<Text>().text = Consts.list_heroQualityLabel[heroData.quality];
         }
 
         // 职业定位
+        if (!isUpgrade)
         {
             string[] strArray = heroData.career.Split('/');
             if(strArray.Length == 1)
@@ -62,6 +70,7 @@ public class HeroUpgradeLayer : MonoBehaviour
 
         // 经验条
         {
+            isCanUpgrade = false;
             int curLevel = GameData.getHeroLevel(heroData.id);
             int curHeroExp = GameData.getHeroExp(heroData.id);
             HeroLevelData nextHeroLevelData = HeroLevelEntity.getInstance().getData(heroData.id, curLevel + 1);
@@ -74,6 +83,8 @@ public class HeroUpgradeLayer : MonoBehaviour
 
                 if (curHeroExp >= nextHeroLevelData.exp)
                 {
+                    isCanUpgrade = true;
+                    upgradeNeedExp = nextHeroLevelData.exp;
                     transform.Find("exp_bg/jiantou").localScale = Vector3.one;
                 }
                 else
@@ -90,6 +101,7 @@ public class HeroUpgradeLayer : MonoBehaviour
         }
 
         // 技能
+        if (!isUpgrade)
         {
             string[] array = heroData.skills.Split("_");
             skillsArray = new HeroSkillData[array.Length];
@@ -121,6 +133,19 @@ public class HeroUpgradeLayer : MonoBehaviour
             else
             {
                 btn_upgrade.localScale = Vector3.one;
+                upgradeNeedGold = HeroLevelEntity.getInstance().getData(heroData.id, GameData.getHeroLevel(heroData.id) + 1).gold;
+                btn_upgrade.Find("price").GetComponent<Text>().text = upgradeNeedGold.ToString();
+
+                if (isCanUpgrade)
+                {
+                    btn_upgrade.GetComponent<Button>().enabled = true;
+                    btn_upgrade.Find("blackMask").localScale = Vector3.zero;
+                }
+                else
+                {
+                    btn_upgrade.GetComponent<Button>().enabled = false;
+                    btn_upgrade.Find("blackMask").localScale = Vector3.one;
+                }
             }
         }
         else
@@ -137,6 +162,7 @@ public class HeroUpgradeLayer : MonoBehaviour
                 btn_upgrade.localScale = Vector3.zero;
                 btn_loginGet.localScale = Vector3.zero;
                 btn_buy.localScale = Vector3.one;
+                btn_buy.Find("price").GetComponent<Text>().text = heroData.price.ToString();
             }
         }
     }
@@ -204,6 +230,21 @@ public class HeroUpgradeLayer : MonoBehaviour
     public void onClickUpgrade()
     {
         AudioScript.s_instance.playSound_btn();
+
+        if(GameData.getMyGold() >= upgradeNeedGold)
+        {
+            if (GameData.getHeroExp(heroData.id) >= upgradeNeedExp)
+            {
+                GameData.changeMyGold(-upgradeNeedGold,"heroUpgrade");
+                GameData.changeHeroExp(heroData.id, -upgradeNeedExp);
+                GameData.setHeroLevel(heroData.id, GameData.getHeroLevel(heroData.id) + 1);
+                init(heroData,true);
+            }
+        }
+        else
+        {
+            ToastScript.show("Coins Not Enough!");
+        }
     }
 
     public void onClickLoginGet()
@@ -226,7 +267,7 @@ public class HeroUpgradeLayer : MonoBehaviour
             btn_loginGet.localScale = Vector3.zero;
             btn_buy.localScale = Vector3.zero;
 
-            ToastScript.show("Get New Hero!");
+            ToastScript.show("Mythic Hero Obtained！");
         }
         else
         {

@@ -9,10 +9,20 @@ public class MainLayer : MonoBehaviour
 
     public Transform childLayerPoint;
     public Transform bottomPoint;
+    public Text text_tili;
+    public Text text_gold;
+    public Text text_diamond;
 
     private void Awake()
     {
         s_instance = this;
+        refreshUI();
+    }
+
+    public void refreshUI()
+    {
+        text_gold.text = CommonUtil.numToStrKMB(GameData.getMyGold());
+        text_diamond.text = CommonUtil.numToStrKMB(GameData.getMyDiamond());
     }
 
     public void onClickBottomTab(int index)

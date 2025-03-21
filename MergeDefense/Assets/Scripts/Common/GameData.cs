@@ -18,10 +18,10 @@ public class GameData
         curCount = curCount < 0 ? 0 : curCount;
         PlayerPrefs.SetInt("gold", curCount);
 
-        //if (MainLayer.s_instance)
-        //{
-        //    MainLayer.s_instance.refreshUI();
-        //}
+        if (MainLayer.s_instance)
+        {
+            MainLayer.s_instance.refreshUI();
+        }
     }
 
     public static int getMyDiamond()
@@ -39,6 +39,11 @@ public class GameData
         int curCount = getMyDiamond() + value;
         curCount = curCount < 0 ? 0 : curCount;
         PlayerPrefs.SetInt("Diamond", curCount);
+
+        if (MainLayer.s_instance)
+        {
+            MainLayer.s_instance.refreshUI();
+        }
     }
 
     public static int getIsOpenVibrate()
