@@ -474,16 +474,7 @@ public class GameUILayer : MonoBehaviour
     {
         AudioScript.s_instance.playSound_btn();
 
-        if (Time.timeScale == 0)
-        {
-            Time.timeScale = 1;
-            AudioScript.s_instance.resumeMusic();
-        }
-        else
-        {
-            Time.timeScale = 0;
-            AudioScript.s_instance.pauseMusic();
-        }
+        LayerManager.ShowLayer(Consts.Layer.GamePauseLayer);
     }
 
     public void onClickSort()

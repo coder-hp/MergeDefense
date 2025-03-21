@@ -16,6 +16,11 @@ public class EnemyManager : MonoBehaviour
 
     private void Update()
     {
+        if(GameFightData.s_instance.isGameOver)
+        {
+            return;
+        }
+
         for(int i = 0; i < list_enemy.Count; i++)
         {
             list_enemy[i].move();
