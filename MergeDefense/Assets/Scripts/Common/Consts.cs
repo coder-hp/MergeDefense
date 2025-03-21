@@ -126,9 +126,9 @@ public class Consts
     {
         if(GMLayer.s_instance.isDebug)
         {
-            return "http://10.26.53.5:8001/";
+            return "http://10.26.53.6:8001/";
         }
 
-        return "http://10.26.53.5:8001/";
+        return "http://10.26.53.6:8001/";
     }
 }
