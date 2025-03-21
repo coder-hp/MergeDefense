@@ -74,10 +74,6 @@ public class GameData
         {
             MainLayer.s_instance.refreshUI();
         }
-        if (HeroUpgradeLayer.s_instance)
-        {
-            HeroUpgradeLayer.s_instance.refreshUI();
-        }
     }
 
     public static int getIsOpenVibrate()

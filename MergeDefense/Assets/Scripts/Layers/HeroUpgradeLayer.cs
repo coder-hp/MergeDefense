@@ -7,7 +7,6 @@ public class HeroUpgradeLayer : MonoBehaviour
 {
     public static HeroUpgradeLayer s_instance = null;
 
-    public Text text_tili;
     public Text text_gold;
     public Text text_diamond;
     public Text text_name;
@@ -45,7 +44,6 @@ public class HeroUpgradeLayer : MonoBehaviour
 
     public void refreshUI()
     {
-        text_tili.text = GameData.getMyTiLi().ToString();
         text_gold.text = CommonUtil.numToStrKMB(GameData.getMyGold());
         text_diamond.text = CommonUtil.numToStrKMB(GameData.getMyDiamond());
     }
