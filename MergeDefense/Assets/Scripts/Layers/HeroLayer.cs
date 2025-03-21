@@ -23,7 +23,7 @@ public class HeroLayer : MonoBehaviour
 
             item.GetComponent<Button>().onClick.AddListener(()=>
             {
-                Debug.Log(heroData.id);
+                LayerManager.ShowLayer(Consts.Layer.HeroUpgradeLayer).GetComponent<HeroUpgradeLayer>().init(heroData);
             });
         }
     }

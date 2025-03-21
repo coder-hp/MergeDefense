@@ -48,6 +48,7 @@ public class Consts
         RankLayer,
         HeroLayer,
         BattleLayer,
+        HeroUpgradeLayer,
     }
 
     public enum WeaponType
@@ -104,6 +105,16 @@ public class Consts
         CommonUtil.stringToColor("#457dd8"),    // 蓝
         CommonUtil.stringToColor("#9146da"),    // 紫
         CommonUtil.stringToColor("#eb9b10"),    // 橙
+    };
+
+    // 角色不同品质的文字标签
+    public static List<string> list_heroQualityLabel = new List<string>()
+    {
+        "",
+        "Common",
+        "Rare",
+        "Epic",
+        "Mythic",
     };
 
     public static string HeroAniNameIdle = "idle";
