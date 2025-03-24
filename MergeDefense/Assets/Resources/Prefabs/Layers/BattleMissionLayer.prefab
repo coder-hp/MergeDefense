@@ -408,7 +408,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2340887254373474377}
-  - component: {fileID: 6019793631955335790}
+  - component: {fileID: 334373449968152627}
   m_Layer: 5
   m_Name: BattleMissionLayer
   m_TagString: Untagged
@@ -437,7 +437,7 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &6019793631955335790
+--- !u!114 &334373449968152627
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -651,7 +651,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 6019793631955335790}
+      - m_Target: {fileID: 334373449968152627}
         m_TargetAssemblyTypeName: BattleMissionLayer, Assembly-CSharp
         m_MethodName: onClickClose
         m_Mode: 1
@@ -936,7 +936,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 6019793631955335790}
+      - m_Target: {fileID: 334373449968152627}
         m_TargetAssemblyTypeName: BattleMissionLayer, Assembly-CSharp
         m_MethodName: onClickClose
         m_Mode: 1
@@ -1380,7 +1380,7 @@ PrefabInstance:
     - target: {fileID: 1730831736540134451, guid: ac0a056c3f5403744b03a3a81d2c0d84, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
-      objectReference: {fileID: 6019793631955335790}
+      objectReference: {fileID: 334373449968152627}
     - target: {fileID: 1730831736540134451, guid: ac0a056c3f5403744b03a3a81d2c0d84, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
       value: 2
