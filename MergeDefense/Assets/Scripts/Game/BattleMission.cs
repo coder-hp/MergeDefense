@@ -49,7 +49,7 @@ public class BattleMission : MonoBehaviour
         transform.DOMove(boatPos, boatComeTime).OnComplete(() =>
         {
             int index = RandomUtil.SelectProbability(BattleMissionEntity.getInstance().list_weight);
-            index = 0;
+            index = 5;
             curMissionData = BattleMissionEntity.getInstance().list[index];
             Debug.Log("新任务："+curMissionData.desc);
             
@@ -103,14 +103,33 @@ public class BattleMission : MonoBehaviour
         }
         else
         {
-            text_progress.text = progress + "/" + curMissionData.value;
+            switch (curMissionData.id)
+            {
+                case 1:
+                case 2:
+                case 6:
+                case 7:
+                case 8:
+                    {
+                        text_progress.text = progress + "/" + curMissionData.value;
+                        break;
+                    }
+
+                case 3:
+                case 4:
+                case 5:
+                    {
+                        text_progress.text = CommonUtil.numToStrKMB(progress) + "/" + CommonUtil.numToStrKMB(curMissionData.value);
+                        break;
+                    }
+            }
         }
     }
 
-    public void addMissionProgress()
+    public void addMissionProgress(int value)
     {
-        ++curMissionProgress;
-        if (curMissionProgress > curMissionData.value)
+        curMissionProgress += value;
+        if (curMissionProgress >= curMissionData.value)
         {
             curMissionProgress = curMissionData.value;
             completeMission();
