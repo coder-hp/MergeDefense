@@ -1,18 +1,21 @@
-id,desc,time,value,reward
-1,,,,
-2,,,,
-3,,,,
-4,,,,
-5,,,,
-6,,,,
-7,,,,
-8,,,,
-9,,,,
-10,,,,
-11,,,,
-12,,,,
-13,,,,
-14,,,,
-15,,,,
-16,,,,
-17,,,,
+id,desc,time,value,reward,weight
+1,Defeat 20 enemies.,30,20,5_100,5
+2,Defeat 30 enemies.,30,30,5_150,5
+3,Deal 100k DMG.,30,10,5_100,5
+4,Deal 200k DMG.,30,20,5_150,5
+5,Deal 300k DMG.,30,30,5_200,5
+6,Purchase 1 weapon.,30,1,6_10,5
+7,Purchase 2 weapon.,30,2,6_20,5
+8,Purchase 3 weapon.,30,3,6_40,5
+9,Equip 5 different weapons.,30,5,5_100,5
+10,Equip 2 identical weapons.,30,2,5_50,5
+11,Equip 3 identical weapons.,30,3,5_100,5
+12,Equip 4 identical weapons.,30,4,5_150,5
+13,Equip 5 identical weapons.,30,5,5_200,5
+14,Light 4 campfires.,30,0,,5
+15,Chop down 3 trees.,30,0,,5
+16,Collect 3 stones.,30,0,,5
+17,Summon with 30% off.,30,0,,5
+18,Forge with 30% off.,30,0,,5
+19,Temporarily turn the weapon shop into a casino.,30,0,,5
+20,Activate Lucky Weapon Fusion Mode.,30,0,,5
