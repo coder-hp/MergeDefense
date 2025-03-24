@@ -648,8 +648,7 @@ public class GameUILayer : MonoBehaviour
     public void onClickBoatMission()
     {
         AudioScript.s_instance.playSound_btn();
-        forceToBoCi(GameFightData.s_instance.curBoCi + 1);
-        btn_spawn.localScale = Vector3.zero;
+        BattleMission.s_instance.takeMission();
     }
 
     bool isCalledGameOver = false;
