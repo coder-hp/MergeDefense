@@ -648,7 +648,8 @@ public class GameUILayer : MonoBehaviour
     public void onClickBoatMission()
     {
         AudioScript.s_instance.playSound_btn();
-        BattleMission.s_instance.takeMission();
+
+        LayerManager.ShowLayer(Consts.Layer.BattleMissionLayer);
     }
 
     bool isCalledGameOver = false;

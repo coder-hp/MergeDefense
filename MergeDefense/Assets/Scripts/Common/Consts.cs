@@ -50,6 +50,7 @@ public class Consts
         HeroLayer,
         BattleLayer,
         HeroUpgradeLayer,
+        BattleMissionLayer,
     }
 
     public enum WeaponType

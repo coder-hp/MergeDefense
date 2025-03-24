@@ -8,7 +8,7 @@ public class BattleMission : MonoBehaviour
 {
     public static BattleMission s_instance = null;
 
-    bool isTakeMission = false;
+    public bool isTakeMission = false;
 
     int boatComeTime = 3;
     int waitTakeMissionTime = 60;
