@@ -50,6 +50,7 @@ public class Consts
         HeroLayer,
         BattleLayer,
         HeroUpgradeLayer,
+        BattleMissionLayer,
     }
 
     public enum WeaponType
@@ -68,6 +69,8 @@ public class Consts
         Diamond,
         ClawTicket,
         PlayerExp,
+        BattleGold,
+        BattleGem,
     }
 
     public enum BuffType

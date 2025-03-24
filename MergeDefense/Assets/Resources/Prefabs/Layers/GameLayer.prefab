@@ -602,6 +602,7 @@ MonoBehaviour:
   attackRangeTrans: {fileID: 1889172472041156528}
   flyPoint: {fileID: 4149523117588117092}
   effectPoint: {fileID: 8027066404486135526}
+  boatTrans: {fileID: 7185873721286738226}
   list_enemyMoveFourPos: []
   matrial_attackRange: {fileID: 0}
 --- !u!114 &-7090605276762049441
@@ -2211,13 +2212,38 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 3523612151457943959, guid: a911a38c565fab14ba3836520b7cd69c, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 3986264568271952677}
   m_SourcePrefab: {fileID: 100100000, guid: a911a38c565fab14ba3836520b7cd69c, type: 3}
 --- !u!4 &677074037658659619 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 5868642307896647996, guid: a911a38c565fab14ba3836520b7cd69c, type: 3}
   m_PrefabInstance: {fileID: 6346953042248239647}
   m_PrefabAsset: {fileID: 0}
+--- !u!4 &7185873721286738226 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 4300289180033272621, guid: a911a38c565fab14ba3836520b7cd69c, type: 3}
+  m_PrefabInstance: {fileID: 6346953042248239647}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &7562259277867129736 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 3523612151457943959, guid: a911a38c565fab14ba3836520b7cd69c, type: 3}
+  m_PrefabInstance: {fileID: 6346953042248239647}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &3986264568271952677
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7562259277867129736}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e75d27d93250ccd41b9fcc7d00ce44ef, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &7642062785112296436
 PrefabInstance:
   m_ObjectHideFlags: 0
