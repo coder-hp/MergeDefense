@@ -6,12 +6,12 @@ public class LiuHaiUtil : MonoBehaviour
     void Awake()
     {
         Rect safeAreaRect = Screen.safeArea;
-        float height = Screen.height;
-        float liuhaiHeight = (height - safeAreaRect.height) * (1920f / height);
-        float chazhi = liuhaiHeight;
-        if (chazhi > 0)
+        float liuhaiHeight = (Screen.height - safeAreaRect.yMax);
+        //liuhaiHeight *= ((float)Screen.height / (float)Screen.width) / (1920f / 1080f);
+        //liuhaiHeight *= (float)Screen.height / 1920f;
+        if (liuhaiHeight > 0)
         {
-            transform.localPosition -= new Vector3(0, chazhi, 0);
+            transform.localPosition -= new Vector3(0, liuhaiHeight, 0);
         }
     }
 }
