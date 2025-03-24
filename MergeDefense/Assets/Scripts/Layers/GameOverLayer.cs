@@ -8,6 +8,7 @@ public class GameOverLayer : MonoBehaviour
 {
     public Text text_wave;
     public Text text_damage;
+    public Transform rewardsTrans;
 
     void Start()
     {
@@ -15,6 +16,37 @@ public class GameOverLayer : MonoBehaviour
         AudioScript.s_instance.playSound("gameOver");
         text_wave.text = GameFightData.s_instance.curBoCi.ToString();
         text_damage.text = CommonUtil.numToStrKMB(GameFightData.s_instance.allDamage);
+
+        // 奖励
+        {
+            EnemyWaveData enemyWaveData = EnemyWaveEntity.getInstance().getData(GameFightData.s_instance.curBoCi);
+            string[] rewardArray = enemyWaveData.reward.Split(';');
+            for(int i = 0; i < rewardArray.Length; i++)
+            {
+                int rewardType = int.Parse(rewardArray[i].Split('_')[0]);
+                int rewardCount = int.Parse(rewardArray[i].Split('_')[1]);
+
+                rewardsTrans.Find("reward_" + rewardType).gameObject.SetActive(true);
+                rewardsTrans.Find("reward_" + rewardType + "/count").GetComponent<Text>().text = rewardCount.ToString();
+
+                if(rewardType == (int)Consts.RewardType.Gold)
+                {
+                    GameData.changeMyGold(rewardCount,"");
+                }
+                else if (rewardType == (int)Consts.RewardType.Diamond)
+                {
+                    GameData.changeMyDiamond(rewardCount);
+                }
+                else if (rewardType == (int)Consts.RewardType.ClawTicket)
+                {
+                    GameData.changeClawTicket(rewardCount);
+                }
+                else if (rewardType == (int)Consts.RewardType.PlayerExp)
+                {
+                    GameData.changePlayerExp(rewardCount);
+                }
+            }
+        }
 
         {
             string str = GameData.getMaxWaveDamage();

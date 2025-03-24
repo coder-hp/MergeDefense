@@ -54,6 +54,23 @@ public class GameData
         }
     }
 
+    public static int getClawTicket()
+    {
+        return PlayerPrefs.GetInt("ClawTicket", 0);
+    }
+
+    public static void changeClawTicket(int value)
+    {
+        if (value == 0)
+        {
+            return;
+        }
+
+        int curCount = getClawTicket() + value;
+        curCount = curCount < 0 ? 0 : curCount;
+        PlayerPrefs.SetInt("ClawTicket", curCount);
+    }
+
     public static int getMyTiLi()
     {
         return PlayerPrefs.GetInt("TiLi", 99);

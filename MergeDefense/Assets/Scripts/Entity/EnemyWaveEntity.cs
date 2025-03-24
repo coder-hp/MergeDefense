@@ -14,6 +14,7 @@ public class EnemyWaveData
     public float speed;
     public int time;
     public int killGold;
+    public string reward;
 }
 
 public class EnemyWaveEntity
