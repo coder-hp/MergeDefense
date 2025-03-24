@@ -16,6 +16,23 @@ public class BattleMissionLayer : MonoBehaviour
         {
             btn_take.localScale = Vector3.zero;
         }
+
+        if(BattleMission.s_instance.curMissionData.reward == "")
+        {
+            timeTrans.localPosition = new Vector3(0,-120,0);
+            rewardTrans.localScale = Vector3.zero;
+        }
+        else
+        {
+            int rewardType = int.Parse(BattleMission.s_instance.curMissionData.reward.Split('_')[0]);
+            int rewardCount = int.Parse(BattleMission.s_instance.curMissionData.reward.Split('_')[1]);
+            rewardTrans.Find("icon").GetComponent<Image>().sprite = AtlasUtil.getAtlas_icon().GetSprite("RewardType" + rewardType);
+            rewardTrans.Find("Text").GetComponent<Text>().text = rewardCount.ToString();
+        }
+
+        text_desc.text = BattleMission.s_instance.curMissionData.desc;
+
+        LayerManager.LayerShowAni(transform.Find("bg"));
     }
 
     bool isClosed = false;
