@@ -50,7 +50,7 @@ public class BattleMission : MonoBehaviour
         transform.DOMove(boatPos, boatComeTime).OnComplete(() =>
         {
             int index = RandomUtil.SelectProbability(BattleMissionEntity.getInstance().list_weight);
-            index = 10;
+            index = 16;
             curMissionData = BattleMissionEntity.getInstance().list[index];
             Debug.Log("新任务："+curMissionData.desc);
             
@@ -104,6 +104,20 @@ public class BattleMission : MonoBehaviour
             case 13:
                 {
                     checkWeaponMission();
+                    break;
+                }
+
+            case 17:
+                {
+                    GameUILayer.s_instance.btn_summon_gold.text = GameFightData.s_instance.getCurSummonGold().ToString();
+                    GameUILayer.s_instance.btn_summon_gold.transform.parent.Find("discount").localScale = Vector3.one;
+                    break;
+                }
+
+            case 18:
+                {
+                    GameUILayer.s_instance.btn_forge_gold.text = GameFightData.s_instance.getCurForgeGold().ToString();
+                    GameUILayer.s_instance.btn_forge_gold.transform.parent.Find("discount").localScale = Vector3.one;
                     break;
                 }
         }
@@ -179,13 +193,33 @@ public class BattleMission : MonoBehaviour
 
     void onInvokeSecond()
     {
+        // 任务时间到
         if(--restDoMissionTime <= 0)
         {
             CancelInvoke("onInvokeSecond");
 
+            int mission_id = curMissionData.id;
+
             curMissionData = null;
             missionTrans.localScale = Vector3.zero;
             transform.DOMove(boatAwayPos, boatComeTime).SetEase(Ease.Linear);
+
+            switch (mission_id)
+            {
+                case 17:
+                    {
+                        GameUILayer.s_instance.btn_summon_gold.text = GameFightData.s_instance.getCurSummonGold().ToString();
+                        GameUILayer.s_instance.btn_summon_gold.transform.parent.Find("discount").localScale = Vector3.zero;
+                        break;
+                    }
+
+                case 18:
+                    {
+                        GameUILayer.s_instance.btn_forge_gold.text = GameFightData.s_instance.getCurForgeGold().ToString();
+                        GameUILayer.s_instance.btn_forge_gold.transform.parent.Find("discount").localScale = Vector3.zero;
+                        break;
+                    }
+            }
         }
 
         text_time.text = restDoMissionTime + "s";

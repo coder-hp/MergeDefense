@@ -415,7 +415,7 @@ public class GameUILayer : MonoBehaviour
         }
 
         // 检查召唤金额是否足够
-        if (GameFightData.s_instance.curGold >= GameFightData.s_instance.curSummonGold)
+        if (GameFightData.s_instance.curGold >= GameFightData.s_instance.getCurSummonGold())
         {
             btn_summon_gold.color = Color.white;
         }
@@ -425,7 +425,7 @@ public class GameUILayer : MonoBehaviour
         }
 
         // 检查锻造金额是否足够
-        if (GameFightData.s_instance.curGold >= GameFightData.s_instance.curForgeGold)
+        if (GameFightData.s_instance.curGold >= GameFightData.s_instance.getCurForgeGold())
         {
             btn_forge_gold.color = Color.white;
         }
@@ -503,7 +503,7 @@ public class GameUILayer : MonoBehaviour
     {
         AudioScript.s_instance.playSound_btn();
 
-        if (GameFightData.s_instance.curGold < GameFightData.s_instance.curSummonGold)
+        if (GameFightData.s_instance.curGold < GameFightData.s_instance.getCurSummonGold())
         {
             AudioScript.s_instance.playSound("summonNotHaveGold");
             ToastScript.show("Coins Not Enough!");
@@ -512,11 +512,11 @@ public class GameUILayer : MonoBehaviour
 
         if (GameLayer.s_instance.addHero())
         {
-            int costGold = GameFightData.s_instance.curSummonGold;
+            int costGold = GameFightData.s_instance.getCurSummonGold();
 
             // 增加下次召唤金额
             GameFightData.s_instance.curSummonGold += Consts.summonAddGold;
-            btn_summon_gold.text = GameFightData.s_instance.curSummonGold.ToString();
+            btn_summon_gold.text = GameFightData.s_instance.getCurSummonGold().ToString();
 
             changeGold(-costGold);
         }
@@ -527,7 +527,7 @@ public class GameUILayer : MonoBehaviour
     {
         AudioScript.s_instance.playSound_btn();
 
-        if (GameFightData.s_instance.curGold < GameFightData.s_instance.curForgeGold)
+        if (GameFightData.s_instance.curGold < GameFightData.s_instance.getCurForgeGold())
         {
             AudioScript.s_instance.playSound("summonNotHaveGold");
             ToastScript.show("Coins Not Enough!");
@@ -555,11 +555,11 @@ public class GameUILayer : MonoBehaviour
 
         if (isForgeSuccess)
         {
-            int costGold = GameFightData.s_instance.curForgeGold;
+            int costGold = GameFightData.s_instance.getCurForgeGold();
 
             // 增加下次锻造金额
             GameFightData.s_instance.curForgeGold += Consts.forgeAddGold;
-            btn_forge_gold.text = GameFightData.s_instance.curForgeGold.ToString();
+            btn_forge_gold.text = GameFightData.s_instance.getCurForgeGold().ToString();
 
             changeGold(-costGold);
         }

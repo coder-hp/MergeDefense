@@ -56,6 +56,38 @@ public class GameFightData : MonoBehaviour
     int heroHighStarRate = 0;
     int weaponHighLevelRate = 0;
 
+    public int getCurSummonGold()
+    {
+        // 小船任务
+        if (BattleMission.s_instance.curMissionData != null && BattleMission.s_instance.isTakeMission)
+        {
+            switch (BattleMission.s_instance.curMissionData.id)
+            {
+                case 17:
+                    {
+                        return Mathf.RoundToInt(curSummonGold * 0.7f);
+                    }
+            }
+        }
+        return curSummonGold;
+    }
+
+    public int getCurForgeGold()
+    {
+        // 小船任务
+        if (BattleMission.s_instance.curMissionData != null && BattleMission.s_instance.isTakeMission)
+        {
+            switch (BattleMission.s_instance.curMissionData.id)
+            {
+                case 18:
+                    {
+                        return Mathf.RoundToInt(curForgeGold * 0.7f);
+                    }
+            }
+        }
+        return curForgeGold;
+    }
+
     public void changeHeroHighStarRate(int rate,bool isRepeatCall = false)
     {
         if(!isRepeatCall)
