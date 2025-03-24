@@ -7,8 +7,8 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: Kein_Scene1_grass
-  m_Shader: {fileID: 4800000, guid: 03373b999292c4b4080e62880c87654a, type: 3}
+  m_Name: eff_scene_seagull
+  m_Shader: {fileID: 4800000, guid: d5aecbeb4acde5b4783eca58be504986, type: 3}
   m_Parent: {fileID: 0}
   m_ModifiedSerializedProperties: 0
   m_ValidKeywords: []
@@ -24,11 +24,12 @@ Material:
     serializedVersion: 3
     m_TexEnvs:
     - _MainTex:
-        m_Texture: {fileID: 0}
+        m_Texture: {fileID: 2800000, guid: 11204500b73626d40808bdc1634f3751, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     m_Ints: []
-    m_Floats: []
+    m_Floats:
+    - _DirectionX: -1
     m_Colors:
-    - _Color: {r: 0.6117647, g: 0.6862745, b: 0.09411766, a: 1}
+    - _Color: {r: 1, g: 1, b: 1, a: 1}
   m_BuildTextureStacks: []
