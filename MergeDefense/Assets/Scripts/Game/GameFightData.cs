@@ -160,6 +160,21 @@ public class GameFightData : MonoBehaviour
     public void addAllDamage(int dmg)
     {
         allDamage += dmg;
+
+        // 小船任务
+        if (BattleMission.s_instance.curMissionData != null && BattleMission.s_instance.isTakeMission)
+        {
+            switch (BattleMission.s_instance.curMissionData.id)
+            {
+                case 3:
+                case 4:
+                case 5:
+                    {
+                        BattleMission.s_instance.addMissionProgress(dmg);
+                        break;
+                    }
+            }
+        }
     }
 
     public void addGlobalHeroBuff(Consts.BuffData buffData)

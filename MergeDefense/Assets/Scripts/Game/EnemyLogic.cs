@@ -172,6 +172,11 @@ public class EnemyLogic : MonoBehaviour
     {
         AudioScript.s_instance.playSound("enemyDamage");
 
+        if(GameFightData.s_instance.isGameOver)
+        {
+            return false;
+        }
+
         if (curHP > 0)
         {
             // 检查是否有增加伤害buff
@@ -310,7 +315,7 @@ public class EnemyLogic : MonoBehaviour
                 case 1:
                 case 2:
                     {
-                        BattleMission.s_instance.addMissionProgress();
+                        BattleMission.s_instance.addMissionProgress(1);
                         break;
                     }
             }

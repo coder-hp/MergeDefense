@@ -229,6 +229,22 @@ public class WeaponShopPanel : MonoBehaviour
 
                     GameUILayer.s_instance.changeDiamond(-price);
                     GameUILayer.s_instance.addWeapon(weaponArray[index]);
+
+                    // 小船任务
+                    if (BattleMission.s_instance.curMissionData != null && BattleMission.s_instance.isTakeMission)
+                    {
+                        switch (BattleMission.s_instance.curMissionData.id)
+                        {
+                            case 6:
+                            case 7:
+                            case 8:
+                                {
+                                    BattleMission.s_instance.addMissionProgress(1);
+                                    break;
+                                }
+                        }
+                    }
+
                     return;
                 }
             }
