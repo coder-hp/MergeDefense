@@ -24,6 +24,7 @@ public class BattleMission : MonoBehaviour
 
     int restDoMissionTime = 30;
     int curMissionProgress = 0;
+    bool isCompleteMission = false;
 
     private void Awake()
     {
@@ -42,6 +43,7 @@ public class BattleMission : MonoBehaviour
     void onInvokeNewMissnon()
     {
         isTakeMission = false;
+        isCompleteMission = false;
         transform.position = boatAwayPos;
         transform.localScale = boatScale;
         transform.DOMove(boatPos, boatComeTime).OnComplete(() =>
@@ -111,8 +113,35 @@ public class BattleMission : MonoBehaviour
         if (curMissionProgress > curMissionData.value)
         {
             curMissionProgress = curMissionData.value;
+            completeMission();
         }
         setMissionProgress(curMissionProgress);
+    }
+
+    void completeMission()
+    {
+        if(isCompleteMission)
+        {
+            return;
+        }
+
+        ToastScript.show("任务完成");
+        isCompleteMission = true;
+
+        if (curMissionData.reward != "")
+        {
+            int rewardType = int.Parse(curMissionData.reward.Split('_')[0]);
+            int rewardCount = int.Parse(curMissionData.reward.Split('_')[1]);
+
+            if(rewardType == (int)Consts.RewardType.BattleGold)
+            {
+                GameUILayer.s_instance.changeGold(rewardCount);
+            }
+            else if (rewardType == (int)Consts.RewardType.BattleGem)
+            {
+                GameUILayer.s_instance.changeDiamond(rewardCount);
+            }
+        }
     }
 
     void onInvokeSecond()

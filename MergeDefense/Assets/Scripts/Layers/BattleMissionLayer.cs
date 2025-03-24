@@ -12,7 +12,7 @@ public class BattleMissionLayer : MonoBehaviour
 
     void Start()
     {
-        if(BattleMission.s_instance.isTakeMission)
+        if (BattleMission.s_instance.isTakeMission)
         {
             btn_take.localScale = Vector3.zero;
         }
