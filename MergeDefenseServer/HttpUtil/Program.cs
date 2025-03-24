@@ -112,7 +112,14 @@ class Program
                     ReqDataSubmitRankData data = new ReqDataSubmitRankData();
                     data.rankType = RankType.GlobalRank.ToString();
                     data.uid = "uid-" + i;
-                    data.name = "name-" + i;
+
+                    {
+                        string name = "name" + i;
+                        int head = RandomUtil.getRandom(101, 119);
+                        int level = i;
+
+                        data.info = name + "_" + head + "_" + level;
+                    }
                     data.score = i;
                     data.score2 = i * 10;
                     RankListManager.submitData(data);

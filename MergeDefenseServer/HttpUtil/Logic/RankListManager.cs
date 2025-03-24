@@ -51,7 +51,7 @@ public class RankListManager
                 {
                     RankListData rankListData = new RankListData();
                     rankListData.uid = reqDataObj.uid;
-                    rankListData.name = reqDataObj.name;
+                    rankListData.info = reqDataObj.info;
                     rankListData.score = reqDataObj.score;
                     rankListData.score2 = reqDataObj.score2;
                     dic_list[rankTypeStr][i] = rankListData;
@@ -64,7 +64,7 @@ public class RankListManager
                     {
                         RankListData rankListData = new RankListData();
                         rankListData.uid = reqDataObj.uid;
-                        rankListData.name = reqDataObj.name;
+                        rankListData.info = reqDataObj.info;
                         rankListData.score = reqDataObj.score;
                         rankListData.score2 = reqDataObj.score2;
                         dic_list[rankTypeStr][i] = rankListData;
@@ -83,7 +83,7 @@ public class RankListManager
         {
             RankListData rankListData = new RankListData();
             rankListData.uid = reqDataObj.uid;
-            rankListData.name = reqDataObj.name;
+            rankListData.info = reqDataObj.info;
             rankListData.score = reqDataObj.score;
             rankListData.score2 = reqDataObj.score2;
             dic_list[rankTypeStr].Add(rankListData);
@@ -134,7 +134,7 @@ public class RankListManager
 
                 RankListData rankListData = new RankListData();
                 rankListData.uid = reqDataObj.uid;
-                rankListData.name = reqDataObj.name;
+                rankListData.info = reqDataObj.info;
                 rankListData.score = reqDataObj.score;
                 rankListData.score2 = reqDataObj.score2;
                 dic_list[rankTypeStr].Add(rankListData);
@@ -189,7 +189,7 @@ public class RankListManager
         string key = "userRankData-" + rankType + "-" + rankListData.uid;
         HashEntry[] hashFields = new HashEntry[4];
         hashFields[0] = new HashEntry("uid", rankListData.uid);
-        hashFields[1] = new HashEntry("name", rankListData.name);
+        hashFields[1] = new HashEntry("info", rankListData.info);
         hashFields[2] = new HashEntry("score", rankListData.score);
         hashFields[3] = new HashEntry("score2", rankListData.score2);
         RedisUtil.getDatabase().HashSet(key, hashFields);
@@ -203,7 +203,7 @@ public class RankListManager
             RankListData userData = new RankListData();
             var values = RedisUtil.getDatabase().HashGetAll(key);
             userData.uid = values[0].Value;
-            userData.name = values[1].Value;
+            userData.info = values[1].Value;
             userData.score = (int)values[2].Value;
             userData.score2 = (long)values[3].Value;
             return userData;

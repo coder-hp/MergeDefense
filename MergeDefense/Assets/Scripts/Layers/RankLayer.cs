@@ -1,6 +1,7 @@
 using Newtonsoft.Json;
 using System.Collections;
 using System.Collections.Generic;
+using TreeEditor;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -38,6 +39,19 @@ public class RankLayer : MonoBehaviour
                 Debug.Log("请求失败2：" + data);
             }
         });
+
+        {
+            string str = GameData.getMaxWaveDamage();
+            int beforeMaxWave = int.Parse(str.Split('_')[0]);
+            long beforeMaxDamage = long.Parse(str.Split('_')[1]);
+
+            RankListData rankListData = new RankListData();
+            rankListData.uid = GameData.getUID();
+            rankListData.info = GameData.getName() + "_" + GameData.getHead() + "_" + GameData.getLevel();
+            rankListData.score = beforeMaxWave;
+            rankListData.score2 = beforeMaxDamage;
+            setItemData(item_myRank, rankListData, 999);
+        }
     }
 
     void getRankSuccess(List<RankListData> list)
@@ -85,19 +99,36 @@ public class RankLayer : MonoBehaviour
 
     void setItemData(Transform itemTrans,RankListData rankListData, int rank)
     {
+        string[] infoArray = rankListData.info.Split('_');
+        string name = infoArray[0];
+        int head = int.Parse(infoArray[1]);
+        int level = int.Parse(infoArray[2]);
+
         itemTrans.Find("rank").GetComponent<Text>().text = rank.ToString();
-        itemTrans.Find("name").GetComponent<Text>().text = rankListData.name;
+        itemTrans.Find("name").GetComponent<Text>().text = name;
         itemTrans.Find("wave").GetComponent<Text>().text = rankListData.score.ToString();
         itemTrans.Find("damage").GetComponent<Text>().text = CommonUtil.numToStrKMB(rankListData.score2);
+        itemTrans.Find("head_bg/head").GetComponent<Image>().sprite = AtlasUtil.getAtlas_icon().GetSprite("hero_avatar_" + head);
 
-        if(rank  <= 3)
+        if (rank  <= 3)
         {
             itemTrans.Find("rank1-3").localScale = Vector3.one;
             itemTrans.Find("rank1-3").GetComponent<Image>().sprite = AtlasUtil.getAtlas_main().GetSprite("list_" + rank);
         }
+        else if(rank <= 100)
+        {
+            itemTrans.Find("rank1-3").localScale = Vector3.zero;
+        }
         else
         {
             itemTrans.Find("rank1-3").localScale = Vector3.zero;
+            itemTrans.Find("rank").GetComponent<Text>().text = "--";
+        }
+
+        if (rankListData.uid == GameData.getUID())
+        {
+            itemTrans.Find("name").GetComponent<Text>().text = GameData.getName();
+            itemTrans.Find("head_bg/head").GetComponent<Image>().sprite = AtlasUtil.getAtlas_icon().GetSprite("hero_avatar_" + GameData.getHead());
         }
     }
 

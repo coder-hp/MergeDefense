@@ -176,7 +176,32 @@ public class GameData
 
     public static string getName()
     {
-        return SystemInfo.deviceUniqueIdentifier.Substring(0, 8);
+        return PlayerPrefs.GetString("name", SystemInfo.deviceUniqueIdentifier.Substring(0, 8));
+    }
+
+    public static void setName(string name)
+    {
+        PlayerPrefs.SetString("name", name);
+    }
+
+    public static int getHead()
+    {
+        return PlayerPrefs.GetInt("head",RandomUtil.getRandom(101,119));
+    }
+
+    public static void setHead(int head)
+    {
+        PlayerPrefs.SetInt("head", head);
+    }
+
+    public static int getLevel()
+    {
+        return PlayerPrefs.GetInt("level", 1);
+    }
+
+    public static void setLevel(int level)
+    {
+        PlayerPrefs.SetInt("level", level);
     }
 
     public static string getMaxWaveDamage()

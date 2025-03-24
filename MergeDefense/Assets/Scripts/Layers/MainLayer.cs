@@ -12,6 +12,7 @@ public class MainLayer : MonoBehaviour
     public Text text_tili;
     public Text text_gold;
     public Text text_diamond;
+    public Image img_head;
 
     private void Awake()
     {
@@ -24,6 +25,7 @@ public class MainLayer : MonoBehaviour
         text_tili.text = GameData.getMyTiLi() + "/" + Consts.maxTiLi;
         text_gold.text = CommonUtil.numToStrKMB(GameData.getMyGold());
         text_diamond.text = CommonUtil.numToStrKMB(GameData.getMyDiamond());
+        img_head.sprite = AtlasUtil.getAtlas_icon().GetSprite("hero_avatar_" + GameData.getHead());
     }
 
     public void onClickBottomTab(int index)
