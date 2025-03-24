@@ -1,4 +1,5 @@
 using DG.Tweening;
+using Spine;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -12,12 +13,10 @@ public class BattleMission : MonoBehaviour
     public bool isTakeMission = false;
     public BattleMissionData curMissionData = null;
 
-    int boatComeTime = 3;
+    Animator animator;
+    int boatComeTime = 7;
     int waitTakeMissionTime = 60;
     int doMissionTime = 30;
-    Vector3 boatScale = Vector3.one;
-    Vector3 boatPos = Vector3.one;
-    Vector3 boatAwayPos = Vector3.one;
 
     Transform missionTrans = null;
     Text text_time;
@@ -30,48 +29,46 @@ public class BattleMission : MonoBehaviour
     private void Awake()
     {
         s_instance = this;
+        animator = GetComponent<Animator>();
     }
 
     void Start()
     {
-        boatScale = transform.localScale;
-        boatPos = transform.position;
-        boatAwayPos = boatPos + new Vector3(0, 4, 0);
-        transform.localScale = Vector3.zero;
-        Invoke("onInvokeNewMissnon",5 - boatComeTime);
+        Invoke("onInvokeNewMissnon",10 - boatComeTime);
     }
 
     void onInvokeNewMissnon()
     {
         isTakeMission = false;
         isCompleteMission = false;
-        transform.position = boatAwayPos;
-        transform.localScale = boatScale;
-        transform.DOMove(boatPos, boatComeTime).OnComplete(() =>
+        animator.Play("enter");
+    }
+
+    public void onBoatCome()
+    {
+        animator.Play("idle");
+        int index = RandomUtil.SelectProbability(BattleMissionEntity.getInstance().list_weight);
+        index = 16;
+        curMissionData = BattleMissionEntity.getInstance().list[index];
+        Debug.Log("新任务：" + curMissionData.desc);
+
+        if (missionTrans == null)
         {
-            int index = RandomUtil.SelectProbability(BattleMissionEntity.getInstance().list_weight);
-            index = 16;
-            curMissionData = BattleMissionEntity.getInstance().list[index];
-            Debug.Log("新任务："+curMissionData.desc);
-            
-            if (missionTrans == null)
-            {
-                missionTrans = GameUILayer.s_instance.missionTrans;
-                text_time = missionTrans.Find("timer/time").GetComponent<Text>();
-                text_progress = missionTrans.Find("timer/progress").GetComponent<Text>();
-            }
+            missionTrans = GameUILayer.s_instance.missionTrans;
+            text_time = missionTrans.Find("timer/time").GetComponent<Text>();
+            text_progress = missionTrans.Find("timer/progress").GetComponent<Text>();
+        }
 
-            curMissionProgress = 0;
-            setMissionProgress(curMissionProgress);
+        curMissionProgress = 0;
+        setMissionProgress(curMissionProgress);
 
-            missionTrans.localPosition = CommonUtil.WorldPosToUI(GameLayer.s_instance.camera3D, boatPos);
-            missionTrans.localScale = Vector3.one;
-            missionTrans.Find("newMission").localScale = Vector3.one;
-            missionTrans.Find("timer").localScale = Vector3.zero;
+        missionTrans.localPosition = CommonUtil.WorldPosToUI(GameLayer.s_instance.camera3D, transform.position);
+        missionTrans.localScale = Vector3.one;
+        missionTrans.Find("newMission").localScale = Vector3.one;
+        missionTrans.Find("timer").localScale = Vector3.zero;
 
-            InvokeRepeating("onInvokeNewMissnon",130,130);
-            Invoke("onInvokeTakeMissionTimeOut", waitTakeMissionTime);
-        });
+        InvokeRepeating("onInvokeNewMissnon", 130, 130);
+        Invoke("onInvokeTakeMissionTimeOut", waitTakeMissionTime);
     }
 
     // 超时未接取任务
@@ -79,7 +76,7 @@ public class BattleMission : MonoBehaviour
     {
         curMissionData = null;
         missionTrans.localScale = Vector3.zero;
-        transform.DOMove(boatAwayPos, boatComeTime).SetEase(Ease.Linear);
+        animator.Play("out");
     }
 
     // 玩家接取任务
@@ -202,7 +199,7 @@ public class BattleMission : MonoBehaviour
 
             curMissionData = null;
             missionTrans.localScale = Vector3.zero;
-            transform.DOMove(boatAwayPos, boatComeTime).SetEase(Ease.Linear);
+            animator.Play("out");
 
             switch (mission_id)
             {
