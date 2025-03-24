@@ -68,6 +68,8 @@ public class Consts
         Diamond,
         ClawTicket,
         PlayerExp,
+        BattleGold,
+        BattleGem,
     }
 
     public enum BuffType

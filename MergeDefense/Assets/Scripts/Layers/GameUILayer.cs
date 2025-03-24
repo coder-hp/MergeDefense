@@ -28,6 +28,7 @@ public class GameUILayer : MonoBehaviour
     public Transform list_content_mythicHero;
     public Transform btn_mythicRedPoint;
     public Transform btn_spawn;
+    public Transform missionTrans;
     public Text text_mythicRedPointNum;
     public Text text_weaponSellPrice;
     public Text text_enemyCount;
@@ -638,6 +639,13 @@ public class GameUILayer : MonoBehaviour
     }
 
     public void onClickSpawn()
+    {
+        AudioScript.s_instance.playSound_btn();
+        forceToBoCi(GameFightData.s_instance.curBoCi + 1);
+        btn_spawn.localScale = Vector3.zero;
+    }
+
+    public void onClickBoatMission()
     {
         AudioScript.s_instance.playSound_btn();
         forceToBoCi(GameFightData.s_instance.curBoCi + 1);
