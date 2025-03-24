@@ -226,7 +226,7 @@ public class GMLayer : MonoBehaviour
             ReqDataSubmitRankData reqData = new ReqDataSubmitRankData();
             reqData.rankType = RankType.GlobalRank.ToString();
             reqData.uid = GameData.getUID();
-            reqData.name = GameData.getName();
+            reqData.info = GameData.getName() + "_" + GameData.getHead() + "_" + GameData.getLevel();
             reqData.score = wave;
             reqData.score2 = damage;
             string reqDataStr = JsonConvert.SerializeObject(reqData);

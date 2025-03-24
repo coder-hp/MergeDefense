@@ -42,6 +42,8 @@ public class LaunchScript : MonoBehaviour
                     GameData.unlockHero(HeroEntity.getInstance().list[i].id);
                 }
             }
+
+            GameData.setHead(RandomUtil.getRandom(101,119));
         }
     }
 }

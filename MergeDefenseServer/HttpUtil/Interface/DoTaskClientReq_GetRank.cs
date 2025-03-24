@@ -36,7 +36,6 @@ class DoTaskClientReq_GetRank
             data.serverCode = ServerCode.UnknownError;
             data.desc = "未知错误";
             HttpUtil.getInstance().sendData(requestContext, JsonConvert.SerializeObject(data));
-            LogUtil.Log("ffff");
             return;
         }
     }

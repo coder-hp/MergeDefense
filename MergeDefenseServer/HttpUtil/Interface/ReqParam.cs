@@ -28,7 +28,7 @@ public enum RankType
 public class RankListData
 {
     public string uid = "";
-    public string name = "";
+    public string info = "";    // 昵称_头像_等级
     public int score = 0;
     public long score2 = 0;
 }
@@ -38,7 +38,7 @@ public class ReqDataSubmitRankData
 {
     public string rankType;
     public string uid = "";
-    public string name = "";
+    public string info = "";    // 昵称_头像_等级
     public int score = 0;
     public long score2 = 0;
 }

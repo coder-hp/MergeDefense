@@ -62,6 +62,14 @@ public class Consts
         End
     }
 
+    public enum RewardType
+    {
+        Gold = 1,
+        Diamond,
+        ClawTicket,
+        PlayerExp,
+    }
+
     public enum BuffType
     {
         Atk,                // 0攻击力
