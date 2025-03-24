@@ -4,6 +4,7 @@ Shader "Kein/Scene/Ground_1"
     {
         _Color("Color",color)=(1,1,1,1)
         _MainTex ("Texture", 2D) = "white" {}
+        _WaveSpeed("WaveSpeed",Range(0.1,10)) = 1
     }
     SubShader
     {
@@ -35,15 +36,26 @@ Shader "Kein/Scene/Ground_1"
             fixed4 _Color;
             sampler2D _MainTex;
             float4 _MainTex_ST;
-
+            float _WaveSpeed;
             v2f vert (appdata v)
             {
                 v2f o;
                 if(v.color.r < 0.95)
                 {
                     v.vertex.y -= v.color.r * 3;
-
                 }
+                if(v.color.g < 0.5)
+                {
+                    float x = v.vertex.x;
+                    float y = v.vertex.y;
+                    float xy = v.vertex.y * v.vertex.x * _WaveSpeed;
+                    x += sin(_Time.y * 0.05 * xy ) * 0.05;
+                    y += sin(_Time.y * 0.05 * xy) * 0.05;
+                    v.vertex.x = x;
+                    v.vertex.y = y;
+                }
+
+
                 o.vertex = UnityObjectToClipPos(v.vertex);
 
                 o.worldNormal = mul(v.normal, (float3x3)unity_WorldToObject);

@@ -5,6 +5,8 @@ Shader "Kein/Scene/Boat_1"
         _Color("Color",color)=(1,1,1,1)
         _MainTex ("Texture", 2D) = "white" {}
         _WaterDown("WaterDown",Range(-1,2)) = 0
+        _WaveSpeed("WaveSpeed",Range(0.1,3)) = 1
+        _BoatShedSpeed("BoatShedSpeed",Range(0,1)) = 1
     }
     SubShader
     {
@@ -17,13 +19,41 @@ Shader "Kein/Scene/Boat_1"
             #pragma fragment frag
 
             #include "UnityCG.cginc"
-             #include "Lighting.cginc"
-            struct appdata
+            #include "Lighting.cginc"
+
+            
+
+            float4x4 Kein_Rotation4x4(float3 _rotation)
+            {
+                float radX = radians(_rotation.x);
+                float radY = radians(_rotation.y);
+                float radZ = radians(_rotation.z);
+
+                float sinX = sin(radX);
+                float cosX = cos(radX);
+                float sinY = sin(radY);
+                float cosY = cos(radY);
+                float sinZ = sin(radZ);
+                float cosZ = cos(radZ);
+
+                return float4x4(
+                cosY * cosZ, -cosY * sinZ, sinY, 0.0,
+                cosX * sinZ + sinX * sinY * cosZ, cosX * cosZ - sinX * sinY * sinZ, -sinX * cosY, 0.0,
+                sinX * sinZ - cosX * sinY * cosZ, sinX * cosZ + cosX * sinY * sinZ, cosX * cosY, 0.0,
+                0.0, 0.0, 0.0, 1.0
+                );
+            }
+            float4 Kein_Rotation(float3 _rotation, float4 _vertex)
+            {
+                return float4(mul(Kein_Rotation4x4(_rotation), _vertex));
+            }
+
+             struct appdata
             {
                 float4 vertex : POSITION;
                 float2 uv : TEXCOORD0;
                 float3 normal : NORMAL;
-                
+                fixed4 color : COLOR;
             };
 
             struct v2f
@@ -37,15 +67,36 @@ Shader "Kein/Scene/Boat_1"
             fixed4 _Color;
             sampler2D _MainTex;
             float4 _MainTex_ST;
-            float _WaterDown;
+            float _WaterDown,_WaveSpeed,_BoatShedSpeed;
             v2f vert (appdata v)
             {
                 v2f o;
-                
+                if(v.color.g < 0.5)
+                {
+                    v.vertex.z += 0.626;
+                    v.vertex.y -= 0.141;
+                    v.vertex = Kein_Rotation(float3(-_Time.y * 1000 * _BoatShedSpeed,0,0),v.vertex);
+                    v.vertex.z -= 0.626;
+                    v.vertex.y += 0.141;
+                }
                 float4 worldPos = mul(unity_ObjectToWorld,v.vertex);
                 worldPos.y -= v.vertex.z * 0.8;
                 o.color = worldPos.z > _WaterDown ? fixed4(0.8,0.8,0.8,1) : fixed4(1,1,1,1);
-                
+                if(v.color.r < 0.5)
+                {
+                    float x = worldPos.x;
+                    float y = worldPos.y;
+                    float xy = worldPos.y * worldPos.x * _WaveSpeed;
+                    x += sin(_Time.y * 0.5 * xy ) * 0.05;
+                    y += sin(_Time.y * 0.5 * xy) * 0.05;
+                    worldPos.x = x;
+                    worldPos.y = y;
+                }
+                else
+                {
+                     worldPos.x += -sin(_Time.y * 2) * 0.03;
+                     worldPos.y += sin(_Time.y * 2) * 0.1;
+                }
                 
 
                 o.vertex = mul(UNITY_MATRIX_VP, worldPos);
@@ -67,9 +118,12 @@ Shader "Kein/Scene/Boat_1"
                 fixed3 worldLightDir = normalize(i.worldLightDir);
                 fixed3 diffuse = (dot(worldNormal, worldLightDir) * 0.5 + 0.5) * _LightColor0;
                 col.rgb = lerp(col.rgb,col.rgb * diffuse,0.2);
-                col.rgb *= i.color;
+                //col.rgb *= i.color;
                 return col;
             }
+
+
+            
             ENDCG
         }
     }
