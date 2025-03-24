@@ -34,7 +34,7 @@ public class ClawLayer : MonoBehaviour
         Transform ballTrans =  Instantiate(prefab_ball, ballPointTrans).transform;
         ballTrans.localPosition = new Vector3(RandomUtil.getRandom(-400,400),450,0);
 
-        if(++addedBallCount > 20)
+        if(++addedBallCount > 50)
         {
             CancelInvoke("onInvokeAddBall");
         }
@@ -45,8 +45,8 @@ public class ClawLayer : MonoBehaviour
         AudioScript.s_instance.playSound_btn();
         clawTrans.DOLocalMoveY(-600, 3).SetEase(Ease.Linear).OnComplete(()=>
         {
-            clawTrans.Find("left").GetChild(0).DOLocalRotateQuaternion(Quaternion.Euler(0,0, 90),0.5f).SetDelay(1);
-            clawTrans.Find("right").GetChild(0).DOLocalRotateQuaternion(Quaternion.Euler(0, 0, -90), 0.5f).SetDelay(1).OnComplete(()=>
+            clawTrans.Find("left").GetChild(0).DOLocalRotateQuaternion(Quaternion.Euler(0,0, 105),0.5f).SetDelay(1);
+            clawTrans.Find("right").GetChild(0).DOLocalRotateQuaternion(Quaternion.Euler(0, 0, -105), 0.5f).SetDelay(1).OnComplete(()=>
             {
                 clawTrans.DOLocalMoveY(860, 3).SetDelay(1).SetEase(Ease.Linear);
             });
