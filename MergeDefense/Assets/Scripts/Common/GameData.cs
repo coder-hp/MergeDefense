@@ -76,6 +76,28 @@ public class GameData
         }
     }
 
+    public static int getPlayerExp()
+    {
+        return PlayerPrefs.GetInt("PlayerExp", 0);
+    }
+
+    public static void changePlayerExp(int value)
+    {
+        if (value == 0)
+        {
+            return;
+        }
+
+        int curCount = getPlayerExp() + value;
+        curCount = curCount < 0 ? 0 : curCount;
+        PlayerPrefs.SetInt("PlayerExp", curCount);
+
+        if (MainLayer.s_instance)
+        {
+            MainLayer.s_instance.refreshUI();
+        }
+    }
+
     public static int getIsOpenVibrate()
     {
         return PlayerPrefs.GetInt("IsOpenVibrate", 1);
