@@ -1,4 +1,5 @@
 using DG.Tweening;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -49,7 +50,7 @@ public class BattleMission : MonoBehaviour
         transform.DOMove(boatPos, boatComeTime).OnComplete(() =>
         {
             int index = RandomUtil.SelectProbability(BattleMissionEntity.getInstance().list_weight);
-            index = 5;
+            index = 10;
             curMissionData = BattleMissionEntity.getInstance().list[index];
             Debug.Log("新任务："+curMissionData.desc);
             
@@ -93,6 +94,19 @@ public class BattleMission : MonoBehaviour
         missionTrans.Find("timer").localScale = Vector3.one;
 
         InvokeRepeating("onInvokeSecond",1,1);
+
+        switch (curMissionData.id)
+        {
+            case 9:
+            case 10:
+            case 11:
+            case 12:
+            case 13:
+                {
+                    checkWeaponMission();
+                    break;
+                }
+        }
     }
 
     void setMissionProgress(int progress)
@@ -175,5 +189,75 @@ public class BattleMission : MonoBehaviour
         }
 
         text_time.text = restDoMissionTime + "s";
+    }
+
+    public void checkWeaponMission()
+    {
+        if(isCompleteMission)
+        {
+            return;
+        }
+
+        switch (curMissionData.id)
+        {
+            // 装备五把不同的武器
+            case 9:
+                {
+                    Dictionary<int, int> dic = new Dictionary<int, int>();
+                    for(int i = 0; i < GameUILayer.s_instance.list_weaponBar.Count; i++)
+                    {
+                        if (GameUILayer.s_instance.list_weaponBar[i].weaponData != null)
+                        {
+                            dic[GameUILayer.s_instance.list_weaponBar[i].weaponData.type] = 1;
+                        }
+                    }
+                    curMissionProgress = dic.Count;
+                    text_progress.text = curMissionProgress + "/" + 5;
+
+                    if(curMissionProgress >= curMissionData.value)
+                    {
+                        completeMission();
+                    }
+
+                    break;
+                }
+
+            case 10:
+            case 11:
+            case 12:
+            case 13:
+                {
+                    Dictionary<int, int> dic = new Dictionary<int, int>();
+                    for (int i = 0; i < GameUILayer.s_instance.list_weaponBar.Count; i++)
+                    {
+                        if (GameUILayer.s_instance.list_weaponBar[i].weaponData != null)
+                        {
+                            if (dic.ContainsKey(GameUILayer.s_instance.list_weaponBar[i].weaponData.type))
+                            {
+                                ++dic[GameUILayer.s_instance.list_weaponBar[i].weaponData.type];
+                            }
+                            else
+                            {
+                                dic[GameUILayer.s_instance.list_weaponBar[i].weaponData.type] = 1;
+                            }
+                        }
+                    }
+                    curMissionProgress = 0;
+                    foreach (KeyValuePair<int, int> kvp in dic)
+                    {
+                        if(kvp.Value > curMissionProgress)
+                        {
+                            curMissionProgress = kvp.Value;
+                        }
+                    }
+                    text_progress.text = curMissionProgress + "/" + curMissionData.value;
+
+                    if (curMissionProgress >= curMissionData.value)
+                    {
+                        completeMission();
+                    }
+                    break;
+                }
+        }
     }
 }

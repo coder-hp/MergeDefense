@@ -41,6 +41,23 @@ public class WeaponBar : MonoBehaviour
         {
             transform.Find("bg").localScale = Vector3.zero;
         }
+
+        // 小船任务
+        if (BattleMission.s_instance.curMissionData != null && BattleMission.s_instance.isTakeMission)
+        {
+            switch (BattleMission.s_instance.curMissionData.id)
+            {
+                case 9:
+                case 10:
+                case 11:
+                case 12:
+                case 13:
+                    {
+                        BattleMission.s_instance.checkWeaponMission();
+                        break;
+                    }
+            }
+        }
     }
 
     public void onClick()
