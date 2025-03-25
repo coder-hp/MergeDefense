@@ -257,10 +257,21 @@ public class GameLayer : MonoBehaviour
                     if (heroPoint.GetChild(j).childCount > 0)
                     {
                         HeroLogicBase heroLogicBase = heroPoint.GetChild(j).GetChild(0).GetComponent<HeroLogicBase>();
-                        if (heroLogicBase.id == id && heroLogicBase.curStar >= star)
+                        if(id == 999)
                         {
-                            mythicHeroProgress[i] = 1;
-                            break;
+                            if (heroLogicBase.curStar >= star)
+                            {
+                                mythicHeroProgress[i] = 1;
+                                break;
+                            }
+                        }
+                        else
+                        {
+                            if (heroLogicBase.id == id && heroLogicBase.curStar >= star)
+                            {
+                                mythicHeroProgress[i] = 1;
+                                break;
+                            }
                         }
                     }
                 }
@@ -275,10 +286,21 @@ public class GameLayer : MonoBehaviour
                 {
                     for (int j = 0; j < GameUILayer.s_instance.list_weaponBar.Count; j++)
                     {
-                        if (GameUILayer.s_instance.list_weaponBar[j].weaponData != null && GameUILayer.s_instance.list_weaponBar[j].weaponData.type == weaponType && GameUILayer.s_instance.list_weaponBar[j].weaponData.level >= level)
+                        if (weaponType == 999)
                         {
-                            mythicHeroProgress[i] = 1;
-                            break;
+                            if (GameUILayer.s_instance.list_weaponBar[j].weaponData != null && GameUILayer.s_instance.list_weaponBar[j].weaponData.level >= level)
+                            {
+                                mythicHeroProgress[i] = 1;
+                                break;
+                            }
+                        }
+                        else
+                        {
+                            if (GameUILayer.s_instance.list_weaponBar[j].weaponData != null && GameUILayer.s_instance.list_weaponBar[j].weaponData.type == weaponType && GameUILayer.s_instance.list_weaponBar[j].weaponData.level >= level)
+                            {
+                                mythicHeroProgress[i] = 1;
+                                break;
+                            }
                         }
                     }
 
@@ -289,10 +311,22 @@ public class GameLayer : MonoBehaviour
                             if (GameUILayer.s_instance.weaponGridTrans.GetChild(j).childCount == 1)
                             {
                                 UIItemWeapon uiItemWeapon = GameUILayer.s_instance.weaponGridTrans.GetChild(j).GetChild(0).GetComponent<UIItemWeapon>();
-                                if (uiItemWeapon.weaponData.type == weaponType && uiItemWeapon.weaponData.level >= level)
+
+                                if (weaponType == 999)
                                 {
-                                    mythicHeroProgress[i] = 1;
-                                    break;
+                                    if (uiItemWeapon.weaponData.level >= level)
+                                    {
+                                        mythicHeroProgress[i] = 1;
+                                        break;
+                                    }
+                                }
+                                else
+                                {
+                                    if (uiItemWeapon.weaponData.type == weaponType && uiItemWeapon.weaponData.level >= level)
+                                    {
+                                        mythicHeroProgress[i] = 1;
+                                        break;
+                                    }
                                 }
                             }
                         }
