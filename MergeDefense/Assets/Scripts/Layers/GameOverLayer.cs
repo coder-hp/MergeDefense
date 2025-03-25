@@ -1,8 +1,10 @@
 using Newtonsoft.Json;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using static Consts;
 
 public class GameOverLayer : MonoBehaviour
 {
@@ -19,31 +21,46 @@ public class GameOverLayer : MonoBehaviour
 
         // 奖励
         {
-            EnemyWaveData enemyWaveData = EnemyWaveEntity.getInstance().getData(GameFightData.s_instance.curBoCi);
-            string[] rewardArray = enemyWaveData.reward.Split(';');
-            for(int i = 0; i < rewardArray.Length; i++)
+            Dictionary<int, int> reward_dic = new Dictionary<int, int>();
+            for (int m = 1; m <= GameFightData.s_instance.curBoCi; m++)
             {
-                int rewardType = int.Parse(rewardArray[i].Split('_')[0]);
-                int rewardCount = int.Parse(rewardArray[i].Split('_')[1]);
+                EnemyWaveData enemyWaveData = EnemyWaveEntity.getInstance().getData(m);
+                string[] rewardArray = enemyWaveData.reward.Split(';');
+                for (int i = 0; i < rewardArray.Length; i++)
+                {
+                    int rewardType = int.Parse(rewardArray[i].Split('_')[0]);
+                    int rewardCount = int.Parse(rewardArray[i].Split('_')[1]);
+                    if (reward_dic.ContainsKey(rewardType))
+                    {
+                        reward_dic[rewardType] += rewardCount;
+                    }
+                    else
+                    {
+                        reward_dic[rewardType] = rewardCount;
+                    }
+                }
+            }
 
-                rewardsTrans.Find("reward_" + rewardType).gameObject.SetActive(true);
-                rewardsTrans.Find("reward_" + rewardType + "/count").GetComponent<Text>().text = rewardCount.ToString();
+            foreach (KeyValuePair<int, int> kvp in reward_dic)
+            {
+                rewardsTrans.Find("reward_" + kvp.Key).gameObject.SetActive(true);
+                rewardsTrans.Find("reward_" + kvp.Key + "/count").GetComponent<Text>().text = kvp.Value.ToString();
 
-                if(rewardType == (int)Consts.RewardType.Gold)
+                if (kvp.Key == (int)Consts.RewardType.Gold)
                 {
-                    GameData.changeMyGold(rewardCount,"");
+                    GameData.changeMyGold(kvp.Value, "");
                 }
-                else if (rewardType == (int)Consts.RewardType.Diamond)
+                else if (kvp.Key == (int)Consts.RewardType.Diamond)
                 {
-                    GameData.changeMyDiamond(rewardCount);
+                    GameData.changeMyDiamond(kvp.Value);
                 }
-                else if (rewardType == (int)Consts.RewardType.ClawTicket)
+                else if (kvp.Key == (int)Consts.RewardType.ClawTicket)
                 {
-                    GameData.changeClawTicket(rewardCount);
+                    GameData.changeClawTicket(kvp.Value);
                 }
-                else if (rewardType == (int)Consts.RewardType.PlayerExp)
+                else if (kvp.Key == (int)Consts.RewardType.PlayerExp)
                 {
-                    GameData.changePlayerExp(rewardCount);
+                    GameData.changePlayerExp(kvp.Value);
                 }
             }
         }
