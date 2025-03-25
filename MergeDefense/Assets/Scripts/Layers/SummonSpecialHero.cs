@@ -62,6 +62,15 @@ public class SummonSpecialHero : MonoBehaviour
                             itemTrans.Find("choiced").localScale = Vector3.one;
                         }
 
+                        if (heroLogicBase.curStar >= 7)
+                        {
+                            itemTrans.Find("shadow").GetComponent<Image>().color = Consts.list_heroQualityColor[3];
+                        }
+                        else if (heroLogicBase.curStar >= 4)
+                        {
+                            itemTrans.Find("shadow").GetComponent<Image>().color = Consts.list_heroQualityColor[2];
+                        }
+
                         // 星级
                         {
                             int showCount = heroLogicBase.curStar % 3;
