@@ -145,7 +145,7 @@ public class AutoSetAtlasContent: EditorWindow
 
         TextureImporterPlatformSettings platformSetting = new TextureImporterPlatformSettings()
         {
-            maxTextureSize = 2048,
+            maxTextureSize = 4096,
             //format = TextureImporterFormat.Automatic,
             //format = TextureImporterFormat.RGBA32,
             format = TextureImporterFormat.ASTC_4x4,
