@@ -16,6 +16,11 @@ public class ClawLayer : MonoBehaviour
         InvokeRepeating("onInvokeAddBall",0.2f,0.2f);
     }
 
+    private void OnEnable()
+    {
+        AudioScript.s_instance.playMusic("bgm_claw", true);
+    }
+
     public void clawMove(bool isLeft)
     {
         if(isLeft)
@@ -51,5 +56,10 @@ public class ClawLayer : MonoBehaviour
                 clawTrans.DOLocalMoveY(860, 3).SetDelay(1).SetEase(Ease.Linear);
             });
         });
+    }
+
+    private void OnDisable()
+    {
+        AudioScript.s_instance.playMusic("bgm_main", true);
     }
 }
