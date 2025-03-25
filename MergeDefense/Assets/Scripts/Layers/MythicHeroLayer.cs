@@ -182,12 +182,20 @@ public class MythicHeroLayer : MonoBehaviour
 
     public void onClickSummon()
     {
+        Destroy(gameObject);
+
         if (curChoiceHero != null)
         {
+            for (int j = 0; j < curChoiceHero.list_summonWay.Count; j++)
+            {
+                if (curChoiceHero.list_summonWay[j][1] == 999)
+                {
+                    LayerManager.ShowLayer(Consts.Layer.SummonSpecialHero).GetComponent<SummonSpecialHero>().init(curChoiceHero);
+                    return;
+                }
+            }
             GameLayer.s_instance.summonMythicHero(curChoiceHero);
         }
-
-        Destroy(gameObject);
     }
 
     bool isClosed = false;
