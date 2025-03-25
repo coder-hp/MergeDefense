@@ -14,7 +14,9 @@ public class BattleMission : MonoBehaviour
     public BattleMissionData curMissionData = null;
 
     Animator animator;
-    int boatComeTime = 7;
+    int firstComeTime = 10;         // 第一次船来的时间，默认41
+    int repeatComeTime = 130;       // 后续船来的时间，默认130
+    int boatComeAniTime = 7;
     int waitTakeMissionTime = 60;
     int doMissionTime = 30;
 
@@ -34,7 +36,7 @@ public class BattleMission : MonoBehaviour
 
     void Start()
     {
-        Invoke("onInvokeNewMissnon",10 - boatComeTime);
+        Invoke("onInvokeNewMissnon", firstComeTime - boatComeAniTime);
     }
 
     void onInvokeNewMissnon()
@@ -67,7 +69,7 @@ public class BattleMission : MonoBehaviour
         missionTrans.Find("newMission").localScale = Vector3.one;
         missionTrans.Find("timer").localScale = Vector3.zero;
 
-        InvokeRepeating("onInvokeNewMissnon", 130, 130);
+        InvokeRepeating("onInvokeNewMissnon", repeatComeTime, repeatComeTime);
         Invoke("onInvokeTakeMissionTimeOut", waitTakeMissionTime);
     }
 
