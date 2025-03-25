@@ -14,6 +14,8 @@ public class SetLayer : MonoBehaviour
     public Image img_head2;
     public Text text_name;
     public InputField inputField_name;
+    public Slider slider_music;
+    public Slider slider_sound;
 
     int curClickHeadItemId = 0;
 
@@ -23,6 +25,9 @@ public class SetLayer : MonoBehaviour
         inputField_name.text = text_name.text;
         img_head.sprite = AtlasUtil.getAtlas_icon().GetSprite("hero_avatar_" + GameData.getHead());
         img_head2.sprite = AtlasUtil.getAtlas_icon().GetSprite("hero_avatar_" + GameData.getHead());
+
+        slider_music.value = GameData.getMusicVolume();
+        slider_sound.value = GameData.getSoundVolume();
 
         LayerManager.LayerShowAni(panel_set);
     }
@@ -143,6 +148,16 @@ public class SetLayer : MonoBehaviour
         panel_changeName.gameObject.SetActive(true);
         panel_changeName.localScale = Vector3.zero;
         LayerManager.LayerShowAni(panel_changeName);
+    }
+
+    public void onSlideValueChanged_Music(float f)
+    {
+        GameData.setMusicVolume(slider_music.value);
+    }
+
+    public void onSlideValueChanged_Sound(float f)
+    {
+        GameData.setSoundVolume(slider_sound.value);
     }
 
     bool isClosed = false;

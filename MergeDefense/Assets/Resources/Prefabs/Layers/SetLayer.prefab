@@ -602,7 +602,19 @@ MonoBehaviour:
   m_Value: 1
   m_OnValueChanged:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 5082537042662696658}
+        m_TargetAssemblyTypeName: SetLayer, Assembly-CSharp
+        m_MethodName: onSlideValueChanged_Music
+        m_Mode: 4
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &1082879855565488111
 GameObject:
   m_ObjectHideFlags: 0
@@ -2757,7 +2769,19 @@ MonoBehaviour:
   m_Value: 1
   m_OnValueChanged:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 5082537042662696658}
+        m_TargetAssemblyTypeName: SetLayer, Assembly-CSharp
+        m_MethodName: onSlideValueChanged_Sound
+        m_Mode: 4
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &4396697057371058133
 GameObject:
   m_ObjectHideFlags: 0
@@ -2971,6 +2995,8 @@ MonoBehaviour:
   img_head2: {fileID: 29119743199533454}
   text_name: {fileID: 8334883435680405525}
   inputField_name: {fileID: 6870495967647899595}
+  slider_music: {fileID: 3509208726843726697}
+  slider_sound: {fileID: 1643791763925685199}
 --- !u!1 &4585142205606998445
 GameObject:
   m_ObjectHideFlags: 0
