@@ -8,6 +8,9 @@ public class AudioScript : MonoBehaviour
 {
     public static AudioScript s_instance = null;
 
+    public float musicVolume = 1;
+    public float soundVolume = 1;
+
     // 背景音乐
     [HideInInspector]
     public AudioSource m_musicAudioSource;
@@ -29,6 +32,9 @@ public class AudioScript : MonoBehaviour
         {
             m_soundAudioSource.Add(transform.Find("Sound").GetChild(i).GetComponent<AudioSource>());
         }
+
+        musicVolume = GameData.getMusicVolume();
+        soundVolume = GameData.getSoundVolume();
     }
 
     public void playMusic(string name, bool isLoop)
@@ -39,7 +45,7 @@ public class AudioScript : MonoBehaviour
         }
         m_musicAudioSource.clip = Resources.Load("Audios/Music/" + name, typeof(AudioClip)) as AudioClip;
         m_musicAudioSource.time = 0;
-        m_musicAudioSource.volume = GameData.getIsOpenMusic();
+        m_musicAudioSource.volume = musicVolume;
         m_musicAudioSource.Play();
         m_musicAudioSource.loop = isLoop;
     }
@@ -63,7 +69,7 @@ public class AudioScript : MonoBehaviour
     Dictionary<string, long> dic_soundPlayTime = new Dictionary<string, long>();
     public void playSound(string audioName,float volume = 1,bool isLoop = false)
     {
-        if (GameData.getIsOpenSound() == 0)
+        if (soundVolume <= 0)
         {
             return;
         }
@@ -81,7 +87,7 @@ public class AudioScript : MonoBehaviour
         {
             if (!m_soundAudioSource[i].isPlaying)
             {
-                m_soundAudioSource[i].volume = volume;
+                m_soundAudioSource[i].volume = volume * soundVolume;
                 m_soundAudioSource[i].loop = isLoop;
                 m_soundAudioSource[i].clip = getSoundAudioClip(audioName);
                 m_soundAudioSource[i].Play();
@@ -110,7 +116,7 @@ public class AudioScript : MonoBehaviour
     {
         if (m_musicAudioSource)
         {
-            m_musicAudioSource.volume = GameData.getIsOpenMusic();
+            m_musicAudioSource.volume = musicVolume;
             m_musicAudioSource.Play();
         }
     }
@@ -122,6 +128,17 @@ public class AudioScript : MonoBehaviour
         {
             m_musicAudioSource.clip.UnloadAudioData();
         }
+    }
+
+    public void setMusicVolume(float volume)
+    {
+        musicVolume = volume;
+        m_musicAudioSource.volume = musicVolume;
+    }
+
+    public void setSoundVolume(float volume)
+    {
+        soundVolume = volume;
     }
 
     public void playSound_btn()

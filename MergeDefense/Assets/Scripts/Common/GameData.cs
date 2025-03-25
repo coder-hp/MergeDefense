@@ -125,26 +125,6 @@ public class GameData
         PlayerPrefs.SetInt("IsOpenVibrate", value);
     }
 
-    public static int getIsOpenMusic()
-    {
-        return PlayerPrefs.GetInt("IsOpenMusic", 1);
-    }
-
-    public static void setIsOpenMusic(int value)
-    {
-        PlayerPrefs.SetInt("IsOpenMusic", value);
-    }
-
-    public static int getIsOpenSound()
-    {
-        return PlayerPrefs.GetInt("IsOpenSound", 1);
-    }
-
-    public static void setIsOpenSound(int value)
-    {
-        PlayerPrefs.SetInt("IsOpenSound", value);
-    }
-
     public static int getOpenCount()
     {
         return PlayerPrefs.GetInt("OpenCount", 0);
@@ -286,5 +266,27 @@ public class GameData
             value = 0;
         }
         PlayerPrefs.SetInt("HeroExp" + id, value);
+    }
+
+    public static float getMusicVolume()
+    {
+        return PlayerPrefs.GetFloat("MusicVolume", 1);
+    }
+
+    public static void setMusicVolume(float volume)
+    {
+        PlayerPrefs.SetFloat("MusicVolume", volume);
+        AudioScript.s_instance.setMusicVolume(volume);
+    }
+
+    public static float getSoundVolume()
+    {
+        return PlayerPrefs.GetFloat("SoundVolume", 1);
+    }
+
+    public static void setSoundVolume(float volume)
+    {
+        PlayerPrefs.SetFloat("SoundVolume", volume);
+        AudioScript.s_instance.setSoundVolume(volume);
     }
 }
