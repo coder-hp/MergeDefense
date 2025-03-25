@@ -21,6 +21,11 @@ public class MainLayer : MonoBehaviour
         refreshUI();
     }
 
+    private void Start()
+    {
+        AudioScript.s_instance.playMusic("bgm_main", true);
+    }
+
     public void refreshUI()
     {
         text_tili.text = GameData.getMyTiLi() + "/" + Consts.maxTiLi;
