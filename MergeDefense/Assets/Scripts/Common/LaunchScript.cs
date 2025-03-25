@@ -43,7 +43,7 @@ public class LaunchScript : MonoBehaviour
                 }
             }
 
-            GameData.setHead(RandomUtil.getRandom(101,119));
+            GameData.setHead(RandomUtil.getRandom(101,110));
         }
     }
 }

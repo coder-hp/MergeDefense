@@ -221,16 +221,26 @@ public class GameData
     public static void setName(string name)
     {
         PlayerPrefs.SetString("name", name);
+
+        if (MainLayer.s_instance)
+        {
+            MainLayer.s_instance.refreshUI();
+        }
     }
 
     public static int getHead()
     {
-        return PlayerPrefs.GetInt("head",RandomUtil.getRandom(101,119));
+        return PlayerPrefs.GetInt("head",101);
     }
 
     public static void setHead(int head)
     {
         PlayerPrefs.SetInt("head", head);
+
+        if (MainLayer.s_instance)
+        {
+            MainLayer.s_instance.refreshUI();
+        }
     }
 
     public static int getLevel()
