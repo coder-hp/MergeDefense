@@ -80,6 +80,15 @@ public class GameUILayer : MonoBehaviour
                     item.GetComponent<Button>().onClick.AddListener(()=>
                     {
                         AudioScript.s_instance.playSound_btn();
+
+                        for (int j = 0; j < heroData.list_summonWay.Count; j++)
+                        {
+                            if(heroData.list_summonWay[j][1] == 999)
+                            {
+                                LayerManager.ShowLayer(Consts.Layer.SummonSpecialHero).GetComponent<SummonSpecialHero>().init(heroData);
+                                return;
+                            }
+                        }
                         GameLayer.s_instance.summonMythicHero(heroData);
                     });
 

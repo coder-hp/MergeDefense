@@ -104,7 +104,7 @@ public class GameLayer : MonoBehaviour
         }
     }
 
-    public void summonMythicHero(HeroData heroData)
+    public void summonMythicHero(HeroData heroData,string deleteHero_id_star = "", string deleteWeapon_type_level = "")
     {
         // 角色替换
         {
@@ -116,21 +116,24 @@ public class GameLayer : MonoBehaviour
                     int heroId = heroData.list_summonWay[i][1];
                     int star = heroData.list_summonWay[i][2];
 
-                    for (int j = 0; j < heroPoint.childCount; j++)
+                    if(deleteHero_id_star != "")
                     {
-                        if (heroPoint.GetChild(j).childCount > 0)
+                        heroId = int.Parse(deleteHero_id_star.Split('_')[0]);
+                        star = int.Parse(deleteHero_id_star.Split('_')[1]);
+                    }
+
+                    for (int j = 0; j < HeroManager.s_instance.list_hero.Count; j++)
+                    {
+                        HeroLogicBase heroLogicBase_temp = HeroManager.s_instance.list_hero[j];
+                        if (heroLogicBase_temp.id == heroId && heroLogicBase_temp.curStar >= star)
                         {
-                            HeroLogicBase heroLogicBase_temp = heroPoint.GetChild(j).GetChild(0).GetComponent<HeroLogicBase>();
-                            if (heroLogicBase_temp.id == heroId && heroLogicBase_temp.curStar >= star)
+                            if (heroLogicBase == null)
                             {
-                                if (heroLogicBase == null)
-                                {
-                                    heroLogicBase = heroLogicBase_temp;
-                                }
-                                else if (heroLogicBase_temp.curStar < heroLogicBase.curStar)
-                                {
-                                    heroLogicBase = heroLogicBase_temp;
-                                }
+                                heroLogicBase = heroLogicBase_temp;
+                            }
+                            else if (heroLogicBase_temp.curStar < heroLogicBase.curStar)
+                            {
+                                heroLogicBase = heroLogicBase_temp;
                             }
                         }
                     }
@@ -163,6 +166,12 @@ public class GameLayer : MonoBehaviour
                 {
                     int weaponType = heroData.list_summonWay[i][1];
                     int level = heroData.list_summonWay[i][2];
+
+                    if (deleteWeapon_type_level != "")
+                    {
+                        weaponType = int.Parse(deleteWeapon_type_level.Split('_')[0]);
+                        level = int.Parse(deleteWeapon_type_level.Split('_')[1]);
+                    }
 
                     // 检索武器栏
                     {
@@ -252,26 +261,23 @@ public class GameLayer : MonoBehaviour
                 int star = heroData.list_summonWay[i][2];
 
                 // 遍历已上场角色，检查条件是否满足
-                for (int j = 0; j < heroPoint.childCount; j++)
+                for (int j = 0; j < HeroManager.s_instance.list_hero.Count; j++)
                 {
-                    if (heroPoint.GetChild(j).childCount > 0)
+                    HeroLogicBase heroLogicBase = HeroManager.s_instance.list_hero[j];
+                    if (id == 999)
                     {
-                        HeroLogicBase heroLogicBase = heroPoint.GetChild(j).GetChild(0).GetComponent<HeroLogicBase>();
-                        if(id == 999)
+                        if (heroLogicBase.curStar >= star)
                         {
-                            if (heroLogicBase.curStar >= star)
-                            {
-                                mythicHeroProgress[i] = 1;
-                                break;
-                            }
+                            mythicHeroProgress[i] = 1;
+                            break;
                         }
-                        else
+                    }
+                    else
+                    {
+                        if (heroLogicBase.id == id && heroLogicBase.curStar >= star)
                         {
-                            if (heroLogicBase.id == id && heroLogicBase.curStar >= star)
-                            {
-                                mythicHeroProgress[i] = 1;
-                                break;
-                            }
+                            mythicHeroProgress[i] = 1;
+                            break;
                         }
                     }
                 }

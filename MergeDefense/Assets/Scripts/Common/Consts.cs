@@ -51,6 +51,7 @@ public class Consts
         BattleLayer,
         HeroUpgradeLayer,
         BattleMissionLayer,
+        SummonSpecialHero,
     }
 
     public enum WeaponType
