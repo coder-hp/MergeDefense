@@ -64,7 +64,7 @@ public class BattleMission : MonoBehaviour
         curMissionProgress = 0;
         setMissionProgress(curMissionProgress);
 
-        missionTrans.localPosition = CommonUtil.WorldPosToUI(GameLayer.s_instance.camera3D, transform.position);
+        missionTrans.localPosition = CommonUtil.WorldPosToUI(GameLayer.s_instance.camera3D, transform.position) + new Vector2(0,65);
         missionTrans.localScale = Vector3.one;
         missionTrans.Find("newMission").localScale = Vector3.one;
         missionTrans.Find("timer").localScale = Vector3.zero;
@@ -124,9 +124,9 @@ public class BattleMission : MonoBehaviour
 
     void setMissionProgress(int progress)
     {
-        if(curMissionData.value == 0)
+        if(curMissionData.shortDesc != "")
         {
-            text_progress.text = "";
+            text_progress.text = curMissionData.shortDesc;
         }
         else
         {
