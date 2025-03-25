@@ -8,8 +8,8 @@ public class AudioScript : MonoBehaviour
 {
     public static AudioScript s_instance = null;
 
-    public float musicVolume = 1;
-    public float soundVolume = 1;
+    float musicVolume = 1;
+    float soundVolume = 1;
 
     // 背景音乐
     [HideInInspector]
