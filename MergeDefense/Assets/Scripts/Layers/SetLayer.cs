@@ -20,6 +20,7 @@ public class SetLayer : MonoBehaviour
     void Start()
     {
         text_name.text = GameData.getName();
+        inputField_name.text = text_name.text;
         img_head.sprite = AtlasUtil.getAtlas_icon().GetSprite("hero_avatar_" + GameData.getHead());
         img_head2.sprite = AtlasUtil.getAtlas_icon().GetSprite("hero_avatar_" + GameData.getHead());
 
@@ -127,6 +128,10 @@ public class SetLayer : MonoBehaviour
             GameData.setName(inputField_name.text);
             text_name.text = inputField_name.text;
             onClickClose();
+        }
+        else
+        {
+            ToastScript.show("最少两个字符");
         }
     }
 
