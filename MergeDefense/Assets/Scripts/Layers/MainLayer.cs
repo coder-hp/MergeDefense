@@ -12,6 +12,7 @@ public class MainLayer : MonoBehaviour
     public Text text_tili;
     public Text text_gold;
     public Text text_diamond;
+    public Text text_name;
     public Image img_head;
 
     private void Awake()
@@ -25,6 +26,7 @@ public class MainLayer : MonoBehaviour
         text_tili.text = GameData.getMyTiLi() + "/" + Consts.maxTiLi;
         text_gold.text = CommonUtil.numToStrKMB(GameData.getMyGold());
         text_diamond.text = CommonUtil.numToStrKMB(GameData.getMyDiamond());
+        text_name.text = GameData.getName();
         img_head.sprite = AtlasUtil.getAtlas_icon().GetSprite("hero_avatar_" + GameData.getHead());
     }
 
@@ -87,5 +89,11 @@ public class MainLayer : MonoBehaviour
                 bottomPoint.GetChild(i).GetComponent<Image>().sprite = AtlasUtil.getAtlas_main().GetSprite("button_nav_1");
             }
         }
+    }
+
+    public void onClickHead()
+    {
+        AudioScript.s_instance.playSound_btn();
+        LayerManager.ShowLayer(Consts.Layer.SetLayer);
     }
 }
