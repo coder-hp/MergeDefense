@@ -85,7 +85,7 @@ public class EnemyLogic : MonoBehaviour
 
         if (enemyWaveData.enemyType > 1)
         {
-            bloodText.text = CommonUtil.intToStrK(curHP).ToString();
+            bloodText.text = CommonUtil.numToStrKMB(curHP).ToString();
         }
     }
 
@@ -210,7 +210,7 @@ public class EnemyLogic : MonoBehaviour
 
             if (enemyWaveData.enemyType > 1)
             {
-                bloodText.text = CommonUtil.intToStrK(curHP).ToString();
+                bloodText.text = CommonUtil.numToStrKMB(curHP).ToString();
             }
 
             bloodProgressImg.DOFillAmount((float)curHP / (float)fullHP,0.2f);
