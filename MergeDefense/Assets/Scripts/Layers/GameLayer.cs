@@ -264,20 +264,23 @@ public class GameLayer : MonoBehaviour
                 for (int j = 0; j < HeroManager.s_instance.list_hero.Count; j++)
                 {
                     HeroLogicBase heroLogicBase = HeroManager.s_instance.list_hero[j];
-                    if (id == 999)
+                    if (heroLogicBase.curStar <= 9)
                     {
-                        if (heroLogicBase.curStar >= star)
+                        if (id == 999)
                         {
-                            mythicHeroProgress[i] = 1;
-                            break;
+                            if (heroLogicBase.curStar >= star)
+                            {
+                                mythicHeroProgress[i] = 1;
+                                break;
+                            }
                         }
-                    }
-                    else
-                    {
-                        if (heroLogicBase.id == id && heroLogicBase.curStar >= star)
+                        else
                         {
-                            mythicHeroProgress[i] = 1;
-                            break;
+                            if (heroLogicBase.id == id && heroLogicBase.curStar >= star)
+                            {
+                                mythicHeroProgress[i] = 1;
+                                break;
+                            }
                         }
                     }
                 }

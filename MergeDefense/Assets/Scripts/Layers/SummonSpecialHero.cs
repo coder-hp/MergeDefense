@@ -34,7 +34,7 @@ public class SummonSpecialHero : MonoBehaviour
                 {
                     HeroLogicBase heroLogicBase = HeroManager.s_instance.list_hero[j];
                     bool isAdd = false;
-                    if (heroLogicBase.curStar >= star)
+                    if (heroLogicBase.curStar >= star && heroLogicBase.curStar <= 9)
                     {
                         if (id == 999)
                         {
@@ -220,6 +220,11 @@ public class SummonSpecialHero : MonoBehaviour
     public void onClickSummon()
     {
         GameLayer.s_instance.summonMythicHero(heroData, curClickHeroItem.name, curClickWeaponItem.name);
+        Destroy(gameObject);
+    }
+
+    public void onClickClose()
+    {
         Destroy(gameObject);
     }
 }
