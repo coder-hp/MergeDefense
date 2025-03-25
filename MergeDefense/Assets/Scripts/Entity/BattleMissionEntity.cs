@@ -8,6 +8,7 @@ public class BattleMissionData
 {
     public int id;
     public string desc;
+    public string shortDesc;
     public int time;
     public int value;
     public string reward;
