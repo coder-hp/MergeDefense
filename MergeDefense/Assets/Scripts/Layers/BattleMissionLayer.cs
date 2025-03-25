@@ -19,7 +19,7 @@ public class BattleMissionLayer : MonoBehaviour
 
         if(BattleMission.s_instance.curMissionData.reward == "")
         {
-            timeTrans.localPosition = new Vector3(0,-120,0);
+            timeTrans.localPosition = new Vector3(0, -280, 0);
             rewardTrans.localScale = Vector3.zero;
         }
         else
