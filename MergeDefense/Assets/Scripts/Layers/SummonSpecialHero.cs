@@ -64,11 +64,11 @@ public class SummonSpecialHero : MonoBehaviour
 
                         if (heroLogicBase.curStar >= 7)
                         {
-                            itemTrans.Find("shadow").GetComponent<Image>().color = Consts.list_heroQualityColor[3];
+                            itemTrans.Find("shadow").GetComponent<Image>().sprite = AtlasUtil.getAtlas_game().GetSprite("board_hero_3");
                         }
                         else if (heroLogicBase.curStar >= 4)
                         {
-                            itemTrans.Find("shadow").GetComponent<Image>().color = Consts.list_heroQualityColor[2];
+                            itemTrans.Find("shadow").GetComponent<Image>().sprite = AtlasUtil.getAtlas_game().GetSprite("board_hero_2");
                         }
 
                         // 星级

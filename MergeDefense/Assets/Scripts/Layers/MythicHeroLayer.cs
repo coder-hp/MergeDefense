@@ -113,11 +113,11 @@ public class MythicHeroLayer : MonoBehaviour
 
                     if(star >= 7)
                     {
-                        yaoqiu_hero.Find("shadow").GetComponent<Image>().color = Consts.list_heroQualityColor[3];
+                        yaoqiu_hero.Find("shadow").GetComponent<Image>().sprite = AtlasUtil.getAtlas_game().GetSprite("board_hero_3");
                     }
                     else if (star >= 4)
                     {
-                        yaoqiu_hero.Find("shadow").GetComponent<Image>().color = Consts.list_heroQualityColor[2];
+                        yaoqiu_hero.Find("shadow").GetComponent<Image>().sprite = AtlasUtil.getAtlas_game().GetSprite("board_hero_2");
                     }
 
                     // 星级
