@@ -136,7 +136,7 @@ public class SetLayer : MonoBehaviour
         }
         else
         {
-            ToastScript.show("最少两个字符");
+            ToastScript.show("Nickname is too short");
         }
     }
 
