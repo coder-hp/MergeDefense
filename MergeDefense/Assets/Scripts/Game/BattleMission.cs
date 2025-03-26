@@ -5,6 +5,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using static UnityEditor.Progress;
 
 public class BattleMission : MonoBehaviour
 {
@@ -27,6 +28,8 @@ public class BattleMission : MonoBehaviour
     int restDoMissionTime = 30;
     int curMissionProgress = 0;
     bool isCompleteMission = false;
+
+    DG.Tweening.Sequence seq_gantanhao = null;
 
     private void Awake()
     {
@@ -55,7 +58,7 @@ public class BattleMission : MonoBehaviour
     {
         animator.Play("idle");
         int index = RandomUtil.SelectProbability(BattleMissionEntity.getInstance().list_weight);
-        //index = 16;
+        //index = 0;
         curMissionData = BattleMissionEntity.getInstance().list[index];
         Debug.Log("新任务：" + curMissionData.desc);
 
@@ -76,6 +79,14 @@ public class BattleMission : MonoBehaviour
 
         InvokeRepeating("onInvokeNewMissnon", repeatComeTime, repeatComeTime);
         Invoke("onInvokeTakeMissionTimeOut", waitTakeMissionTime);
+
+        if(seq_gantanhao == null)
+        {
+            Transform gantanhao = missionTrans.Find("newMission/icon");
+            seq_gantanhao = DOTween.Sequence();
+            seq_gantanhao.Append(gantanhao.DOScale(1.2f, 0.4f))
+                         .Append(gantanhao.DOScale(1f, 0.4f)).SetLoops(-1);
+        }
     }
 
     // 超时未接取任务
@@ -178,6 +189,7 @@ public class BattleMission : MonoBehaviour
 
         ToastScript.show("任务完成");
         isCompleteMission = true;
+        restDoMissionTime = 0;
 
         if (curMissionData.reward != "")
         {
@@ -200,6 +212,7 @@ public class BattleMission : MonoBehaviour
         // 任务时间到
         if(--restDoMissionTime <= 0)
         {
+            restDoMissionTime = 0;
             CancelInvoke("onInvokeSecond");
 
             int mission_id = curMissionData.id;

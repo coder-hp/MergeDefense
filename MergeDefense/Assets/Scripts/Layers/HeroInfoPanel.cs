@@ -307,8 +307,10 @@ public class HeroInfoPanel : MonoBehaviour
         GameUILayer.s_instance.changeGold(sellPrice);
 
         EffectManager.s_instance.sellHero(heroLogicBase.transform.position);
-        Destroy(heroLogicBase.gameObject);
+        DestroyImmediate(heroLogicBase.gameObject);
         onClickClose();
+
+        GameUILayer.s_instance.checkMythicHeroProgress();
     }
 
     public void onClickClose()

@@ -17,6 +17,7 @@ public class Consts
     public static int startForgeGold = 20;      // 初始锻造金额
     public static int forgeAddGold = 2;         // 每锻造一次增加的金额
     public static int maxTiLi = 99;             // 最大体力
+    public static int maxBoCi = 80;             // 最大波次
 
 
     public static int maxEnemyCount = 60;      // 最大存在怪物数量

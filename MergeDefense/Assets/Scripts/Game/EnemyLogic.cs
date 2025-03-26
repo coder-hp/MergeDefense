@@ -331,7 +331,14 @@ public class EnemyLogic : MonoBehaviour
 
         if(GameFightData.s_instance.isAddEnemyEnd && EnemyManager.s_instance.list_enemy.Count == 0)
         {
-            GameUILayer.s_instance.btn_spawn.localScale = Vector3.one;
+            if(GameFightData.s_instance.curBoCi >= Consts.maxBoCi)
+            {
+                GameUILayer.s_instance.gameOver();
+            }
+            else
+            {
+                GameUILayer.s_instance.btn_spawn.localScale = Vector3.one;
+            }
         }
     }
 }

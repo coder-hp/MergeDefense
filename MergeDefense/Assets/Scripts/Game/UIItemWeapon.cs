@@ -13,8 +13,9 @@ public class UIItemWeapon : MonoBehaviour
     public WeaponData weaponData;
     [HideInInspector]
     public bool isCanDrag = false;
+    [HideInInspector]
+    public Transform parentTrans;
 
-    Transform parentTrans;
     Transform mergeTarget = null;
 
     Transform dragTriggerWeaponBar = null;
@@ -96,6 +97,7 @@ public class UIItemWeapon : MonoBehaviour
             return;
         }
 
+        GameFightData.s_instance.curDragUIItemWeapon = this;
         WeaponInfoPanel.s_instance.show(weaponData);
 
         mergeTarget = null;
@@ -162,6 +164,8 @@ public class UIItemWeapon : MonoBehaviour
             return;
         }
 
+        GameFightData.s_instance.curDragUIItemWeapon = null;
+
         WeaponInfoPanel.s_instance.close();
 
         // 关闭所有角色的武器适配性emoji
@@ -216,7 +220,8 @@ public class UIItemWeapon : MonoBehaviour
 
             GameUILayer.s_instance.changeDiamond(weaponData.level);
             GameUILayer.s_instance.setIsShowBtnWeaponSell(false);
-            Destroy(gameObject);
+            DestroyImmediate(gameObject);
+            GameUILayer.s_instance.checkMythicHeroProgress();
             return;
         }
         // 检测是否拖到了武器栏
