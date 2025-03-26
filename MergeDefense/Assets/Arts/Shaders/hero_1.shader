@@ -108,43 +108,43 @@ Shader "Kein/Hero/hero_1"
         }
 
 
-        Pass
-        {
-            Cull Front
-            Offset 1,1
+        // Pass
+        // {
+        //     Cull Front
+        //     Offset 1,1
        
-            CGPROGRAM
-            #pragma vertex vert
-            #pragma fragment frag
-            #include "UnityCG.cginc"
+        //     CGPROGRAM
+        //     #pragma vertex vert
+        //     #pragma fragment frag
+        //     #include "UnityCG.cginc"
             
-            struct v2f
-            {
-                float4 pos : SV_POSITION;
-            };
+        //     struct v2f
+        //     {
+        //         float4 pos : SV_POSITION;
+        //     };
   
-            fixed4 _OutlineCol;
-            float _OutlineFactor,_IsOutLine;
+        //     fixed4 _OutlineCol;
+        //     float _OutlineFactor,_IsOutLine;
   
-            v2f vert(appdata_full v)
-            {
-                v2f o;
-                o.pos = UnityObjectToClipPos(v.vertex);
-                if(_IsOutLine)
-                {
-                    float3 vnormal = mul((float3x3)UNITY_MATRIX_IT_MV, v.normal);
-                    float2 offset = TransformViewToProjection(vnormal.xy);
-                    o.pos.xy += offset * _OutlineFactor * 0.1f;
-                }
-                return o;
-            }
+        //     v2f vert(appdata_full v)
+        //     {
+        //         v2f o;
+        //         o.pos = UnityObjectToClipPos(v.vertex);
+        //         if(_IsOutLine)
+        //         {
+        //             float3 vnormal = mul((float3x3)UNITY_MATRIX_IT_MV, v.normal);
+        //             float2 offset = TransformViewToProjection(vnormal.xy);
+        //             o.pos.xy += offset * _OutlineFactor * 0.1f;
+        //         }
+        //         return o;
+        //     }
 
-            fixed4 frag(v2f i) : SV_Target
-            {
-                clip(_IsOutLine);
-                return _OutlineCol;
-            }
-            ENDCG
-        }
+        //     fixed4 frag(v2f i) : SV_Target
+        //     {
+        //         clip(_IsOutLine);
+        //         return _OutlineCol;
+        //     }
+        //     ENDCG
+        // }
     }
 }

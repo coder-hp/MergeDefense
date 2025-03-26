@@ -7,7 +7,7 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: hero_109
+  m_Name: hero_110
   m_Shader: {fileID: 4800000, guid: d478261b751a479438de946f9c6cec65, type: 3}
   m_Parent: {fileID: 0}
   m_ModifiedSerializedProperties: 0
@@ -29,7 +29,7 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _BaseMap:
-        m_Texture: {fileID: 2800000, guid: f252e147e75da814cbbe96d15bd0ef3a, type: 3}
+        m_Texture: {fileID: 2800000, guid: 9c3c0e3c33ddbfc4e8208ee89edfdeb7, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _BumpMap:
@@ -53,15 +53,15 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _MainTex:
-        m_Texture: {fileID: 2800000, guid: f252e147e75da814cbbe96d15bd0ef3a, type: 3}
+        m_Texture: {fileID: 2800000, guid: 9c3c0e3c33ddbfc4e8208ee89edfdeb7, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _Mask:
-        m_Texture: {fileID: 2800000, guid: e5aff231b8c45294a9584d5a30be336f, type: 3}
+        m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _MatCap:
-        m_Texture: {fileID: 2800000, guid: 9a125c52f08278f47813cde26b13daf9, type: 3}
+        m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _MetallicGlossMap:
@@ -93,7 +93,7 @@ Material:
     - _DstBlend: 0
     - _EnvironmentReflections: 1
     - _Fresnel: 0
-    - _Gloss: 20
+    - _Gloss: 8
     - _GlossMapScale: 0
     - _Glossiness: 0
     - _GlossyReflections: 0
@@ -124,8 +124,8 @@ Material:
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
     - _FresnelColor: {r: 0, g: 0, b: 0, a: 1}
     - _OutlineCol: {r: 0, g: 0, b: 0, a: 1}
-    - _RimColor: {r: 0.6886792, g: 0.6886792, b: 0.6886792, a: 1}
+    - _RimColor: {r: 0.4433962, g: 0.4433962, b: 0.4433962, a: 1}
     - _SpecColor: {r: 0.2, g: 0.2, b: 0.2, a: 1}
-    - _Specular: {r: 0.4339623, g: 0.4339623, b: 0.4339623, a: 1}
-    - _TintColor: {r: 0.95, g: 0.95, b: 0.95, a: 1}
+    - _Specular: {r: 0, g: 0, b: 0, a: 1}
+    - _TintColor: {r: 0.92, g: 0.92, b: 0.92, a: 1}
   m_BuildTextureStacks: []

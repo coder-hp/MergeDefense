@@ -12,7 +12,8 @@ Material:
   m_Parent: {fileID: 0}
   m_ModifiedSerializedProperties: 0
   m_ValidKeywords: []
-  m_InvalidKeywords: []
+  m_InvalidKeywords:
+  - _GLOSSYREFLECTIONS_OFF
   m_LightmapFlags: 4
   m_EnableInstancingVariants: 0
   m_DoubleSidedGI: 0
@@ -23,6 +24,14 @@ Material:
   m_SavedProperties:
     serializedVersion: 3
     m_TexEnvs:
+    - _AOMap:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _BaseMap:
+        m_Texture: {fileID: 2800000, guid: 3dc6b32b4dce5a44f8580d6457a554c3, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
     - _BumpMap:
         m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
@@ -44,7 +53,7 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _MainTex:
-        m_Texture: {fileID: 2800000, guid: a7a594d39111c2c4398edced5d16130d, type: 3}
+        m_Texture: {fileID: 2800000, guid: 3dc6b32b4dce5a44f8580d6457a554c3, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _Mask:
@@ -69,30 +78,54 @@ Material:
         m_Offset: {x: 0, y: 0}
     m_Ints: []
     m_Floats:
+    - _AODarkness: 0
+    - _AOSaturation: 1
+    - _AOSaturationAmount: 0.1
+    - _AlphaClip: 0
+    - _Blend: 0
     - _BumpScale: 1
+    - _ClearCoatMask: 0
+    - _ClearCoatSmoothness: 0
+    - _Cull: 2
     - _Cutoff: 0.5
+    - _DetailAlbedoMapScale: 1
     - _DetailNormalMapScale: 1
     - _DstBlend: 0
-    - _Gloss: 16
-    - _GlossMapScale: 1
-    - _Glossiness: 0.5
-    - _GlossyReflections: 1
+    - _EnvironmentReflections: 1
+    - _Fresnel: 0
+    - _Gloss: 29
+    - _GlossMapScale: 0
+    - _Glossiness: 0
+    - _GlossyReflections: 0
+    - _Highlight: 0.5
+    - _HighlightAmount: 0.04
+    - _IgnoreShadow: 0
     - _IsOutLine: 0
     - _Metallic: 0
     - _Mode: 0
     - _OcclusionStrength: 1
     - _OutlineFactor: 0.1
-    - _Parallax: 0.02
+    - _Parallax: 0.005
+    - _QueueOffset: 0
+    - _ReceiveShadows: 1
     - _RimPower: 0.2
+    - _Smoothness: 0.5
     - _SmoothnessTextureChannel: 0
     - _SpecularHighlights: 1
     - _SrcBlend: 1
+    - _Surface: 0
+    - _UI: 0
     - _UVSec: 0
+    - _WorkflowMode: 1
     - _ZWrite: 1
     m_Colors:
+    - _BaseColor: {r: 1, g: 1, b: 1, a: 1}
     - _Color: {r: 1, g: 1, b: 1, a: 1}
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
+    - _FresnelColor: {r: 0, g: 0, b: 0, a: 1}
     - _OutlineCol: {r: 0, g: 0, b: 0, a: 1}
-    - _RimColor: {r: 0.27714488, g: 0.33962262, b: 0.28755784, a: 1}
-    - _Specular: {r: 0.4339623, g: 0.4339623, b: 0.4339623, a: 1}
+    - _RimColor: {r: 0.26415092, g: 0.26415092, b: 0.26415092, a: 1}
+    - _SpecColor: {r: 0.2, g: 0.2, b: 0.2, a: 1}
+    - _Specular: {r: 0.4716981, g: 0.4716981, b: 0.4716981, a: 1}
+    - _TintColor: {r: 0.97, g: 0.97, b: 0.97, a: 1}
   m_BuildTextureStacks: []
