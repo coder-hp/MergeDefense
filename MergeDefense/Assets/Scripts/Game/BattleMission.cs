@@ -46,6 +46,11 @@ public class BattleMission : MonoBehaviour
         animator.Play("enter");
     }
 
+    public void playBoatSound()
+    {
+        AudioScript.s_instance.playSound("missionAvdiable");
+    }
+
     public void onBoatCome()
     {
         animator.Play("idle");
