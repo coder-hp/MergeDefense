@@ -42,7 +42,10 @@ public class BattleMissionEntity
             list_weight.Add(list[i].weight);
             allWeight += list[i].weight;
         }
-        Debug.Log("battleMission AllWeight=" + allWeight);
+        if(allWeight != 100)
+        {
+            Debug.LogError("battleMission AllWeight=" + allWeight);
+        }
     }
 
     public BattleMissionData getData(int id)
