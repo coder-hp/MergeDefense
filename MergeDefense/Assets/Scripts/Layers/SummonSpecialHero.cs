@@ -244,11 +244,11 @@ public class SummonSpecialHero : MonoBehaviour
     {
         if(isShow)
         {
-            bgTrans.localScale = Vector3.one;
+            bgTrans.localPosition = Vector3.zero;
         }
         else
         {
-            bgTrans.localScale = Vector3.zero;
+            bgTrans.localPosition = new Vector3(0, 99999, 0);
         }
     }
 
