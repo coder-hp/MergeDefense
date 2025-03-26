@@ -17,7 +17,6 @@ public class UIItemWeapon : MonoBehaviour
     Transform parentTrans;
     Transform mergeTarget = null;
 
-    RaycastHit raycastHit;
     Transform dragTriggerWeaponBar = null;
 
     public void init(int type,int level)
