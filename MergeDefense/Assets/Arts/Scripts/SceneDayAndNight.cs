@@ -1,52 +1,77 @@
+using Spine;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class SceneDayAndNight : MonoBehaviour
 {
-    public float Duration;
-    Material SceneMat,RayLightMat,NightStarMat;
-    float DayAndNight = 0f;
-    
+    public float duration;
+    Material sceneMat,rayLightMat,nightStarMat;
+    float dayAndNight = 0f;
+    GameObject fireObj;
 
-    bool IsDay = true;
+    bool isDay = true;
+    bool isFire = false;
     int RefreshRate = 0;
+
 
     void Start()
     {
-        SceneMat = transform.Find("ground").GetComponent<MeshRenderer>().material;
-        RayLightMat = transform.Find("effect/eff_rayLight").GetComponent<ParticleSystemRenderer>().material;
-        NightStarMat = transform.Find("effect/eff_nightStar").GetComponent<ParticleSystemRenderer>().material;
+        sceneMat = transform.Find("ground").GetComponent<MeshRenderer>().material;
+        rayLightMat = transform.Find("effect/eff_rayLight").GetComponent<ParticleSystemRenderer>().material;
+        nightStarMat = transform.Find("effect/eff_nightStar").GetComponent<ParticleSystemRenderer>().material;
+
+        fireObj = transform.Find("effect/fire").gameObject;
+        fireObj.SetActive(false);
     }
 
     
     void Update()
     {
-        if (IsDay)
+        if (isDay)
         {
-            DayAndNight += Time.deltaTime / Duration;
-            if (DayAndNight >= 1)
+            dayAndNight += Time.deltaTime / duration;
+            if (dayAndNight >= 1)
             {
-                IsDay = false;
+                isDay = false;
             }
         }
         else
         {
-            DayAndNight -= Time.deltaTime / Duration;
-            if (DayAndNight <= 0f)
+            dayAndNight -= Time.deltaTime / duration;
+            if (dayAndNight <= 0f)
             {
-                IsDay = true;
+                isDay = true;
             }
         }
 
+        // 开关灯
+        if (!isFire)
+        {
+            if (dayAndNight >= 0.7f)
+            {
+                isFire = true;
+                fireObj.SetActive(true);
+            }
+        }
+        else
+        {
+            if (dayAndNight < 0.7f)
+            {
+                isFire = false;
+                fireObj.SetActive(false);
+            }
+        }
+
+        // 刷新频率
         RefreshRate++;
         if (RefreshRate > 20)
         {
-            SceneMat.SetFloat("_DayAndNight", DayAndNight);
-            RayLightMat.SetFloat("_Alpha", DayAndNight * DayAndNight);
-            NightStarMat.SetFloat("_Alpha", DayAndNight * DayAndNight);
+            sceneMat.SetFloat("_DayAndNight", dayAndNight);
+            rayLightMat.SetFloat("_Alpha", dayAndNight * dayAndNight);
+            nightStarMat.SetFloat("_Alpha", dayAndNight * dayAndNight);
+            
             RefreshRate = 0;
-            //Debug.Log(DayAndNight);
         }
     }
 
