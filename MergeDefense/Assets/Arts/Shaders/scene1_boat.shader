@@ -22,7 +22,7 @@ Shader "Kein/Scene/Boat_1"
             #include "Lighting.cginc"
 
             
-
+            // 旋转矩阵
             float4x4 Kein_Rotation4x4(float3 _rotation)
             {
                 float radX = radians(_rotation.x);
@@ -43,14 +43,17 @@ Shader "Kein/Scene/Boat_1"
                 0.0, 0.0, 0.0, 1.0
                 );
             }
+            // 旋转方法
             float4 Kein_Rotation(float3 _rotation, float4 _vertex)
             {
                 return float4(mul(Kein_Rotation4x4(_rotation), _vertex));
             }
-            inline float RandomValue(float2 uv)
-            {
-                return frac(sin(dot(uv, float2(12.9898, 76.154))) * 45359.6543);
-            }
+
+            // 随机方法
+            // inline float RandomValue(float2 uv)
+            // {
+            //     return frac(sin(dot(uv, float2(12.9898, 76.154))) * 45359.6543);
+            // }
 
             struct appdata
             {
@@ -75,6 +78,8 @@ Shader "Kein/Scene/Boat_1"
             v2f vert (appdata v)
             {
                 v2f o;
+
+                // 船桨动画
                 if(v.color.g < 0.5)
                 {
                     v.vertex.z += 0.626;
@@ -83,20 +88,24 @@ Shader "Kein/Scene/Boat_1"
                     v.vertex.z -= 0.626;
                     v.vertex.y += 0.141;
                 }
-                float4 worldPos = mul(unity_ObjectToWorld,v.vertex);
+                // 泡沫动画
                 if(v.color.r < 0.5)
                 {
-                    float time = _Time.y * worldPos.x * worldPos.y * _WaveSpeed * 0.5;
-                    worldPos.x += sin(time) * 0.05;
-                    worldPos.y += sin(time) * 0.05;
+                    float time = _Time.y * v.vertex.x * v.vertex.y * _WaveSpeed * 60;
+                    v.vertex.x += sin(time) * 0.04;
+                    v.vertex.y += sin(time) * 0.04;
                 }
-                else
-                {
-                     worldPos.x += -sin(_Time.y * 2) * 0.03;
-                     worldPos.y += sin(_Time.y * 2) * 0.1;
-                }
+                // 转世界坐标
+                float4 worldPos = mul(unity_ObjectToWorld,v.vertex);
+
+                // 待机动画
+                worldPos.x += -sin(_Time.y * 2) * 0.03;
+                worldPos.y += sin(_Time.y * 2) * 0.1;
+
+                // Y轴整体偏移
                 worldPos.y -= v.vertex.z * 0.8;
 
+                
                 o.vertex = mul(UNITY_MATRIX_VP, worldPos);
                 //o.vertex = UnityObjectToClipPos(v.vertex);
 
@@ -115,8 +124,9 @@ Shader "Kein/Scene/Boat_1"
                 fixed3 worldNormal = normalize(i.worldNormal);
                 fixed3 worldLightDir = normalize(i.worldLightDir);
                 fixed3 diffuse = (dot(worldNormal, worldLightDir) * 0.5 + 0.5) * _LightColor0;
+
                 col.rgb = lerp(col.rgb,col.rgb * diffuse,0.2);
-                //col.rgb *= i.color;
+                
                 return col;
             }
 
