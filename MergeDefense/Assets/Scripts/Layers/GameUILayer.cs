@@ -241,6 +241,18 @@ public class GameUILayer : MonoBehaviour
                     }
                 }
             }
+            // 如果是精英怪波次，并且没有击杀，则弹出提示
+            else if (GameFightData.s_instance.curBoCi % 5 == 0)
+            {
+                for (int i = 0; i < EnemyManager.s_instance.list_enemy.Count; i++)
+                {
+                    if (EnemyManager.s_instance.list_enemy[i].enemyWaveData.enemyType == 2)
+                    {
+                        ToastScript.show("Elite hunt failed");
+                        break;
+                    }
+                }
+            }
 
             Invoke("startBoCi", 1);
 
