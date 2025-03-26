@@ -213,6 +213,11 @@ public class HeroLogicBase : MonoBehaviour
 
     private void Update()
     {
+        if(GameFightData.s_instance.isGameOver)
+        {
+            return;
+        }
+
         if(!isCanUpdate)
         {
             return;
