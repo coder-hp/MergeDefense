@@ -55,7 +55,7 @@ public class BattleMission : MonoBehaviour
     {
         animator.Play("idle");
         int index = RandomUtil.SelectProbability(BattleMissionEntity.getInstance().list_weight);
-        //index = 16;
+        //index = 0;
         curMissionData = BattleMissionEntity.getInstance().list[index];
         Debug.Log("新任务：" + curMissionData.desc);
 
@@ -178,6 +178,7 @@ public class BattleMission : MonoBehaviour
 
         ToastScript.show("任务完成");
         isCompleteMission = true;
+        restDoMissionTime = 0;
 
         if (curMissionData.reward != "")
         {
@@ -200,6 +201,7 @@ public class BattleMission : MonoBehaviour
         // 任务时间到
         if(--restDoMissionTime <= 0)
         {
+            restDoMissionTime = 0;
             CancelInvoke("onInvokeSecond");
 
             int mission_id = curMissionData.id;
