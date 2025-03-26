@@ -14,7 +14,7 @@ public class BattleMission : MonoBehaviour
     public BattleMissionData curMissionData = null;
 
     Animator animator;
-    int firstComeTime = 10;         // 第一次船来的时间，默认41
+    int firstComeTime = 41;         // 第一次船来的时间，默认41
     int repeatComeTime = 130;       // 后续船来的时间，默认130
     int boatComeAniTime = 7;
     int waitTakeMissionTime = 60;
@@ -50,7 +50,7 @@ public class BattleMission : MonoBehaviour
     {
         animator.Play("idle");
         int index = RandomUtil.SelectProbability(BattleMissionEntity.getInstance().list_weight);
-        index = 16;
+        //index = 16;
         curMissionData = BattleMissionEntity.getInstance().list[index];
         Debug.Log("新任务：" + curMissionData.desc);
 
