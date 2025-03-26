@@ -440,8 +440,8 @@ public class HeroLogicBase : MonoBehaviour
 
     public int getAtk()
     {
-        int atk = heroData.atk + heroLevelAddAtk;
-        float atkXiShu = heroStarData.baseAtkXiShu;
+        int atk = Mathf.RoundToInt(heroData.atk * heroStarData.baseAtkXiShu) + heroLevelAddAtk;
+        float atkXiShu = 1;
 
         // 武器加成
         for (int i = 0; i < GameUILayer.s_instance.list_weaponBar.Count; i++)
