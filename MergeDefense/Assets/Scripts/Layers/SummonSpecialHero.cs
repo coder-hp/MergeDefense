@@ -12,6 +12,7 @@ public class SummonSpecialHero : MonoBehaviour
     public Transform list_content_weapon;
     public GameObject item_hero;
     public GameObject item_weapon;
+    public Image img_head;
 
     Transform curClickHeroItem = null;
     Transform curClickWeaponItem = null;
@@ -26,6 +27,8 @@ public class SummonSpecialHero : MonoBehaviour
     public void init(HeroData _heroData)
     {
         heroData = _heroData;
+
+        img_head.sprite = AtlasUtil.getAtlas_icon().GetSprite("hero_avatar_" + heroData.id);
 
         for (int i = 0; i < heroData.list_summonWay.Count; i++)
         {
