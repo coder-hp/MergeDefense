@@ -67,6 +67,7 @@ public class HeroLogic118 : HeroBase
 
             while(addedCount < 3)
             {
+                ++addedCount;
                 Transform ball = Instantiate(ObjectPool.getPrefab("Prefabs/Games/heroFlyWeapon118_fireBall"), GameLayer.s_instance.flyPoint).transform;
                 ball.GetComponent<HeroFlyWeaponBase>().init(heroLogicBase, null);
             }
