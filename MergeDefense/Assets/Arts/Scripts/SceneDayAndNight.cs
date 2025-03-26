@@ -23,6 +23,8 @@ public class SceneDayAndNight : MonoBehaviour
 
         fireObj = transform.Find("effect/fire").gameObject;
         fireObj.SetActive(false);
+
+        duration = 1 / duration;
     }
 
     
@@ -30,7 +32,7 @@ public class SceneDayAndNight : MonoBehaviour
     {
         if (isDay)
         {
-            dayAndNight += Time.deltaTime / duration;
+            dayAndNight += Time.deltaTime * duration;
             if (dayAndNight >= 1)
             {
                 isDay = false;
@@ -38,7 +40,7 @@ public class SceneDayAndNight : MonoBehaviour
         }
         else
         {
-            dayAndNight -= Time.deltaTime / duration;
+            dayAndNight -= Time.deltaTime * duration;
             if (dayAndNight <= 0f)
             {
                 isDay = true;
