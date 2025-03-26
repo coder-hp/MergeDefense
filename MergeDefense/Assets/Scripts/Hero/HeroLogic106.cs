@@ -4,10 +4,10 @@ using UnityEngine;
 
 // 圣骑士
 // 单体攻击
-// 技能：攻击时，15%概率提升周围单位20%的攻击力，持续5s
+// 技能：攻击时，20%概率提升周围单位15%的攻击力，持续5s
 public class HeroLogic106 : HeroBase
 {
-    int baseSkillRate = 15;
+    int baseSkillRate = 20;
     public override void AttackLogic(EnemyLogic enemyLogic)
     {
         AudioScript.s_instance.playSound("106_attack");
@@ -19,7 +19,7 @@ public class HeroLogic106 : HeroBase
             {
                 if (Vector3.Distance(heroLogicBase.curStandGrid.position, HeroManager.s_instance.list_hero[i].curStandGrid.position) <= 1.6f)
                 {
-                    HeroManager.s_instance.list_hero[i].addBuff(new Consts.BuffData(Consts.BuffType.AtkBaiFenBi, 0.2f, 5, "106", false, false));
+                    HeroManager.s_instance.list_hero[i].addBuff(new Consts.BuffData(Consts.BuffType.AtkBaiFenBi, 0.15f, 5, "106", false, false));
                 }
             }
         }
