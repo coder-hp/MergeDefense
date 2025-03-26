@@ -5,6 +5,9 @@ using UnityEngine.UI;
 
 public class SummonSpecialHero : MonoBehaviour
 {
+    public static SummonSpecialHero s_instance = null;
+
+    public Transform bgTrans;
     public Transform list_content_hero;
     public Transform list_content_weapon;
     public GameObject item_hero;
@@ -14,6 +17,11 @@ public class SummonSpecialHero : MonoBehaviour
     Transform curClickWeaponItem = null;
 
     HeroData heroData;
+
+    private void Awake()
+    {
+        s_instance = this;
+    }
 
     public void init(HeroData _heroData)
     {
@@ -230,6 +238,18 @@ public class SummonSpecialHero : MonoBehaviour
     {
         GameLayer.s_instance.summonMythicHero(heroData, curClickHeroItem.name, curClickWeaponItem.name);
         Destroy(gameObject);
+    }
+
+    public void setIsShow(bool isShow)
+    {
+        if(isShow)
+        {
+            bgTrans.localScale = Vector3.one;
+        }
+        else
+        {
+            bgTrans.localScale = Vector3.zero;
+        }
     }
 
     public void onClickClose()
