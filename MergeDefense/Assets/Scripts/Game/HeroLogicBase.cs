@@ -478,7 +478,7 @@ public class HeroLogicBase : MonoBehaviour
                 atkXiShu += GameFightData.s_instance.list_globalHeroBuff[i].value;
             }
         }
-
+        Debug.Log("atk=" + atk + "  atkXiShu=" + atkXiShu);
         return Mathf.RoundToInt(atk * atkXiShu);
     }
 
