@@ -13,8 +13,9 @@ public class UIItemWeapon : MonoBehaviour
     public WeaponData weaponData;
     [HideInInspector]
     public bool isCanDrag = false;
+    [HideInInspector]
+    public Transform parentTrans;
 
-    Transform parentTrans;
     Transform mergeTarget = null;
 
     Transform dragTriggerWeaponBar = null;
@@ -96,6 +97,7 @@ public class UIItemWeapon : MonoBehaviour
             return;
         }
 
+        GameFightData.s_instance.curDragUIItemWeapon = this;
         WeaponInfoPanel.s_instance.show(weaponData);
 
         mergeTarget = null;
@@ -161,6 +163,8 @@ public class UIItemWeapon : MonoBehaviour
         {
             return;
         }
+
+        GameFightData.s_instance.curDragUIItemWeapon = null;
 
         WeaponInfoPanel.s_instance.close();
 

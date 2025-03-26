@@ -50,6 +50,8 @@ public class GameFightData : MonoBehaviour
     [HideInInspector]
     public int curForgeGold = Consts.startForgeGold;
 
+    public UIItemWeapon curDragUIItemWeapon = null;
+
     [HideInInspector]
     public float gameTimeScale = 1;
 

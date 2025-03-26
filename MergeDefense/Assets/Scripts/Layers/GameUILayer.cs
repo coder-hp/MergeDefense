@@ -578,11 +578,24 @@ public class GameUILayer : MonoBehaviour
     {
         for (int i = 0; i < weaponGridTrans.childCount; i++)
         {
-            if (weaponGridTrans.GetChild(i).childCount == 0)
+            Transform gridTrans = weaponGridTrans.GetChild(i);
+            if (GameFightData.s_instance.curDragUIItemWeapon)
             {
-                UIItemWeapon uIItemWeapon = Instantiate(item_weapon, weaponGridTrans.GetChild(i)).GetComponent<UIItemWeapon>();
-                uIItemWeapon.init(weaponData.type, weaponData.level);
-                break;
+                if (gridTrans.childCount == 0 && GameFightData.s_instance.curDragUIItemWeapon.parentTrans != gridTrans)
+                {
+                    UIItemWeapon uIItemWeapon = Instantiate(item_weapon, gridTrans).GetComponent<UIItemWeapon>();
+                    uIItemWeapon.init(weaponData.type, weaponData.level);
+                    break;
+                }
+            }
+            else
+            {
+                if (gridTrans.childCount == 0)
+                {
+                    UIItemWeapon uIItemWeapon = Instantiate(item_weapon, gridTrans).GetComponent<UIItemWeapon>();
+                    uIItemWeapon.init(weaponData.type, weaponData.level);
+                    break;
+                }
             }
         }
     }

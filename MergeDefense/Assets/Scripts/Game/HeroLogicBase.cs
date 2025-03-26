@@ -810,33 +810,36 @@ public class HeroLogicBase : MonoBehaviour
     DG.Tweening.Sequence tween_emoji = null;
     public void showWeaponEmoji(WeaponData weaponData)
     {
-        bool isShowTween = false;
+        if(emojiTrans)
+        {
+            bool isShowTween = false;
 
-        // 优势武器
-        if(weaponData.type == heroData.goodWeapon)
-        {
-            isShowTween = true;
-            emojiTrans.localScale = Vector3.one;
-            emojiTrans.GetChild(0).localScale = Vector3.one;
-            emojiTrans.GetChild(1).localScale = Vector3.zero;
-        }
-        else
-        {
-            emojiTrans.localScale = Vector3.zero;
-        }
-
-        if(isShowTween)
-        {
-            if(tween_emoji == null)
+            // 优势武器
+            if (weaponData.type == heroData.goodWeapon)
             {
-                tween_emoji = DOTween.Sequence();
-                tween_emoji.Append(emojiTrans.DOLocalRotateQuaternion(Quaternion.Euler(0,0,5),0.5f))
-                           .Append(emojiTrans.DOLocalRotateQuaternion(Quaternion.Euler(0, 0, -5), 0.5f)).SetLoops(-1);
-                tween_emoji.SetAutoKill(false);
+                isShowTween = true;
+                emojiTrans.localScale = Vector3.one;
+                emojiTrans.GetChild(0).localScale = Vector3.one;
+                emojiTrans.GetChild(1).localScale = Vector3.zero;
             }
             else
             {
-                tween_emoji.Restart();
+                emojiTrans.localScale = Vector3.zero;
+            }
+
+            if (isShowTween)
+            {
+                if (tween_emoji == null)
+                {
+                    tween_emoji = DOTween.Sequence();
+                    tween_emoji.Append(emojiTrans.DOLocalRotateQuaternion(Quaternion.Euler(0, 0, 5), 0.5f))
+                               .Append(emojiTrans.DOLocalRotateQuaternion(Quaternion.Euler(0, 0, -5), 0.5f)).SetLoops(-1);
+                    tween_emoji.SetAutoKill(false);
+                }
+                else
+                {
+                    tween_emoji.Restart();
+                }
             }
         }
     }
