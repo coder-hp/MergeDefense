@@ -67,12 +67,6 @@ public class SummonSpecialHero : MonoBehaviour
                             onClickItemHero(itemTrans);
                         });
 
-                        if(j == 0)
-                        {
-                            curClickHeroItem = itemTrans;
-                            itemTrans.Find("choiced").localScale = Vector3.one;
-                        }
-
                         if (heroLogicBase.curStar >= 7)
                         {
                             itemTrans.Find("shadow").GetComponent<Image>().sprite = AtlasUtil.getAtlas_game().GetSprite("board_hero_3");
@@ -142,12 +136,6 @@ public class SummonSpecialHero : MonoBehaviour
                         {
                             onClickItemWeapon(itemTrans);
                         });
-
-                        if (curClickWeaponItem == null)
-                        {
-                            curClickWeaponItem = itemTrans;
-                            itemTrans.Find("choiced").localScale = Vector3.one;
-                        }
                     }
                 }
 
@@ -184,16 +172,22 @@ public class SummonSpecialHero : MonoBehaviour
                             {
                                 onClickItemWeapon(itemTrans);
                             });
-
-                            if (curClickWeaponItem == null)
-                            {
-                                curClickWeaponItem = itemTrans;
-                                itemTrans.Find("choiced").localScale = Vector3.one;
-                            }
                         }
                     }
                 }
             }
+        }
+
+        if (list_content_hero.childCount > 0)
+        {
+            curClickHeroItem = list_content_hero.GetChild(0);
+            curClickHeroItem.Find("choiced").localScale = Vector3.one;
+        }
+
+        if (list_content_weapon.childCount > 0)
+        {
+            curClickWeaponItem = list_content_weapon.GetChild(0);
+            curClickWeaponItem.Find("choiced").localScale = Vector3.one;
         }
     }
 
