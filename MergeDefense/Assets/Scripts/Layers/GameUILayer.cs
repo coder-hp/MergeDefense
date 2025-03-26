@@ -426,21 +426,35 @@ public class GameUILayer : MonoBehaviour
         // 检查召唤金额是否足够
         if (GameFightData.s_instance.curGold >= GameFightData.s_instance.getCurSummonGold())
         {
-            btn_summon_gold.color = Color.white;
+            if(GameFightData.s_instance.isSummonHeroDiscount())
+            {
+                btn_summon_gold.color = Consts.color_summonDiscount;
+            }
+            else
+            {
+                btn_summon_gold.color = Color.white;
+            }
         }
         else
         {
-            btn_summon_gold.color = new Color(0.97f, 0.26f, 0.26f, 1);
+            btn_summon_gold.color = Consts.color_summonGoldNotEnough;
         }
 
         // 检查锻造金额是否足够
         if (GameFightData.s_instance.curGold >= GameFightData.s_instance.getCurForgeGold())
         {
-            btn_forge_gold.color = Color.white;
+            if (GameFightData.s_instance.isForgeWeaponDiscount())
+            {
+                btn_forge_gold.color = Consts.color_summonDiscount;
+            }
+            else
+            {
+                btn_forge_gold.color = Color.white;
+            }
         }
         else
         {
-            btn_forge_gold.color = new Color(0.97f, 0.26f, 0.26f, 1);
+            btn_forge_gold.color = Consts.color_summonGoldNotEnough;
         }
     }
 

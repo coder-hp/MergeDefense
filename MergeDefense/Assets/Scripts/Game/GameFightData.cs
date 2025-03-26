@@ -74,6 +74,22 @@ public class GameFightData : MonoBehaviour
         return curSummonGold;
     }
 
+    public bool isSummonHeroDiscount()
+    {
+        // 小船任务
+        if (BattleMission.s_instance.curMissionData != null && BattleMission.s_instance.isTakeMission)
+        {
+            switch (BattleMission.s_instance.curMissionData.id)
+            {
+                case 17:
+                    {
+                        return true;
+                    }
+            }
+        }
+        return false;
+    }
+
     public int getCurForgeGold()
     {
         // 小船任务
@@ -88,6 +104,22 @@ public class GameFightData : MonoBehaviour
             }
         }
         return curForgeGold;
+    }
+
+    public bool isForgeWeaponDiscount()
+    {
+        // 小船任务
+        if (BattleMission.s_instance.curMissionData != null && BattleMission.s_instance.isTakeMission)
+        {
+            switch (BattleMission.s_instance.curMissionData.id)
+            {
+                case 18:
+                    {
+                        return true;
+                    }
+            }
+        }
+        return false;
     }
 
     public void changeHeroHighStarRate(int rate,bool isRepeatCall = false)

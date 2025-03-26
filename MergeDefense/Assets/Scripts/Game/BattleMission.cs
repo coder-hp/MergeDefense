@@ -15,7 +15,7 @@ public class BattleMission : MonoBehaviour
     public BattleMissionData curMissionData = null;
 
     Animator animator;
-    int firstComeTime = 41;         // 第一次船来的时间，默认41
+    int firstComeTime = 10;         // 第一次船来的时间，默认41
     int repeatComeTime = 130;       // 后续船来的时间，默认130
     int boatComeAniTime = 7;
     int waitTakeMissionTime = 60;
@@ -58,7 +58,7 @@ public class BattleMission : MonoBehaviour
     {
         animator.Play("idle");
         int index = RandomUtil.SelectProbability(BattleMissionEntity.getInstance().list_weight);
-        //index = 0;
+        index = 16;
         curMissionData = BattleMissionEntity.getInstance().list[index];
         Debug.Log("新任务：" + curMissionData.desc);
 
@@ -126,6 +126,14 @@ public class BattleMission : MonoBehaviour
                 {
                     GameUILayer.s_instance.btn_summon_gold.text = GameFightData.s_instance.getCurSummonGold().ToString();
                     GameUILayer.s_instance.btn_summon_gold.transform.parent.Find("discount").localScale = Vector3.one;
+                    if(GameFightData.s_instance.curGold >= GameFightData.s_instance.getCurSummonGold())
+                    {
+                        GameUILayer.s_instance.btn_summon_gold.color = Consts.color_summonDiscount;
+                    }
+                    else
+                    {
+                        GameUILayer.s_instance.btn_summon_gold.color = Consts.color_summonGoldNotEnough;
+                    }
                     break;
                 }
 
@@ -133,6 +141,14 @@ public class BattleMission : MonoBehaviour
                 {
                     GameUILayer.s_instance.btn_forge_gold.text = GameFightData.s_instance.getCurForgeGold().ToString();
                     GameUILayer.s_instance.btn_forge_gold.transform.parent.Find("discount").localScale = Vector3.one;
+                    if (GameFightData.s_instance.curGold >= GameFightData.s_instance.getCurForgeGold())
+                    {
+                        GameUILayer.s_instance.btn_forge_gold.color = Consts.color_summonDiscount;
+                    }
+                    else
+                    {
+                        GameUILayer.s_instance.btn_forge_gold.color = Consts.color_summonGoldNotEnough;
+                    }
                     break;
                 }
         }
@@ -227,6 +243,14 @@ public class BattleMission : MonoBehaviour
                     {
                         GameUILayer.s_instance.btn_summon_gold.text = GameFightData.s_instance.getCurSummonGold().ToString();
                         GameUILayer.s_instance.btn_summon_gold.transform.parent.Find("discount").localScale = Vector3.zero;
+                        if (GameFightData.s_instance.curGold >= GameFightData.s_instance.getCurSummonGold())
+                        {
+                            GameUILayer.s_instance.btn_summon_gold.color = Color.white;
+                        }
+                        else
+                        {
+                            GameUILayer.s_instance.btn_summon_gold.color = Consts.color_summonGoldNotEnough;
+                        }
                         break;
                     }
 
@@ -234,6 +258,14 @@ public class BattleMission : MonoBehaviour
                     {
                         GameUILayer.s_instance.btn_forge_gold.text = GameFightData.s_instance.getCurForgeGold().ToString();
                         GameUILayer.s_instance.btn_forge_gold.transform.parent.Find("discount").localScale = Vector3.zero;
+                        if (GameFightData.s_instance.curGold >= GameFightData.s_instance.getCurForgeGold())
+                        {
+                            GameUILayer.s_instance.btn_forge_gold.color = Color.white;
+                        }
+                        else
+                        {
+                            GameUILayer.s_instance.btn_forge_gold.color = Consts.color_summonGoldNotEnough;
+                        }
                         break;
                     }
             }

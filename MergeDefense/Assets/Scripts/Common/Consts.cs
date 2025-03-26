@@ -146,6 +146,8 @@ public class Consts
 
     public static Color color_weaponCantEquip = new Color(1,0,0, 0.5f);
     public static Color color_critText = new Color(1, 0.45f, 0.2f, 1);
+    public static Color color_summonGoldNotEnough = new Color(0.97f, 0.26f, 0.26f, 1);
+    public static Color color_summonDiscount = new Color(0, 1, 0,1);
 
     public static string getServerUrl()
     {
