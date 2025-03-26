@@ -220,7 +220,8 @@ public class UIItemWeapon : MonoBehaviour
 
             GameUILayer.s_instance.changeDiamond(weaponData.level);
             GameUILayer.s_instance.setIsShowBtnWeaponSell(false);
-            Destroy(gameObject);
+            DestroyImmediate(gameObject);
+            GameUILayer.s_instance.checkMythicHeroProgress();
             return;
         }
         // 检测是否拖到了武器栏
