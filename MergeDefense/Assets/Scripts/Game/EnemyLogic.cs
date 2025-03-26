@@ -322,6 +322,19 @@ public class EnemyLogic : MonoBehaviour
         }
     }
 
+    public void forceDestroy()
+    {
+        EnemyManager.s_instance.removeEnemy(this);
+
+        Destroy(bloodBarTrans.gameObject);
+        Destroy(gameObject);
+
+        if (tween_hitRedColor != null)
+        {
+            tween_hitRedColor.Kill();
+        }
+    }
+
     private void OnDestroy()
     {
         if(tween_hitRedColor != null)

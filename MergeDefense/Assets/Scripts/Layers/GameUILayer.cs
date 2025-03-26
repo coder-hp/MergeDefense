@@ -249,6 +249,7 @@ public class GameUILayer : MonoBehaviour
                     if (EnemyManager.s_instance.list_enemy[i].enemyWaveData.enemyType == 2)
                     {
                         ToastScript.show("Elite hunt failed");
+                        EnemyManager.s_instance.list_enemy[i].forceDestroy();
                         break;
                     }
                 }
