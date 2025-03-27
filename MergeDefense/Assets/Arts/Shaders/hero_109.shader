@@ -93,7 +93,9 @@ Shader "Kein/Hero/hero_109"
                 fixed4 col = tex2D(_MainTex, i.uv.xy);
                 fixed3 matcap = tex2D(_MatCap, i.uv.zw).rgb;
                 fixed mask = tex2D(_Mask, i.uv.xy).r;
-                
+
+
+                fixed3 ambient = UNITY_LIGHTMODEL_AMBIENT.xyz;
                 fixed3 worldNormal = normalize(i.worldNormal);
                 fixed3 worldLightDir = normalize(i.worldLightDir);
 
@@ -113,6 +115,7 @@ Shader "Kein/Hero/hero_109"
                 col.rgb += rimColor;
                 col.rgb = lerp(col.rgb + specular, col.rgb , mask);
                 col.rgb *= matcap;
+                col.rgb *= ambient;
                 return col;
             }
             ENDCG

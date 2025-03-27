@@ -1,6 +1,7 @@
 using Spine;
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class SceneDayAndNight : MonoBehaviour
@@ -14,6 +15,7 @@ public class SceneDayAndNight : MonoBehaviour
     bool isFire = false;
     int RefreshRate = 0;
 
+    public Color dayAmbientColor, nightAmbientColor;
 
     void Start()
     {
@@ -23,7 +25,7 @@ public class SceneDayAndNight : MonoBehaviour
 
         fireObj = transform.Find("effect/fire").gameObject;
         fireObj.SetActive(false);
-
+        RenderSettings.ambientLight = dayAmbientColor;
         duration = 1 / duration;
     }
 
@@ -36,6 +38,7 @@ public class SceneDayAndNight : MonoBehaviour
             if (dayAndNight >= 1)
             {
                 isDay = false;
+                dayAndNight = 1.0f;
             }
         }
         else
@@ -44,6 +47,7 @@ public class SceneDayAndNight : MonoBehaviour
             if (dayAndNight <= 0f)
             {
                 isDay = true;
+                dayAndNight = 0.0f;
             }
         }
 
@@ -67,12 +71,12 @@ public class SceneDayAndNight : MonoBehaviour
 
         // 刷新频率
         RefreshRate++;
-        if (RefreshRate > 20)
+        if (RefreshRate > 30)
         {
             sceneMat.SetFloat("_DayAndNight", dayAndNight);
             rayLightMat.SetFloat("_Alpha", dayAndNight * dayAndNight);
             nightStarMat.SetFloat("_Alpha", dayAndNight * dayAndNight);
-            
+            RenderSettings.ambientLight = Color.Lerp(dayAmbientColor, nightAmbientColor, dayAndNight);
             RefreshRate = 0;
         }
     }
