@@ -131,6 +131,9 @@ public class GameUILayer : MonoBehaviour
 
         EnemyWaveData enemyWaveData = EnemyWaveEntity.getInstance().getData(GameFightData.s_instance.curBoCi);
 
+        GameFightData.s_instance.luckySummon = enemyWaveData.luckysummon;
+        GameFightData.s_instance.luckyForge = enemyWaveData.luckyforge;
+
         GameFightData.s_instance.curBoCiRestTime = enemyWaveData.time;
 
         for (int i = 0; i < HeroManager.s_instance.list_hero.Count; i++)

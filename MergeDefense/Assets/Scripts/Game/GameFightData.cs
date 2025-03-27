@@ -13,12 +13,15 @@ public class GameFightData : MonoBehaviour
     }
 
     public long allDamage = 0;
+    
+    public int luckySummon;     // 概率：万分之几
+    public int luckyForge;      // 概率：万分之几
 
-    //[HideInInspector]
+    [HideInInspector]
     public List<int> list_canSummonHero = new List<int>() {101,102,103,104,105 };                    // 初始可以召唤的角色
-    //[HideInInspector]
+    [HideInInspector]
     public List<int> list_heroWeight = new List<int>() { 100, 0, 0, 0, 0, 0, 0, 0, 0, 0 };           // 角色1-10星的召唤权重
-    //[HideInInspector]
+    [HideInInspector]
     public List<int> list_weaponWeight = new List<int>() { 100, 0, 0, 0, 0, 0, 0, 0, 0, 0 };         // 武器1-10级的锻造权重
 
     [HideInInspector]
