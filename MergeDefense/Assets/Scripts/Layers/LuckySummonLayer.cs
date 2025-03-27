@@ -15,7 +15,7 @@ public class LuckySummonLayer : MonoBehaviour
     private void Awake()
     {
         transform.Find("bg").localScale = new Vector3(1,0,1);
-        transform.Find("bg").DOScaleY(1,0.2f).OnComplete(()=>
+        transform.Find("bg").DOScaleY(1,0.3f).OnComplete(()=>
         {
             skeletonGraphic.freeze = false;
         });
