@@ -292,19 +292,19 @@ public class GameData
         PlayerPrefs.SetInt("HeroLevel" + id, level);
     }
 
-    public static int getHeroExp(int id)
+    public static int getHeroSuiPian(int heroQuality)
     {
-        return PlayerPrefs.GetInt("HeroExp" + id, 0);
+        return PlayerPrefs.GetInt("HeroSuiPian" + heroQuality, 0);
     }
 
-    public static void changeHeroExp(int id, int exp)
+    public static void changeHeroSuiPian(int heroQuality, int value)
     {
-        int value = getHeroExp(id) + exp;
-        if (value < 0)
+        int count = getHeroSuiPian(heroQuality) + value;
+        if (count < 0)
         {
-            value = 0;
+            count = 0;
         }
-        PlayerPrefs.SetInt("HeroExp" + id, value);
+        PlayerPrefs.SetInt("HeroSuiPian" + heroQuality, count);
     }
 
     public static float getMusicVolume()

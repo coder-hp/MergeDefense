@@ -267,7 +267,7 @@ public class GMLayer : MonoBehaviour
         {
             int id = int.Parse(inputField_HeroExp.text.Split('_')[0]);
             int exp = int.Parse(inputField_HeroExp.text.Split('_')[1]);
-            GameData.changeHeroExp(id, exp);
+            GameData.changeHeroSuiPian(id, exp);
         }
     }
 

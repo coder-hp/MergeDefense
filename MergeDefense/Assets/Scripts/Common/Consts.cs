@@ -73,6 +73,10 @@ public class Consts
         PlayerExp,
         BattleGold,
         BattleGem,
+        SuiPianBai = 101,
+        SuiPianLan,
+        SuiPianZi,
+        SuiPianCheng,
     }
 
     public enum BuffType

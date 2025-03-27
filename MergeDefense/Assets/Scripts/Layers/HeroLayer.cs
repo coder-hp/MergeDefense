@@ -59,7 +59,7 @@ public class HeroLayer : MonoBehaviour
         if (GameData.isUnlockHero(heroData.id))
         {
             int curLevel = GameData.getHeroLevel(heroData.id);
-            int curHeroExp = GameData.getHeroExp(heroData.id);
+            int curHeroExp = GameData.getHeroSuiPian(heroData.quality);
             HeroLevelData nextHeroLevelData = HeroLevelEntity.getInstance().getData(heroData.id, curLevel + 1);
             item.Find("level_bg").GetComponent<Image>().sprite = AtlasUtil.getAtlas_hero().GetSprite("kuang_hero_" + heroData.quality + "_3");
             item.Find("level_bg/level").GetComponent<Text>().text = "Lv." + curLevel;

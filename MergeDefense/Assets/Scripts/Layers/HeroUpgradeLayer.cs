@@ -91,7 +91,7 @@ public class HeroUpgradeLayer : MonoBehaviour
         {
             isCanUpgrade = false;
             int curLevel = GameData.getHeroLevel(heroData.id);
-            int curHeroExp = GameData.getHeroExp(heroData.id);
+            int curHeroExp = GameData.getHeroSuiPian(heroData.quality);
             HeroLevelData nextHeroLevelData = HeroLevelEntity.getInstance().getData(heroData.id, curLevel + 1);
 
             if (nextHeroLevelData != null)
@@ -318,10 +318,10 @@ public class HeroUpgradeLayer : MonoBehaviour
 
         if(GameData.getMyGold() >= upgradeNeedGold)
         {
-            if (GameData.getHeroExp(heroData.id) >= upgradeNeedExp)
+            if (GameData.getHeroSuiPian(heroData.quality) >= upgradeNeedExp)
             {
                 GameData.changeMyGold(-upgradeNeedGold,"heroUpgrade");
-                GameData.changeHeroExp(heroData.id, -upgradeNeedExp);
+                GameData.changeHeroSuiPian(heroData.quality, -upgradeNeedExp);
                 GameData.setHeroLevel(heroData.id, GameData.getHeroLevel(heroData.id) + 1);
                 init(heroData,true);
                 effect_upgrade.SetActive(false);
