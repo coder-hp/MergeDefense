@@ -348,39 +348,6 @@ public class CommonUtil
         return i;
     }
 
-    static public void setGray(Image img, bool isGray)
-    {
-        if (isGray)
-        {
-            if (ImageGray == null)
-            {
-                ImageGray = Resources.Load("materials/ImageGray", typeof(Material)) as Material;
-            }
-
-            img.material = ImageGray;
-        }
-        else
-        {
-            img.material = null;
-        }
-    }
-
-    static public Sprite getSprite(string path)
-    {
-        return Resources.Load(path, typeof(Sprite)) as Sprite;
-    }
-
-    static public Texture GetTexture(string fullPath)
-    {
-        //return AssetDatabase.LoadAssetAtPath(fullPath, typeof(Texture)) as Texture;
-        return Resources.Load(fullPath, typeof(Texture)) as Texture;
-    }
-
-    static public Material GetMaterial(string fullPath)
-    {
-        return Resources.Load(fullPath, typeof(Material)) as Material;
-    }
-
     // 鼠标坐标转UI坐标(Canvas使用Screen Space-Camera模式)
     static public Vector2 getCurMousePosToUI()
     {
