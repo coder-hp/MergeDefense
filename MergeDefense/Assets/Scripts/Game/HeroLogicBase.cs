@@ -367,6 +367,9 @@ public class HeroLogicBase : MonoBehaviour
                         case 106:
                         case 108:
                         case 112:
+                        case 113:
+                        case 114:
+                        case 117:
                             {
                                 if(obj_attackEffect)
                                 {
