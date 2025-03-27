@@ -366,6 +366,7 @@ public class HeroLogicBase : MonoBehaviour
                         case 104:
                         case 106:
                         case 108:
+                        case 109:
                         case 112:
                         case 113:
                         case 114:
