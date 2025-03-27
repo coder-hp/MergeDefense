@@ -120,12 +120,12 @@ Shader "Kein/Scene/Boat_1"
             {
                
                 fixed4 col = tex2D(_MainTex, i.uv) * _Color;
-
+                fixed3 ambient = UNITY_LIGHTMODEL_AMBIENT.xyz;
                 fixed3 worldNormal = normalize(i.worldNormal);
                 fixed3 worldLightDir = normalize(i.worldLightDir);
                 fixed3 diffuse = (dot(worldNormal, worldLightDir) * 0.5 + 0.5) * _LightColor0;
 
-                col.rgb = lerp(col.rgb,col.rgb * diffuse,0.2);
+                col.rgb = lerp(col.rgb,col.rgb * diffuse,0.2) * ambient;
                 
                 return col;
             }
