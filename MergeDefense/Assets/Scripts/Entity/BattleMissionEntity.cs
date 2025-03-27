@@ -12,14 +12,13 @@ public class BattleMissionData
     public int time;
     public int value;
     public string reward;
-    public int weight;
+    public int wave;
 }
 
 public class BattleMissionEntity
 {
     static BattleMissionEntity s_instance = null;
     public List<BattleMissionData> list;
-    public List<int> list_weight = new List<int>();
 
     static public BattleMissionEntity getInstance()
     {
@@ -35,17 +34,6 @@ public class BattleMissionEntity
     public void init()
     {
         list = JsonUtils.loadJsonToList<BattleMissionData>("battleMission");
-
-        int allWeight = 0;
-        for(int i = 0; i < list.Count; i++)
-        {
-            list_weight.Add(list[i].weight);
-            allWeight += list[i].weight;
-        }
-        if(allWeight != 100)
-        {
-            Debug.LogError("battleMission AllWeight=" + allWeight);
-        }
     }
 
     public BattleMissionData getData(int id)

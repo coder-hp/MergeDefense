@@ -118,6 +118,15 @@ public class GameUILayer : MonoBehaviour
             return;
         }
 
+        // 小船任务
+        for (int i = 0; i < BattleMissionEntity.getInstance().list.Count; i++)
+        {
+            if (BattleMissionEntity.getInstance().list[i].wave == GameFightData.s_instance.curBoCi)
+            {
+                BattleMission.s_instance.list_canTakeMission.Add(BattleMissionEntity.getInstance().list[i]);
+            }
+        }
+
         // ToastScript.show("WAVE：" + curBoCi);
 
         EnemyWaveData enemyWaveData = EnemyWaveEntity.getInstance().getData(GameFightData.s_instance.curBoCi);

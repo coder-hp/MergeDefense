@@ -9,11 +9,11 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5642007137054696346}
-  - component: {fileID: 2353189074333375484}
-  - component: {fileID: 7994614664066391857}
-  - component: {fileID: 6220148324318163160}
+  - component: {fileID: 5452951762415222453}
+  - component: {fileID: -21771534958603014}
+  - component: {fileID: 4524591597093053119}
   m_Layer: 0
-  m_Name: heroFlyWeapon102
+  m_Name: eff_attack_hero119
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -36,7 +36,7 @@ Transform:
   - {fileID: 7317709852177799367}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &2353189074333375484
+--- !u!114 &5452951762415222453
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -45,12 +45,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 121763911918041632}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e33dbf6a6d7d7854d9273d54f90be0d9, type: 3}
+  m_Script: {fileID: 11500000, guid: afbc86007e5a2814a854ab25f6310d68, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   heroLogicBase: {fileID: 0}
   fixedAtk: 0
---- !u!54 &7994614664066391857
+--- !u!54 &-21771534958603014
 Rigidbody:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -77,7 +77,7 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
---- !u!65 &6220148324318163160
+--- !u!65 &4524591597093053119
 BoxCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}

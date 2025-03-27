@@ -5,14 +5,17 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
-using static UnityEditor.Progress;
 
 public class BattleMission : MonoBehaviour
 {
     public static BattleMission s_instance = null;
 
     public bool isTakeMission = false;
+
+    [HideInInspector]
     public BattleMissionData curMissionData = null;
+    [HideInInspector]
+    public List<BattleMissionData> list_canTakeMission = new List<BattleMissionData>();
 
     Animator animator;
     int firstComeTime = 10;         // 第一次船来的时间，默认41
@@ -27,6 +30,7 @@ public class BattleMission : MonoBehaviour
 
     int restDoMissionTime = 30;
     int curMissionProgress = 0;
+
     bool isCompleteMission = false;
 
     DG.Tweening.Sequence seq_gantanhao = null;
@@ -35,6 +39,14 @@ public class BattleMission : MonoBehaviour
     {
         s_instance = this;
         animator = GetComponent<Animator>();
+
+        for(int i = 0; i < BattleMissionEntity.getInstance().list.Count; i++)
+        {
+            if (BattleMissionEntity.getInstance().list[i].wave <= 1)
+            {
+                list_canTakeMission.Add(BattleMissionEntity.getInstance().list[i]);
+            }
+        }
     }
 
     void Start()
@@ -57,9 +69,7 @@ public class BattleMission : MonoBehaviour
     public void onBoatCome()
     {
         animator.Play("idle");
-        int index = RandomUtil.SelectProbability(BattleMissionEntity.getInstance().list_weight);
-        index = 16;
-        curMissionData = BattleMissionEntity.getInstance().list[index];
+        curMissionData = list_canTakeMission[RandomUtil.getRandom(0, list_canTakeMission.Count - 1)];
         Debug.Log("新任务：" + curMissionData.desc);
 
         if (missionTrans == null)
