@@ -603,7 +603,7 @@ public class GameUILayer : MonoBehaviour
                         weaponLevel += 2;
                     }
 
-                    LayerManager.ShowLayer(Consts.Layer.LuckySummonLayer).GetComponent<LuckySummonLayer>().init(GameFightData.s_instance.luckyForge);
+                    LayerManager.ShowLayer(Consts.Layer.LuckySummonLayer).GetComponent<LuckySummonLayer>().init(GameFightData.s_instance.luckyForge,true);
                 }
 
                 if (weaponLevel > 10)

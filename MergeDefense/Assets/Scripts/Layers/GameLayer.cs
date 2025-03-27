@@ -78,7 +78,7 @@ public class GameLayer : MonoBehaviour
                         star += 2;
                     }
 
-                    LayerManager.ShowLayer(Consts.Layer.LuckySummonLayer).GetComponent<LuckySummonLayer>().init(GameFightData.s_instance.luckySummon);
+                    LayerManager.ShowLayer(Consts.Layer.LuckySummonLayer).GetComponent<LuckySummonLayer>().init(GameFightData.s_instance.luckySummon,false);
                 }
 
                 if(star > 9)

@@ -8,6 +8,8 @@ using UnityEngine.UI;
 public class LuckySummonLayer : MonoBehaviour
 {
     public Text text_gailv;
+    public Text text_title;
+    public Text text_desc;
     public SkeletonGraphic skeletonGraphic;
 
     private void Awake()
@@ -24,8 +26,18 @@ public class LuckySummonLayer : MonoBehaviour
         });
     }
 
-    public void init(int gailv)
+    public void init(int gailv,bool isForge)
     {
         text_gailv.text = gailv / 10000f + "% Chance!";
+
+        if(gailv <= 100)
+        {
+            text_title.text = "Super Lucky !";
+        }
+
+        if(isForge)
+        {
+            text_desc.text = "✦  High-Level Weapon Forged! ✦";
+        }
     }
 }
