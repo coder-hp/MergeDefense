@@ -45,7 +45,7 @@ public class HeroLogic118 : HeroBase
         AudioScript.s_instance.playSound("118_attack");
 
         {
-            Transform arrow = Instantiate(ObjectPool.getPrefab("Prefabs/Effects/eff_attack_hero101"), GameLayer.s_instance.flyPoint).transform;
+            Transform arrow = Instantiate(ObjectPool.getPrefab("Prefabs/Effects/eff_attack_hero118"), GameLayer.s_instance.flyPoint).transform;
             arrow.GetComponent<HeroFlyWeaponBase>().init(heroLogicBase, enemyLogic);
         }
 
