@@ -12,6 +12,9 @@ public class SetLayer : MonoBehaviour
     public GameObject item_head;
     public Image img_head;
     public Image img_head2;
+    public Image img_expProgress;
+    public Text text_level;
+    public Text text_exp;
     public Text text_name;
     public InputField inputField_name;
     public Slider slider_music;
@@ -21,6 +24,31 @@ public class SetLayer : MonoBehaviour
 
     void Start()
     {
+        // 经验
+        {
+            int curLevel = GameData.getPlayerLevel();
+            int curExp = GameData.getPlayerExp();
+            PlayerLevelData curPlayerLevelData = PlayerLevelEntity.getInstance().getData(curLevel);
+            PlayerLevelData nextPlayerLevelData = PlayerLevelEntity.getInstance().getData(curLevel + 1);
+            if (nextPlayerLevelData == null)
+            {
+                if (curExp > curPlayerLevelData.exp)
+                {
+                    curExp = curPlayerLevelData.exp;
+                    GameData.setPlayerExp(curExp);
+                }
+                text_level.text = curLevel.ToString();
+                text_exp.text = curExp + "/" + curPlayerLevelData.exp;
+                img_expProgress.fillAmount = 1;
+            }
+            else
+            {
+                text_level.text = curLevel.ToString();
+                text_exp.text = curExp + "/" + nextPlayerLevelData.exp;
+                img_expProgress.fillAmount = (float)curExp / (float)nextPlayerLevelData.exp;
+            }
+        }
+
         text_name.text = GameData.getName();
         inputField_name.text = text_name.text;
         img_head.sprite = AtlasUtil.getAtlas_icon().GetSprite("hero_avatar_" + GameData.getHead());

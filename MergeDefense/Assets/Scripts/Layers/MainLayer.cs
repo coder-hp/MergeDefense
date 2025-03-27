@@ -9,11 +9,14 @@ public class MainLayer : MonoBehaviour
 
     public Transform childLayerPoint;
     public Transform bottomPoint;
+    public Text text_level;
+    public Text text_exp;
     public Text text_tili;
     public Text text_gold;
     public Text text_diamond;
     public Text text_name;
     public Image img_head;
+    public Image img_expProgress;
 
     private void Awake()
     {
@@ -28,6 +31,31 @@ public class MainLayer : MonoBehaviour
 
     public void refreshUI()
     {
+        // 经验
+        {
+            int curLevel = GameData.getPlayerLevel();
+            int curExp = GameData.getPlayerExp();
+            PlayerLevelData curPlayerLevelData = PlayerLevelEntity.getInstance().getData(curLevel);
+            PlayerLevelData nextPlayerLevelData = PlayerLevelEntity.getInstance().getData(curLevel + 1);
+            if(nextPlayerLevelData == null)
+            {
+                if(curExp > curPlayerLevelData.exp)
+                {
+                    curExp = curPlayerLevelData.exp;
+                    GameData.setPlayerExp(curExp);
+                }
+                text_level.text = curLevel.ToString();
+                text_exp.text = curExp + "/" + curPlayerLevelData.exp;
+                img_expProgress.fillAmount = 1;
+            }
+            else
+            {
+                text_level.text = curLevel.ToString();
+                text_exp.text = curExp + "/" + nextPlayerLevelData.exp;
+                img_expProgress.fillAmount = (float)curExp / (float)nextPlayerLevelData.exp;
+            }
+        }
+
         text_tili.text = GameData.getMyTiLi() + "/" + Consts.maxTiLi;
         text_gold.text = CommonUtil.numToStrKMB(GameData.getMyGold());
         text_diamond.text = CommonUtil.numToStrKMB(GameData.getMyDiamond());

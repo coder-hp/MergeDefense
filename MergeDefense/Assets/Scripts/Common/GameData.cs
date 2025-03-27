@@ -93,9 +93,36 @@ public class GameData
         }
     }
 
+    public static int getPlayerLevel()
+    {
+        return PlayerPrefs.GetInt("PlayerLevel", 1);
+    }
+
+    public static void addPlayerLevel(int value)
+    {
+        if (value == 0)
+        {
+            return;
+        }
+
+        int curCount = getPlayerLevel() + value;
+        curCount = curCount < 0 ? 0 : curCount;
+        PlayerPrefs.SetInt("PlayerLevel", curCount);
+
+        //if (MainLayer.s_instance)
+        //{
+        //    MainLayer.s_instance.refreshUI();
+        //}
+    }
+
     public static int getPlayerExp()
     {
         return PlayerPrefs.GetInt("PlayerExp", 0);
+    }
+
+    public static void setPlayerExp(int exp)
+    {
+        PlayerPrefs.SetInt("PlayerExp", exp);
     }
 
     public static void changePlayerExp(int value)
@@ -107,6 +134,18 @@ public class GameData
 
         int curCount = getPlayerExp() + value;
         curCount = curCount < 0 ? 0 : curCount;
+
+        int curLevel = getPlayerLevel();
+        PlayerLevelData nextPlayerLevelData = PlayerLevelEntity.getInstance().getData(curLevel + 1);
+        if (nextPlayerLevelData != null)
+        {
+            if(curCount >= nextPlayerLevelData.exp)
+            {
+                addPlayerLevel(1);
+                curCount -= nextPlayerLevelData.exp;
+            }
+        }
+
         PlayerPrefs.SetInt("PlayerExp", curCount);
 
         if (MainLayer.s_instance)

@@ -271,6 +271,11 @@ public class GMLayer : MonoBehaviour
         }
     }
 
+    public void onClickAddPlayerExp(int exp)
+    {
+        GameData.changePlayerExp(exp);
+    }
+
     public void onClickClose()
     {
         bg.SetActive(false);
