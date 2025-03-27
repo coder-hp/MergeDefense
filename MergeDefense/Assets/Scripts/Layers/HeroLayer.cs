@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using DG.Tweening;
 
 public class HeroLayer : MonoBehaviour
 {
@@ -31,6 +32,20 @@ public class HeroLayer : MonoBehaviour
             {
                 LayerManager.ShowLayer(Consts.Layer.HeroUpgradeLayer).GetComponent<HeroUpgradeLayer>().init(heroData);
             });
+
+            Transform jiantou = item.Find("exp_bg/jiantou");
+            Vector3 jiantouPos = jiantou.localPosition;
+            {
+                Sequence seq = DOTween.Sequence();
+                seq.Append(jiantou.DOLocalMoveY(jiantouPos.y + 14, 0.5f))
+                   .Append(jiantou.DOLocalMoveY(jiantouPos.y, 0.5f)).SetLoops(-1);
+            }
+
+            {
+                Sequence seq = DOTween.Sequence();
+                seq.Append(jiantou.DOScaleX(0.7f, 0.5f))
+                   .Append(jiantou.DOScaleX(1, 0.5f)).SetLoops(-1);
+            }
         }
     }
 

@@ -1,7 +1,9 @@
+using DG.Tweening;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using static UnityEditor.Progress;
 
 public class HeroUpgradeLayer : MonoBehaviour
 {
@@ -18,6 +20,7 @@ public class HeroUpgradeLayer : MonoBehaviour
     public Text text_crit_damage;
     public Image img_icon;
     public Image img_weapon_icon;
+    public Image img_suipian;
     public Transform skillTrans;
     public Transform tabsPoint;
     public Transform btn_upgrade;
@@ -26,6 +29,7 @@ public class HeroUpgradeLayer : MonoBehaviour
     public Transform mythicHeroMergeWay;
     public Transform yaoqiu_hero;
     public Transform yaoqiu_weapon;
+    public Transform jiantouTrans;
     public GameObject effect_upgrade;
 
     HeroSkillData[] skillsArray;
@@ -40,6 +44,22 @@ public class HeroUpgradeLayer : MonoBehaviour
         s_instance = this;
         HeroLayer.s_instance.gameObject.SetActive(false);
         refreshUI();
+
+        // 箭头动画
+        {
+            Vector3 jiantouPos = jiantouTrans.localPosition;
+            {
+                Sequence seq = DOTween.Sequence();
+                seq.Append(jiantouTrans.DOLocalMoveY(jiantouPos.y + 14, 0.5f))
+                   .Append(jiantouTrans.DOLocalMoveY(jiantouPos.y, 0.5f)).SetLoops(-1);
+            }
+
+            {
+                Sequence seq = DOTween.Sequence();
+                seq.Append(jiantouTrans.DOScaleX(0.7f, 0.5f))
+                   .Append(jiantouTrans.DOScaleX(1, 0.5f)).SetLoops(-1);
+            }
+        }
     }
 
     public void refreshUI()
@@ -62,9 +82,10 @@ public class HeroUpgradeLayer : MonoBehaviour
         text_crit_damage.text = Mathf.RoundToInt(heroData.critDamage * 100) + "%";
         img_icon.sprite = AtlasUtil.getAtlas_icon().GetSprite("head_" + heroData.id);
         img_weapon_icon.sprite = AtlasUtil.getAtlas_icon().GetSprite("weapon_" + heroData.goodWeapon);
+        img_suipian.sprite = AtlasUtil.getAtlas_hero().GetSprite("heroSuiPian" + heroData.quality);
 
         // 品质标签
-        if(!isUpgrade)
+        if (!isUpgrade)
         {
             tabsPoint.Find("quality").GetComponent<Image>().sprite = AtlasUtil.getAtlas_hero().GetSprite("biaoqian_quality_" + heroData.quality);
             tabsPoint.Find("quality/Text").GetComponent<Text>().text = Consts.list_heroQualityLabel[heroData.quality];
@@ -106,11 +127,11 @@ public class HeroUpgradeLayer : MonoBehaviour
                 {
                     isCanUpgrade = true;
                     upgradeNeedExp = nextHeroLevelData.exp;
-                    transform.Find("exp_bg/jiantou").localScale = Vector3.one;
+                    jiantouTrans.localScale = Vector3.one;
                 }
                 else
                 {
-                    transform.Find("exp_bg/jiantou").localScale = Vector3.zero;
+                    jiantouTrans.localScale = Vector3.zero;
                 }
             }
             else
