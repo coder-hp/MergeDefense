@@ -6,6 +6,7 @@ using UnityEngine.UI;
 public class BattleMissionLayer : MonoBehaviour
 {
     public Transform btn_take;
+    public Transform inProgress;
     public Transform timeTrans;
     public Transform rewardTrans;
     public Text text_desc;
@@ -15,9 +16,10 @@ public class BattleMissionLayer : MonoBehaviour
         if (BattleMission.s_instance.isTakeMission)
         {
             btn_take.localScale = Vector3.zero;
+            inProgress.localScale = Vector3.one;
         }
 
-        if(BattleMission.s_instance.curMissionData.reward == "")
+        if (BattleMission.s_instance.curMissionData.reward == "")
         {
             timeTrans.localPosition = new Vector3(0, -280, 0);
             rewardTrans.localScale = Vector3.zero;
