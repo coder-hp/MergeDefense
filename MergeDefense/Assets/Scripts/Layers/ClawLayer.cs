@@ -2,6 +2,7 @@ using DG.Tweening;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class ClawLayer : MonoBehaviour
 {
@@ -42,6 +43,7 @@ public class ClawLayer : MonoBehaviour
                 return;
             }
 
+            ClawData clawData = ClawEntity.getInstance().getRandomEgg();
             Transform ballTrans = Instantiate(prefab_ball, ballPointTrans).transform;
             if (RandomUtil.getRandom(1, 100) <= 50)
             {
@@ -51,8 +53,9 @@ public class ClawLayer : MonoBehaviour
             {
                 ballTrans.localPosition = new Vector3(330 + RandomUtil.getRandom(-60, 60), 750 + RandomUtil.getRandom(0, 50), 0);
             }
+            ballTrans.GetComponent<Image>().sprite = AtlasUtil.getAtlas_claw().GetSprite("ball_" + clawData.eggstyle);
             ballTrans.GetComponent<Rigidbody2D>().velocity = new Vector2(0, -10);
-            ballTrans.name = addedBallCount.ToString();
+            ballTrans.name = clawData.id.ToString();
         }
     }
 
@@ -83,50 +86,41 @@ public class ClawLayer : MonoBehaviour
     {
         clawTrans.Find("left/downGanZi").DOLocalRotateQuaternion(Quaternion.Euler(0, 0, 0), 1f);
         clawTrans.Find("right/downGanZi").DOLocalRotateQuaternion(Quaternion.Euler(0, 0, 0), 1f);
-        clawTrans.DOLocalMoveY(startPos.y, 2).SetEase(Ease.Linear);
+        clawTrans.DOLocalMoveY(startPos.y, 2).SetEase(Ease.Linear).OnComplete(()=>
+        {
+            CancelInvoke("checkDropBall");
+        });
 
-        InvokeRepeating("checkDropBall",1f,0.3f);
+        InvokeRepeating("checkDropBall",1f,0.1f);
     }
 
     void checkDropBall()
     {
-        //Transform min = ballPointTrans.GetChild(0);
-        //for (int i = 1; i < ballPointTrans.childCount; i++)
-        //{
-        //    if (Vector2.Distance(ballPointTrans.GetChild(i).position, clawCenterTrans.position) < Vector2.Distance(min.position, clawCenterTrans.position))
-        //    {
-        //        min = ballPointTrans.GetChild(i);
-        //    }
-        //}
-        //Debug.Log(min.name + "  " + Vector2.Distance(min.position, clawCenterTrans.position));
-
-        int count = 0;
         for (int i = 0; i < ballPointTrans.childCount; i++)
         {
-            if (Vector2.Distance(ballPointTrans.GetChild(i).position, clawCenterTrans.position) <= 1f)
+            if (Vector2.Distance(ballPointTrans.GetChild(i).position, clawCenterTrans.position) <= 0.8f)
             {
-                ++count;
-            }
-        }
-        Debug.Log("count=" + count);
-        if (count <= 5)
-        {
-            //CancelInvoke("checkDropBall");
-            return;
-        }
-
-        for (int i = 0; i < ballPointTrans.childCount; i++)
-        {
-            if (Vector2.Distance(ballPointTrans.GetChild(i).position, clawCenterTrans.position) <= 0.7f)
-            {
-                Collider2D collider2D = ballPointTrans.GetChild(i).GetComponent<Collider2D>();
-                collider2D.enabled = false;
-                ballPointTrans.GetChild(i).GetComponent<Rigidbody2D>().velocity = new Vector2(0, -10);
-                TimerUtil.getInstance().delayTime(0.5f, () =>
+                Transform ballTrans = ballPointTrans.GetChild(i);
+                
+                if(!ballTrans.CompareTag("Finish"))
                 {
-                    collider2D.enabled = true;
-                });
-                break;
+                    ClawData clawData = ClawEntity.getInstance().getData(int.Parse(ballTrans.name));
+                    if (RandomUtil.getRandom(1, 100) <= clawData.droprate)
+                    {
+                        Collider2D collider2D = ballTrans.GetComponent<Collider2D>();
+                        collider2D.enabled = false;
+                        ballTrans.GetComponent<Rigidbody2D>().velocity = new Vector2(0, -10);
+                        TimerUtil.getInstance().delayTime(0.5f, () =>
+                        {
+                            collider2D.enabled = true;
+                        });
+                        break;
+                    }
+                    else
+                    {
+                        ballTrans.tag = "Finish";
+                    }
+                }
             }
         }
     }
