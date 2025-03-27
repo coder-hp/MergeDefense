@@ -50,7 +50,7 @@ public class HeroLogic114 : HeroBase
 
             if (roadUpHaveEnemy || roadDownHaveEnemy)
             {
-                Transform skillEffect = Instantiate(ObjectPool.getPrefab("Prefabs/Games/heroSkill114_2"), GameLayer.s_instance.flyPoint).transform;
+                Transform skillEffect = Instantiate(ObjectPool.getPrefab("Prefabs/Effects/eff_skill_hero114_2"), GameLayer.s_instance.flyPoint).transform;
 
                 int atkTargetPosIndex = 0;
 

@@ -23,7 +23,7 @@ public class HeroLogic115 : HeroBase
 
             // 上边的路
             {
-                Transform obj = Instantiate(ObjectPool.getPrefab("Prefabs/Games/HeroSkill115_3"), GameLayer.s_instance.flyPoint).transform;
+                Transform obj = Instantiate(ObjectPool.getPrefab("Prefabs/Effects/eff_skill_hero115_3"), GameLayer.s_instance.flyPoint).transform;
                 obj.GetComponent<HeroSkill115_3>().init(atk);
                 float posX = RandomUtil.getRandom((int)(GameLayer.s_instance.list_enemyMoveFourPos[1].x * 60), (int)(GameLayer.s_instance.list_enemyMoveFourPos[2].x * 60)) / 100f;
                 obj.position = new Vector3(posX, GameLayer.s_instance.list_enemyMoveFourPos[1].y,0);
@@ -31,7 +31,7 @@ public class HeroLogic115 : HeroBase
 
             // 下边的路
             {
-                Transform obj = Instantiate(ObjectPool.getPrefab("Prefabs/Games/HeroSkill115_3"), GameLayer.s_instance.flyPoint).transform;
+                Transform obj = Instantiate(ObjectPool.getPrefab("Prefabs/Effects/eff_skill_hero115_3"), GameLayer.s_instance.flyPoint).transform;
                 obj.GetComponent<HeroSkill115_3>().init(atk);
                 float posX = RandomUtil.getRandom((int)(GameLayer.s_instance.list_enemyMoveFourPos[1].x * 60), (int)(GameLayer.s_instance.list_enemyMoveFourPos[2].x * 60)) / 100f;
                 obj.position = new Vector3(posX, GameLayer.s_instance.list_enemyMoveFourPos[0].y, 0);
@@ -39,7 +39,7 @@ public class HeroLogic115 : HeroBase
 
             // 左边的路
             {
-                Transform obj = Instantiate(ObjectPool.getPrefab("Prefabs/Games/HeroSkill115_3"), GameLayer.s_instance.flyPoint).transform;
+                Transform obj = Instantiate(ObjectPool.getPrefab("Prefabs/Effects/eff_skill_hero115_3"), GameLayer.s_instance.flyPoint).transform;
                 obj.GetComponent<HeroSkill115_3>().init(atk);
                 float posY = RandomUtil.getRandom((int)(GameLayer.s_instance.list_enemyMoveFourPos[0].y * 60), (int)(GameLayer.s_instance.list_enemyMoveFourPos[1].y * 60)) / 100f;
                 obj.position = new Vector3(GameLayer.s_instance.list_enemyMoveFourPos[0].x, posY, 0);
@@ -47,7 +47,7 @@ public class HeroLogic115 : HeroBase
 
             // 右边的路
             {
-                Transform obj = Instantiate(ObjectPool.getPrefab("Prefabs/Games/HeroSkill115_3"), GameLayer.s_instance.flyPoint).transform;
+                Transform obj = Instantiate(ObjectPool.getPrefab("Prefabs/Effects/eff_skill_hero115_3"), GameLayer.s_instance.flyPoint).transform;
                 obj.GetComponent<HeroSkill115_3>().init(atk);
                 float posY = RandomUtil.getRandom((int)(GameLayer.s_instance.list_enemyMoveFourPos[0].y * 60), (int)(GameLayer.s_instance.list_enemyMoveFourPos[1].y * 60)) / 100f;
                 obj.position = new Vector3(GameLayer.s_instance.list_enemyMoveFourPos[3].x, posY, 0);
