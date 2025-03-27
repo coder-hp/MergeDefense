@@ -78,13 +78,14 @@ Shader "Kein/Spine/Skeleton" {
 
 			float4 frag (VertexOutput i) : SV_Target {
 				float4 texColor = tex2D(_MainTex, i.uv);
-
+                fixed3 ambient = UNITY_LIGHTMODEL_AMBIENT.xyz;
 				#if defined(_STRAIGHT_ALPHA_INPUT)
 				texColor.rgb *= texColor.a;
 				#endif
                 if(texColor.a > 0.2)
                 texColor.rgb = lerp(texColor.rgb,texColor.rgb + fixed3(0.5,0.0,0.0), _Hit);
                 texColor *= i.vertexColor;
+                texColor.rgb *= ambient;
 				return texColor;
 			}
 			ENDCG
