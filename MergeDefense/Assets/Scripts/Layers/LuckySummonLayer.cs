@@ -28,9 +28,16 @@ public class LuckySummonLayer : MonoBehaviour
 
     public void init(int gailv,bool isSuper,bool isForge)
     {
-        text_gailv.text = gailv / 100f + "% Chance!";
-
         if(isSuper)
+        {
+            text_gailv.text = gailv / 1000f + "% Chance!";
+        }
+        else
+        {
+            text_gailv.text = gailv / 100f + "% Chance!";
+        }
+
+        if (isSuper)
         {
             text_title.text = "Super Lucky !";
         }
