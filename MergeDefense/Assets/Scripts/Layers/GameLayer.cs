@@ -1,7 +1,6 @@
 using DG.Tweening;
 using System.Collections;
 using System.Collections.Generic;
-using Unity.VisualScripting;
 using UnityEngine;
 
 public class GameLayer : MonoBehaviour
@@ -66,7 +65,28 @@ public class GameLayer : MonoBehaviour
             if (heroPoint.GetChild(i).childCount == 0)
             {
                 Transform heroTrans = Instantiate(ObjectPool.getPrefab("Prefabs/Heros/hero" + GameFightData.s_instance.randomSummonHero()), heroPoint.GetChild(i)).transform;
-                heroTrans.GetComponent<HeroLogicBase>().curStar = RandomUtil.SelectProbability(GameFightData.s_instance.list_heroWeight) + 1;
+
+                int star = RandomUtil.SelectProbability(GameFightData.s_instance.list_heroWeight) + 1;
+                if(RandomUtil.getRandom(1,10000) <= GameFightData.s_instance.luckySummon)
+                {
+                    if(RandomUtil.getRandom(1,100) <= 90)
+                    {
+                        star += 1;
+                    }
+                    else
+                    {
+                        star += 2;
+                    }
+
+                    LayerManager.ShowLayer(Consts.Layer.LuckySummonLayer).GetComponent<LuckySummonLayer>().init(GameFightData.s_instance.luckySummon);
+                }
+
+                if(star > 9)
+                {
+                    star = 9;
+                }
+
+                heroTrans.GetComponent<HeroLogicBase>().curStar = star;
                 EffectManager.s_instance.summonHero(heroGrid.transform.GetChild(i).position);
                 return true;
             }

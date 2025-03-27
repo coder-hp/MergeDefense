@@ -131,6 +131,9 @@ public class GameUILayer : MonoBehaviour
 
         EnemyWaveData enemyWaveData = EnemyWaveEntity.getInstance().getData(GameFightData.s_instance.curBoCi);
 
+        GameFightData.s_instance.luckySummon = enemyWaveData.luckysummon;
+        GameFightData.s_instance.luckyForge = enemyWaveData.luckyforge;
+
         GameFightData.s_instance.curBoCiRestTime = enemyWaveData.time;
 
         for (int i = 0; i < HeroManager.s_instance.list_hero.Count; i++)
@@ -580,21 +583,36 @@ public class GameUILayer : MonoBehaviour
         }
 
         bool isForgeSuccess = false;
-        // int forgeCount = RandomUtil.getRandom(1, 3);
-        int forgeCount = 1;
-        for (int c = 0; c < forgeCount; c++)
+        for (int i = 0; i < weaponGridTrans.childCount; i++)
         {
-            for (int i = 0; i < weaponGridTrans.childCount; i++)
+            if (weaponGridTrans.GetChild(i).childCount == 0)
             {
-                if (weaponGridTrans.GetChild(i).childCount == 0)
-                {
-                    isForgeSuccess = true;
+                isForgeSuccess = true;
 
-                    UIItemWeapon uIItemWeapon = Instantiate(item_weapon, weaponGridTrans.GetChild(i)).GetComponent<UIItemWeapon>();
-                    int weaponLevel = RandomUtil.SelectProbability(GameFightData.s_instance.list_weaponWeight) + 1;
-                    uIItemWeapon.init(RandomUtil.getRandom(1,5), weaponLevel);
-                    break;
+                UIItemWeapon uIItemWeapon = Instantiate(item_weapon, weaponGridTrans.GetChild(i)).GetComponent<UIItemWeapon>();
+                int weaponLevel = RandomUtil.SelectProbability(GameFightData.s_instance.list_weaponWeight) + 1;
+
+                if (RandomUtil.getRandom(1, 10000) <= GameFightData.s_instance.luckyForge)
+                {
+                    if (RandomUtil.getRandom(1, 100) <= 90)
+                    {
+                        weaponLevel += 1;
+                    }
+                    else
+                    {
+                        weaponLevel += 2;
+                    }
+
+                    LayerManager.ShowLayer(Consts.Layer.LuckySummonLayer).GetComponent<LuckySummonLayer>().init(GameFightData.s_instance.luckyForge);
                 }
+
+                if (weaponLevel > 10)
+                {
+                    weaponLevel = 10;
+                }
+
+                uIItemWeapon.init(RandomUtil.getRandom(1, 5), weaponLevel);
+                break;
             }
         }
 

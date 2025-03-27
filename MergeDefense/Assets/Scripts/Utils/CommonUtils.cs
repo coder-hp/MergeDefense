@@ -8,7 +8,6 @@ using UnityEngine.UI;
 
 public class CommonUtil
 {
-    static Material ImageGray = null;
     static long time_start = 0;
 
     // 13位时间戳：毫秒
