@@ -69,16 +69,18 @@ public class GameLayer : MonoBehaviour
                 int star = RandomUtil.SelectProbability(GameFightData.s_instance.list_heroWeight) + 1;
                 if(RandomUtil.getRandom(1,10000) <= GameFightData.s_instance.luckySummon)
                 {
-                    if(RandomUtil.getRandom(1,100) <= 90)
+                    bool isSuper = false;
+                    if (RandomUtil.getRandom(1,100) <= 90)
                     {
                         star += 1;
                     }
                     else
                     {
                         star += 2;
+                        isSuper = true;
                     }
 
-                    LayerManager.ShowLayer(Consts.Layer.LuckySummonLayer).GetComponent<LuckySummonLayer>().init(GameFightData.s_instance.luckySummon,false);
+                    LayerManager.ShowLayer(Consts.Layer.LuckySummonLayer).GetComponent<LuckySummonLayer>().init(GameFightData.s_instance.luckySummon, isSuper,false);
                 }
 
                 if(star > 9)

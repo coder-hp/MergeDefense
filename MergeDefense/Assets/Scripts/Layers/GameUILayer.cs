@@ -594,6 +594,7 @@ public class GameUILayer : MonoBehaviour
 
                 if (RandomUtil.getRandom(1, 10000) <= GameFightData.s_instance.luckyForge)
                 {
+                    bool isSuper = false;
                     if (RandomUtil.getRandom(1, 100) <= 90)
                     {
                         weaponLevel += 1;
@@ -601,9 +602,10 @@ public class GameUILayer : MonoBehaviour
                     else
                     {
                         weaponLevel += 2;
+                        isSuper = true;
                     }
 
-                    LayerManager.ShowLayer(Consts.Layer.LuckySummonLayer).GetComponent<LuckySummonLayer>().init(GameFightData.s_instance.luckyForge,true);
+                    LayerManager.ShowLayer(Consts.Layer.LuckySummonLayer).GetComponent<LuckySummonLayer>().init(GameFightData.s_instance.luckyForge, isSuper,true);
                 }
 
                 if (weaponLevel > 10)
