@@ -7,9 +7,12 @@ using UnityEngine.UI;
 public class ClawLayer : MonoBehaviour
 {
     public GameObject prefab_ball;
+    public GameObject prefab_splitBall;
     public Transform clawTrans;
     public Transform ballPointTrans;
     public Transform clawCenterTrans;
+    public Transform rewardPanel;
+    public Transform rewardGrid;
     public Button btn_claw;
 
     Vector3 startPos;
@@ -85,6 +88,7 @@ public class ClawLayer : MonoBehaviour
         clawTrans.DOLocalMoveY(startPos.y, 2).SetEase(Ease.Linear).OnComplete(()=>
         {
             CancelInvoke("checkDropBall");
+            Invoke("showReward",1);
         });
 
         InvokeRepeating("checkDropBall",1f,0.1f);
@@ -121,8 +125,26 @@ public class ClawLayer : MonoBehaviour
         }
     }
 
-    private void OnDisable()
+    void showReward()
     {
+        rewardPanel.localScale = Vector3.one;
+
+        for (int i = 0; i < ballPointTrans.childCount; i++)
+        {
+            if (Vector2.Distance(ballPointTrans.GetChild(i).position, clawCenterTrans.position) <= 0.8f)
+            {
+                Transform ballTrans = ballPointTrans.GetChild(i);
+                ClawData clawData = ClawEntity.getInstance().getData(int.Parse(ballTrans.name));
+                Transform trans = Instantiate(prefab_splitBall, rewardGrid).transform;
+            }
+        }
+
+        Invoke("close",3);
+    }
+
+    void close()
+    {
+        Destroy(gameObject);
         AudioScript.s_instance.playMusic("bgm_main", true);
     }
 }
