@@ -45,7 +45,7 @@ public class HeroLogic118 : HeroBase
         AudioScript.s_instance.playSound("118_attack");
 
         {
-            Transform arrow = Instantiate(ObjectPool.getPrefab("Prefabs/Games/heroFlyWeapon118"), GameLayer.s_instance.flyPoint).transform;
+            Transform arrow = Instantiate(ObjectPool.getPrefab("Prefabs/Effects/eff_attack_hero101"), GameLayer.s_instance.flyPoint).transform;
             arrow.GetComponent<HeroFlyWeaponBase>().init(heroLogicBase, enemyLogic);
         }
 
@@ -57,7 +57,7 @@ public class HeroLogic118 : HeroBase
             int addedCount = 0;
             for(int i = 0; i < EnemyManager.s_instance.list_enemy.Count; i++)
             {
-                Transform ball = Instantiate(ObjectPool.getPrefab("Prefabs/Games/heroFlyWeapon118_fireBall"), GameLayer.s_instance.flyPoint).transform;
+                Transform ball = Instantiate(ObjectPool.getPrefab("Prefabs/Effects/eff_attack_hero118_fireBall"), GameLayer.s_instance.flyPoint).transform;
                 ball.GetComponent<HeroFlyWeaponBase>().init(heroLogicBase, EnemyManager.s_instance.list_enemy[i]);
                 if(++addedCount >= 3)
                 {
@@ -68,7 +68,7 @@ public class HeroLogic118 : HeroBase
             while(addedCount < 3)
             {
                 ++addedCount;
-                Transform ball = Instantiate(ObjectPool.getPrefab("Prefabs/Games/heroFlyWeapon118_fireBall"), GameLayer.s_instance.flyPoint).transform;
+                Transform ball = Instantiate(ObjectPool.getPrefab("Prefabs/Effects/eff_attack_hero118_fireBall"), GameLayer.s_instance.flyPoint).transform;
                 ball.GetComponent<HeroFlyWeaponBase>().init(heroLogicBase, null);
             }
         }

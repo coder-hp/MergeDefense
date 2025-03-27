@@ -10,7 +10,7 @@ public class HeroLogic105 : HeroBase
     public override void AttackLogic(EnemyLogic enemyLogic)
     {
         AudioScript.s_instance.playSound("105_attack");
-        Transform arrow = Instantiate(ObjectPool.getPrefab("Prefabs/Games/heroFlyWeapon105"), GameLayer.s_instance.flyPoint).transform;
+        Transform arrow = Instantiate(ObjectPool.getPrefab("Prefabs/Effects/eff_attack_hero105"), GameLayer.s_instance.flyPoint).transform;
         arrow.GetComponent<HeroFlyWeaponBase>().init(heroLogicBase, enemyLogic);
     }
 }
