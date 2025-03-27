@@ -8,17 +8,12 @@ public class ClawLayer : MonoBehaviour
 {
     public GameObject prefab_ball;
     public Transform clawTrans;
-    public Transform btn_claw;
     public Transform ballPointTrans;
     public Transform clawCenterTrans;
+    public Button btn_claw;
 
     Vector3 startPos;
     Sequence seq_claw;
-
-    private void Awake()
-    {
-        btn_claw.localScale = Vector3.zero;
-    }
 
     void Start()
     {
@@ -61,7 +56,7 @@ public class ClawLayer : MonoBehaviour
 
     void readyClaw()
     {
-        btn_claw.localScale = Vector3.one;
+        btn_claw.interactable = true;
         seq_claw = DOTween.Sequence();
         seq_claw.Append(clawTrans.DOLocalMoveX(158, 1).SetEase(Ease.Linear))
            .Append(clawTrans.DOLocalMoveX(-158, 2).SetEase(Ease.Linear))
@@ -71,6 +66,7 @@ public class ClawLayer : MonoBehaviour
     public void onClickClaw()
     {
         AudioScript.s_instance.playSound_btn();
+        btn_claw.interactable = false;
         seq_claw.Kill();
 
         clawTrans.Find("left/downGanZi").DOLocalRotateQuaternion(Quaternion.Euler(0, 0, -100), 0.5f);

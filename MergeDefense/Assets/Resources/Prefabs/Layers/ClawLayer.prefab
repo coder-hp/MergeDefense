@@ -891,9 +891,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   prefab_ball: {fileID: 5265999895643756118}
   clawTrans: {fileID: 2389646892652553906}
-  btn_claw: {fileID: 558883028724754209}
   ballPointTrans: {fileID: 2310207745865310203}
   clawCenterTrans: {fileID: 7955733424293135017}
+  btn_claw: {fileID: 3590031535208992053}
 --- !u!1 &4420594160171739804
 GameObject:
   m_ObjectHideFlags: 0
@@ -2480,6 +2480,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 21300000, guid: 564723563ebf45d46b65ab9c538a8934, type: 3}
     - target: {fileID: 1730831736540134451, guid: ac0a056c3f5403744b03a3a81d2c0d84, type: 3}
+      propertyPath: m_Interactable
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1730831736540134451, guid: ac0a056c3f5403744b03a3a81d2c0d84, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.size
       value: 1
       objectReference: {fileID: 0}
@@ -2606,3 +2610,14 @@ RectTransform:
   m_CorrespondingSourceObject: {fileID: 3321107604125865511, guid: ac0a056c3f5403744b03a3a81d2c0d84, type: 3}
   m_PrefabInstance: {fileID: 3015015787043188998}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &3590031535208992053 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 1730831736540134451, guid: ac0a056c3f5403744b03a3a81d2c0d84, type: 3}
+  m_PrefabInstance: {fileID: 3015015787043188998}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
