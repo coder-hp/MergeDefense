@@ -39,6 +39,11 @@ public class AudioScript : MonoBehaviour
 
     public void playMusic(string name, bool isLoop)
     {
+        if(!m_musicAudioSource)
+        {
+            return;
+        }
+
         if (m_musicAudioSource.isPlaying)
         {
             m_musicAudioSource.Stop();

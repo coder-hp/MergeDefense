@@ -7,13 +7,22 @@ public class ClawLayer : MonoBehaviour
 {
     public GameObject prefab_ball;
     public Transform clawTrans;
+    public Transform btn_claw;
     public Transform ballPointTrans;
 
     float moveSpeed = 2;
+    Vector3 startPos;
+    Sequence seq_claw;
+
+    private void Awake()
+    {
+        btn_claw.localScale = Vector3.zero;
+    }
 
     void Start()
     {
-        InvokeRepeating("onInvokeAddBall",0.2f,0.2f);
+        startPos = clawTrans.localPosition;
+        InvokeRepeating("onInvokeAddBall",0.1f,0.1f);
     }
 
     private void OnEnable()
@@ -41,19 +50,26 @@ public class ClawLayer : MonoBehaviour
 
         if(++addedBallCount > 50)
         {
+            btn_claw.localScale = Vector3.one;
             CancelInvoke("onInvokeAddBall");
+
+            seq_claw = DOTween.Sequence();
+            seq_claw.Append(clawTrans.DOLocalMoveX(250,1).SetEase(Ease.Linear))
+               .Append(clawTrans.DOLocalMoveX(-250, 2).SetEase(Ease.Linear))
+               .Append(clawTrans.DOLocalMoveX(0, 1).SetEase(Ease.Linear)).SetLoops(-1);
         }
     }
 
     public void onClickClaw()
     {
         AudioScript.s_instance.playSound_btn();
-        clawTrans.DOLocalMoveY(-500, 3).SetEase(Ease.Linear).OnComplete(()=>
+        seq_claw.Kill();
+        clawTrans.DOLocalMoveY(-250, 2).SetEase(Ease.Linear).OnComplete(()=>
         {
             clawTrans.Find("left").GetChild(0).DOLocalRotateQuaternion(Quaternion.Euler(0,0, 100),0.5f).SetDelay(1);
             clawTrans.Find("right").GetChild(0).DOLocalRotateQuaternion(Quaternion.Euler(0, 0, -100), 0.5f).SetDelay(1).OnComplete(()=>
             {
-                clawTrans.DOLocalMoveY(860, 3).SetDelay(1).SetEase(Ease.Linear);
+                clawTrans.DOLocalMoveY(startPos.y, 3).SetDelay(1).SetEase(Ease.Linear);
             });
         });
     }
