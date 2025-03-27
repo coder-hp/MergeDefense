@@ -72,14 +72,18 @@ public class ClawLayer : MonoBehaviour
         clawTrans.Find("left/downGanZi").DOLocalRotateQuaternion(Quaternion.Euler(0, 0, -100), 0.5f);
         clawTrans.Find("right/downGanZi").DOLocalRotateQuaternion(Quaternion.Euler(0, 0, -100), 0.5f);
 
-        clawTrans.DOLocalMoveY(-230, 2).SetEase(Ease.Linear).OnComplete(()=>
+        clawTrans.DOLocalMoveY(-250, 2).SetEase(Ease.Linear).OnComplete(()=>
         {
-            clawTrans.Find("left/downGanZi").DOLocalRotateQuaternion(Quaternion.Euler(0,0, 0),0.5f).SetDelay(1);
-            clawTrans.Find("right/downGanZi").DOLocalRotateQuaternion(Quaternion.Euler(0, 0, 0), 0.5f).SetDelay(1).OnComplete(()=>
-            {
-                clawTrans.DOLocalMoveY(startPos.y, 3).SetDelay(1).SetEase(Ease.Linear);
-            });
+            Invoke("startUp",1);
+            
         });
+    }
+
+    void startUp()
+    {
+        clawTrans.Find("left/downGanZi").DOLocalRotateQuaternion(Quaternion.Euler(0, 0, 0), 1f).SetDelay(1f);
+        clawTrans.Find("right/downGanZi").DOLocalRotateQuaternion(Quaternion.Euler(0, 0, 0), 1f).SetDelay(1f);
+        clawTrans.DOLocalMoveY(startPos.y, 2).SetDelay(1).SetEase(Ease.Linear);
     }
 
     private void OnDisable()
