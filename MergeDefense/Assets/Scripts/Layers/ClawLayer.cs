@@ -98,7 +98,7 @@ public class ClawLayer : MonoBehaviour
     {
         for (int i = 0; i < ballPointTrans.childCount; i++)
         {
-            if (Vector2.Distance(ballPointTrans.GetChild(i).position, clawCenterTrans.position) <= 0.8f)
+            if (Vector2.Distance(ballPointTrans.GetChild(i).position, clawCenterTrans.position) <= 1f)
             {
                 Transform ballTrans = ballPointTrans.GetChild(i);
                 
@@ -131,7 +131,7 @@ public class ClawLayer : MonoBehaviour
 
         for (int i = 0; i < ballPointTrans.childCount; i++)
         {
-            if (Vector2.Distance(ballPointTrans.GetChild(i).position, clawCenterTrans.position) <= 0.8f)
+            if (Vector2.Distance(ballPointTrans.GetChild(i).position, clawCenterTrans.position) <= 1f)
             {
                 Transform ballTrans = ballPointTrans.GetChild(i);
                 ClawData clawData = ClawEntity.getInstance().getData(int.Parse(ballTrans.name));
