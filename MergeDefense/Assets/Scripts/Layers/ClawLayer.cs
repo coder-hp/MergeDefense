@@ -209,10 +209,10 @@ public class ClawLayer : MonoBehaviour
                 }
                 else
                 {
-                    float shakeTime = 0.06f;
+                    float shakeTime = 0.05f;
                     Sequence seq = DOTween.Sequence();
-                    seq.Append(trans.DOLocalRotateQuaternion(Quaternion.Euler(0,0,20), shakeTime).SetEase(Ease.Linear))
-                       .Append(trans.DOLocalRotateQuaternion(Quaternion.Euler(0, 0, -20), shakeTime * 2).SetEase(Ease.Linear))
+                    seq.Append(trans.DOLocalRotateQuaternion(Quaternion.Euler(0,0,25), shakeTime).SetEase(Ease.Linear))
+                       .Append(trans.DOLocalRotateQuaternion(Quaternion.Euler(0, 0, -25), shakeTime * 2).SetEase(Ease.Linear))
                        .Append(trans.DOLocalRotateQuaternion(Quaternion.Euler(0, 0, 0), shakeTime).SetEase(Ease.Linear)).SetLoops(2);
 
                     switch (clawData.rewardtype)
