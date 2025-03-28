@@ -51,13 +51,42 @@ public class ClawLayer : MonoBehaviour
             {
                 ballTrans.localPosition = new Vector3(330 + RandomUtil.getRandom(-60, 60), 750 + RandomUtil.getRandom(0, 50), 0);
             }
-            ballTrans.GetComponent<Image>().sprite = AtlasUtil.getAtlas_claw().GetSprite("ball_" + clawData.eggstyle);
+            ballTrans.Find("up").GetComponent<Image>().sprite = AtlasUtil.getAtlas_claw().GetSprite("ball_" + clawData.eggstyle + "_1");
+            ballTrans.Find("down").GetComponent<Image>().sprite = AtlasUtil.getAtlas_claw().GetSprite("ball_" + clawData.eggstyle + "_2");
             ballTrans.GetComponent<Rigidbody2D>().velocity = new Vector2(0, -10);
             ballTrans.name = clawData.id.ToString();
 
             if(clawData.eggstyle == 4)
             {
                 ballTrans.localScale = new Vector3(1.5f, 1.5f, 1.5f);
+
+                List<int> list_hero = new List<int>();
+                for(int j = 0; j < HeroEntity.getInstance().list.Count; j++)
+                {
+                    if (HeroEntity.getInstance().list[j].quality == 4)
+                    {
+                        if (!GameData.isUnlockHero(HeroEntity.getInstance().list[i].id))
+                        {
+                            list_hero.Add(HeroEntity.getInstance().list[j].id);
+                        }
+                    }
+                }
+                if(list_hero.Count == 0)
+                {
+                    for (int j = 0; j < HeroEntity.getInstance().list.Count; j++)
+                    {
+                        if (HeroEntity.getInstance().list[j].quality == 4)
+                        {
+                            list_hero.Add(HeroEntity.getInstance().list[j].id);
+                        }
+                    }
+                }
+                int heroId = list_hero[RandomUtil.getRandom(0, list_hero.Count - 1)];
+
+                Transform iconTrans = ballTrans.Find("icon");
+                iconTrans.localScale = Vector3.one;
+                iconTrans.GetComponent<Image>().sprite = AtlasUtil.getAtlas_icon().GetSprite("hero_avatar_" + heroId);
+                iconTrans.name = heroId.ToString();
             }
         }
     }
@@ -141,6 +170,16 @@ public class ClawLayer : MonoBehaviour
                 Transform ballTrans = ballPointTrans.GetChild(i);
                 ClawData clawData = ClawEntity.getInstance().getData(int.Parse(ballTrans.name));
                 Transform trans = Instantiate(prefab_splitBall, rewardGrid).transform;
+                trans.Find("up").GetComponent<Image>().sprite = AtlasUtil.getAtlas_claw().GetSprite("ball_" + clawData.eggstyle + "_1");
+                trans.Find("down").GetComponent<Image>().sprite = AtlasUtil.getAtlas_claw().GetSprite("ball_" + clawData.eggstyle + "_2");
+
+                if (clawData.eggstyle == 4)
+                {
+                    int heroId = int.Parse(ballTrans.GetChild(1).name);
+                    Transform iconTrans = trans.Find("icon");
+                    iconTrans.localScale = new Vector3(1.4f, 1.4f, 1.4f);
+                    iconTrans.GetComponent<Image>().sprite = AtlasUtil.getAtlas_icon().GetSprite("hero_avatar_" + heroId);
+                }
             }
         }
 
