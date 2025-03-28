@@ -15,6 +15,7 @@ public class EnemyWaveData
     public int time;
     public int killGold;
     public string reward;
+    public int exp;
     public int luckysummon;     // 概率：万分之几
     public int luckyforge;      // 概率：万分之几
 }

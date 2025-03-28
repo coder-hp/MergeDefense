@@ -21,9 +21,11 @@ public class GameOverLayer : MonoBehaviour
         // 奖励
         {
             Dictionary<int, int> reward_dic = new Dictionary<int, int>();
+            reward_dic[(int)Consts.RewardType.PlayerExp] = 0;
             for (int m = 1; m <= GameFightData.s_instance.curBoCi; m++)
             {
                 EnemyWaveData enemyWaveData = EnemyWaveEntity.getInstance().getData(m);
+                reward_dic[(int)Consts.RewardType.PlayerExp] += enemyWaveData.exp;
                 string[] rewardArray = enemyWaveData.reward.Split(';');
                 for (int i = 0; i < rewardArray.Length; i++)
                 {
