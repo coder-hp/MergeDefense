@@ -58,7 +58,7 @@ public class ClawLayer : MonoBehaviour
 
             if(clawData.eggstyle == 4)
             {
-                ballTrans.localScale = new Vector3(1.5f, 1.5f, 1.5f);
+                ballTrans.localScale = new Vector3(1.3f, 1.3f, 1.3f);
 
                 List<int> list_hero = new List<int>();
                 for(int j = 0; j < HeroEntity.getInstance().list.Count; j++)
@@ -172,18 +172,81 @@ public class ClawLayer : MonoBehaviour
                 Transform trans = Instantiate(prefab_splitBall, rewardGrid).transform;
                 trans.Find("up").GetComponent<Image>().sprite = AtlasUtil.getAtlas_claw().GetSprite("ball_" + clawData.eggstyle + "_1");
                 trans.Find("down").GetComponent<Image>().sprite = AtlasUtil.getAtlas_claw().GetSprite("ball_" + clawData.eggstyle + "_2");
-
+                Transform iconTrans = trans.Find("icon");
                 if (clawData.eggstyle == 4)
                 {
+                    trans.Find("up").localScale = Vector3.zero;
+                    trans.Find("light").localScale = Vector3.one;
+                    trans.Find("light").DORotate(new Vector3(0f, 0f, -360), 4, RotateMode.FastBeyond360).SetEase(Ease.Linear).SetLoops(-1);
+                    iconTrans.localScale = Vector3.one;
                     int heroId = int.Parse(ballTrans.GetChild(1).name);
-                    Transform iconTrans = trans.Find("icon");
-                    iconTrans.localScale = new Vector3(1.4f, 1.4f, 1.4f);
-                    iconTrans.GetComponent<Image>().sprite = AtlasUtil.getAtlas_icon().GetSprite("hero_avatar_" + heroId);
+                    if(GameData.isUnlockHero(heroId))
+                    {
+                        iconTrans.GetComponent<Image>().sprite = AtlasUtil.getAtlas_hero().GetSprite("heroSuiPian4");
+                        GameData.changeHeroSuiPian(4, 5);
+                        iconTrans.Find("count").GetComponent<Text>().text = "x5";
+                    }
+                    else
+                    {
+                        iconTrans.GetComponent<Image>().sprite = AtlasUtil.getAtlas_icon().GetSprite("hero_avatar_" + heroId);
+                        GameData.changeHeroSuiPian(1, clawData.count);
+                        iconTrans.Find("count").GetComponent<Text>().text = HeroEntity.getInstance().getData(heroId).name;
+                    }
                 }
+                else
+                {
+                    switch(clawData.rewardtype)
+                    {
+                        case (int)Consts.RewardType.Gold:
+                            {
+                                iconTrans.GetComponent<Image>().sprite = AtlasUtil.getAtlas_icon().GetSprite("RewardType" + clawData.rewardtype);
+                                GameData.changeMyGold(clawData.count,"claw");
+                                iconTrans.Find("count").GetComponent<Text>().text = "x" + clawData.count;
+                                break;
+                            }
+
+                        case (int)Consts.RewardType.Diamond:
+                            {
+                                iconTrans.GetComponent<Image>().sprite = AtlasUtil.getAtlas_icon().GetSprite("RewardType" + clawData.rewardtype);
+                                GameData.changeMyDiamond(clawData.count);
+                                iconTrans.Find("count").GetComponent<Text>().text = "x" + clawData.count;
+                                break;
+                            }
+
+                        case (int)Consts.RewardType.SuiPianBai:
+                            {
+                                iconTrans.GetComponent<Image>().sprite = AtlasUtil.getAtlas_hero().GetSprite("heroSuiPian" + 1);
+                                GameData.changeHeroSuiPian(1, clawData.count);
+                                iconTrans.Find("count").GetComponent<Text>().text = "x" + clawData.count;
+                                break;
+                            }
+
+                        case (int)Consts.RewardType.SuiPianLan:
+                            {
+                                iconTrans.GetComponent<Image>().sprite = AtlasUtil.getAtlas_hero().GetSprite("heroSuiPian" + 2);
+                                GameData.changeHeroSuiPian(2, clawData.count);
+                                iconTrans.Find("count").GetComponent<Text>().text = "x" + clawData.count;
+                                break;
+                            }
+
+                        case (int)Consts.RewardType.SuiPianZi:
+                            {
+                                iconTrans.GetComponent<Image>().sprite = AtlasUtil.getAtlas_hero().GetSprite("heroSuiPian" + 3);
+                                GameData.changeHeroSuiPian(3, clawData.count);
+                                iconTrans.Find("count").GetComponent<Text>().text = "x" + clawData.count;
+                                break;
+                            }
+                    }
+                }
+
+                trans.Find("up").GetComponent<Image>().DOFade(0, 0.3f).SetDelay(1).OnComplete(()=>
+                {
+                    iconTrans.DOScale(1, 0.2f);
+                });
             }
         }
 
-        Invoke("close",3);
+        Invoke("close",4);
     }
 
     void close()
