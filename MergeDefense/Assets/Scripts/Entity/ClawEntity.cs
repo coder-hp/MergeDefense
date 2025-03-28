@@ -13,6 +13,8 @@ public class ClawData
     public int spawnrate;
     public int droprate;
     public string bonus;
+
+    public List<int> list_bonus = new List<int>();
 }
 
 public class ClawEntity
@@ -40,6 +42,12 @@ public class ClawEntity
         for(int i = 0; i < list.Count; i++)
         {
             list_rate.Add(list[i].spawnrate);
+
+            string[] bonusArray = list[i].bonus.Split('_');
+            for(int j = 0; j < bonusArray.Length; j++)
+            {
+                list[i].list_bonus.Add(int.Parse(bonusArray[j]));
+            }
         }
     }
 

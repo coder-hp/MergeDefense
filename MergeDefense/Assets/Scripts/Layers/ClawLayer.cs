@@ -202,8 +202,23 @@ public class ClawLayer : MonoBehaviour
                     }
                     else
                     {
+                        int beishu = RandomUtil.SelectProbability(clawData.list_bonus) + 1;
+                        int getCount = clawData.count * beishu;
+                        if (getCount == 2)
+                        {
+                            trans.Find("beishu").GetComponent<Image>().sprite = AtlasUtil.getAtlas_claw().GetSprite("crit_x2");
+                        }
+                        else if (getCount == 3)
+                        {
+                            trans.Find("beishu").GetComponent<Image>().sprite = AtlasUtil.getAtlas_claw().GetSprite("crit_x3");
+                        }
+
+                        if (beishu >= 2)
+                        {
+                            trans.Find("beishu").DOScale(1, 0.15f).SetDelay(1);
+                        }
                         iconTrans.GetComponent<Image>().sprite = AtlasUtil.getAtlas_icon().GetSprite("hero_avatar_" + heroId);
-                        GameData.changeHeroSuiPian(1, clawData.count);
+                        GameData.changeHeroSuiPian(1, getCount);
                         iconTrans.Find("count").GetComponent<Text>().text = HeroEntity.getInstance().getData(heroId).name;
                     }
                 }
@@ -215,48 +230,64 @@ public class ClawLayer : MonoBehaviour
                        .Append(trans.DOLocalRotateQuaternion(Quaternion.Euler(0, 0, -25), shakeTime * 2).SetEase(Ease.Linear))
                        .Append(trans.DOLocalRotateQuaternion(Quaternion.Euler(0, 0, 0), shakeTime).SetEase(Ease.Linear)).SetLoops(2);
 
-                    switch (clawData.rewardtype)
+                    int beishu = RandomUtil.SelectProbability(clawData.list_bonus) + 1;
+                    int getCount = clawData.count * beishu;
+                    if(getCount == 2)
                     {
-                        case (int)Consts.RewardType.Gold:
-                            {
-                                iconTrans.GetComponent<Image>().sprite = AtlasUtil.getAtlas_icon().GetSprite("RewardType" + clawData.rewardtype);
-                                GameData.changeMyGold(clawData.count,"claw");
-                                iconTrans.Find("count").GetComponent<Text>().text = "x" + clawData.count;
-                                break;
-                            }
-
-                        case (int)Consts.RewardType.Diamond:
-                            {
-                                iconTrans.GetComponent<Image>().sprite = AtlasUtil.getAtlas_icon().GetSprite("RewardType" + clawData.rewardtype);
-                                GameData.changeMyDiamond(clawData.count);
-                                iconTrans.Find("count").GetComponent<Text>().text = "x" + clawData.count;
-                                break;
-                            }
-
-                        case (int)Consts.RewardType.SuiPianBai:
-                            {
-                                iconTrans.GetComponent<Image>().sprite = AtlasUtil.getAtlas_hero().GetSprite("heroSuiPian" + 1);
-                                GameData.changeHeroSuiPian(1, clawData.count);
-                                iconTrans.Find("count").GetComponent<Text>().text = "x" + clawData.count;
-                                break;
-                            }
-
-                        case (int)Consts.RewardType.SuiPianLan:
-                            {
-                                iconTrans.GetComponent<Image>().sprite = AtlasUtil.getAtlas_hero().GetSprite("heroSuiPian" + 2);
-                                GameData.changeHeroSuiPian(2, clawData.count);
-                                iconTrans.Find("count").GetComponent<Text>().text = "x" + clawData.count;
-                                break;
-                            }
-
-                        case (int)Consts.RewardType.SuiPianZi:
-                            {
-                                iconTrans.GetComponent<Image>().sprite = AtlasUtil.getAtlas_hero().GetSprite("heroSuiPian" + 3);
-                                GameData.changeHeroSuiPian(3, clawData.count);
-                                iconTrans.Find("count").GetComponent<Text>().text = "x" + clawData.count;
-                                break;
-                            }
+                        trans.Find("beishu").GetComponent<Image>().sprite = AtlasUtil.getAtlas_claw().GetSprite("crit_x2");
                     }
+                    else if (getCount == 3)
+                    {
+                        trans.Find("beishu").GetComponent<Image>().sprite = AtlasUtil.getAtlas_claw().GetSprite("crit_x3");
+                    }
+
+                    if (beishu >= 2)
+                    {
+                        trans.Find("beishu").DOScale(1,0.15f).SetDelay(1);
+                    }
+
+                    switch (clawData.rewardtype)
+                        {
+                            case (int)Consts.RewardType.Gold:
+                                {
+                                    iconTrans.GetComponent<Image>().sprite = AtlasUtil.getAtlas_icon().GetSprite("RewardType" + clawData.rewardtype);
+                                    GameData.changeMyGold(getCount, "claw");
+                                    iconTrans.Find("count").GetComponent<Text>().text = "x" + getCount;
+                                    break;
+                                }
+
+                            case (int)Consts.RewardType.Diamond:
+                                {
+                                    iconTrans.GetComponent<Image>().sprite = AtlasUtil.getAtlas_icon().GetSprite("RewardType" + clawData.rewardtype);
+                                    GameData.changeMyDiamond(getCount);
+                                    iconTrans.Find("count").GetComponent<Text>().text = "x" + getCount;
+                                    break;
+                                }
+
+                            case (int)Consts.RewardType.SuiPianBai:
+                                {
+                                    iconTrans.GetComponent<Image>().sprite = AtlasUtil.getAtlas_hero().GetSprite("heroSuiPian" + 1);
+                                    GameData.changeHeroSuiPian(1, getCount);
+                                    iconTrans.Find("count").GetComponent<Text>().text = "x" + getCount;
+                                    break;
+                                }
+
+                            case (int)Consts.RewardType.SuiPianLan:
+                                {
+                                    iconTrans.GetComponent<Image>().sprite = AtlasUtil.getAtlas_hero().GetSprite("heroSuiPian" + 2);
+                                    GameData.changeHeroSuiPian(2, getCount);
+                                    iconTrans.Find("count").GetComponent<Text>().text = "x" + getCount;
+                                    break;
+                                }
+
+                            case (int)Consts.RewardType.SuiPianZi:
+                                {
+                                    iconTrans.GetComponent<Image>().sprite = AtlasUtil.getAtlas_hero().GetSprite("heroSuiPian" + 3);
+                                    GameData.changeHeroSuiPian(3, getCount);
+                                    iconTrans.Find("count").GetComponent<Text>().text = "x" + getCount;
+                                    break;
+                                }
+                        }
                 }
                 ballTrans.localScale = Vector3.zero;
                 trans.Find("up").GetComponent<Image>().DOFade(0, 0.15f).SetDelay(1).OnComplete(()=>
