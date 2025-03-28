@@ -13,6 +13,8 @@ public class DamageNumManager : MonoBehaviour
     List<Transform> list_damageNum = new List<Transform>();
     List<Text> list_damageNumText = new List<Text>();
 
+    Vector3 critTextScale = new Vector3(1.4f, 1.4f, 1.4f);
+
     void Awake()
     {
         s_instance = this;
@@ -60,12 +62,16 @@ public class DamageNumManager : MonoBehaviour
             damageNumTrans.localScale = Vector3.zero;
         });
 
-        if(isCrit)
+        //if(isCrit)
+        //{
+        //    damageNumTrans.DOScale(1.6f, 0.15f).OnComplete(()=>
+        //    {
+        //        damageNumTrans.DOScale(1.2f, 0.1f);
+        //    });
+        //}
+        if (isCrit)
         {
-            damageNumTrans.DOScale(1.6f, 0.15f).OnComplete(()=>
-            {
-                damageNumTrans.DOScale(1.2f, 0.1f);
-            });
+            damageNumTrans.localScale = critTextScale;
         }
     }
 }
