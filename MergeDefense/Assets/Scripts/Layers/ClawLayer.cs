@@ -24,10 +24,7 @@ public class ClawLayer : MonoBehaviour
     {
         startPos = clawTrans.localPosition;
         InvokeRepeating("onInvokeAddBall",0.1f,0.1f);
-    }
 
-    private void OnEnable()
-    {
         AudioScript.s_instance.playMusic("bgm_claw", true);
     }
 
@@ -267,7 +264,10 @@ public class ClawLayer : MonoBehaviour
         }
         else
         {
-            AudioScript.s_instance.playSound("eggOpen");
+            TimerUtil.getInstance().delayTime(1.3f, () =>
+            {
+                AudioScript.s_instance.playSound("eggOpen");
+            });
         }
 
         Invoke("close", 4);
