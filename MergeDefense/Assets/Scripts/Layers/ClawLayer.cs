@@ -259,7 +259,7 @@ public class ClawLayer : MonoBehaviour
                     }
                 }
                 ballTrans.localScale = Vector3.zero;
-                trans.Find("up").GetComponent<Image>().DOFade(0, 0.3f).SetDelay(1).OnComplete(()=>
+                trans.Find("up").GetComponent<Image>().DOFade(0, 0.15f).SetDelay(1).OnComplete(()=>
                 {
                     iconTrans.DOScale(1, 0.2f);
                 });
