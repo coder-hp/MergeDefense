@@ -377,7 +377,7 @@ public class GameUILayer : MonoBehaviour
 
     public void checkIsShowBossRedKuang()
     {
-        if (GameFightData.s_instance.curBoCi % 10 == 0 && GameFightData.s_instance.curBoCiRestTime == 20)
+        if (GameFightData.s_instance.curBoCi % 10 == 0 && GameFightData.s_instance.curBoCiRestTime <= 20)
         {
             for (int i = 0; i < EnemyManager.s_instance.list_enemy.Count; i++)
             {
