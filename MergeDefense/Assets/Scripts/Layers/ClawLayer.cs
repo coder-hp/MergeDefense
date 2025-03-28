@@ -96,15 +96,17 @@ public class ClawLayer : MonoBehaviour
 
         img_jiantouRight.color = Color.white;
 
+
+        Color color_alpha = new Color(1, 1, 1, 0.5f);
         seq_claw = DOTween.Sequence();
         seq_claw.Append(clawTrans.DOLocalMoveX(158, 1).OnComplete(()=>
                 {
                     img_jiantouLeft.color = Color.white;
-                    img_jiantouRight.color = new Color(1, 1, 1, 0.5f);
+                    img_jiantouRight.color = color_alpha;
                 }).SetEase(Ease.Linear))
                 .Append(clawTrans.DOLocalMoveX(-158, 2).OnComplete(() =>
                 {
-                    img_jiantouLeft.color = new Color(1, 1, 1, 0.5f);
+                    img_jiantouLeft.color = color_alpha;
                     img_jiantouRight.color = Color.white;
                 }).SetEase(Ease.Linear))
                 .Append(clawTrans.DOLocalMoveX(0, 1).SetEase(Ease.Linear)).SetLoops(-1);
@@ -250,7 +252,7 @@ public class ClawLayer : MonoBehaviour
                             }
                     }
                 }
-
+                ballTrans.localScale = Vector3.zero;
                 trans.Find("up").GetComponent<Image>().DOFade(0, 0.3f).SetDelay(1).OnComplete(()=>
                 {
                     iconTrans.DOScale(1, 0.2f);
