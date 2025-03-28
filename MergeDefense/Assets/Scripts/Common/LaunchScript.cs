@@ -45,17 +45,5 @@ public class LaunchScript : MonoBehaviour
 
             GameData.setHead(RandomUtil.getRandom(101,110));
         }
-
-        // 记得删除
-        {
-            // 解锁所有白蓝紫角色
-            for (int i = 0; i < HeroEntity.getInstance().list.Count; i++)
-            {
-                if (HeroEntity.getInstance().list[i].price == 0)
-                {
-                    GameData.unlockHero(HeroEntity.getInstance().list[i].id);
-                }
-            }
-        }
     }
 }
