@@ -54,6 +54,11 @@ public class ClawLayer : MonoBehaviour
             ballTrans.GetComponent<Image>().sprite = AtlasUtil.getAtlas_claw().GetSprite("ball_" + clawData.eggstyle);
             ballTrans.GetComponent<Rigidbody2D>().velocity = new Vector2(0, -10);
             ballTrans.name = clawData.id.ToString();
+
+            if(clawData.eggstyle == 4)
+            {
+                ballTrans.localScale = new Vector3(1.5f, 1.5f, 1.5f);
+            }
         }
     }
 
