@@ -90,14 +90,12 @@ public class ClawLayer : MonoBehaviour
         }
     }
 
+    Color color_alpha = new Color(1, 1, 1, 0.5f);
     void readyClaw()
     {
         btn_claw.interactable = true;
-
         img_jiantouRight.color = Color.white;
 
-
-        Color color_alpha = new Color(1, 1, 1, 0.5f);
         seq_claw = DOTween.Sequence();
         seq_claw.Append(clawTrans.DOLocalMoveX(158, 1).OnComplete(()=>
                 {
@@ -117,6 +115,8 @@ public class ClawLayer : MonoBehaviour
         AudioScript.s_instance.playSound("clawDown");
         btn_claw.interactable = false;
         seq_claw.Kill();
+        img_jiantouLeft.color = color_alpha;
+        img_jiantouRight.color = color_alpha;
 
         clawTrans.Find("left/downGanZi").DOLocalRotateQuaternion(Quaternion.Euler(0, 0, -100), 0.5f);
         clawTrans.Find("right/downGanZi").DOLocalRotateQuaternion(Quaternion.Euler(0, 0, -100), 0.5f);
@@ -209,7 +209,13 @@ public class ClawLayer : MonoBehaviour
                 }
                 else
                 {
-                    switch(clawData.rewardtype)
+                    float shakeTime = 0.06f;
+                    Sequence seq = DOTween.Sequence();
+                    seq.Append(trans.DOLocalRotateQuaternion(Quaternion.Euler(0,0,20), shakeTime).SetEase(Ease.Linear))
+                       .Append(trans.DOLocalRotateQuaternion(Quaternion.Euler(0, 0, -20), shakeTime * 2).SetEase(Ease.Linear))
+                       .Append(trans.DOLocalRotateQuaternion(Quaternion.Euler(0, 0, 0), shakeTime).SetEase(Ease.Linear)).SetLoops(2);
+
+                    switch (clawData.rewardtype)
                     {
                         case (int)Consts.RewardType.Gold:
                             {
@@ -262,7 +268,7 @@ public class ClawLayer : MonoBehaviour
 
         if (eggCount == 0)
         {
-
+            Invoke("close", 2);
         }
         else
         {
@@ -270,9 +276,8 @@ public class ClawLayer : MonoBehaviour
             {
                 AudioScript.s_instance.playSound("eggOpen");
             });
+            Invoke("close", 4);
         }
-
-        Invoke("close", 4);
     }
 
     void close()
