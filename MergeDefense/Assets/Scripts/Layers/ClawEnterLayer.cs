@@ -11,7 +11,7 @@ public class ClawEnterLayer : MonoBehaviour
 
     public void onClickClaw()
     {
-        AudioScript.s_instance.playSound_btn();
+        AudioScript.s_instance.playSound("clawCoin");
         LayerManager.ShowLayer(Consts.Layer.ClawLayer);
     }
 }

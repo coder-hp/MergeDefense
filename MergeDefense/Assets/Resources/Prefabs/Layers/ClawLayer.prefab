@@ -867,7 +867,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: 95}
+  m_AnchoredPosition: {x: 0, y: 99}
   m_SizeDelta: {x: 200, y: 138}
   m_Pivot: {x: 0.5, y: 1}
 --- !u!222 &8429104214875465554
@@ -1088,6 +1088,8 @@ MonoBehaviour:
   rewardPanel: {fileID: 8380745730542844484}
   rewardGrid: {fileID: 425114824937787210}
   btn_claw: {fileID: 3590031535208992053}
+  img_jiantouLeft: {fileID: 6699692356248844158}
+  img_jiantouRight: {fileID: 5142261956112532546}
 --- !u!1 &4420594160171739804
 GameObject:
   m_ObjectHideFlags: 0
@@ -1921,14 +1923,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 1, g: 1, b: 1, a: 0.5019608}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 6ec948f46115a6046b5bfe6e014b5525, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 03ca991404bd78046a8e79da4af38bec, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -2477,14 +2479,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 1, g: 1, b: 1, a: 0.5019608}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 6ec948f46115a6046b5bfe6e014b5525, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 03ca991404bd78046a8e79da4af38bec, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1

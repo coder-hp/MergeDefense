@@ -14,6 +14,8 @@ public class ClawLayer : MonoBehaviour
     public Transform rewardPanel;
     public Transform rewardGrid;
     public Button btn_claw;
+    public Image img_jiantouLeft;
+    public Image img_jiantouRight;
 
     Vector3 startPos;
     Sequence seq_claw;
@@ -94,15 +96,26 @@ public class ClawLayer : MonoBehaviour
     void readyClaw()
     {
         btn_claw.interactable = true;
+
+        img_jiantouRight.color = Color.white;
+
         seq_claw = DOTween.Sequence();
-        seq_claw.Append(clawTrans.DOLocalMoveX(158, 1).SetEase(Ease.Linear))
-           .Append(clawTrans.DOLocalMoveX(-158, 2).SetEase(Ease.Linear))
-           .Append(clawTrans.DOLocalMoveX(0, 1).SetEase(Ease.Linear)).SetLoops(-1);
+        seq_claw.Append(clawTrans.DOLocalMoveX(158, 1).OnComplete(()=>
+                {
+                    img_jiantouLeft.color = Color.white;
+                    img_jiantouRight.color = new Color(1, 1, 1, 0.5f);
+                }).SetEase(Ease.Linear))
+                .Append(clawTrans.DOLocalMoveX(-158, 2).OnComplete(() =>
+                {
+                    img_jiantouLeft.color = new Color(1, 1, 1, 0.5f);
+                    img_jiantouRight.color = Color.white;
+                }).SetEase(Ease.Linear))
+                .Append(clawTrans.DOLocalMoveX(0, 1).SetEase(Ease.Linear)).SetLoops(-1);
     }
 
     public void onClickClaw()
     {
-        AudioScript.s_instance.playSound_btn();
+        AudioScript.s_instance.playSound("clawDown");
         btn_claw.interactable = false;
         seq_claw.Kill();
 
@@ -163,10 +176,12 @@ public class ClawLayer : MonoBehaviour
     {
         rewardPanel.localScale = Vector3.one;
 
+        int eggCount = 0;
         for (int i = 0; i < ballPointTrans.childCount; i++)
         {
             if (Vector2.Distance(ballPointTrans.GetChild(i).position, clawCenterTrans.position) <= 1f)
             {
+                ++eggCount;
                 Transform ballTrans = ballPointTrans.GetChild(i);
                 ClawData clawData = ClawEntity.getInstance().getData(int.Parse(ballTrans.name));
                 Transform trans = Instantiate(prefab_splitBall, rewardGrid).transform;
@@ -246,7 +261,16 @@ public class ClawLayer : MonoBehaviour
             }
         }
 
-        Invoke("close",4);
+        if (eggCount == 0)
+        {
+
+        }
+        else
+        {
+            AudioScript.s_instance.playSound("eggOpen");
+        }
+
+        Invoke("close", 4);
     }
 
     void close()
