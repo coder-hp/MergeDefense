@@ -215,7 +215,7 @@ public class ClawLayer : MonoBehaviour
 
                         if (beishu >= 2)
                         {
-                            trans.Find("beishu").DOScale(1, 0.15f).SetDelay(1);
+                            trans.Find("beishu").DOScale(1, 0.15f).SetDelay(1.5f);
                         }
                         iconTrans.GetComponent<Image>().sprite = AtlasUtil.getAtlas_icon().GetSprite("hero_avatar_" + heroId);
                         GameData.changeHeroSuiPian(1, getCount);
@@ -243,7 +243,7 @@ public class ClawLayer : MonoBehaviour
 
                     if (beishu >= 2)
                     {
-                        trans.Find("beishu").DOScale(1,0.15f).SetDelay(1);
+                        trans.Find("beishu").DOScale(1,0.15f).SetDelay(1.5f);
                     }
 
                     switch (clawData.rewardtype)
@@ -290,9 +290,9 @@ public class ClawLayer : MonoBehaviour
                         }
                 }
                 ballTrans.localScale = Vector3.zero;
-                trans.Find("up").GetComponent<Image>().DOFade(0, 0.15f).SetDelay(1).OnComplete(()=>
+                trans.Find("up").GetComponent<Image>().DOFade(0, 0.15f).SetDelay(1.2f).OnComplete(()=>
                 {
-                    iconTrans.DOScale(1, 0.2f);
+                    iconTrans.DOScale(1, 0.1f);
                 });
             }
         }
